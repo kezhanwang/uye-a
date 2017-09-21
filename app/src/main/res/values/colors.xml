@@ -3,4 +3,14 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="common_font_3">#333333</color>
+    <color name="common_font_6">#666666</color>
+
+    <color name="white_bg">#ffffff</color>
+    <color name="common_font_black">#333333</color>
+    <color name="common_font_ccc">#cccccc</color>
+    <color name="common_font_white">#ffffff</color>
+
+
 </resources>

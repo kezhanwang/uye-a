@@ -17,7 +17,6 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.pager)
     ViewPager mViewPager;
     TabHost mTabHost;
-
     private TabsAdapter mTabsAdapter;
     private MainTabView mViewMsg;
     private MainTabView mViewCommunity;

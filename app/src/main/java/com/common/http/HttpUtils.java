@@ -7,7 +7,7 @@ import android.net.Proxy;
 import android.text.TextUtils;
 
 import com.bjzt.uye.global.Global;
-import com.bjzt.uye.global.MyLog;
+import com.common.common.MyLog;
 import com.common.common.NetCommon;
 import com.common.controller.LoginController;
 import com.common.entity.PHttpHeader;

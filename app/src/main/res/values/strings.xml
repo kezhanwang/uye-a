@@ -5,10 +5,21 @@
     <string name="common_default">---</string>
 
     <!--tab目录-->
-    <string name="tab_msg">沟通</string>
-    <string name="tab_discover">发现</string>
-    <string name="tab_scene">场景</string>
-    <string name="tab_community">社区</string>
+    <string name="tab_main">首页</string>
+    <string name="tab_uye">U业</string>
     <string name="tab_mine">我的</string>
+
+
+    <!-- 下拉刷新相关 -->
+    <string name="pull_headerview_txt_down">下拉刷新</string>
+    <string name="pull_headerview_txt_up">释放立即刷新</string>
+    <string name="pull_headerview_refresh_succ">刷新成功</string>
+    <string name="pull_headerview_refresh_error">刷新失败</string>
+    <string name="pull_headerview_refresh_no_refresh">石器时代</string>
+    <string name="msgitem_bottom_nomore">没有更多消息</string>
+    <string name="msgitem_bottom_init">点击加载更多消息</string>
+    <string name="msgitem_bottom_loading">加载中.....</string>
+    <string name="msgitem_bottom_error_tips">加载失败，点击重新加载</string>
+
 
 </resources>

@@ -3,14 +3,20 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="translucent">#00000000</color>
 
+    <color name="common_bg_color_grey">#eeeeee</color>
     <color name="common_font_3">#333333</color>
     <color name="common_font_6">#666666</color>
+    <color name="common_white">#ffffff</color>
+    <color name="more_list_item_press">#f1fafe</color>
+    <color name="common_grey">#909090</color>
+
 
     <color name="white_bg">#ffffff</color>
     <color name="common_font_black">#333333</color>
     <color name="common_font_ccc">#cccccc</color>
     <color name="common_font_white">#ffffff</color>
-
+    <color name="common_font_f7">#f7f7f7</color>
 
 </resources>

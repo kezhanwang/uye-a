@@ -1,27 +1,29 @@
-package com.bjzt.uye.global;
+package com.common.common;
 
 import android.util.Log;
 
+import com.bjzt.uye.global.MConfiger;
+
 /**
- * Created by billy on 2017/9/18.
+ * Created by billy on 2017/9/21.
  */
 
 public class MyLog {
-    public static final String Billy = "Billywen";
 
-    /****
-     * 是否debug调试模式
-     * @return
-     */
-    public static final boolean isDebugable(){
+    public static boolean isDebugable(){
         return MConfiger.isDebug;
     }
 
-    public static final void debug(String TAG,String msg){
+    public static final void d(String TAG,String msg){
         if(!MConfiger.isDebug){
             return;
         }
         Log.d(TAG,msg);
+    }
+
+
+    public static final void debug(String TAG,String msg){
+        d(TAG,msg);
     }
 
     public static final void error(String TAG,String msg,Throwable throwable){
@@ -44,4 +46,6 @@ public class MyLog {
         }
         Log.e(TAG, "", throwable);
     }
+
+
 }

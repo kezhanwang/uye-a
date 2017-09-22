@@ -19,8 +19,7 @@ public class MainActivity extends BaseActivity {
     TabHost mTabHost;
     private TabsAdapter mTabsAdapter;
     private MainTabView mViewMsg;
-    private MainTabView mViewCommunity;
-    private MainTabView mViewDiscovery;
+    private MainTabView mViewUYe;
     private MainTabView mViewMine;
     private ArrayList<String> curTabNames = new ArrayList<>();
 
@@ -34,7 +33,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initLayout(){
-        mTabHost = (TabHost) findViewById(android.R.id.tabhost);
+        mTabHost = findViewById(android.R.id.tabhost);
         mTabHost.setup();
         mTabsAdapter = new TabsAdapter(this, mTabHost, mViewPager);
         String[] tabNames = getResources().getStringArray(R.array.main_tab_name);
@@ -53,29 +52,23 @@ public class MainActivity extends BaseActivity {
     }
 
     private void createTabView(String tabName){
-        if(tabName.equals(getString(R.string.tab_msg))){
+        if(tabName.equals(getString(R.string.tab_main))){
             mViewMsg = new MainTabView(getApplicationContext());
             mViewMsg.setTabName(tabName);
 //            mViewMsg.setIcon(R.drawable.wz_tab_icon_msg_selector);
             mTabsAdapter.addTab(mTabHost.newTabSpec(tabName).setIndicator(mViewMsg),FragmentMain.class, null);
             curTabNames.add(tabName);
-        }else if(tabName.equals(getString(R.string.tab_discover))){
-            mViewMsg = new MainTabView(getApplicationContext());
-            mViewMsg.setTabName(tabName);
+        }else if(tabName.equals(getString(R.string.tab_uye))){
+            mViewUYe = new MainTabView(getApplicationContext());
+            mViewUYe.setTabName(tabName);
 //            mViewMsg.setIcon(R.drawable.wz_tab_icon_msg_selector);
-            mTabsAdapter.addTab(mTabHost.newTabSpec(tabName).setIndicator(mViewMsg),FragmentMain.class, null);
-            curTabNames.add(tabName);
-        }else if(tabName.equals(getString(R.string.tab_scene))){
-            mViewMsg = new MainTabView(getApplicationContext());
-            mViewMsg.setTabName(tabName);
-//            mViewMsg.setIcon(R.drawable.wz_tab_icon_msg_selector);
-            mTabsAdapter.addTab(mTabHost.newTabSpec(tabName).setIndicator(mViewMsg),FragmentMain.class, null);
+            mTabsAdapter.addTab(mTabHost.newTabSpec(tabName).setIndicator(mViewUYe),FragmentMain.class, null);
             curTabNames.add(tabName);
         }else if(tabName.equals(getString(R.string.tab_mine))){
-            mViewMsg = new MainTabView(getApplicationContext());
-            mViewMsg.setTabName(tabName);
+            mViewMine = new MainTabView(getApplicationContext());
+            mViewMine.setTabName(tabName);
 //            mViewMsg.setIcon(R.drawable.wz_tab_icon_msg_selector);
-            mTabsAdapter.addTab(mTabHost.newTabSpec(tabName).setIndicator(mViewMsg),FragmentMain.class, null);
+            mTabsAdapter.addTab(mTabHost.newTabSpec(tabName).setIndicator(mViewMine),FragmentMain.class, null);
             curTabNames.add(tabName);
         }
     }

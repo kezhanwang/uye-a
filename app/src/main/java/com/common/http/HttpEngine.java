@@ -1,6 +1,6 @@
 package com.common.http;
 
-import com.bjzt.uye.global.MyLog;
+import com.common.common.MyLog;
 import com.common.common.NetCommon;
 import com.common.file.SharePreDev;
 import com.common.thread.ThreadPool;

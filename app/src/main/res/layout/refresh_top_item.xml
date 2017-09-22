@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="72dp"
+    android:orientation="vertical" 
+    android:minHeight="72dp"
+    android:background="@color/common_bg_color_grey"
+    >
+
+      <LinearLayout
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:orientation="vertical"
+          android:layout_centerInParent="true"
+          android:layout_marginTop="12dp"
+          >
+          <ImageView 
+              android:id="@+id/img_logo"
+              android:layout_height="wrap_content"
+              android:layout_width="wrap_content"
+              android:background="@drawable/pull_down_logo"
+              android:visibility="visible"
+              />
+          
+          <ProgressBar
+              android:id="@+id/progress"
+              style="?android:attr/progressBarStyleSmall"
+              android:layout_width="26dp" 
+         	  android:layout_height="16dp"
+              android:indeterminateBehavior="repeat"
+              android:max="10000"
+              android:visibility="gone"
+              android:indeterminateDrawable="@drawable/ablum_progress"
+              />
+
+          <RelativeLayout
+              android:id="@+id/refresh_bottom_view"
+              android:layout_height="22dp"
+              android:layout_width="110dp"
+              android:orientation="horizontal"
+              android:layout_marginTop="12dp"
+	          android:layout_marginBottom="4dp"
+	          android:layout_gravity="center"
+	          android:gravity="center_horizontal|bottom"
+              >
+              
+              <ImageView 
+                  android:id="@+id/refresh_img_indicator"
+                  android:layout_height="wrap_content"
+                  android:layout_width="wrap_content"
+                  android:src="@drawable/refresh_arrow_up"
+                  android:scaleType="center"
+                  android:layout_alignParentLeft="true"
+                  android:layout_centerVertical="true"
+                  />
+              
+              <TextView
+                  android:id="@+id/refresh_hint"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:gravity="center"
+                  android:text="下拉刷新"
+                  android:textColor="#aaaaaa"
+                  android:textSize="13.0sp"
+                  android:layout_centerInParent="true"
+                  />
+          </RelativeLayout>
+          
+      </LinearLayout>
+            
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="#f1f1f1" 
+        android:layout_alignParentBottom="true"
+        />
+    
+</RelativeLayout>

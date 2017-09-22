@@ -8,6 +8,8 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Process;
 
+import com.common.common.MyLog;
+
 /**
  * Created by billy on 2017/9/18.
  */

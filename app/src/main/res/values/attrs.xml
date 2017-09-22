@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    
+   	<declare-styleable name="mytype">
+        <attr name="mType" format="integer"/>
+    </declare-styleable>  
+    
+   	
+   	<!-- 表情相关 -->
+   	<string-array name="smiley_array">    
+        <item>[热门]</item>     
+    </string-array>
+
+
+    <declare-styleable name="LetterList">
+        <attr name="textColor" format="color" />
+        <attr name="textSize" format="dimension" value="12sp" />
+        <attr name="startPadding" format="dimension" />
+        <attr name="endPadding" format="dimension" />
+        <attr name="rightPadding" format="dimension" />
+    </declare-styleable>
+
+</resources>

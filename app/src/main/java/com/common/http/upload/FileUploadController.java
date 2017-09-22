@@ -1,6 +1,6 @@
 package com.common.http.upload;
 
-import com.bjzt.uye.global.MyLog;
+import com.common.common.MyLog;
 import com.common.thread.ThreadPool;
 import java.io.File;
 import java.util.Vector;

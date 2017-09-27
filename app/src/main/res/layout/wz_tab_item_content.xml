@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_bg">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/tab_item_content_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="@string/common_default"
+            android:textColor="@color/wz_tab_text_color_selector"
+            android:textSize="14sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="4dp"
+            />
+
+        <ImageView
+            android:id="@+id/tab_btn_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@id/tab_item_content_text"
+            android:layout_marginBottom="3dp"
+            android:scaleType="centerCrop"
+            android:src="@null" />
+
+        <TextView
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_alignEnd="@+id/tab_item_content_text"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/tab_item_content_text"
+            android:background="@drawable/circle_red_bg"
+            android:gravity="center"
+            android:text="99+"
+            android:textColor="@color/common_font_white"
+            android:textSize="7sp"
+            android:layout_marginLeft="10dp"
+            android:visibility="gone"
+            />
+
+        <View
+            android:id="@+id/new_msg_tips"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_alignEnd="@+id/tab_item_content_text"
+            android:layout_alignTop="@id/tab_btn_icon"
+            android:layout_alignRight="@+id/tab_item_content_text"
+            android:background="@drawable/circle_red_bg"
+            android:layout_marginTop="-1dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/new_msg_counter"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_alignEnd="@+id/tab_item_content_text"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/tab_item_content_text"
+            android:background="@drawable/circle_red_bg"
+            android:gravity="center"
+            android:text="99+"
+            android:textColor="@color/common_font_white"
+            android:textSize="7sp"
+            android:layout_marginLeft="10dp"
+            android:visibility="gone"
+            />
+
+    </RelativeLayout>
+</FrameLayout>

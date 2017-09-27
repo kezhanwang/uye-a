@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--主页页面被选中的优先级-->
+    <string-array name="init_page_tab">
+        <item>@string/tab_main</item>
+        <item>@string/tab_uye</item>
+        <item>@string/tab_mine</item>
+    </string-array>
+
+    <!--主页页面显示的顺序-->
+    <string-array name="main_tab_name">
+        <item>@string/tab_main</item>
+        <item>@string/tab_uye</item>
+        <item>@string/tab_mine</item>
+    </string-array>
+
+</resources>

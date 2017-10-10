@@ -5,20 +5,67 @@ android {
     compileSdkVersion 26
     buildToolsVersion "25.0.0"
 
+    signingConfigs {
+        sign {
+            keyAlias 'kezhanwang'
+            keyPassword 'kezhanwang'
+            storeFile file('uyekeystore.jks')
+            storePassword 'kezhanwang'
+        }
+    }
+
     defaultConfig {
         applicationId "com.bjzt.uye"
         minSdkVersion 9
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
+        signingConfig signingConfigs.sign
+        ndk {
+            //设置支持的SO库架构
+            abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86', 'arm64-v8a'
+        }
+        // Enabling multidex support.
+        multiDexEnabled true
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //移除无用的resource文件
+            shrinkResources true
+            //签名
+            signingConfig signingConfigs.sign
         }
 
+        debug {
+            signingConfig signingConfigs.sign
+        }
+
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+        incremental true
+        jumboMode true
+        preDexLibraries = false
     }
 
     lintOptions {
@@ -46,15 +93,14 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     apt 'com.jakewharton:butterknife-compiler:8.3.0'
-    compile ('com.jakewharton:butterknife:8.3.0')
-    compile ('com.android.support:support-v4:23.4.0')
-    compile ('com.android.support:appcompat-v7:23.4.0')
-
+    compile 'com.jakewharton:butterknife:8.3.0'
+    compile 'com.android.support:support-v4:23.4.0'
+    compile 'com.android.support:appcompat-v7:23.4.0'
     compile files('libs/glide-3.6.1.jar')
     compile files('libs/gson-2.2.4.jar')
     compile files('libs/httpclient-4.2.5.jar')
     compile files('libs/httpclient-cache-4.2.5.jar')
     compile files('libs/httpcore-4.2.4.jar')
     compile files('libs/httpmime-4.2.5.jar')
-
+    compile files('libs/BaiduLBS_Android.jar')
 }

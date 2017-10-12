@@ -13,4 +13,6 @@ public class MConfiger {
     public static final int AUTO_LOAD_ITEM_CNT = 16;
 
     public static final int TIME_OUT = 1000 * 40;	//半分钟超时
+    public static final int SPLASH_INTERVAL = 1000 * 3; //闪屏3秒钟
+
 }

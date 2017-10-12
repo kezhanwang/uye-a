@@ -1,5 +1,7 @@
 package com.bjzt.uye.activity.base;
 
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -71,9 +73,30 @@ public class BaseActivity extends FragmentActivity {
     }
 
 
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         hideToast();
+        uiHandler.removeCallbacksAndMessages(null);
+    }
+
+    protected Handler uiHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            if(!isFinishing()){
+                handleMsg(msg);
+            }
+        }
+    };
+
+    protected void handleMsg(Message msg){}
+
+    protected void sendMsg(Message msg){
+        uiHandler.sendMessage(msg);
+    }
+
+    protected void sendMsgDelay(Message msg,long milli){
+        uiHandler.sendMessageDelayed(msg,milli);
     }
 }

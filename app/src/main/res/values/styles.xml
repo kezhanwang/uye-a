@@ -4,6 +4,19 @@
     <style name="AppTheme" parent="android:Theme.Light">
     </style>
 
+    <style name="Theme.Youye" parent="@android:style/Theme.Light">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@style/anim.right</item>
+    </style>
+
+
+    <style name="anim.right" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/activity_right_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/activity_left_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/activity_left_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/activity_right_out</item>
+    </style>
 
     <!-- Dialog样式相关 -->
     <style name="MyDialogBg" parent="@android:style/Theme.Dialog">

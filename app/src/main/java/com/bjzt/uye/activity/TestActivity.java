@@ -9,6 +9,7 @@ import com.bjzt.uye.activity.base.BaseActivity;
 import com.bjzt.uye.controller.LBSController;
 import com.bjzt.uye.http.ProtocalManager;
 import com.bjzt.uye.http.listener.ICallBack;
+import com.bjzt.uye.util.IntentUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,6 +24,9 @@ public class TestActivity extends BaseActivity{
 
     @BindView(R.id.btn_loc_city)
     Button btnLocCity;
+
+    @BindView(R.id.btn_main)
+    Button btnMainPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,5 +56,24 @@ public class TestActivity extends BaseActivity{
                 });
             }
         });
+
+        btnMainPage.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                IntentUtils.startMainActivity(TestActivity.this);
+            }
+        });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(0,0);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        overridePendingTransition(0,0);
     }
 }

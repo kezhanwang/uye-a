@@ -53,16 +53,18 @@ public abstract class RspBaseEntity implements Serializable {
 			if(interfaceType == NetCommon.NET_INTERFACE_TYPE_UYE){
 				this.isSucc = true;
 				if(!isJsonArray){
-					try{
-						JSONObject obj = jsonObj.getJSONObject("data");
-						parseData(obj,null,false,reqEntity);
-					}catch(JSONException ee){
-						if(MyLog.isJsonDebugable()){
-							MyLog.error(TAG, ee);
-						}
-					}catch(Exception ee){
-						if(MyLog.isJsonDebugable()){
-							MyLog.error(TAG,ee);
+					if(this.code == NetCommon.ERROR_CODE_SUCC){
+						try{
+							JSONObject obj = jsonObj.getJSONObject("data");
+							parseData(obj,null,false,reqEntity);
+						}catch(JSONException ee){
+							if(MyLog.isJsonDebugable()){
+								MyLog.error(TAG, ee);
+							}
+						}catch(Exception ee){
+							if(MyLog.isJsonDebugable()){
+								MyLog.error(TAG,ee);
+							}
 						}
 					}
 				}else{

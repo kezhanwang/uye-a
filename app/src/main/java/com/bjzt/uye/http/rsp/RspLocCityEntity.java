@@ -2,6 +2,7 @@ package com.bjzt.uye.http.rsp;
 
 import com.bjzt.uye.http.base.ReqBaseEntity;
 import com.bjzt.uye.http.base.RspBaseEntity;
+import com.common.common.MyLog;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -13,7 +14,7 @@ import org.json.JSONObject;
 public class RspLocCityEntity extends RspBaseEntity{
 
     @Override
-    public void parseData(JSONObject jsonObj, JSONArray jsonArray, boolean isArray, ReqBaseEntity reqEntity) {
-
+    public void parseData(JSONObject jsonObj, JSONArray jsonArray, boolean isArray, ReqBaseEntity reqEntity){
+        MyLog.d(TAG,"[parseData]" + " jsonObj -> " + jsonObj);
     }
 }

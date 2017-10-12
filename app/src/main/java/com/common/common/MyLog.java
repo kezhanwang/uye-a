@@ -10,6 +10,10 @@ import com.bjzt.uye.global.MConfiger;
 
 public class MyLog {
 
+    public static final boolean isJsonDebugable(){
+        return MConfiger.isJsonDebug;
+    }
+
     public static boolean isDebugable(){
         return MConfiger.isDebug;
     }

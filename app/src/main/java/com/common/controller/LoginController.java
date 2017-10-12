@@ -7,7 +7,8 @@ package com.common.controller;
 public class LoginController {
     private final String TAG = getClass().getSimpleName();
     private static LoginController instance;
-
+    private String token;
+    
     private LoginController(){
 
     }
@@ -20,6 +21,10 @@ public class LoginController {
     }
 
     public String getCookie(){
+        return "";
+    }
+
+    public String getUid(){
         return "";
     }
 }

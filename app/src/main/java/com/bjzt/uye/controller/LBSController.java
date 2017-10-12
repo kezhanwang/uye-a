@@ -125,5 +125,11 @@ public class LBSController {
         }
     };
 
+    public String getLa(){
+        return this.la;
+    }
 
+    public String getLo(){
+        return this.lo;
+    }
 }

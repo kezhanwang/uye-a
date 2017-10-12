@@ -31,16 +31,13 @@ public class HttpEngine extends Thread {
 		// TODO Auto-generated constructor stub
 		super("HttpEnginePool");
 		//0->正式域名
-		mMapUrl.put(NetCommon.NET_TYPE_INDEX_OFFICAL,"http://api2.kezhanwang.cn");
+		mMapUrl.put(NetCommon.NET_TYPE_INDEX_OFFICAL,"http://dev.bjzhongteng.com");
 		//1->开发域名
-		mMapUrl.put(NetCommon.NET_TYPE_INDEX_DEV,"http://dev.kezhanwang.cn");
+		mMapUrl.put(NetCommon.NET_TYPE_INDEX_DEV,"http://dev.bjzhongteng.com");
 		//2->测试域名 .app "http://test1.app.kezhanwang.cn/saas";
-		mMapUrl.put(NetCommon.NET_TYPE_INDEX_TEST1,"http://dev.kezhanwang.cn");
-		mMapUrl.put(NetCommon.NET_TYPE_INDEX_TEST3,"http://test3.app.kezhanwang.cn");
-		mMapUrl.put(NetCommon.NET_TYPE_INDEX_TEST4,"http://test4.app.kezhanwang.cn");
+		mMapUrl.put(NetCommon.NET_TYPE_INDEX_TEST1,"http://dev.bjzhongteng.com");
 		//3->预发布环境
-		mMapUrl.put(NetCommon.NET_TYPE_PRE, "http://uat.kezhanwang.cn");
-
+		mMapUrl.put(NetCommon.NET_TYPE_PRE, "http://dev.bjzhongteng.com");
 
 		setPriority(Thread.MAX_PRIORITY);
 	}
@@ -112,12 +109,8 @@ public class HttpEngine extends Thread {
 	}
 	
 	public String getRefer(int interfaceType){
-		if(interfaceType == NetCommon.NET_INTERFACE_TYPE_KEZHAN) {
+		if(interfaceType == NetCommon.NET_INTERFACE_TYPE_UYE) {
 			return mMapUrl.get(mDevType);
-		} else if(interfaceType == NetCommon.NET_INTERFACE_TYPE_SAAS){
-			return mSaasMapUrl.get(mDevType);
-		} else if(interfaceType == NetCommon.NET_INTERFACE_TYPE_LOAN){
-			return mMapLoanUrl.get(mDevType);
 		}else{
 			return mMapUrl.get(mDevType);
 		}

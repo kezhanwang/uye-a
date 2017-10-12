@@ -22,6 +22,7 @@ public class Global {
     private static Handler bizHandler = null;
     private static Handler uiHandler = null;
     public static int PKG_VER = 0;
+    private static int seqNo = 200;
 
     static{
         initHandlerThread();
@@ -104,5 +105,9 @@ public class Global {
         String strInfo = "";
 
         return strInfo;
+    }
+
+    public synchronized static final int getSeqNo(){
+        return seqNo++;
     }
 }

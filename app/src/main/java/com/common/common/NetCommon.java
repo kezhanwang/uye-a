@@ -23,7 +23,20 @@ public class NetCommon {
     /** 服务器发生异常 */
     public static final int ERROR_HTTP_RESPONSE_HTTP_CODE = 112;
     /**服务器发生500异常**/
-    public static final int ERROR_HTTP_RESPONSE_HTTP_CODE_500 = 113;
+    public static final int ERROR_HTTP_RESPONSE_HTTP_CODE_500 = 5;
+    /**服务器发生404异常**/
+    public static final int ERROR_HTTP_RESPONSE_HTTP_CODE_404 = 4;
+    /**http请求code发生异常**/
+    public static final int ERROR_CODE_EXCEPTION = 115;
+    /**UnSupport异常**/
+    public static final int ERROR_HTTP_UNSUPPORT = 116;
+    /**其他异常信息**/
+    public static final int ERROR_HTTP_OTHERWISE = 117;
+    /**Http请求超时异常**/
+    public static final int ERROR_CODE_TIME_OUT = 118;
+
+    /**业务错误码**/
+    public static final int ERROR_CODE_CODE_EXCEPTION = 1000;
 
     /**正式域名**/
     public static final int NET_TYPE_INDEX_OFFICAL = 0;
@@ -36,8 +49,8 @@ public class NetCommon {
     public static final int NET_TYPE_PRE = 5;
 
     //接口类型;
-    public static final int NET_INTERFACE_TYPE_KEZHAN = 0;
-    public static final int NET_INTERFACE_TYPE_SAAS = 1;
-    public static final int NET_INTERFACE_TYPE_LOAN = 2;
+    public static final int NET_INTERFACE_TYPE_UYE = 0;
 
+
+    public static final int ERROR_CODE_SUCC = 1000;
 }

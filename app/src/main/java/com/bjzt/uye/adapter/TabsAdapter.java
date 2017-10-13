@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TabHost;
 import android.widget.TabWidget;
-import com.bjzt.uye.views.fragments.BaseFragment;
+import com.bjzt.uye.fragments.base.BaseFragment;
 import com.common.common.MyLog;
 import java.util.ArrayList;
 

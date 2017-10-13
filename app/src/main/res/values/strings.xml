@@ -22,4 +22,14 @@
     <string name="msgitem_bottom_error_tips">加载失败，点击重新加载</string>
 
 
+    <!--个人中心-->
+    <string name="myinfo_title">个人中心</string>
+    <string name="myinfo_itemview_cache_clean">清除缓存</string>
+    <string name="myinfo_itemview_contact_us">联系我们</string>
+
+
+    <!--登录-->
+    <string name="login_title">登录/注册</string>
+
+
 </resources>

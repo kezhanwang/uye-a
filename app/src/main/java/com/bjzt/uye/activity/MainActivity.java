@@ -7,6 +7,7 @@ import com.bjzt.uye.R;
 import com.bjzt.uye.activity.base.BaseActivity;
 import com.bjzt.uye.adapter.TabsAdapter;
 import com.bjzt.uye.fragments.FragmentMain;
+import com.bjzt.uye.fragments.FragmentMyInfo;
 import com.bjzt.uye.views.component.MainTabView;
 import java.util.ArrayList;
 import butterknife.BindView;
@@ -68,7 +69,7 @@ public class MainActivity extends BaseActivity {
             mViewMine = new MainTabView(getApplicationContext());
             mViewMine.setTabName(tabName);
 //            mViewMsg.setIcon(R.drawable.wz_tab_icon_msg_selector);
-            mTabsAdapter.addTab(mTabHost.newTabSpec(tabName).setIndicator(mViewMine),FragmentMain.class, null);
+            mTabsAdapter.addTab(mTabHost.newTabSpec(tabName).setIndicator(mViewMine),FragmentMyInfo.class, null);
             curTabNames.add(tabName);
         }
     }

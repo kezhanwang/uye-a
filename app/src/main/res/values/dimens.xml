@@ -2,4 +2,25 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+
+    <!--common-->
+    <dimen name="common_margin">12dp</dimen>
+
+
+    <dimen name="header_bar_height">52dp</dimen>
+    <dimen name="headerview_height">120dp</dimen>
+
+
+    <!--个人中心-->
+    <dimen name="myinfo_headerview_nickname_left_margin">18dp</dimen>
+    <dimen name="myinfo_item_height">55dp</dimen>
+    <dimen name="myinfo_itemview_top_margin">22dp</dimen>
+
+
+    <!--登录页卡-->
+    <dimen name="login_btn_width">350dp</dimen>
+    <dimen name="login_btn_height">50dp</dimen>
+
+
 </resources>

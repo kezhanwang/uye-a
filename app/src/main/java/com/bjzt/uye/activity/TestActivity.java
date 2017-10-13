@@ -3,14 +3,14 @@ package com.bjzt.uye.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
 import com.bjzt.uye.R;
 import com.bjzt.uye.activity.base.BaseActivity;
 import com.bjzt.uye.controller.LBSController;
 import com.bjzt.uye.http.ProtocalManager;
 import com.bjzt.uye.http.listener.ICallBack;
 import com.bjzt.uye.util.IntentUtils;
-
+import com.common.common.MyLog;
+import com.common.util.DeviceUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -35,6 +35,8 @@ public class TestActivity extends BaseActivity{
         ButterKnife.bind(this);
 
         initLayout();
+        String strMac = DeviceUtil.getMacAdd();
+        MyLog.d(TAG,"[onCreate]" + " strMac:" + strMac);
     }
 
     private void initLayout(){
@@ -51,6 +53,7 @@ public class TestActivity extends BaseActivity{
                 ProtocalManager.getInstance().reqLocCity(new ICallBack<Object>() {
                     @Override
                     public void getResponse(Object rsp, boolean isSucc, int errorCode, int seqNo, int src) {
+
 
                     }
                 });

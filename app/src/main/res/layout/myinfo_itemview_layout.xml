@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/myinfo_item_height"
+    android:background="@drawable/more_setting_bg_selector"
+    android:id="@+id/rela_main"
+    >
+
+    <ImageView
+        android:id="@+id/img_view"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="12dp"
+        android:background="@drawable/my_qa"
+        />
+
+    <!-- 
+    	common_font_black
+    	setting_textColor
+     -->
+    <TextView
+        android:id="@+id/txt_title"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/common_default"
+        android:textSize="16.5sp"
+        android:layout_toRightOf="@id/img_view"
+        android:layout_marginLeft="@dimen/common_margin"
+        android:textColor="@color/common_font_black"
+        android:layout_centerVertical="true"
+        />
+
+    <ImageView
+        android:id="@+id/img_arrow"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/common_margin"
+        android:background="@drawable/img_right"
+        />
+
+    <View
+        android:id="@+id/viewline"
+        android:layout_height="1px"
+        android:layout_width="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="12dp"
+        android:background="@color/page_bg"
+        android:visibility="gone"
+        ></View>
+
+</RelativeLayout>

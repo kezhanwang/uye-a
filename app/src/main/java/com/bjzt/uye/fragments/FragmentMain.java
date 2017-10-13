@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.bjzt.uye.R;
-import com.bjzt.uye.views.fragments.BaseFragment;
+import com.bjzt.uye.fragments.base.BaseFragment;
 
 /**
  * Created by billy on 2017/9/21.

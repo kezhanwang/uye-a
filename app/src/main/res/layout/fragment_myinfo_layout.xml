@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+/* //device/apps/common/assets/res/layout/tab_content.xml
+**
+** Copyright 2011, The Android Open Source Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License");
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
+-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/page_bg"
+    >
+
+    <com.bjzt.uye.views.component.MyInfoHeader
+        android:id="@+id/myinfo_header"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        ></com.bjzt.uye.views.component.MyInfoHeader>
+
+    <com.bjzt.uye.views.component.MyInfoHeaderView
+        android:id="@+id/myinfo_headerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/myinfo_header"
+        ></com.bjzt.uye.views.component.MyInfoHeaderView>
+
+
+    <com.bjzt.uye.views.component.MyInfoItemView
+        android:id="@+id/item_clean_cache"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/myinfo_headerview"
+        android:layout_marginTop="@dimen/myinfo_itemview_top_margin"
+        ></com.bjzt.uye.views.component.MyInfoItemView>
+
+    <com.bjzt.uye.views.component.MyInfoItemView
+        android:id="@+id/item_contact_us"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/item_clean_cache"
+        ></com.bjzt.uye.views.component.MyInfoItemView>
+
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="@dimen/login_btn_width"
+        android:layout_height="@dimen/login_btn_height"
+        android:layout_marginLeft="@dimen/common_margin"
+        android:layout_marginRight="@dimen/common_margin"
+        android:layout_below="@id/item_contact_us"
+        android:layout_marginTop="42dp"
+        android:gravity="center"
+        android:background="@drawable/btn_login_selector"
+        android:text="@string/login_title"
+        android:textColor="@color/common_white"
+        android:textSize="18.5sp"
+        />
+
+
+</RelativeLayout>

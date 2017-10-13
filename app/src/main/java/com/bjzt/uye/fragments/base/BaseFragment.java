@@ -1,4 +1,4 @@
-package com.bjzt.uye.views.fragments;
+package com.bjzt.uye.fragments.base;
 
 import android.support.v4.app.Fragment;
 

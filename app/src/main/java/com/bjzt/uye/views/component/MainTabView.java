@@ -3,7 +3,6 @@ package com.bjzt.uye.views.component;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,10 +16,6 @@ import com.bjzt.uye.R;
 public class MainTabView extends FrameLayout {
     private TextView mTabNameView;
     private ImageView mTabIcon;
-
-    private View mIconNewTip;
-
-    private TextView mTxtNewMsgCount;//新消息数字
 
     public MainTabView(Context context) {
         this(context, null);
@@ -37,11 +32,10 @@ public class MainTabView extends FrameLayout {
     }
 
     private void initView(Context context) {
-        LayoutInflater.from(context).inflate(R.layout.wz_tab_item_content, this);
+        LayoutInflater li = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        li.inflate(R.layout.tab_item_content, this);
         mTabNameView = ((TextView) findViewById(R.id.tab_item_content_text));
         mTabIcon = ((ImageView) findViewById(R.id.tab_btn_icon));
-        mIconNewTip = findViewById(R.id.new_msg_tips);
-        mTxtNewMsgCount = (TextView) findViewById(R.id.new_msg_counter);
     }
 
     private void init() {
@@ -60,36 +54,4 @@ public class MainTabView extends FrameLayout {
         }
     }
 
-    public void showNewTip(boolean isShow) {
-        if (mIconNewTip != null) {
-            if (isShow) {
-                mIconNewTip.setVisibility(VISIBLE);
-            } else {
-                mIconNewTip.setVisibility(GONE);
-            }
-        }
-    }
-
-    /**
-     * 消息栏中的新消息数字
-     *
-     * @param count
-     */
-    public void setTxtNewMsgCount(int count) {
-        if (count <= 0) {
-            mTxtNewMsgCount.setVisibility(GONE);
-            return;
-        } else {
-            mTxtNewMsgCount.setVisibility(VISIBLE);
-        }
-
-        String strCount;
-        if (count > 99) {
-            strCount = "99+";
-        } else {
-            strCount = count + "";
-        }
-
-        mTxtNewMsgCount.setText(strCount);
-    }
 }

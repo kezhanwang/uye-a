@@ -15,10 +15,9 @@
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="12dp"
-        android:background="@drawable/my_qa"
         />
 
-    <!-- 
+    <!--
     	common_font_black
     	setting_textColor
      -->

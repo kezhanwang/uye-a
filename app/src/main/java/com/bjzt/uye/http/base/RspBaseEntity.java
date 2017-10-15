@@ -95,5 +95,5 @@ public abstract class RspBaseEntity implements Serializable {
 		return this.isSucc;
 	}
 
-	public void parseData(JSONObject jsonObj, JSONArray jsonArray, boolean isArray, ReqBaseEntity reqEntity){};
+	abstract public void parseData(JSONObject jsonObj, JSONArray jsonArray, boolean isArray, ReqBaseEntity reqEntity);
 }

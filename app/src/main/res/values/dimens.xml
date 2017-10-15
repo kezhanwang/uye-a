@@ -6,11 +6,17 @@
 
     <!--common-->
     <dimen name="common_margin">12dp</dimen>
-
+    <dimen name="common_margin_18">18dp</dimen>
+    <dimen name="common_margin_left_small">2dp</dimen>
 
     <dimen name="header_bar_height">52dp</dimen>
     <dimen name="headerview_height">120dp</dimen>
 
+
+    <!--ItemView-->
+    <dimen name="item_view_height">52dp</dimen>
+    <dimen name="item_view_textWidth_ss">72dp</dimen>
+    <dimen name="item_view_textsize">15sp</dimen>
 
     <!--个人中心-->
     <dimen name="myinfo_headerview_nickname_left_margin">18dp</dimen>

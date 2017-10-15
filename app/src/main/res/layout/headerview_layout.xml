@@ -70,10 +70,11 @@
         <TextView
             android:id="@+id/textView_header_right"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:textSize="16.5sp"
             android:textColor="@color/common_font_3"
-            android:gravity="left|center_vertical"
+            android:gravity="center"
+            android:layout_centerInParent="true"
             />
         <ImageView
             android:id="@+id/img_header_right"

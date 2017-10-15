@@ -47,9 +47,9 @@ public class BaseTaskV2<T> extends HttpBaseTask implements ITaskListener {
             ReqBaseEntity reqBaseEntity = (ReqBaseEntity) o;
             String url = reqBaseEntity.getReqUrl();
             //url转换为小写
-//            if(!TextUtils.isEmpty(url)){
-//                url = url.toLowerCase();
-//            }
+            if(!TextUtils.isEmpty(url)){
+                url = url.toLowerCase();
+            }
 //            CacheCommon mCache = new CacheCommon();
             final int seqNo = reqBaseEntity.seqNo;
             //数据库缓存请求
@@ -77,8 +77,8 @@ public class BaseTaskV2<T> extends HttpBaseTask implements ITaskListener {
                 String la = LBSController.getInstance().getLa();
                 String lo = LBSController.getInstance().getLo();
                 if(!TextUtils.isEmpty(la) && !TextUtils.isEmpty(lo)){
-                    mMap.put("lat",la);
-                    mMap.put("lng",lo);
+                    mMap.put("map_lat",la);
+                    mMap.put("map_lng",lo);
                 }
 //                //添加areaid
 //                PHotCityEntity pHotEntity = CityListController.getInstance().getCurCityEntity();
@@ -91,6 +91,9 @@ public class BaseTaskV2<T> extends HttpBaseTask implements ITaskListener {
                 if(!TextUtils.isEmpty(strPhoneId)){
                     mMap.put("phoneid",strPhoneId);
                 }
+                //version
+                mMap.put("version",MConfiger.VERSION);
+
                 if(mMap != null && mMap.size() > 0){
                     for(Map.Entry<String, Object> entry:mMap.entrySet()){
                         String key = entry.getKey();

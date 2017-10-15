@@ -1,6 +1,11 @@
 package com.bjzt.uye.util;
 
+import android.content.Context;
 import android.text.TextUtils;
+
+import com.bjzt.uye.R;
+import com.bjzt.uye.global.Global;
+import com.common.common.NetCommon;
 
 /**
  * Created by billy on 2017/10/12.
@@ -22,4 +27,26 @@ public class StrUtil {
         return strResult;
     }
 
+    /***
+     * 判断手机号码是否合法
+     * @param phone
+     * @return
+     */
+    public static final boolean isLegal(String phone){
+        if(!TextUtils.isEmpty(phone) && phone.length() == 11){
+            return true;
+        }
+        return false;
+    }
+
+    public static final String getErrorTipsByCode(int errorCode){
+        String str = "";
+        Context mContext = Global.getContext();
+        if(errorCode == NetCommon.ERROR_CODE_TIME_OUT){
+            str = mContext.getResources().getString(R.string.common_timeout);
+        }else{
+            str = mContext.getResources().getString(R.string.common_request_error_code,errorCode);
+        }
+        return str;
+    }
 }

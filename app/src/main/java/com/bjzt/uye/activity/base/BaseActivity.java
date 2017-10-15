@@ -1,7 +1,9 @@
 package com.bjzt.uye.activity.base;
 
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -10,18 +12,40 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.bjzt.uye.R;
 import com.bjzt.uye.activity.dialog.MLoadingDialog;
+import com.bjzt.uye.http.listener.ICallBack;
 import com.common.util.DeviceUtil;
+
+import butterknife.ButterKnife;
 
 /**
  * Created by billy on 2017/9/21.
  */
-public class BaseActivity extends FragmentActivity {
+public abstract class BaseActivity extends FragmentActivity {
     protected final String TAG = getClass().getSimpleName();
     private Toast toast;
     private MLoadingDialog mLoadingDialog;
 
-    protected void showToast(){
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(getLayoutID());
+        initExtras(savedInstanceState);
+        bindView();
+        initLayout();
+    }
 
+    abstract protected int getLayoutID();
+
+    abstract  protected void initLayout();
+
+    abstract  protected  void initExtras(Bundle bundle);
+
+    protected void bindView(){
+        ButterKnife.bind(this);
+    }
+
+    protected void showToast(String str){
+        showToast(str,Toast.LENGTH_SHORT);
     }
 
     protected void showToast(String str,int duration){
@@ -48,7 +72,6 @@ public class BaseActivity extends FragmentActivity {
         }
     }
 
-
     protected void hideLoadingDialog(){
         if(mLoadingDialog != null){
             mLoadingDialog.dismiss();
@@ -58,7 +81,7 @@ public class BaseActivity extends FragmentActivity {
 
     protected void showLoading(String msg,boolean isCancle){
         hideLoadingDialog();
-        if(!isFinishing() && mLoadingDialog == null){
+        if(mLoadingDialog == null){
             mLoadingDialog = new MLoadingDialog(this,R.style.MyDialogBg);
             mLoadingDialog.setCanceledOnTouchOutside(isCancle);
             mLoadingDialog.setCancelable(isCancle);
@@ -73,6 +96,10 @@ public class BaseActivity extends FragmentActivity {
     }
 
 
+    protected void showLoading(){
+        String tips = getResources().getString(R.string.common_request);
+        showLoading(tips,true);
+    }
 
     @Override
     protected void onDestroy() {
@@ -99,4 +126,20 @@ public class BaseActivity extends FragmentActivity {
     protected void sendMsgDelay(Message msg,long milli){
         uiHandler.sendMessageDelayed(msg,milli);
     }
+
+    protected ICallBack<Object> callBack = new ICallBack<Object>() {
+        @Override
+        public void getResponse(Object rsp, boolean isSucc, int errorCode, int seqNo, int src) {
+            if(!isFinishing()){
+                onRsp(rsp,isSucc,errorCode,seqNo,src);
+            }
+        }
+    };
+
+    protected ICallBack<Object> getCallBack(){
+        return callBack;
+    }
+
+    protected void onRsp(Object rsp, boolean isSucc, int errorCode, int seqNo, int src){}
+
 }

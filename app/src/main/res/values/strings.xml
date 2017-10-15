@@ -3,6 +3,9 @@
 
 
     <string name="common_default">---</string>
+    <string name="common_request">数据请求中...</string>
+    <string name="common_timeout">网络超时</string>
+    <string name="common_request_error_code">请求失败[%d]</string>
 
     <!--tab目录-->
     <string name="tab_main">首页</string>
@@ -27,9 +30,22 @@
     <string name="myinfo_itemview_cache_clean">清除缓存</string>
     <string name="myinfo_itemview_contact_us">联系我们</string>
 
-
     <!--登录-->
     <string name="login_title">登录/注册</string>
+    <string name="login_header_title">登录</string>
+    <string name="login_hint_tel">手机号码</string>
+    <string name="login_hint_pwd">密码</string>
+    <string name="login_hint_sms_verify_code">短信验证</string>
+    <string name="login_tips_input_tel">请输入手机号码</string>
+    <string name="login_tips_input_tel_legal">请输入合法手机号码</string>
+    <string name="login_tips_bottom_phone_verify">使用短信登录</string>
+    <string name="login_tips_bottom_phone_pwd">使用密码登录</string>
 
+    <!--注册-->
+    <string name="reg_header_title">注册</string>
+    <string name="reg_header_btn_str">立即注册</string>
+    <string name="reg_hint_tel">@string/login_hint_tel</string>
+    <string name="reg_hint_pwd">@string/login_hint_pwd</string>
+    <string name="reg_hint_verify">@string/login_hint_sms_verify_code</string>
 
 </resources>

@@ -5,15 +5,21 @@
     <color name="colorAccent">#FF4081</color>
     <color name="translucent">#00000000</color>
 
+    <color name="common_red">#ee0000</color>
     <color name="common_bg_color_grey">#eeeeee</color>
     <color name="common_font_3">#333333</color>
     <color name="common_font_6">#666666</color>
+    <color name="common_font_9">#999999</color>
+    <color name="common_font_d6">#d6d6d6</color>
+    <color name="common_font_53">#535353</color>
     <color name="common_white">#ffffff</color>
     <color name="more_list_item_press">#f1fafe</color>
     <color name="common_grey">#909090</color>
+    <color name="common_line_divider">@color/common_font_ccc</color>
 
     <color name="common_green">#00c29a</color>
     <color name="common_green_press">#00c2ba</color>
+    <color name="common_dc">#dcdcdc</color>
 
     <color name="white_bg">#ffffff</color>
     <color name="common_font_black">#333333</color>
@@ -23,6 +29,8 @@
 
     <color name="page_bg">#f4f4f4</color>
 
+    <!--tab相关-->
+    <color name="tab_txt_color_normal">#747474</color>
     <!-- header先关-->
     <color name="header_rela_bg_press">#f1f1f1</color>
 

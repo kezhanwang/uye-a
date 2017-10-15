@@ -25,15 +25,12 @@ public class MainActivity extends BaseActivity {
     private ArrayList<String> curTabNames = new ArrayList<>();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-
-        initLayout();
+    protected int getLayoutID() {
+        return R.layout.activity_main;
     }
 
-    private void initLayout(){
+    @Override
+    protected void initLayout(){
         mTabHost = findViewById(android.R.id.tabhost);
         mTabHost.setup();
         mTabsAdapter = new TabsAdapter(this, mTabHost, mViewPager);
@@ -52,23 +49,29 @@ public class MainActivity extends BaseActivity {
         mViewPager.setOffscreenPageLimit(4);
     }
 
+    @Override
+    protected void initExtras(Bundle bundle) {
+
+    }
+
+
     private void createTabView(String tabName){
         if(tabName.equals(getString(R.string.tab_main))){
             mViewMsg = new MainTabView(getApplicationContext());
             mViewMsg.setTabName(tabName);
-//            mViewMsg.setIcon(R.drawable.wz_tab_icon_msg_selector);
+            mViewMsg.setIcon(R.drawable.tab_main_selector);
             mTabsAdapter.addTab(mTabHost.newTabSpec(tabName).setIndicator(mViewMsg),FragmentMain.class, null);
             curTabNames.add(tabName);
         }else if(tabName.equals(getString(R.string.tab_uye))){
             mViewUYe = new MainTabView(getApplicationContext());
             mViewUYe.setTabName(tabName);
-//            mViewMsg.setIcon(R.drawable.wz_tab_icon_msg_selector);
+            mViewUYe.setIcon(R.drawable.tab_uye_selector);
             mTabsAdapter.addTab(mTabHost.newTabSpec(tabName).setIndicator(mViewUYe),FragmentMain.class, null);
             curTabNames.add(tabName);
         }else if(tabName.equals(getString(R.string.tab_mine))){
             mViewMine = new MainTabView(getApplicationContext());
             mViewMine.setTabName(tabName);
-//            mViewMsg.setIcon(R.drawable.wz_tab_icon_msg_selector);
+            mViewMine.setIcon(R.drawable.tab_myinfo_selector);
             mTabsAdapter.addTab(mTabHost.newTabSpec(tabName).setIndicator(mViewMine),FragmentMyInfo.class, null);
             curTabNames.add(tabName);
         }

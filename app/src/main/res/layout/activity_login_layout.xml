@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+/* //device/apps/common/assets/res/layout/tab_content.xml
+**
+** Copyright 2011, The Android Open Source Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License");
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
+-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/page_bg"
+    >
+
+    <com.bjzt.uye.views.component.YHeaderView
+        android:id="@+id/login_header"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        ></com.bjzt.uye.views.component.YHeaderView>
+
+
+    <LinearLayout
+        android:id="@+id/linear_main"
+        android:layout_width="fill_parent"
+        android:layout_height="55dp"
+        android:orientation="horizontal"
+        android:layout_below="@id/login_header"
+        >
+
+        <com.bjzt.uye.views.component.ExtendEditText
+            android:id="@+id/login_tel"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            ></com.bjzt.uye.views.component.ExtendEditText>
+
+        <com.bjzt.uye.views.component.TimerDownTextView
+            android:id="@+id/txt_timerdown"
+            android:layout_width="115dp"
+            android:layout_height="fill_parent"
+            android:text="获取验证码"
+            android:clickable="true"
+            android:gravity="center"
+            android:textColor="@color/common_green"
+            android:textSize="16sp"
+            />
+
+    </LinearLayout>
+
+    <com.bjzt.uye.views.component.ExtendEditText
+        android:id="@+id/login_pwd"
+        android:layout_width="fill_parent"
+        android:layout_height="55dp"
+        android:layout_below="@id/linear_main"
+        ></com.bjzt.uye.views.component.ExtendEditText>
+
+    <View
+        android:layout_height="1px"
+        android:layout_width="fill_parent"
+        android:background="@color/common_line_divider"
+        android:layout_below="@id/linear_main"
+        android:layout_marginLeft="@dimen/common_margin"
+        ></View>
+
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="@dimen/login_btn_width"
+        android:layout_height="@dimen/login_btn_height"
+        android:layout_marginLeft="@dimen/common_margin"
+        android:layout_marginRight="@dimen/common_margin"
+        android:layout_below="@id/login_pwd"
+        android:layout_marginTop="42dp"
+        android:gravity="center"
+        android:background="@drawable/btn_login_selector"
+        android:text="@string/login_title"
+        android:textColor="@color/common_white"
+        android:textSize="18.5sp"
+        />
+
+    <TextView
+        android:id="@+id/txt_bottom_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:layout_below="@id/btn_login"
+        android:layout_alignRight="@id/btn_login"
+        android:layout_marginTop="2dp"
+        android:text="密码登录"
+        android:textColor="@color/common_font_53"
+        android:textSize="14.5sp"
+        android:layout_marginRight="2dp"
+        />
+
+</RelativeLayout>

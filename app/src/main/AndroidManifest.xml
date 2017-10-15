@@ -54,21 +54,33 @@
             android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"
             >
 
-
-
         </activity>
 
+        <!--主Tab页卡-->
         <activity
             android:name=".activity.MainActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTop"
             android:theme="@style/Theme.Youye"
             >
-
         </activity>
 
+        <!--登录页卡-->
+        <activity
+            android:name=".activity.LoginActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.Youye"
+            ></activity>
 
-
+        <!--注册页卡-->
+        <activity
+            android:name=".activity.RegisterActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.Youye"
+            ></activity>
+'
     <!--===========================================相关配置SDK============================ -->
     <service
         android:name="com.baidu.location.f"

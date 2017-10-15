@@ -28,18 +28,25 @@ public class TestActivity extends BaseActivity{
     @BindView(R.id.btn_main)
     Button btnMainPage;
 
+    @BindView(R.id.btn_login)
+    Button btnLogin;
+
+    @BindView(R.id.btn_register)
+    Button btnReg;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test_layout);
-        ButterKnife.bind(this);
-
-        initLayout();
         String strMac = DeviceUtil.getMacAdd();
         MyLog.d(TAG,"[onCreate]" + " strMac:" + strMac);
     }
 
-    private void initLayout(){
+    @Override
+    protected int getLayoutID() {
+        return R.layout.activity_test_layout;
+    }
+
+    protected void initLayout(){
         btnLoc.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -66,6 +73,26 @@ public class TestActivity extends BaseActivity{
                 IntentUtils.startMainActivity(TestActivity.this);
             }
         });
+
+        btnLogin.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                IntentUtils.startLoginActivity(TestActivity.this,LoginActivity.TYPE_PHONE_VERIFY_CODE,10);
+            }
+        });
+
+        btnReg.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                IntentUtils.startRegisterActivity(TestActivity.this,11);
+            }
+        });
+    }
+
+    @Override
+    protected void initExtras(Bundle bundle) {
+
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.bjzt.uye.views.component;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -55,17 +56,22 @@ public class MyInfoItemView extends RelativeLayout implements NoConfusion,View.O
     public void updateType(int mType){
         this.mType = mType;
         String title = "";
+        Drawable d = null;
         switch(this.mType){
             case TYPE_CACHE_CLEAN:
                 title = getResources().getString(R.string.myinfo_itemview_cache_clean);
+                d = getResources().getDrawable(R.drawable.myinfo_clean_cache);
                 break;
             case TYPE_CONTACT_US:
                 title = getResources().getString(R.string.myinfo_itemview_contact_us);
+                d = getResources().getDrawable(R.drawable.myinfo_contact_us);
                 break;
         }
-
         if(!TextUtils.isEmpty(title)){
             mTxtTitle.setText(title);
+        }
+        if(d != null){
+            imgIcon.setImageDrawable(d);
         }
     }
 

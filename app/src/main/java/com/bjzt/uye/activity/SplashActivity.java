@@ -17,9 +17,22 @@ public class SplashActivity extends BaseActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash_layout);
-
         delayTask();
+    }
+
+    @Override
+    protected int getLayoutID() {
+        return R.layout.activity_splash_layout;
+    }
+
+    @Override
+    protected void initLayout() {
+
+    }
+
+    @Override
+    protected void initExtras(Bundle bundle) {
+
     }
 
     private void delayTask(){

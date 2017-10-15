@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/common_white"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:id="@+id/linear_main"
+    >
+
+    <EditText
+        android:id="@+id/edit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="1"
+        android:background="@null"
+        android:textColor="#505050"
+        android:textSize="16.5sp"
+        android:singleLine="true"
+        android:focusable="true"
+        />
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:src="@drawable/input_back"
+        android:visibility="gone"
+        android:paddingLeft="8dp"
+        android:paddingRight="6dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:scaleType="center"
+        />
+
+    <ImageView
+        android:id="@+id/img_eyes"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_marginRight="6dp"
+        android:src="@drawable/login_img_eye_close"
+        android:paddingLeft="8dp"
+        android:paddingRight="12dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:scaleType="center"
+        android:visibility="gone"
+        />
+
+</LinearLayout>

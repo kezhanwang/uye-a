@@ -1,5 +1,6 @@
 package com.bjzt.uye.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 import com.bjzt.uye.R;
 import com.bjzt.uye.activity.base.BaseActivity;
 import com.bjzt.uye.http.ProtocalManager;
+import com.bjzt.uye.http.rsp.RspLoginPhoneEntity;
+import com.bjzt.uye.http.rsp.RspLoginPwdEntity;
 import com.bjzt.uye.http.rsp.RspPhoneVerifyEntity;
 import com.bjzt.uye.listener.IHeaderListener;
 import com.bjzt.uye.listener.IItemListener;
@@ -21,6 +24,8 @@ import com.bjzt.uye.util.StrUtil;
 import com.bjzt.uye.views.component.ExtendEditText;
 import com.bjzt.uye.views.component.TimerDownTextView;
 import com.bjzt.uye.views.component.YHeaderView;
+import com.common.controller.LoginController;
+
 import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
@@ -29,7 +34,7 @@ import butterknife.BindView;
  * 登录页卡
  * Created by billy on 2017/10/15.
  */
-public class LoginActivity extends BaseActivity{
+public class LoginActivity extends BaseActivity implements  View.OnClickListener{
 
     @BindView(R.id.login_header)
     YHeaderView mHeader;
@@ -87,12 +92,8 @@ public class LoginActivity extends BaseActivity{
         editTel.setMaxLength(11);
 
         editPwd.setTxtChangeListener(mTxtChangeListener);
-        btnLogin.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
+        btnLogin.setOnClickListener(this);
 
-            }
-        });
         mTxtBottom.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -105,14 +106,25 @@ public class LoginActivity extends BaseActivity{
         });
 
         refresh();
+        reSetBtnStatus();
     }
 
     private ITextListener mTxtChangeListener = new ITextListener() {
         @Override
         public void onTxtState(boolean isEmpty) {
-
+            reSetBtnStatus();
         }
     };
+
+    private void reSetBtnStatus(){
+        String phone = editTel.getText();
+        String pwd = editPwd.getText();
+        if(!TextUtils.isEmpty(phone) && !TextUtils.isEmpty(pwd)){
+            btnLogin.setEnabled(true);
+        }else{
+            btnLogin.setEnabled(false);
+        }
+    }
 
     private void refresh(){
         String hint = "";
@@ -163,11 +175,101 @@ public class LoginActivity extends BaseActivity{
             hideLoadingDialog();
             if(rsp instanceof RspPhoneVerifyEntity){
                 RspPhoneVerifyEntity rspEntity = (RspPhoneVerifyEntity) rsp;
-                if(isSucc && rspEntity != null){
+                if(isSucc){
 
                 }else{
-
+                    mTxtTimerDown.stopTimer();
+                    String tips = StrUtil.getErrorTipsByCode(errorCode);
+                    if(!TextUtils.isEmpty(tips)){
+                        tips = rspEntity.msg;
+                    }
+                    showToast(tips);
                 }
+            }else if(rsp instanceof RspLoginPhoneEntity){
+                RspLoginPhoneEntity rspEntity = (RspLoginPhoneEntity) rsp;
+                if(isSucc){
+                    if(rspEntity.mEntity != null){
+                        LoginController.getInstance().loginSucc(rspEntity.mEntity);
+                        String tips = getResources().getString(R.string.login_tips_succ);
+                        showToast(tips);
+                        setResult(Activity.RESULT_OK);
+                        finish();
+                    }
+                }else{
+                    String tips = StrUtil.getErrorTipsByCode(errorCode);
+                    if(!TextUtils.isEmpty(rspEntity.msg)){
+                        tips = rspEntity.msg;
+                    }
+                    showToast(tips);
+                }
+            }else if(rsp instanceof RspLoginPwdEntity){
+                RspLoginPwdEntity rspEntity = (RspLoginPwdEntity) rsp;
+                if(isSucc){
+                    if(rspEntity.mEntity != null){
+                        LoginController.getInstance().loginSucc(rspEntity.mEntity);
+                        String tips = getResources().getString(R.string.login_tips_succ);
+                        showToast(tips);
+                        setResult(Activity.RESULT_OK);
+                        finish();
+                    }
+                }else{
+                    String tips = StrUtil.getErrorTipsByCode(errorCode);
+                    if(!TextUtils.isEmpty(rspEntity.msg)){
+                        tips = rspEntity.msg;
+                    }
+                    showToast(tips);
+                }
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == Activity.RESULT_OK){
+            switch(requestCode){
+                case REQ_CODE_PWD:
+                    setResult(Activity.RESULT_OK);
+                    finish();
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view == this.btnLogin){
+            String phone = editTel.getText();
+            if(TextUtils.isEmpty(phone)){
+                String tips = getResources().getString(R.string.login_tips_input_tel);
+                showToast(tips);
+                return;
+            }
+            if(!StrUtil.isLegal(phone)){
+                String tips = getResources().getString(R.string.login_tips_input_tel_legal);
+                showToast(tips);
+                return;
+            }
+            if(mType == TYPE_PHONE_VERIFY_CODE){
+                String code = editPwd.getText();
+                if(TextUtils.isEmpty(code)){
+                    String tips = getResources().getString(R.string.login_tips_input_verify_code);
+                    showToast(tips);
+                    return;
+                }
+                showLoading();
+                int seqNo = ProtocalManager.getInstance().reqLoginPhone(phone,code,getCallBack());
+                mReqList.add(seqNo);
+            }else if(mType == TYPE_PWD){
+                String pwd = editPwd.getText();
+                if(TextUtils.isEmpty(pwd)){
+                    String tips = getResources().getString(R.string.login_tips_input_pwd);
+                    showToast(tips);
+                    return;
+                }
+                showLoading();
+                int seqNo = ProtocalManager.getInstance().reqLoginPwd(phone,pwd,getCallBack());
+                mReqList.add(seqNo);
             }
         }
     }

@@ -31,7 +31,7 @@
     <string name="myinfo_itemview_contact_us">联系我们</string>
 
     <!--登录-->
-    <string name="login_title">登录/注册</string>
+    <string name="login_title">登录</string>
     <string name="login_header_title">登录</string>
     <string name="login_hint_tel">手机号码</string>
     <string name="login_hint_pwd">密码</string>
@@ -40,6 +40,9 @@
     <string name="login_tips_input_tel_legal">请输入合法手机号码</string>
     <string name="login_tips_bottom_phone_verify">使用短信登录</string>
     <string name="login_tips_bottom_phone_pwd">使用密码登录</string>
+    <string name="login_tips_input_verify_code">请输入手机验证码</string>
+    <string name="login_tips_input_pwd">请输入密码</string>
+    <string name="login_tips_succ">登录成功</string>
 
     <!--注册-->
     <string name="reg_header_title">注册</string>
@@ -47,5 +50,8 @@
     <string name="reg_hint_tel">@string/login_hint_tel</string>
     <string name="reg_hint_pwd">@string/login_hint_pwd</string>
     <string name="reg_hint_verify">@string/login_hint_sms_verify_code</string>
+    <string name="reg_tips_please_input_verify_code">@string/login_tips_input_verify_code</string>
+    <string name="reg_tips_input_pwd">@string/login_tips_input_pwd</string>
+
 
 </resources>

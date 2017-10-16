@@ -5,6 +5,8 @@ import com.bjzt.uye.http.base.ReqBaseEntity;
 import com.bjzt.uye.http.base.TaskCommonV2;
 import com.bjzt.uye.http.listener.ICallBack;
 import com.bjzt.uye.http.req.ReqLocCityEntity;
+import com.bjzt.uye.http.req.ReqLoginPhoneEntity;
+import com.bjzt.uye.http.req.ReqLoginPwdEntity;
 import com.bjzt.uye.http.req.ReqPhoneVerifyEntity;
 import com.bjzt.uye.http.req.ReqRegEntity;
 import com.common.http.HttpEngine;
@@ -77,6 +79,34 @@ public class ProtocalManager {
         ReqRegEntity reqEntity =new ReqRegEntity();
         reqEntity.code = code;
         reqEntity.password = pwd;
+        reqEntity.phone = phone;
+        return addTask(reqEntity,callBack);
+    }
+
+    /***
+     * 使用密码登录
+     * @param phone
+     * @param pwd
+     * @param callBack
+     * @return
+     */
+    public int reqLoginPwd(String phone,String pwd,ICallBack<Object> callBack){
+        ReqLoginPwdEntity reqEntity = new ReqLoginPwdEntity();
+        reqEntity.password = pwd;
+        reqEntity.phone = phone;
+        return addTask(reqEntity,callBack);
+    }
+
+    /**
+     * 手机验证码方式登录
+     * @param phone
+     * @param code
+     * @param callBack
+     * @return
+     */
+    public int reqLoginPhone(String phone,String code,ICallBack<Object> callBack){
+        ReqLoginPhoneEntity reqEntity = new ReqLoginPhoneEntity();
+        reqEntity.code = code;
         reqEntity.phone = phone;
         return addTask(reqEntity,callBack);
     }

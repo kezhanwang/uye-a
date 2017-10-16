@@ -70,9 +70,9 @@ public class BaseTaskV2<T> extends HttpBaseTask implements ITaskListener {
                     mMap = new HashMap<String, Object>();
                 }
                 //每个请求添加一个时间戳,防止运营商的缓存
-                if(reqBaseEntity._t <= 0){
-                    mMap.put("_t", System.currentTimeMillis());
-                }
+//                if(reqBaseEntity._t <= 0){
+//                    mMap.put("_t", System.currentTimeMillis());
+//                }
                 //添加经纬度
                 String la = LBSController.getInstance().getLa();
                 String lo = LBSController.getInstance().getLo();

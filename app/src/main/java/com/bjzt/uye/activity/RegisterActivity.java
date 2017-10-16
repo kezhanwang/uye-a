@@ -97,14 +97,26 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         editPwd.setTxtChangeListener(mTxtChangeListener);
 
         btnReg.setOnClickListener(this);
+        btnReg.setEnabled(false);
     }
 
     private ITextListener mTxtChangeListener = new ITextListener() {
         @Override
         public void onTxtState(boolean isEmpty) {
-
+            reSetBtnStatus();
         }
     };
+
+    private void reSetBtnStatus(){
+        String strTel = editPhone.getText();
+        String strVerify = editVerify.getText();
+        String strPwd = editPwd.getText();
+        if(!TextUtils.isEmpty(strTel) && !TextUtils.isEmpty(strVerify) && !TextUtils.isEmpty(strPwd)){
+            btnReg.setEnabled(true);
+        }else{
+            btnReg.setEnabled(false);
+        }
+    }
 
     @Override
     protected void initExtras(Bundle bundle) {
@@ -117,6 +129,26 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             String phone = editPhone.getText();
             String code = editVerify.getText();
             String pwd = editPwd.getText();
+            if(TextUtils.isEmpty(phone)){
+                String tips = getResources().getString(R.string.login_tips_input_tel);
+                showToast(tips);
+                return;
+            }
+            if(!StrUtil.isLegal(phone)){
+                String tips = getResources().getString(R.string.login_tips_input_tel_legal);
+                showToast(tips);
+                return;
+            }
+            if(TextUtils.isEmpty(code)){
+                String tips = getResources().getString(R.string.reg_tips_please_input_verify_code);
+                showToast(tips);
+                return;
+            }
+            if(TextUtils.isEmpty(pwd)){
+                String tips = getResources().getString(R.string.reg_tips_input_pwd);
+                showToast(tips);
+                return;
+            }
             showLoading();
             int seqNo = ProtocalManager.getInstance().reqReg(phone,code,pwd,getCallBack());
             mReqList.add(seqNo);

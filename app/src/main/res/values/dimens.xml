@@ -8,6 +8,7 @@
     <dimen name="common_margin">12dp</dimen>
     <dimen name="common_margin_18">18dp</dimen>
     <dimen name="common_margin_left_small">2dp</dimen>
+    <dimen name="common_margin_10">10dp</dimen>
 
     <dimen name="header_bar_height">52dp</dimen>
     <dimen name="headerview_height">120dp</dimen>
@@ -28,5 +29,7 @@
     <dimen name="login_btn_width">350dp</dimen>
     <dimen name="login_btn_height">50dp</dimen>
 
+    <!--资料审核-->
+    <dimen name="datachecking_img_left_margin">22dp</dimen>
 
 </resources>

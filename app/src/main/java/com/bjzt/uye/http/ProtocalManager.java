@@ -9,6 +9,8 @@ import com.bjzt.uye.http.req.ReqLoginPhoneEntity;
 import com.bjzt.uye.http.req.ReqLoginPwdEntity;
 import com.bjzt.uye.http.req.ReqPhoneVerifyEntity;
 import com.bjzt.uye.http.req.ReqRegEntity;
+import com.bjzt.uye.http.req.ReqUInfoEntity;
+import com.bjzt.uye.http.req.ReqUploadPhoneListEntity;
 import com.common.http.HttpEngine;
 
 /**
@@ -108,6 +110,28 @@ public class ProtocalManager {
         ReqLoginPhoneEntity reqEntity = new ReqLoginPhoneEntity();
         reqEntity.code = code;
         reqEntity.phone = phone;
+        return addTask(reqEntity,callBack);
+    }
+
+    /**
+     * 获取个人资料页卡相关
+     * @param callBack
+     * @return
+     */
+    public int reqUInfoDataCheck(ICallBack<Object> callBack){
+        ReqUInfoEntity reqEntity = new ReqUInfoEntity();
+        return addTask(reqEntity,callBack);
+    }
+
+    /**
+     * 上报通讯录
+     * @param mobile
+     * @param callBack
+     * @return
+     */
+    public int reqUploadPhoneList(String mobile,ICallBack<Object> callBack){
+        ReqUploadPhoneListEntity reqEntity = new ReqUploadPhoneListEntity();
+        reqEntity.mobile = mobile;
         return addTask(reqEntity,callBack);
     }
 }

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/out_bg">
+
+    <TextView
+        android:id="@+id/update_title"
+        android:layout_width="fill_parent"
+        android:layout_height="42dp"
+        android:gravity="center"
+        android:paddingRight="@dimen/common_margin_10"
+        android:paddingLeft="@dimen/common_margin_10"
+        android:textSize="17sp"
+        android:textColor="@color/common_font_3"
+        android:text="提示框"
+        />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2px"
+        android:paddingRight="@dimen/common_margin_10"
+        android:paddingLeft="@dimen/common_margin_10"
+        android:background="@color/upgrade_color_disable"
+        android:layout_marginBottom="5dp"
+        android:visibility="gone"
+        />
+    
+    <TextView
+        android:id="@+id/txt_tips"
+        android:layout_width="fill_parent"
+        android:layout_height="46dp"
+        android:layout_marginTop="5.0dip"
+        android:paddingRight="@dimen/common_margin_10"
+        android:paddingLeft="@dimen/common_margin_10"
+        android:gravity="left"
+        android:textSize="15sp"
+        android:text="提示内容..."
+        android:textColor="@color/common_font_50"
+        />
+    
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:paddingRight="@dimen/common_margin_10"
+        android:paddingLeft="@dimen/common_margin_10"
+        android:background="#b3b3b3"
+        />
+
+    <Button
+        android:id="@+id/btn_ok"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/single_dialog_btn_selector"
+        android:textSize="17.5sp"
+        android:textColor="@color/common_font_3"
+        android:text="@string/common_default"
+        >
+    </Button>
+
+</LinearLayout>

@@ -34,6 +34,12 @@ public class TestActivity extends BaseActivity{
     @BindView(R.id.btn_register)
     Button btnReg;
 
+    @BindView(R.id.btn_datacheck)
+    Button btnDataCheck;
+
+    @BindView(R.id.btn_webview)
+    Button btnWebView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +92,20 @@ public class TestActivity extends BaseActivity{
             @Override
             public void onClick(View view) {
                 IntentUtils.startRegisterActivity(TestActivity.this,11);
+            }
+        });
+
+        btnDataCheck.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                IntentUtils.startDataCheckActivity(TestActivity.this,0x10);
+            }
+        });
+
+        btnWebView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                IntentUtils.startWebViewActivity(TestActivity.this,"http://www.qq.com");
             }
         });
     }

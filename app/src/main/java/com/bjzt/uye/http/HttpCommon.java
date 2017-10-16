@@ -5,6 +5,8 @@ import com.bjzt.uye.http.rsp.RspLoginPhoneEntity;
 import com.bjzt.uye.http.rsp.RspLoginPwdEntity;
 import com.bjzt.uye.http.rsp.RspPhoneVerifyEntity;
 import com.bjzt.uye.http.rsp.RspRegEntity;
+import com.bjzt.uye.http.rsp.RspUInfoEntity;
+import com.bjzt.uye.http.rsp.RspUploadPhoneListEntity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +24,8 @@ public class HttpCommon {
     public static final String URL_REG = "/login/register";                     //注册
     public static final String URL_LOGIN_PWD = "/login/login";                  //登录
     public static final String URL_LOGIN_PHONE = "/login/Loginphone";           //手机验证码登录
+    public static final String URL_GET_UINFO = "/app/user/index";               //获取个人资料
+    public static final String URL_UPLOAD_CONTACTLIST = "/app/mobile/submit";   //通讯录上传
 
     static{
         //请求定位城市
@@ -34,5 +38,10 @@ public class HttpCommon {
         mMap.put(URL_LOGIN_PWD, RspLoginPwdEntity.class);
         //手机验证码登录
         mMap.put(URL_LOGIN_PHONE,RspLoginPhoneEntity.class);
+        //个人资料
+        mMap.put(URL_GET_UINFO,RspUInfoEntity.class);
+        //通讯录上传
+        mMap.put(URL_UPLOAD_CONTACTLIST,RspUploadPhoneListEntity.class);
+
     }
 }

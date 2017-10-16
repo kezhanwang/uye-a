@@ -184,6 +184,7 @@ public class HttpUtils {
         httpPost.addHeader("kzua",Global.getQUA());
         String ua = System.getProperty("http.agent");
         httpPost.addHeader("User-Agent",ua);
+        httpPost.addHeader("HTTP_USER_AGENT",ua);
         String loginStatus = getLoginStatus();
         if (!TextUtils.isEmpty(loginStatus)) {
             httpPost.setHeader("Cookie", loginStatus);

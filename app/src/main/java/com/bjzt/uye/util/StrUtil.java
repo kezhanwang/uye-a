@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import com.bjzt.uye.R;
 import com.bjzt.uye.global.Global;
+import com.bjzt.uye.http.base.RspBaseEntity;
 import com.common.common.NetCommon;
 
 /**
@@ -49,4 +50,14 @@ public class StrUtil {
         }
         return str;
     }
+
+
+    public static final String getErrorTipsByCode(int errorCode, RspBaseEntity rspEntity){
+        String str = getErrorTipsByCode(errorCode);
+        if(rspEntity != null && !TextUtils.isEmpty(rspEntity.msg)){
+            str = rspEntity.msg;
+        }
+        return str;
+    }
+
 }

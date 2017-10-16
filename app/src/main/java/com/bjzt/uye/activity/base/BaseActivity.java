@@ -101,6 +101,10 @@ public abstract class BaseActivity extends FragmentActivity {
         showLoading(tips,true);
     }
 
+    protected void showLoading(String tips){
+        showLoading(tips,true);
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

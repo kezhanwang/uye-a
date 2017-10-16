@@ -54,4 +54,39 @@
     <string name="reg_tips_input_pwd">@string/login_tips_input_pwd</string>
 
 
+    <!--资料审核-->
+    <string name="cash_data_title">个人资料</string>
+    <string name="cash_data_check_tips">温馨提示：请填写真是有效信息，以便我们更好的为您的订单进行赔付。</string>
+    <string name="cash_data_check_btn_txt">立即申请</string>
+    <string name="cash_data_check_identity_title">身份</string>
+    <string name="cash_data_check_contact_title">联络方式</string>
+    <string name="cash_data_check_bankcard_title">绑定银行卡</string>
+    <string name="cash_data_check_friend_title">联系人</string>
+    <string name="cash_data_check_degree_title">学历及职业</string>
+    <string name="cash_data_check_contactlist_title">手机通讯信息</string>
+    <string name="cash_data_check_sesame_title">芝麻信用</string>
+    <string name="cash_data_check_identity_content">姓名、身份证、人脸识别等</string>
+    <string name="cash_data_check_contact_content">手机、QQ、微信</string>
+    <string name="cash_data_check_bankcard_content">银行和卡号</string>
+    <string name="cash_data_check_friend_content">能够联系到您的其他相关人</string>
+    <string name="cash_data_check_degree_content">相关资料证明</string>
+    <string name="cash_data_check_contactlist_content">为保障您的权益,请授权读取您的手机通讯信息</string>
+    <string name="cash_data_check_sesame_content">授权获取芝麻信用分，有助于申请快速通过</string>
+    <string name="cash_data_check_tips_need_idinfo">请填写完成身份信息</string>
+    <string name="cash_data_check_tips_need_contact">请填写完成联络方式</string>
+    <string name="data_check_experience_title">个人经历</string>
+    <string name="data_check_experience_content">学习就业的经历</string>
+
+    <!--手机通讯录-->
+    <string name="contactlist_requesting">手机通讯信息获取中...</string>
+
+    <!--单按钮Dialog-->
+    <string name="dialog_btn_str_okay">好的</string>
+    <string name="dialog_contactlist_failure">通讯录获取失败，请打开通讯录获取权限</string>
+
+
+    <!--WebViewActiivty-->
+    <string name="webview_title">标题</string>
+
+
 </resources>

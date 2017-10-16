@@ -55,6 +55,7 @@ public class LoginActivity extends BaseActivity implements  View.OnClickListener
     private List<Integer> mReqList = new ArrayList<Integer>();
 
     private final int REQ_CODE_PWD = 0x100;
+    private final int REQ_CODE_REG = 0x101;
 
     @Override
     protected int getLayoutID() {
@@ -77,7 +78,7 @@ public class LoginActivity extends BaseActivity implements  View.OnClickListener
 
             @Override
             public void onRightClick() {
-
+                IntentUtils.startRegisterActivity(LoginActivity.this,REQ_CODE_REG);
             }
         });
         String title = getResources().getString(R.string.login_header_title);
@@ -134,7 +135,7 @@ public class LoginActivity extends BaseActivity implements  View.OnClickListener
             hint = getResources().getString(R.string.login_hint_pwd);
             mTxtTimerDown.setVisibility(View.GONE);
             editPwd.setMaxLength(20);
-            tipsBottom = getResources().getString(R.string.login_tips_bottom_phone_pwd);
+            tipsBottom = getResources().getString(R.string.login_tips_bottom_phone_verify);
         }else if(mType == TYPE_PHONE_VERIFY_CODE){
             editPwd.setInputType(InputType.TYPE_CLASS_NUMBER);
             editPwd.setMaxLength(8);
@@ -160,7 +161,7 @@ public class LoginActivity extends BaseActivity implements  View.OnClickListener
                     mReqList.add(seqNo);
                 }
             });
-            tipsBottom = getResources().getString(R.string.login_tips_bottom_phone_verify);
+            tipsBottom = getResources().getString(R.string.login_tips_bottom_phone_pwd);
         }
         if(!TextUtils.isEmpty(hint)){
             editPwd.setHint(hint);
@@ -230,6 +231,10 @@ public class LoginActivity extends BaseActivity implements  View.OnClickListener
             switch(requestCode){
                 case REQ_CODE_PWD:
                     setResult(Activity.RESULT_OK);
+                    finish();
+                    break;
+                case REQ_CODE_REG:
+                    setResult(Activity.RESULT_CANCELED);
                     finish();
                     break;
             }

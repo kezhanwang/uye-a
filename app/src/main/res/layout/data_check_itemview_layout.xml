@@ -1,0 +1,79 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="78dp"
+    android:orientation="vertical"
+    android:background="@drawable/more_setting_bg_selector"
+    android:id="@+id/rela_main"
+    >
+
+    <ImageView
+        android:id="@+id/cash_data_check_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/datacheck_img_id"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/datachecking_img_left_margin"
+        />
+
+    <TextView
+        android:id="@+id/cash_data_checking_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="身份信息"
+        android:textSize="16sp"
+        android:textColor="@color/common_font_3"
+        android:layout_toRightOf="@id/cash_data_check_logo"
+        android:layout_marginTop="-2dp"
+        android:layout_marginLeft="@dimen/common_margin"
+        android:textStyle="normal"
+        android:layout_alignTop="@id/cash_data_check_logo"
+        />
+
+
+    <ImageView
+        android:id="@+id/cash_data_checking_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/arrow_right"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/datachecking_img_left_margin"
+        android:layout_centerVertical="true"
+        />
+
+    <TextView
+        android:id="@+id/cash_data_checking_tail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:text="待认证"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/cash_data_checking_arrow"
+        android:layout_marginRight="8dp"
+        android:textColor="@color/data_check_color_font_red"
+        />
+
+    <View
+        android:id="@+id/cash_data_check_line_bottom"
+        android:layout_height="1px"
+        android:layout_width="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:background="@color/common_font_d6"
+        android:layout_marginLeft="@dimen/datachecking_img_left_margin"
+        ></View>
+
+    <TextView
+        android:id="@+id/cash_data_checking_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/cash_data_checking_tail"
+        android:text="姓名，身份信息，人脸识别等"
+        android:textSize="12sp"
+        android:textColor="@color/common_font_9"
+        android:layout_below="@id/cash_data_checking_title"
+        android:layout_alignLeft="@+id/cash_data_checking_title"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="@dimen/common_margin"
+        />
+
+</RelativeLayout>

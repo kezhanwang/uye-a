@@ -1,0 +1,117 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@color/common_bg_color_grey"
+    >
+
+    <com.bjzt.uye.views.component.YHeaderView
+        android:id="@+id/header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        ></com.bjzt.uye.views.component.YHeaderView>
+
+    <ScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/header"
+        android:fillViewport="true"
+        >
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                android:id="@+id/linear_tips"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="#fff9d8"
+                android:gravity="center_vertical"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/img_tips"
+                    android:layout_marginLeft="@dimen/datachecking_img_left_margin"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cash_data_check_tips"
+                    android:textSize="13sp"
+                    android:textColor="@color/common_orange"
+                    android:layout_marginLeft="4dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    />
+
+            </LinearLayout>
+
+            <!--身份信息-->
+            <com.bjzt.uye.views.component.DataCheckItemView
+                android:id="@+id/datacheck_item_identity"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                ></com.bjzt.uye.views.component.DataCheckItemView>
+            <!--手机通讯录-->
+            <com.bjzt.uye.views.component.DataCheckItemView
+                android:id="@+id/datacheck_item_phonecontact"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                ></com.bjzt.uye.views.component.DataCheckItemView>
+            <!--联系信息-->
+            <com.bjzt.uye.views.component.DataCheckItemView
+                android:id="@+id/cash_datacheck_item_contact"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                ></com.bjzt.uye.views.component.DataCheckItemView>
+            <!--个人经历-->
+            <com.bjzt.uye.views.component.DataCheckItemView
+                android:id="@+id/cash_datacheck_item_experience"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                ></com.bjzt.uye.views.component.DataCheckItemView>
+            <!--芝麻信用-->
+            <com.bjzt.uye.views.component.DataCheckItemView
+                android:id="@+id/cash_datacheck_item_sesame"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:layout_marginBottom="@dimen/common_margin"
+                ></com.bjzt.uye.views.component.DataCheckItemView>
+
+            <!--button-->
+            <Button
+                android:id="@+id/btn_ok"
+                android:layout_height="@dimen/login_btn_height"
+                android:layout_width="fill_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="@dimen/common_margin_18"
+                android:layout_marginBottom="36dp"
+                android:background="@drawable/btn_login_selector"
+                android:textSize="19sp"
+                android:textColor="@color/common_white"
+                android:text="@string/cash_data_check_btn_txt"
+                />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+    <com.bjzt.uye.views.component.BlankEmptyView
+        android:id="@+id/emptyveiw"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_below="@id/header"
+        android:visibility="gone"
+        ></com.bjzt.uye.views.component.BlankEmptyView>
+
+</RelativeLayout>

@@ -12,10 +12,12 @@
     <color name="common_font_9">#999999</color>
     <color name="common_font_d6">#d6d6d6</color>
     <color name="common_font_53">#535353</color>
+    <color name="common_font_50">#505050</color>
     <color name="common_white">#ffffff</color>
     <color name="more_list_item_press">#f1fafe</color>
     <color name="common_grey">#909090</color>
     <color name="common_line_divider">@color/common_font_ccc</color>
+    <color name="common_orange">#f08300</color>
 
     <color name="common_green">#00c29a</color>
     <color name="common_green_press">#00c2ba</color>
@@ -37,5 +39,10 @@
     <!--MyInfo个人中心相关-->
     <color name="myinfo_nick_txt_color">#666666</color>
 
+    <!--DataCheckActivity-->
+    <color name="data_check_color_font_red">#e70010</color>
+
+    <!-- 升级提示框 -->
+    <color name="upgrade_color_disable">#8e8e8f</color>
 
 </resources>

@@ -3,6 +3,9 @@ package com.bjzt.uye.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.authreal.api.AuthBuilder;
+import com.authreal.api.OnResultListener;
 import com.bjzt.uye.R;
 import com.bjzt.uye.activity.base.BaseActivity;
 import com.bjzt.uye.controller.LBSController;
@@ -39,6 +42,12 @@ public class TestActivity extends BaseActivity{
 
     @BindView(R.id.btn_webview)
     Button btnWebView;
+
+    @BindView(R.id.btn_faceverify)
+    Button btnVerify;
+
+    @BindView(R.id.btn_ud_sdk)
+    Button btnUDSDK;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +115,26 @@ public class TestActivity extends BaseActivity{
             @Override
             public void onClick(View view) {
                 IntentUtils.startWebViewActivity(TestActivity.this,"http://www.qq.com");
+            }
+        });
+
+        btnVerify.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                IntentUtils.startApplyIDActivity(TestActivity.this,0x10);
+            }
+        });
+
+        btnUDSDK.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                AuthBuilder builder = new AuthBuilder("123123", "123213213", "http://www.baidu.com", new OnResultListener() {
+                    @Override
+                    public void onResult(String s) {
+
+                    }
+                });
+                builder.faceAuth(TestActivity.this);
             }
         });
     }

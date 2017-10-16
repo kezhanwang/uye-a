@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.text.TextUtils;
 
+import com.bjzt.uye.activity.ApplyIDActivity;
 import com.bjzt.uye.activity.DataCheckActivity;
 import com.bjzt.uye.activity.LoginActivity;
 import com.bjzt.uye.activity.MainActivity;
@@ -106,5 +107,15 @@ public class IntentUtils {
         Intent intent = new Intent(mContext, WebViewActivity.class);
         intent.putExtra(IntentUtils.KEY_WEB_URL,url);
         mContext.startActivity(intent);
+    }
+
+    /***
+     * 打开身份认证UI
+     * @param mContext
+     * @param requestCode
+     */
+    public static final void startApplyIDActivity(Activity mContext,int requestCode){
+        Intent intent = new Intent(mContext, ApplyIDActivity.class);
+        mContext.startActivityForResult(intent,requestCode);
     }
 }

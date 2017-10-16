@@ -6,6 +6,7 @@
     <string name="common_request">数据请求中...</string>
     <string name="common_timeout">网络超时</string>
     <string name="common_request_error_code">请求失败[%d]</string>
+    <string name="common_request_error">请求失败</string>
 
     <!--tab目录-->
     <string name="tab_main">首页</string>

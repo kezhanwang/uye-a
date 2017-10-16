@@ -1,5 +1,6 @@
 package com.bjzt.uye.http;
 
+import com.bjzt.uye.http.rsp.RspFaceVerifyCfgEntity;
 import com.bjzt.uye.http.rsp.RspLocCityEntity;
 import com.bjzt.uye.http.rsp.RspLoginPhoneEntity;
 import com.bjzt.uye.http.rsp.RspLoginPwdEntity;
@@ -26,6 +27,7 @@ public class HttpCommon {
     public static final String URL_LOGIN_PHONE = "/login/Loginphone";           //手机验证码登录
     public static final String URL_GET_UINFO = "/app/user/index";               //获取个人资料
     public static final String URL_UPLOAD_CONTACTLIST = "/app/mobile/submit";   //通讯录上传
+    public static final String URL_FACE_VERIFY_CFG = "/udcredit/index";         //获取云慧眼配置信息
 
     static{
         //请求定位城市
@@ -42,6 +44,7 @@ public class HttpCommon {
         mMap.put(URL_GET_UINFO,RspUInfoEntity.class);
         //通讯录上传
         mMap.put(URL_UPLOAD_CONTACTLIST,RspUploadPhoneListEntity.class);
-
+        //云慧眼配置
+        mMap.put(URL_FACE_VERIFY_CFG, RspFaceVerifyCfgEntity.class);
     }
 }

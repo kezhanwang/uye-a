@@ -4,6 +4,7 @@ import com.bjzt.uye.global.Global;
 import com.bjzt.uye.http.base.ReqBaseEntity;
 import com.bjzt.uye.http.base.TaskCommonV2;
 import com.bjzt.uye.http.listener.ICallBack;
+import com.bjzt.uye.http.req.ReqFaceVerifyCfgEntity;
 import com.bjzt.uye.http.req.ReqLocCityEntity;
 import com.bjzt.uye.http.req.ReqLoginPhoneEntity;
 import com.bjzt.uye.http.req.ReqLoginPwdEntity;
@@ -132,6 +133,16 @@ public class ProtocalManager {
     public int reqUploadPhoneList(String mobile,ICallBack<Object> callBack){
         ReqUploadPhoneListEntity reqEntity = new ReqUploadPhoneListEntity();
         reqEntity.mobile = mobile;
+        return addTask(reqEntity,callBack);
+    }
+
+    /**
+     * 获取云慧眼配置信息
+     * @param callBack
+     * @return
+     */
+    public int reqFaceVerifyCfg(ICallBack<Object> callBack){
+        ReqFaceVerifyCfgEntity reqEntity = new ReqFaceVerifyCfgEntity();
         return addTask(reqEntity,callBack);
     }
 }

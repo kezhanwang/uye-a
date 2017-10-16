@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -41,7 +42,7 @@ public class WebViewActivity extends BaseActivity{
     @BindView(R.id.progressbar)
     ProgressBar progressBar;
     @BindView(R.id.blank_empty)
-    BlankEmptyView emptyView;
+    BlankEmptyView mEmptyView;
     @BindView(R.id.webview)
     MWebView mWebView;
 
@@ -204,6 +205,58 @@ public class WebViewActivity extends BaseActivity{
             if(mHeader != null &&  !TextUtils.isEmpty(title)){
                 mHeader.setTitle(title);
             }
+        }
+    };
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            if(mWebView != null && mWebView.canGoBack()){
+                mWebView.goBack();
+                return true;
+            }else{
+                finish();
+            }
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    private void initEmptyView(int errorCode,String content){
+        mEmptyView.setVisibility(View.VISIBLE);
+        mWebView.setVisibility(View.GONE);
+        String str = "";
+//		if(!TextUtils.isEmpty(content)){
+//			str = content;
+//		}
+        str = getResources().getString(R.string.msgitem_bottom_error_tips);
+        str += "[" + errorCode + "]";
+        mEmptyView.setErrorTips(str);
+
+        mEmptyView.setBlankListener(new BlankEmptyView.BlankBtnListener(){
+            @Override
+            public void btnRefresh() {
+                mEmptyView.setVisibility(View.GONE);
+                mWebView.setVisibility(View.VISIBLE);
+                showLoading();
+                if(mWebView != null && !TextUtils.isEmpty(mUrl)){
+                    setSynCookies(mUrl);
+                    mWebView.loadUrl(mUrl);
+                }
+            }
+        });
+    }
+
+
+    @Override
+    protected void handleMsg(Message msg) {
+        super.handleMsg(msg);
+        int what = msg.what;
+        switch(what){
+            case FLAG_EMPYTVIEW:
+                int errorCode = msg.arg1;
+                String content = (String) msg.obj;
+                initEmptyView(errorCode,content);
+                break;
         }
     };
 

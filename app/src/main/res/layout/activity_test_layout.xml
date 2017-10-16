@@ -66,10 +66,24 @@
             />
 
         <Button
+            android:id="@+id/btn_faceverify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="身份认证"
+            />
+
+        <Button
             android:id="@+id/btn_webview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="WebView"
+            />
+
+        <Button
+            android:id="@+id/btn_ud_sdk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="云慧眼sdk"
             />
 
     </LinearLayout>

@@ -30,11 +30,155 @@
         android:layout_height="wrap_content"
         ></com.bjzt.uye.views.component.YHeaderView>
 
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/apply_id_header"
+        >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            >
+            <!--姓名-->
+            <com.bjzt.uye.views.component.ItemView
+                android:id="@+id/item_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+            </com.bjzt.uye.views.component.ItemView>
+            <!--身份证件号-->
+            <com.bjzt.uye.views.component.ItemView
+                android:id="@+id/item_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+            </com.bjzt.uye.views.component.ItemView>
+            <!--身份证件开始日期-->
+            <com.bjzt.uye.views.component.ItemView
+                android:id="@+id/item_start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+            </com.bjzt.uye.views.component.ItemView>
+            <!--身份证件结束日期-->
+            <com.bjzt.uye.views.component.ItemView
+                android:id="@+id/item_end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+            </com.bjzt.uye.views.component.ItemView>
+            <!--身份证住址-->
+            <com.bjzt.uye.views.component.ItemView
+                android:id="@+id/item_addr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+            </com.bjzt.uye.views.component.ItemView>
+
+            <!--身份证件照片-->
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/common_white"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/common_margin"
+                >
+
+                <TextView
+                    android:id="@+id/txt_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/common_font_3"
+                    android:layout_marginLeft="@dimen/common_margin"
+                    android:text="证件照片"
+                    android:layout_marginTop="@dimen/common_margin_8"
+                    />
+
+                <com.bjzt.uye.views.component.BindCardPhotoView
+                    android:id="@+id/photoview_front"
+                    android:layout_width="@dimen/loan_apply_imgarea_top_margin_large"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="@dimen/common_margin"
+                    ></com.bjzt.uye.views.component.BindCardPhotoView>
+
+
+                <com.bjzt.uye.views.component.BindCardPhotoView
+                    android:id="@+id/photoview_back"
+                    android:layout_width="@dimen/loan_apply_imgarea_top_margin_large"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="@dimen/common_margin"
+                    ></com.bjzt.uye.views.component.BindCardPhotoView>
+
+
+            </LinearLayout>
+
+            <!--银行卡号-->
+            <com.bjzt.uye.views.component.ItemView
+                android:id="@+id/item_bankcard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin"
+                >
+            </com.bjzt.uye.views.component.ItemView>
+
+            <!--开户行-->
+            <com.bjzt.uye.views.component.ItemView
+                android:id="@+id/item_bank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+            </com.bjzt.uye.views.component.ItemView>
+
+            <!--手机号码-->
+            <com.bjzt.uye.views.component.ItemView
+                android:id="@+id/item_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+            </com.bjzt.uye.views.component.ItemView>
+
+            <!--验证码-->
+            <com.bjzt.uye.views.component.ItemView
+                android:id="@+id/item_verify"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+            </com.bjzt.uye.views.component.ItemView>
+
+
+            <Button
+                android:id="@+id/btn_ok"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/login_btn_height"
+                android:layout_marginLeft="@dimen/common_margin"
+                android:layout_marginRight="@dimen/common_margin"
+                android:layout_marginTop="22dp"
+                android:gravity="center"
+                android:background="@drawable/btn_login_selector"
+                android:text="@string/complete"
+                android:textColor="@color/common_white"
+                android:textSize="18.5sp"
+                android:layout_marginBottom="32dp"
+                />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
     <com.bjzt.uye.views.component.BlankEmptyView
         android:id="@+id/apply_id_emptyview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@id/apply_id_header"
+        android:visibility="gone"
         ></com.bjzt.uye.views.component.BlankEmptyView>
 
 </RelativeLayout>

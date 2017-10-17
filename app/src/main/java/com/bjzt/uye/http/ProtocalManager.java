@@ -8,8 +8,11 @@ import com.bjzt.uye.http.req.ReqFaceVerifyCfgEntity;
 import com.bjzt.uye.http.req.ReqLocCityEntity;
 import com.bjzt.uye.http.req.ReqLoginPhoneEntity;
 import com.bjzt.uye.http.req.ReqLoginPwdEntity;
+import com.bjzt.uye.http.req.ReqLogoutEntity;
 import com.bjzt.uye.http.req.ReqPhoneVerifyEntity;
 import com.bjzt.uye.http.req.ReqRegEntity;
+import com.bjzt.uye.http.req.ReqSearchEntity;
+import com.bjzt.uye.http.req.ReqSearchHotWEntity;
 import com.bjzt.uye.http.req.ReqUInfoEntity;
 import com.bjzt.uye.http.req.ReqUploadPhoneListEntity;
 import com.common.http.HttpEngine;
@@ -143,6 +146,40 @@ public class ProtocalManager {
      */
     public int reqFaceVerifyCfg(ICallBack<Object> callBack){
         ReqFaceVerifyCfgEntity reqEntity = new ReqFaceVerifyCfgEntity();
+        return addTask(reqEntity,callBack);
+    }
+
+    /***
+     * 退出登录
+     * @param callBack
+     * @return
+     */
+    public int reqLogout(ICallBack<Object> callBack){
+        ReqLogoutEntity reqEntity = new ReqLogoutEntity();
+        return addTask(reqEntity,callBack);
+    }
+
+    /**
+     * 搜索热词
+     * @param callBack
+     * @return
+     */
+    public int reqSearchHotW(ICallBack<Object> callBack){
+        ReqSearchHotWEntity reqEntity = new ReqSearchHotWEntity();
+        return addTask(reqEntity,callBack);
+    }
+
+    /**
+     * 搜索列表
+     * @param words
+     * @param page
+     * @param callBack
+     * @return
+     */
+    public int reqSearchAgencyList(String words,int page,ICallBack<Object> callBack){
+        ReqSearchEntity reqEntity = new ReqSearchEntity();
+        reqEntity.word = words;
+        reqEntity.page = page;
         return addTask(reqEntity,callBack);
     }
 }

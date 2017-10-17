@@ -9,5 +9,128 @@
     >
 
 
+    <RelativeLayout
+        android:id="@+id/item_rela"
+        android:layout_height="fill_parent"
+        android:layout_width="@dimen/item_textWidth_ss"
+        android:layout_marginLeft="@dimen/item_margin_s"
+        >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_height="fill_parent"
+            android:layout_width="wrap_content"
+            android:text="姓名"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/item_textSize"
+            android:textColor="@color/common_font_black"
+            android:gravity="center_vertical|left"
+            />
+
+        <TextView
+            android:id="@+id/txt_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/title"
+            android:text="*"
+            android:textSize="14.5sp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="2dp"
+            android:textColor="@color/common_red"
+            android:visibility="invisible"/>
+
+    </RelativeLayout>
+
+
+
+    <ImageView
+        android:id="@+id/img_arrow"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/arrow_right"
+        />
+
+    <com.bjzt.uye.views.component.BankInputEditTxt
+        android:id="@+id/item_edittxt"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:layout_toRightOf="@id/item_rela"
+        android:layout_toLeftOf="@id/img_arrow"
+        android:layout_marginRight="4dp"
+        android:layout_marginLeft="@dimen/item_margin_et"
+        android:gravity="center_vertical|left"
+        android:textColor="@color/common_font_3"
+        android:textSize="@dimen/item_textSize"
+        android:textColorHint="@color/common_font_hint"
+        android:layout_centerVertical="true"
+        android:singleLine="true"
+        android:background="@null"
+        />
+
+    <!-- 发送按钮 -->
+    <com.bjzt.uye.views.component.TimerDownTextView
+        android:id="@+id/txt_btn"
+        android:layout_height="@dimen/item_height"
+        android:layout_width="@dimen/item_verify_img_width"
+        android:text="发送到手机"
+        android:textColor="@color/common_green"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/more_setting_bg_selector"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:singleLine="true"
+        android:visibility="gone"
+        />
+
+
+    <ImageView
+        android:id="@+id/img_verify"
+        android:layout_width="@dimen/item_verify_img_width"
+        android:layout_height="fill_parent"
+        android:background="#f1f1f1"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="2dp"
+        android:visibility="gone"
+        android:scaleType="fitXY"
+        />
+
+    <TextView
+        android:id="@+id/txtview_tips_tail"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:text="---"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:paddingLeft="22dp"
+        android:paddingRight="22dp"
+        android:singleLine="true"
+        android:textColor="@color/common_font_9"
+        android:visibility="gone"
+        android:textSize="15.5sp"
+        />
+
+    <View
+        android:id="@+id/viewline"
+        android:layout_height="fill_parent"
+        android:layout_width="1px"
+        android:background="@color/common_d6"
+        android:layout_toLeftOf="@id/img_verify"
+        android:visibility="gone"
+        ></View>
+
+    <View
+        android:id="@+id/view_line"
+        android:layout_height="1px"
+        android:layout_width="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:background="@color/common_font_ccc"
+        android:layout_marginLeft="@dimen/common_margin_18"
+        ></View>
+
 
 </RelativeLayout>

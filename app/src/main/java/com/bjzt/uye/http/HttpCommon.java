@@ -4,8 +4,11 @@ import com.bjzt.uye.http.rsp.RspFaceVerifyCfgEntity;
 import com.bjzt.uye.http.rsp.RspLocCityEntity;
 import com.bjzt.uye.http.rsp.RspLoginPhoneEntity;
 import com.bjzt.uye.http.rsp.RspLoginPwdEntity;
+import com.bjzt.uye.http.rsp.RspLogoutEntity;
 import com.bjzt.uye.http.rsp.RspPhoneVerifyEntity;
 import com.bjzt.uye.http.rsp.RspRegEntity;
+import com.bjzt.uye.http.rsp.RspSearchEntity;
+import com.bjzt.uye.http.rsp.RspSearchWEntity;
 import com.bjzt.uye.http.rsp.RspUInfoEntity;
 import com.bjzt.uye.http.rsp.RspUploadPhoneListEntity;
 
@@ -28,6 +31,9 @@ public class HttpCommon {
     public static final String URL_GET_UINFO = "/app/user/index";               //获取个人资料
     public static final String URL_UPLOAD_CONTACTLIST = "/app/mobile/submit";   //通讯录上传
     public static final String URL_FACE_VERIFY_CFG = "/udcredit/index";         //获取云慧眼配置信息
+    public static final String URL_LOGOUT = "/login/logout";                    //退出登录
+    public static final String URL_SEARCH_HOTWORDS = "/app/index/search";       //搜索热词
+    public static final String URL_SEARCH = "/app/index/inquire";               //机构搜索
 
     static{
         //请求定位城市
@@ -46,5 +52,12 @@ public class HttpCommon {
         mMap.put(URL_UPLOAD_CONTACTLIST,RspUploadPhoneListEntity.class);
         //云慧眼配置
         mMap.put(URL_FACE_VERIFY_CFG, RspFaceVerifyCfgEntity.class);
+        //退出登录
+        mMap.put(URL_LOGOUT, RspLogoutEntity.class);
+        //搜索热词
+        mMap.put(URL_SEARCH_HOTWORDS, RspSearchWEntity.class);
+        //搜索机构列表
+        mMap.put(URL_SEARCH,RspSearchEntity.class);
     }
+
 }

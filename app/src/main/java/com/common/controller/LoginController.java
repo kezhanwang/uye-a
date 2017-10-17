@@ -7,6 +7,8 @@ import com.bjzt.uye.global.Global;
 import com.common.file.SharePreLogin;
 import com.common.listener.ILoginListener;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,11 +41,32 @@ public class LoginController {
         mSet.remove(mListener);
     }
 
-    public String getCookie(){
-        if(pEntity != null && pEntity.cookie != null){
-            return pEntity.cookie.b42e7_uye_user;
+    /***
+     * 获取cookie data
+     * @return
+     */
+    private String getCookieData(){
+        if(pEntity != null && pEntity.cookie != null && !TextUtils.isEmpty(pEntity.cookie.b42e7_uye_user)){
+            return this.pEntity.cookie.b42e7_uye_user;
         }
         return null;
+    }
+
+    /***
+     * 获取分期Cookie数据Data
+     * @return
+     */
+    public String getLoanCookie(){
+        String cookie = getCookieData();
+        if(!TextUtils.isEmpty(cookie)){
+            return "b42e7_uye_user="+cookie+";";
+        }
+        return cookie;
+    }
+
+    public String getCookie(){
+        String cookie = getLoanCookie();
+        return cookie;
     }
 
     /***

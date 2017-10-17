@@ -44,6 +44,7 @@
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
+            android:background="@color/common_white"
             ></com.bjzt.uye.views.component.ExtendEditText>
 
         <com.bjzt.uye.views.component.TimerDownTextView
@@ -64,6 +65,7 @@
         android:layout_width="fill_parent"
         android:layout_height="55dp"
         android:layout_below="@id/linear_main"
+        android:background="@color/common_white"
         ></com.bjzt.uye.views.component.ExtendEditText>
 
     <com.bjzt.uye.views.component.ExtendEditText
@@ -71,6 +73,7 @@
         android:layout_width="fill_parent"
         android:layout_height="55dp"
         android:layout_below="@id/reg_verify"
+        android:background="@color/common_white"
         ></com.bjzt.uye.views.component.ExtendEditText>
 
 

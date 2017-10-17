@@ -6,6 +6,7 @@
 
     <!--common-->
     <dimen name="common_margin">12dp</dimen>
+    <dimen name="common_margin_8">8dp</dimen>
     <dimen name="common_margin_18">18dp</dimen>
     <dimen name="common_margin_left_small">2dp</dimen>
     <dimen name="common_margin_10">10dp</dimen>
@@ -31,5 +32,31 @@
 
     <!--资料审核-->
     <dimen name="datachecking_img_left_margin">22dp</dimen>
+
+
+    <dimen name="item_height">52dp</dimen>
+    <dimen name="item_textWidth">130dp</dimen>
+    <dimen name="item_textWidth_s">110dp</dimen>
+    <dimen name="item_textWidth_ss">78dp</dimen>
+    <dimen name="item_textSize">15sp</dimen>
+    <dimen name="item_textSize_l">15.5sp</dimen>
+    <dimen name="item_margin">12.5dp</dimen>
+    <dimen name="item_margin_s">12dp</dimen>
+    <dimen name="item_margin_et">6dp</dimen>
+    <dimen name="item_verify_img_width">88dp</dimen>
+
+
+    <!--身份认证UI-->
+    <dimen name="loan_apply_item_txt_margin">28dp</dimen>
+    <dimen name="loan_apply_imgarea_top_margin_large">128dp</dimen>
+    <dimen name="loan_apply_imgarea_top_margin_s">108dp</dimen>
+
+    <!--绑卡图片控件-->
+    <dimen name="photo_view_left_margin">12dp</dimen>
+    <dimen name="photo_view_rela_width">120dp</dimen>
+    <dimen name="photo_view_rela_height">80dp</dimen>
+    <dimen name="photo_view_rela_width_s">115dp</dimen>
+    <dimen name="photo_view_rela_height_s">60dp</dimen>
+
 
 </resources>

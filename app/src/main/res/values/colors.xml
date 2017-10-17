@@ -5,6 +5,10 @@
     <color name="colorAccent">#FF4081</color>
     <color name="translucent">#00000000</color>
 
+    <color name="header_bg_color">#00a5f0</color>
+
+    <color name="common_d6">#d6d6d6</color>
+    <color name="common_font_blue">#0aaaf5</color>
     <color name="common_red">#ee0000</color>
     <color name="common_bg_color_grey">#eeeeee</color>
     <color name="common_font_3">#333333</color>
@@ -13,7 +17,9 @@
     <color name="common_font_d6">#d6d6d6</color>
     <color name="common_font_53">#535353</color>
     <color name="common_font_50">#505050</color>
+    <color name="common_a6">#a6a6a6</color>
     <color name="common_white">#ffffff</color>
+    <color name="common_font_hint">#c0c0c0</color>
     <color name="more_list_item_press">#f1fafe</color>
     <color name="common_grey">#909090</color>
     <color name="common_line_divider">@color/common_font_ccc</color>

@@ -1,0 +1,118 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/common_white"
+    android:clipChildren="false"
+    >
+
+    <RelativeLayout
+        android:id="@+id/bind_card_rela"
+        android:layout_width="76dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/common_margin"
+        android:layout_marginTop="@dimen/common_margin"
+        >
+
+        <TextView
+            android:id="@+id/cash_bindcard_phototview_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="卡正面照"
+            android:textSize="15sp"
+            android:textColor="@color/common_font_3"
+            android:gravity="left"
+            />
+
+        <TextView
+            android:id="@+id/cash_bindcard_txt_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/cash_bindcard_phototview_title"
+            android:text="*"
+            android:textSize="14.5sp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="2dp"
+            android:textColor="@color/common_red"
+            android:visibility="invisible"
+            />
+
+    </RelativeLayout>
+
+
+
+    <ImageView
+        android:id="@+id/img_bankcard"
+        android:layout_width="106dp"
+        android:layout_height="66dp"
+        android:layout_toRightOf="@id/bind_card_rela"
+        android:background="@drawable/bind_card_back"
+        android:layout_marginLeft="@dimen/common_margin"
+        android:layout_alignTop="@id/bind_card_rela"
+        android:layout_marginTop="8dp"
+        android:scaleType="fitXY"
+        android:visibility="visible"
+        />
+
+    <RelativeLayout
+        android:id="@+id/rela_imgbitmap"
+        android:layout_width="120dp"
+        android:layout_height="88dp"
+        android:layout_toRightOf="@id/bind_card_rela"
+        android:background="@drawable/loan_round_bindcard_photoview_bg"
+        android:layout_marginLeft="@dimen/common_margin_8"
+        android:layout_marginTop="@dimen/common_margin"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:visibility="gone"
+        >
+
+
+        <ImageView
+            android:id="@+id/bind_card_img_content"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_margin="8dp"
+            android:scaleType="fitXY"
+            android:background="#f1f1f1"
+            />
+
+        <ImageView
+            android:id="@+id/bind_card_img_close"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/cash_img_close"
+            android:layout_marginTop="-10dp"
+            android:layout_marginRight="-10dp"
+            android:scaleType="center"
+            android:padding="4dp"
+            android:background="@null"
+            />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/txt_bottom_tips"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="102dp"
+        android:layout_marginLeft="@dimen/common_margin_18"
+        android:layout_marginRight="@dimen/common_margin"
+        android:textSize="13sp"
+        android:textColor="#fa0000"
+        android:text="@string/cash_data_check_tips"
+        android:visibility="visible"
+        />
+
+    <View
+        android:id="@+id/cash_bindcard_viewline_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="1px"
+        android:layout_marginTop="108dp"
+        android:background="#d6d6d6"
+        android:layout_marginLeft="@dimen/common_margin_18"
+        ></View>
+
+</RelativeLayout>

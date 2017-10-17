@@ -84,6 +84,7 @@ public class DataCheckActivity extends BaseActivity{
                 Global.postDelay(rUploadPhone);
             }
         });
+        //联系方式
         itemContact.updateType(DataCheckItemView.TYPE_CONTACT);
         itemContact.setIItemListener(new IItemListener() {
             @Override
@@ -91,6 +92,9 @@ public class DataCheckActivity extends BaseActivity{
 
             }
         });
+        itemContact.updateTailContent(true);
+
+        //个人经历
         itemExperience.updateType(DataCheckItemView.TYPE_EXPERIENCE);
         itemExperience.setIItemListener(new IItemListener() {
             @Override
@@ -98,6 +102,9 @@ public class DataCheckActivity extends BaseActivity{
 
             }
         });
+        itemExperience.updateTailContent(true);
+
+        //芝麻信用
         itemSesame.updateType(DataCheckItemView.TYPE_SESAME);
         itemSesame.setIItemListener(new IItemListener() {
             @Override
@@ -105,6 +112,7 @@ public class DataCheckActivity extends BaseActivity{
 
             }
         });
+        itemSesame.updateTailContent(true);
 
         int seqNo = ProtocalManager.getInstance().reqUInfoDataCheck(getCallBack());
         mReqList.add(seqNo);

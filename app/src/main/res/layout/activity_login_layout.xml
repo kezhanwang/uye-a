@@ -44,6 +44,7 @@
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
+            android:background="@color/common_white"
             ></com.bjzt.uye.views.component.ExtendEditText>
 
         <com.bjzt.uye.views.component.TimerDownTextView
@@ -64,6 +65,7 @@
         android:layout_width="fill_parent"
         android:layout_height="55dp"
         android:layout_below="@id/linear_main"
+        android:background="@color/common_white"
         ></com.bjzt.uye.views.component.ExtendEditText>
 
     <View
@@ -77,7 +79,7 @@
 
     <Button
         android:id="@+id/btn_login"
-        android:layout_width="@dimen/login_btn_width"
+        android:layout_width="fill_parent"
         android:layout_height="@dimen/login_btn_height"
         android:layout_marginLeft="@dimen/common_margin"
         android:layout_marginRight="@dimen/common_margin"

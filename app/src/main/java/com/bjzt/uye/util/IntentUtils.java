@@ -11,6 +11,7 @@ import com.bjzt.uye.activity.DataCheckActivity;
 import com.bjzt.uye.activity.LoginActivity;
 import com.bjzt.uye.activity.MainActivity;
 import com.bjzt.uye.activity.RegisterActivity;
+import com.bjzt.uye.activity.SearchActivity;
 import com.bjzt.uye.activity.WebViewActivity;
 import com.common.common.MyLog;
 
@@ -117,5 +118,14 @@ public class IntentUtils {
     public static final void startApplyIDActivity(Activity mContext,int requestCode){
         Intent intent = new Intent(mContext, ApplyIDActivity.class);
         mContext.startActivityForResult(intent,requestCode);
+    }
+
+    /**
+     * 打开搜索页卡
+     * @param mContext
+     */
+    public static final void startSearchActivity(Activity mContext){
+        Intent intent = new Intent(mContext, SearchActivity.class);
+        mContext.startActivity(intent);
     }
 }

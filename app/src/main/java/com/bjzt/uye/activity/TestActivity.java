@@ -49,6 +49,12 @@ public class TestActivity extends BaseActivity{
     @BindView(R.id.btn_ud_sdk)
     Button btnUDSDK;
 
+    @BindView(R.id.btn_logout)
+    Button btnLogout;
+
+    @BindView(R.id.btn_search)
+    Button btnSearch;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,6 +141,20 @@ public class TestActivity extends BaseActivity{
                     }
                 });
                 builder.faceAuth(TestActivity.this);
+            }
+        });
+
+        btnLogout.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                ProtocalManager.getInstance().reqLogout(getCallBack());
+            }
+        });
+
+        btnSearch.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                IntentUtils.startSearchActivity(TestActivity.this);
             }
         });
     }

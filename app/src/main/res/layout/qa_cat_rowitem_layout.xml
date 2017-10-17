@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    >
+    
+    <TextView 
+        android:id="@+id/txt_first"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="---"
+        android:layout_marginLeft="12dp"
+        android:layout_centerVertical="true"
+        android:textSize="16.5sp"
+        android:textColor="@drawable/textcolor_qa_cat"
+        android:background="@drawable/btn_qa_cat_selector"
+        />
+    
+    <TextView 
+        android:id="@+id/txt_second"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="---"
+        android:layout_toRightOf="@id/txt_first"
+        android:layout_centerVertical="true"
+        android:textSize="16.5sp"
+        android:textColor="@drawable/textcolor_qa_cat"
+        android:layout_marginLeft="@dimen/common_margin"
+        android:background="@drawable/btn_qa_cat_selector"
+        />
+    
+    <TextView 
+        android:id="@+id/txt_third"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="---"
+        android:layout_toRightOf="@id/txt_second"
+        android:layout_centerVertical="true"
+        android:textSize="16.5sp"
+        android:textColor="@drawable/textcolor_qa_cat"
+        android:layout_marginLeft="@dimen/common_margin"
+        android:background="@drawable/btn_qa_cat_selector"
+        />
+    
+     <TextView 
+        android:id="@+id/txt_forth"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="---"
+        android:layout_toRightOf="@id/txt_third"
+        android:layout_centerVertical="true"
+        android:textSize="16.5sp"
+        android:textColor="@drawable/textcolor_qa_cat"
+        android:layout_marginLeft="@dimen/common_margin"
+        android:background="@drawable/btn_qa_cat_selector"
+        />
+        
+</RelativeLayout>

@@ -1,10 +1,14 @@
 package com.bjzt.uye.http;
 
+import com.bjzt.uye.entity.PBankEntity;
 import com.bjzt.uye.global.Global;
 import com.bjzt.uye.http.base.ReqBaseEntity;
 import com.bjzt.uye.http.base.TaskCommonV2;
 import com.bjzt.uye.http.listener.ICallBack;
 import com.bjzt.uye.http.req.ReqFaceVerifyCfgEntity;
+import com.bjzt.uye.http.req.ReqIDentityCfgEntity;
+import com.bjzt.uye.http.req.ReqIDentityInfoEntity;
+import com.bjzt.uye.http.req.ReqIDentityPicEntity;
 import com.bjzt.uye.http.req.ReqLocCityEntity;
 import com.bjzt.uye.http.req.ReqLoginPhoneEntity;
 import com.bjzt.uye.http.req.ReqLoginPwdEntity;
@@ -13,6 +17,7 @@ import com.bjzt.uye.http.req.ReqPhoneVerifyEntity;
 import com.bjzt.uye.http.req.ReqRegEntity;
 import com.bjzt.uye.http.req.ReqSearchEntity;
 import com.bjzt.uye.http.req.ReqSearchHotWEntity;
+import com.bjzt.uye.http.req.ReqSubmitIDentityEntity;
 import com.bjzt.uye.http.req.ReqUInfoEntity;
 import com.bjzt.uye.http.req.ReqUploadPhoneListEntity;
 import com.common.http.HttpEngine;
@@ -180,6 +185,79 @@ public class ProtocalManager {
         ReqSearchEntity reqEntity = new ReqSearchEntity();
         reqEntity.word = words;
         reqEntity.page = page;
+        return addTask(reqEntity,callBack);
+    }
+
+    /***
+     * 获取身份信息
+     * @param callBack
+     * @return
+     */
+    public int reqIDentifyInfo(ICallBack<Object> callBack){
+        ReqIDentityInfoEntity reqEntity = new ReqIDentityInfoEntity();
+        return addTask(reqEntity,callBack);
+    }
+
+    /***
+     * 提交身份信息
+     * @param name
+     * @param idCard
+     * @param idCardStart
+     * @param idCardEnd
+     * @param addr
+     * @param picFront
+     * @param picBack
+     * @param authMobile
+     * @param bankCardNo
+     * @param banckCode
+     * @param openBank
+     * @param code
+     * @param udOrder
+     * @param callBack
+     * @return
+     */
+    public int reqIDentitySubmit(String name,String idCard,String idCardStart,String idCardEnd,
+                                 String addr,String picFront,String picBack,String authMobile,
+                                 String bankNo,PBankEntity bankEntity,
+                                 String code,String udOrder,ICallBack<Object> callBack
+    ){
+        ReqSubmitIDentityEntity reqEntity = new ReqSubmitIDentityEntity();
+        reqEntity.full_name = name;
+        reqEntity.id_card = idCard;
+        reqEntity.id_card_start = idCardStart;
+        reqEntity.id_card_end = idCardEnd;
+        reqEntity.id_card_address = addr;
+        reqEntity.id_card_info_pic = picFront;
+        reqEntity.id_card_nation_pic = picBack;
+        reqEntity.auth_mobile = authMobile;
+        reqEntity.bank_card_number = bankNo;
+        reqEntity.open_bank_code = bankEntity.open_bank_code;
+        reqEntity.code = code;
+        reqEntity.open_bank = bankEntity.open_bank;
+        reqEntity.udcredit_order = udOrder;
+        return addTask(reqEntity,callBack);
+    }
+
+    /***
+     * 身份获取配置
+     * @param callBack
+     * @return
+     */
+    public int reqIDentityCfg(ICallBack<Object> callBack){
+        ReqIDentityCfgEntity reqEntity = new ReqIDentityCfgEntity();
+        reqEntity.isJsonArray = true;
+        return addTask(reqEntity,callBack);
+    }
+
+    /***
+     * 获取云慧眼图片信息
+     * @param order
+     * @param callBack
+     * @return
+     */
+    public int reqIDentityPic(String order,ICallBack<Object> callBack){
+        ReqIDentityPicEntity reqEntity = new ReqIDentityPicEntity();
+        reqEntity.udcredit_order = order;
         return addTask(reqEntity,callBack);
     }
 }

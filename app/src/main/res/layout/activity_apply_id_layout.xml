@@ -99,7 +99,7 @@
 
                 <com.bjzt.uye.views.component.BindCardPhotoView
                     android:id="@+id/photoview_front"
-                    android:layout_width="@dimen/loan_apply_imgarea_top_margin_large"
+                    android:layout_width="@dimen/apply_imgarea_top_margin_large"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="14dp"
                     android:layout_marginTop="6dp"
@@ -109,7 +109,7 @@
 
                 <com.bjzt.uye.views.component.BindCardPhotoView
                     android:id="@+id/photoview_back"
-                    android:layout_width="@dimen/loan_apply_imgarea_top_margin_large"
+                    android:layout_width="@dimen/apply_imgarea_top_margin_large"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="0dp"
                     android:layout_marginTop="6dp"

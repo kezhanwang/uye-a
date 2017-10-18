@@ -75,7 +75,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     showToast(tips);
                     return;
                 }
-                if(!StrUtil.isLegal(strPhone)){
+                if(!StrUtil.isPhotoLegal(strPhone)){
                     String tips = getResources().getString(R.string.login_tips_input_tel_legal);
                     showToast(tips);
                     return;
@@ -134,7 +134,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 showToast(tips);
                 return;
             }
-            if(!StrUtil.isLegal(phone)){
+            if(!StrUtil.isPhotoLegal(phone)){
                 String tips = getResources().getString(R.string.login_tips_input_tel_legal);
                 showToast(tips);
                 return;

@@ -51,4 +51,7 @@
     <!-- 升级提示框 -->
     <color name="upgrade_color_disable">#8e8e8f</color>
 
+    <!--date picker-->
+    <color name="loan_province_line_border">#D0D0D0</color>
+
 </resources>

@@ -3,14 +3,17 @@
 
     <string name="cancle">取消</string>
     <string name="complete">完成</string>
-
+    <string name="name">姓名</string>
 
     <string name="common_default">---</string>
     <string name="common_request">数据请求中...</string>
     <string name="common_timeout">网络超时</string>
     <string name="common_request_error_code">请求失败[%d]</string>
     <string name="common_request_error">请求失败</string>
-
+    <string name="common_pic_uploading">图片正在上传中...</string>
+    <string name="common_pic_requesting">图片请求中[%d]..</string>
+    <string name="common_pic_path_failure">获取图片路径失败</string>
+    <string name="common_cfg_error">配置下发错误</string>
     <!--tab目录-->
     <string name="tab_main">首页</string>
     <string name="tab_uye">U业</string>
@@ -88,9 +91,41 @@
     <string name="dialog_btn_str_okay">好的</string>
     <string name="dialog_contactlist_failure">通讯录获取失败，请打开通讯录获取权限</string>
 
-
     <!--WebViewActiivty-->
     <string name="webview_title">标题</string>
 
+    <!--身份认证-->
+    <string name="apply_id_title">身份认证</string>
+    <string name="apply_id_start_rec">启动识别</string>
+    <string name="apply_id_input_name">请输入本人姓名</string>
+    <string name="apply_id_idno">身份证号</string>
+    <string name="apply_id_tips_input_idno">请输入本人身份证号</string>
+    <string name="apply_id_date">证件日期</string>
+    <string name="apply_id_tips_input_start">请选择身份证起始日期</string>
+    <string name="apply_id_tips_input_end">请选择身份证失效日期</string>
+    <string name="apply_id_addr">证件住址</string>
+    <string name="apply_id_tips_input_addr">请输入您身份证上的地址</string>
+    <string name="apply_id_bankcardno">银行卡号</string>
+    <string name="apply_id_tips_input_bankno">请输入银行卡号</string>
+    <string name="apply_id_bank">开户行</string>
+    <string name="apply_id_input_bankname">请选择开户行名称</string>
+    <string name="apply_id_phone">手机号</string>
+    <string name="apply_id_inputphone">请输入本人实名制手机号</string>
+    <string name="apply_id_verifycode">验证码</string>
+    <string name="apply_id_input_verifycode">请输入手机验证码</string>
+    <string name="apply_id_tips_front">请上传身份证人像面</string>
+    <string name="apply_id_tips_back">请上传身份证国徽面</string>
+
+
+    <!--请求云慧眼配置-->
+    <string name="face_auth_loading_tips">请求人脸识别验证配置...</string>
+    <string name="face_auth_error_tips">请求验证失败</string>
+    <string name="face_auth_sdk_error">人脸识别sdk验证失败</string>
+    <string name="face_auth_sdk_running">人脸识别程序启动中...</string>
+    <string name="face_auth_sdk_k12_forbid">该课程属于成年人课程...</string>
+    <string name="face_auth_sdk_k12_result_failure">人脸相似度低...</string>
+    <string name="face_auth_sdk_k12_result_checking">人脸相似度低...</string>
+
+    <string name="img_uploading_progress">图片正在上传中%s</string>
 
 </resources>

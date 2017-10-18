@@ -105,6 +105,21 @@ public abstract class BaseActivity extends FragmentActivity {
         showLoading(tips,true);
     }
 
+    protected boolean isDialogShowing(){
+        if(this.mLoadingDialog != null && this.mLoadingDialog.isShowing()) {
+            return true;
+        }
+        return false;
+    }
+
+    protected void setLoadingTips(String tips){
+        if(this.mLoadingDialog != null && this.mLoadingDialog.isShowing()){
+            if(!TextUtils.isEmpty(tips)){
+                mLoadingDialog.setMyTips(tips);
+            }
+        }
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

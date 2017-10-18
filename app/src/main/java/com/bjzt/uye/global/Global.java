@@ -34,6 +34,10 @@ public class Global {
         init();
     }
 
+    public static Looper getLooper(){
+        return mLooper;
+    }
+
     private static final void initHandlerThread(){
         mHandlerThread = new HandlerThread(TAG, Process.THREAD_PRIORITY_BACKGROUND);
         mHandlerThread.start();

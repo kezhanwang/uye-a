@@ -119,4 +119,8 @@ public class LoginController {
             }
         }
     }
+
+    public long getMillseconds(){
+        return System.currentTimeMillis();
+    }
 }

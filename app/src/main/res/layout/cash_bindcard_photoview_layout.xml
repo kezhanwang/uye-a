@@ -59,7 +59,7 @@
         android:layout_width="120dp"
         android:layout_height="88dp"
         android:layout_toRightOf="@id/bind_card_rela"
-        android:background="@drawable/loan_round_bindcard_photoview_bg"
+        android:background="@drawable/round_bindcard_photoview_bg"
         android:layout_marginLeft="@dimen/common_margin_8"
         android:layout_marginTop="@dimen/common_margin"
         android:clipChildren="false"

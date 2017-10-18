@@ -47,9 +47,9 @@
 
 
     <!--身份认证UI-->
-    <dimen name="loan_apply_item_txt_margin">28dp</dimen>
-    <dimen name="loan_apply_imgarea_top_margin_large">128dp</dimen>
-    <dimen name="loan_apply_imgarea_top_margin_s">108dp</dimen>
+    <dimen name="apply_item_txt_margin">28dp</dimen>
+    <dimen name="apply_imgarea_top_margin_large">128dp</dimen>
+    <dimen name="apply_imgarea_top_margin_s">108dp</dimen>
 
     <!--绑卡图片控件-->
     <dimen name="photo_view_left_margin">12dp</dimen>
@@ -58,5 +58,46 @@
     <dimen name="photo_view_rela_width_s">115dp</dimen>
     <dimen name="photo_view_rela_height_s">60dp</dimen>
 
+
+    <!-- loanDialog -->
+    <dimen name="loanDialog_margin">30dp</dimen>
+    <!-- 修改个人资料Dialog -->
+    <dimen name="modifyDialog_textSize">17.4sp</dimen>
+    <dimen name="modify_edit_fontSize">15.5sp</dimen>
+    <dimen name="modify_item_icon_height">90dp</dimen>
+    <dimen name="modifyDialog_item_height">52dp</dimen>
+    <dimen name="modifyDialog_marginBottom">1px</dimen>
+    <dimen name="modifyDialog_textSize1">18.5sp</dimen>
+    <dimen name="modifyInfo_noteTextSize">14sp</dimen>
+    <!-- 修改个人资料Dialog -->
+    <dimen name="modifyDialog_margin">10dp</dimen>
+    <dimen name="modifyDialog_textSize_small">15.5sp</dimen>
+
+    <!-- 本地相册 -->
+    <dimen name="pic_local_imgview_margin">7dp</dimen>
+
+    <!-- 大图浏览相关UI -->
+    <dimen name="PicScan_btn_height">52dp</dimen>
+    <dimen name="PicScan_btn_textSize">19sp</dimen>
+
+
+    <!-- 图片预览 -->
+    <dimen name="ablum_height">52dp</dimen>
+    <dimen name="ablum_left_width">72dp</dimen>
+    <dimen name="ablum_textSize">17sp</dimen>
+    <dimen name="ablum_right_width">82dp</dimen>
+    <dimen name="ablum_right_textSize">13.5sp</dimen>
+    <dimen name="ablum_margin1">12dp</dimen>
+    <dimen name="ablum_margin2">6dp</dimen>
+
+    <!--绑定银行卡-->
+    <dimen name="cash_bind_card_dialog_height">480dp</dimen>
+    <dimen name="cash_bind_card_title_height">56dp</dimen>
+
+    <!--时间控件相关-->
+    <dimen name="loan_datepicker_height">220dp</dimen>
+    <dimen name="loan_datepicker_txtsize">18.5sp</dimen>
+    <dimen name="loan_datepicker_itemwidth">68dp</dimen>
+    <dimen name="loan_datepicker_itemwidth_l">86dp</dimen>
 
 </resources>

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 
 import com.bjzt.uye.activity.ApplyIDActivity;
@@ -14,6 +15,8 @@ import com.bjzt.uye.activity.RegisterActivity;
 import com.bjzt.uye.activity.SearchActivity;
 import com.bjzt.uye.activity.WebViewActivity;
 import com.common.common.MyLog;
+
+import java.io.File;
 
 /**
  * Created by billy on 2017/10/12.
@@ -128,4 +131,28 @@ public class IntentUtils {
         Intent intent = new Intent(mContext, SearchActivity.class);
         mContext.startActivity(intent);
     }
+
+    /***
+     * 打开系统照相机
+     * @param context
+     * @param requestCode
+     */
+    public static final void startMediaStore(Activity context,int requestCode,String filePath){
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(filePath)));
+        cameraIntent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 100);
+        cameraIntent.setFlags(Intent.FLAG_ACTIVITY_NO_USER_ACTION);
+        context.startActivityForResult(cameraIntent, requestCode);
+    }
+
+    /***
+     * 打开系统相机
+     * @param context
+     * @param requestCode
+     * @param filePath
+     */
+    public static final void startSysCammera(Activity context,int requestCode,String filePath){
+        startMediaStore(context, requestCode, filePath);
+    }
+
 }

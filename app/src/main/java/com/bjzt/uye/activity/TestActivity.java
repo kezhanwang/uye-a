@@ -134,7 +134,15 @@ public class TestActivity extends BaseActivity{
         btnUDSDK.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                AuthBuilder builder = new AuthBuilder("123123", "123213213", "http://www.baidu.com", new OnResultListener() {
+//                商户号：201710139094511687
+//                密码：5G3qaDDa
+//                合同编号：KZ1WY1610021
+//                security_key（secretkey）：c46d326d-dd79-44f1-82b4-41d71299df48
+//                pub_key（pubkey、Apikey、authKey）：50e00acb-4146-4084-94ac-bc48472d5b1f
+                String sKey = "50e00acb-4146-4084-94ac-bc48472d5b1f";
+                String orderId = "201710139094511687";
+
+                AuthBuilder builder = new AuthBuilder(orderId,sKey, "http://www.baidu.com", new OnResultListener() {
                     @Override
                     public void onResult(String s) {
 

@@ -33,7 +33,7 @@ public class StrUtil {
      * @param phone
      * @return
      */
-    public static final boolean isLegal(String phone){
+    public static final boolean isPhotoLegal(String phone){
         if(!TextUtils.isEmpty(phone) && phone.length() == 11){
             return true;
         }
@@ -59,5 +59,18 @@ public class StrUtil {
         }
         return str;
     }
+
+    /***
+     * 获取百分比进度
+     * @param cur
+     * @param total
+     * @return
+     */
+    public static final String getProgressStr(long cur,long total){
+        double result = ((double)cur / (double)total);
+        int data = (int) (result * 100);
+        return data+"%";
+    }
+
 
 }

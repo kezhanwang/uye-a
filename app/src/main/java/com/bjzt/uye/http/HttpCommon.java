@@ -1,6 +1,9 @@
 package com.bjzt.uye.http;
 
 import com.bjzt.uye.http.rsp.RspFaceVerifyCfgEntity;
+import com.bjzt.uye.http.rsp.RspIDentityCfgEntity;
+import com.bjzt.uye.http.rsp.RspIDentityInfoEntity;
+import com.bjzt.uye.http.rsp.RspIDentityPicEntity;
 import com.bjzt.uye.http.rsp.RspLocCityEntity;
 import com.bjzt.uye.http.rsp.RspLoginPhoneEntity;
 import com.bjzt.uye.http.rsp.RspLoginPwdEntity;
@@ -9,8 +12,11 @@ import com.bjzt.uye.http.rsp.RspPhoneVerifyEntity;
 import com.bjzt.uye.http.rsp.RspRegEntity;
 import com.bjzt.uye.http.rsp.RspSearchEntity;
 import com.bjzt.uye.http.rsp.RspSearchWEntity;
+import com.bjzt.uye.http.rsp.RspSubmitIDentityEntity;
 import com.bjzt.uye.http.rsp.RspUInfoEntity;
 import com.bjzt.uye.http.rsp.RspUploadPhoneListEntity;
+import com.common.common.NetCommon;
+import com.common.http.HttpEngine;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,6 +40,10 @@ public class HttpCommon {
     public static final String URL_LOGOUT = "/login/logout";                    //退出登录
     public static final String URL_SEARCH_HOTWORDS = "/app/index/search";       //搜索热词
     public static final String URL_SEARCH = "/app/index/inquire";               //机构搜索
+    public static final String URL_IDENTIFY_INFO = "/app/identity/info";        //身份信息
+    public static final String URL_IDENTITY_SUBMIT = "/app/identity/submit";    //提交身份信息
+    public static final String URL_IDENTITY_CFG = "/app/identity/config";       //获取配置信息,银行列表
+    public static final String URL_IDENTITY_PIC = "/app/identity/pic";          //获取云慧眼图片
 
     static{
         //请求定位城市
@@ -58,6 +68,22 @@ public class HttpCommon {
         mMap.put(URL_SEARCH_HOTWORDS, RspSearchWEntity.class);
         //搜索机构列表
         mMap.put(URL_SEARCH,RspSearchEntity.class);
+        //身份信息页
+        mMap.put(URL_IDENTIFY_INFO, RspIDentityInfoEntity.class);
+        //身份信息页提交
+        mMap.put(URL_IDENTITY_SUBMIT,RspSubmitIDentityEntity.class);
+        //配置信息
+        mMap.put(URL_IDENTITY_CFG, RspIDentityCfgEntity.class);
+        //获取云慧眼图片信息
+        mMap.put(URL_IDENTITY_PIC, RspIDentityPicEntity.class);
     }
 
+    /***
+     * 获取图片上传地址
+     * @return
+     */
+    public static final String getUploadPicUrl(){
+        String refer = HttpEngine.getInstance().getRefer(NetCommon.NET_INTERFACE_TYPE_UYE);
+        return refer + "/common/upload";
+    }
 }

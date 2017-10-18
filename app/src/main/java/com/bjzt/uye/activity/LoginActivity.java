@@ -3,7 +3,6 @@ package com.bjzt.uye.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
@@ -150,7 +149,7 @@ public class LoginActivity extends BaseActivity implements  View.OnClickListener
                         showToast(tips);
                         return;
                     }
-                    if(!StrUtil.isLegal(strTel)){
+                    if(!StrUtil.isPhotoLegal(strTel)){
                         String tips = getResources().getString(R.string.login_tips_input_tel_legal);
                         showToast(tips);
                         return;
@@ -250,7 +249,7 @@ public class LoginActivity extends BaseActivity implements  View.OnClickListener
                 showToast(tips);
                 return;
             }
-            if(!StrUtil.isLegal(phone)){
+            if(!StrUtil.isPhotoLegal(phone)){
                 String tips = getResources().getString(R.string.login_tips_input_tel_legal);
                 showToast(tips);
                 return;

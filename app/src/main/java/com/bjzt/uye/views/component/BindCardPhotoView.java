@@ -90,19 +90,19 @@ public class BindCardPhotoView extends RelativeLayout implements NoConfusion,Vie
         String bottomTips = "";
         switch (mType){
             case TYPE_BINDCARD:
-                topMargin = (int) getResources().getDimension(R.dimen.loan_apply_imgarea_top_margin_s);
+                topMargin = (int) getResources().getDimension(R.dimen.apply_imgarea_top_margin_s);
                 mTxtBottomTips.setVisibility(View.GONE);
                 break;
             case TYPE_IMG_SITUATION:
-                topMargin = (int) getResources().getDimension(R.dimen.loan_apply_imgarea_top_margin_large);
+                topMargin = (int) getResources().getDimension(R.dimen.apply_imgarea_top_margin_large);
                 mTxtBottomTips.setVisibility(View.VISIBLE);
                 break;
             case TYPE_IMG_STATEMENT:
-                topMargin = (int) getResources().getDimension(R.dimen.loan_apply_imgarea_top_margin_large);
+                topMargin = (int) getResources().getDimension(R.dimen.apply_imgarea_top_margin_large);
                 mTxtBottomTips.setVisibility(View.VISIBLE);
                 break;
             case TYPE_IMG_PERSONAL_HOLD:
-                topMargin = (int) getResources().getDimension(R.dimen.loan_apply_imgarea_top_margin_large);
+                topMargin = (int) getResources().getDimension(R.dimen.apply_imgarea_top_margin_large);
                 mTxtBottomTips.setVisibility(View.VISIBLE);
                 break;
             case TYPE_IMG_ID_BACK:
@@ -154,12 +154,12 @@ public class BindCardPhotoView extends RelativeLayout implements NoConfusion,Vie
     public void onClick(View v) {
         if(this.mListener != null){
             if(v == this.imgView){
-                this.mListener.onItemClick(null,TAG_TYPE_IMG_ADD);
+                this.mListener.onItemClick(this,TAG_TYPE_IMG_ADD);
             }else if(v == this.imgClose) {
-                this.mListener.onItemClick(null, TAG_TYPE_CLOSE);
+                this.mListener.onItemClick(this, TAG_TYPE_CLOSE);
             }else if(v == this.imgContent){
                 if(mIsClickable){
-                    this.mListener.onItemClick(null,TAG_TYPE_CONTENT);
+                    this.mListener.onItemClick(this,TAG_TYPE_CONTENT);
                 }
             }
         }

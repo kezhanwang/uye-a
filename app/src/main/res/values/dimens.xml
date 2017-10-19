@@ -56,8 +56,9 @@
     <dimen name="photo_view_rela_width">120dp</dimen>
     <dimen name="photo_view_rela_height">80dp</dimen>
     <dimen name="photo_view_rela_width_s">115dp</dimen>
-    <dimen name="photo_view_rela_height_s">60dp</dimen>
-
+    <dimen name="photo_view_rela_height_s">68dp</dimen>
+    <dimen name="photo_view_img_width">66dp</dimen>
+    <dimen name="photo_view_img_height">66dp</dimen>
 
     <!-- loanDialog -->
     <dimen name="loanDialog_margin">30dp</dimen>
@@ -93,6 +94,8 @@
     <!--绑定银行卡-->
     <dimen name="cash_bind_card_dialog_height">480dp</dimen>
     <dimen name="cash_bind_card_title_height">56dp</dimen>
+    <dimen name="cash_bind_card_divider">1px</dimen>
+    <dimen name="cash_bind_card_item_height">62dp</dimen>
 
     <!--时间控件相关-->
     <dimen name="loan_datepicker_height">220dp</dimen>

@@ -39,12 +39,12 @@ public class BindCardPhotoView extends RelativeLayout implements NoConfusion,Vie
     ImageView imgContent;
     @BindView(R.id.txt_bottom_tips)
     TextView mTxtBottomTips;
-    @BindView(R.id.cash_bindcard_viewline_bottom)
-    View mViewLine;
     @BindView(R.id.cash_bindcard_phototview_title)
     TextView mTxtTitle;
     @BindView(R.id.cash_bindcard_txt_star)
     TextView mTxtStar;
+    @BindView(R.id.line_bottom)
+    View mViewLineBottom;
 
     IItemListener mListener;
     public static final int TYPE_BINDCARD = 1;
@@ -53,6 +53,7 @@ public class BindCardPhotoView extends RelativeLayout implements NoConfusion,Vie
     public static final int TYPE_IMG_PERSONAL_HOLD = 4;
     public static final int TYPE_IMG_ID = 5;
     public static final int TYPE_IMG_ID_BACK = 6;
+    public static final int TYPE_IMG_PROTOCAL = 7;
 
     public static final int TAG_TYPE_IMG_ADD = 1;
     public static final int TAG_TYPE_CLOSE = 2;
@@ -85,25 +86,38 @@ public class BindCardPhotoView extends RelativeLayout implements NoConfusion,Vie
     }
 
     public void updateType(int mType){
-        int topMargin = -1;
         String title = "";
         String bottomTips = "";
+        Drawable d = null;
+        int imgWidth = -1;
+        int imgHeight = -1;
         switch (mType){
             case TYPE_BINDCARD:
-                topMargin = (int) getResources().getDimension(R.dimen.apply_imgarea_top_margin_s);
                 mTxtBottomTips.setVisibility(View.GONE);
                 break;
             case TYPE_IMG_SITUATION:
-                topMargin = (int) getResources().getDimension(R.dimen.apply_imgarea_top_margin_large);
                 mTxtBottomTips.setVisibility(View.VISIBLE);
                 break;
             case TYPE_IMG_STATEMENT:
-                topMargin = (int) getResources().getDimension(R.dimen.apply_imgarea_top_margin_large);
                 mTxtBottomTips.setVisibility(View.VISIBLE);
                 break;
             case TYPE_IMG_PERSONAL_HOLD:
-                topMargin = (int) getResources().getDimension(R.dimen.apply_imgarea_top_margin_large);
                 mTxtBottomTips.setVisibility(View.VISIBLE);
+                mViewLineBottom.setVisibility(View.VISIBLE);
+                title = "手持身份证";
+                bottomTips = "注: 请持本人身份证,在有机构LOGO的地方与课程顾问一起拍摄,要求照片清晰无遮挡。";
+                imgWidth = (int) getResources().getDimension(R.dimen.photo_view_img_width);
+                imgHeight = (int) getResources().getDimension(R.dimen.photo_view_img_height);
+                d = getResources().getDrawable(R.drawable.img_add);
+                break;
+            case TYPE_IMG_PROTOCAL:
+                mTxtBottomTips.setVisibility(View.VISIBLE);
+                mViewLineBottom.setVisibility(View.VISIBLE);
+                title = "培训协议";
+                bottomTips = "注: 请上传培训协议或收据,需要包括机构名称、课程、价格、时间等重要信息。";
+                imgWidth = (int) getResources().getDimension(R.dimen.photo_view_img_width);
+                imgHeight = (int) getResources().getDimension(R.dimen.photo_view_img_height);
+                d = getResources().getDrawable(R.drawable.img_add);
                 break;
             case TYPE_IMG_ID_BACK:
             case TYPE_IMG_ID:
@@ -117,25 +131,25 @@ public class BindCardPhotoView extends RelativeLayout implements NoConfusion,Vie
                 llp.height = relaHeight;
                 llp.leftMargin = 0;
                 mRelaContent.setLayoutParams(llp);
-                Drawable d = null;
                 if(mType == TYPE_IMG_ID_BACK){
                     d = getResources().getDrawable(R.drawable.bind_card_back);
                 }else{
                     d = getResources().getDrawable(R.drawable.bind_card_front);
                 }
-                this.imgView.setBackgroundDrawable(d);
+                mViewLineBottom.setVisibility(View.GONE);
                 break;
         }
 
-        if(topMargin >= 0){
-            mViewLine.setVisibility(View.VISIBLE);
-        }else{
-            topMargin = 0;
-            mViewLine.setVisibility(View.INVISIBLE);
+        if(imgWidth > 0 && imgHeight > 0){
+            RelativeLayout.LayoutParams llp = (LayoutParams) this.imgView.getLayoutParams();
+            llp.width = imgWidth;
+            llp.height = imgHeight;
+            imgView.setLayoutParams(llp);
         }
-        RelativeLayout.LayoutParams llp = (LayoutParams) mViewLine.getLayoutParams();
-        llp.topMargin = topMargin;
-        mViewLine.setLayoutParams(llp);
+
+        if(d != null){
+            this.imgView.setBackgroundDrawable(d);
+        }
 
         if(!TextUtils.isEmpty(title)){
             mTxtTitle.setText(title);
@@ -172,6 +186,7 @@ public class BindCardPhotoView extends RelativeLayout implements NoConfusion,Vie
             mTxtStar.setVisibility(View.INVISIBLE);
         }
     }
+
     public void updateBitmap(Bitmap bitmap, String url, boolean isEditable){
         if(bitmap != null){
             this.mUrl = url;
@@ -189,6 +204,16 @@ public class BindCardPhotoView extends RelativeLayout implements NoConfusion,Vie
         }else{
             this.imgView.setOnClickListener(null);
             this.imgClose.setVisibility(View.GONE);
+        }
+    }
+
+    public void updateBitmapAdd(Bitmap bitmap,String url){
+        if(bitmap != null){
+            this.mUrl = url;
+            this.imgView.setVisibility(View.VISIBLE);
+            this.imgView.setImageBitmap(bitmap);
+        }else{
+            this.mUrl = null;
         }
     }
 

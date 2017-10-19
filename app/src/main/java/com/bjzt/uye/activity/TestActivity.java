@@ -55,6 +55,9 @@ public class TestActivity extends BaseActivity{
     @BindView(R.id.btn_search)
     Button btnSearch;
 
+    @BindView(R.id.btn_orderinfo)
+    Button btnOrderInfo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -163,6 +166,13 @@ public class TestActivity extends BaseActivity{
             @Override
             public void onClick(View view) {
                 IntentUtils.startSearchActivity(TestActivity.this);
+            }
+        });
+
+        btnOrderInfo.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                IntentUtils.startOrderInfoActivity(TestActivity.this,"",10);
             }
         });
     }

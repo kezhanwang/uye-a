@@ -6,6 +6,7 @@ import com.bjzt.uye.entity.PUploadEntity;
 import com.bjzt.uye.http.HttpCommon;
 import com.bjzt.uye.http.listener.IUploadListener;
 import com.common.common.MyLog;
+import com.common.common.NetCommon;
 import com.common.controller.LoginController;
 import org.json.JSONObject;
 import java.io.DataOutputStream;
@@ -101,7 +102,7 @@ public class UploadFileUtil {
                 String msg = jsonObj.getString("msg");
                 mEntity.msg = msg;
                 String code = jsonObj.getString("code");
-                if(!TextUtils.isEmpty(code) && code.equals("0")){
+                if(!TextUtils.isEmpty(code) && code.equals("" + NetCommon.ERROR_CODE_SUCC)){
                     mEntity.isSucc = true;
                 }else{
                     mEntity.isSucc = false;

@@ -33,7 +33,7 @@
             android:layout_height="fill_parent"
             android:layout_alignParentRight="true"
             android:gravity="center"
-            android:textColor="@color/common_font_blue"
+            android:textColor="@color/common_green"
             android:background="@drawable/more_setting_bg_selector"
             android:clickable="true"
             android:textSize="16.5sp"

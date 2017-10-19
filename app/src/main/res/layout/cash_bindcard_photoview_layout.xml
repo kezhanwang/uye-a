@@ -22,6 +22,7 @@
             android:textSize="15sp"
             android:textColor="@color/common_font_3"
             android:gravity="left"
+            android:maxLines="2"
             />
 
         <TextView
@@ -32,9 +33,8 @@
             android:text="*"
             android:textSize="14.5sp"
             android:layout_centerVertical="true"
-            android:layout_marginRight="2dp"
             android:textColor="@color/common_red"
-            android:visibility="invisible"
+            android:visibility="visible"
             />
 
     </RelativeLayout>
@@ -104,15 +104,17 @@
         android:textColor="#fa0000"
         android:text="@string/cash_data_check_tips"
         android:visibility="visible"
+        android:paddingBottom="@dimen/common_margin_8"
         />
 
     <View
-        android:id="@+id/cash_bindcard_viewline_bottom"
-        android:layout_width="wrap_content"
+        android:id="@+id/line_bottom"
         android:layout_height="1px"
-        android:layout_marginTop="108dp"
-        android:background="#d6d6d6"
-        android:layout_marginLeft="@dimen/common_margin_18"
-        ></View>
+        android:layout_width="fill_parent"
+        android:layout_below="@id/txt_bottom_tips"
+        android:background="@color/common_d6"
+        android:layout_marginLeft="@dimen/common_margin"
+        >
+    </View>
 
 </RelativeLayout>

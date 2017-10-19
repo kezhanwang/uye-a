@@ -1,5 +1,7 @@
 package com.bjzt.uye.http;
 
+import android.text.TextUtils;
+
 import com.bjzt.uye.entity.PBankEntity;
 import com.bjzt.uye.global.Global;
 import com.bjzt.uye.http.base.ReqBaseEntity;
@@ -9,10 +11,12 @@ import com.bjzt.uye.http.req.ReqFaceVerifyCfgEntity;
 import com.bjzt.uye.http.req.ReqIDentityCfgEntity;
 import com.bjzt.uye.http.req.ReqIDentityInfoEntity;
 import com.bjzt.uye.http.req.ReqIDentityPicEntity;
-import com.bjzt.uye.http.req.ReqLocCityEntity;
+import com.bjzt.uye.http.req.ReqHomeEntity;
 import com.bjzt.uye.http.req.ReqLoginPhoneEntity;
 import com.bjzt.uye.http.req.ReqLoginPwdEntity;
 import com.bjzt.uye.http.req.ReqLogoutEntity;
+import com.bjzt.uye.http.req.ReqOrderInfoEntity;
+import com.bjzt.uye.http.req.ReqOrderSubmitEntity;
 import com.bjzt.uye.http.req.ReqPhoneVerifyEntity;
 import com.bjzt.uye.http.req.ReqRegEntity;
 import com.bjzt.uye.http.req.ReqSearchEntity;
@@ -21,6 +25,8 @@ import com.bjzt.uye.http.req.ReqSubmitIDentityEntity;
 import com.bjzt.uye.http.req.ReqUInfoEntity;
 import com.bjzt.uye.http.req.ReqUploadPhoneListEntity;
 import com.common.http.HttpEngine;
+
+import java.util.List;
 
 /**
  * Created by billy on 2017/10/12.
@@ -62,7 +68,7 @@ public class ProtocalManager {
      * @return
      */
     public int reqLocCity(ICallBack<Object> callBack){
-        ReqLocCityEntity reqEntity = new ReqLocCityEntity();
+        ReqHomeEntity reqEntity = new ReqHomeEntity();
         return addTask(reqEntity,callBack);
     }
 
@@ -208,9 +214,6 @@ public class ProtocalManager {
      * @param picFront
      * @param picBack
      * @param authMobile
-     * @param bankCardNo
-     * @param banckCode
-     * @param openBank
      * @param code
      * @param udOrder
      * @param callBack
@@ -258,6 +261,56 @@ public class ProtocalManager {
     public int reqIDentityPic(String order,ICallBack<Object> callBack){
         ReqIDentityPicEntity reqEntity = new ReqIDentityPicEntity();
         reqEntity.udcredit_order = order;
+        return addTask(reqEntity,callBack);
+    }
+
+    /**
+     * 获取订单配置信息
+     * @param orgId
+     * @param callBack
+     * @return
+     */
+    public int reqOrderInfo(String orgId,ICallBack<Object> callBack){
+        ReqOrderInfoEntity reqEntity = new ReqOrderInfoEntity();
+        reqEntity.org_id = orgId;
+        return addTask(reqEntity,callBack);
+    }
+
+    /***
+     * 提交保单
+     * @param orgId
+     * @param cid
+     * @param tution
+     * @param clazz
+     * @param class_start
+     * @param class_end
+     * @param course_consultant
+     * @param group_pic
+     * @param training_pic
+     * @param insured_type
+     * @param callBack
+     * @return
+     */
+    public int reqOrderSubmit(String orgId, String cid, String tution, String clazz,
+                              String class_start, String class_end, String course_consultant,
+                              String group_pic, List<String> training_pic, String insured_type,
+                              ICallBack<Object> callBack){
+        ReqOrderSubmitEntity reqEntity = new ReqOrderSubmitEntity();
+        reqEntity.org_id = orgId;
+        reqEntity.c_id = cid;
+        long r = 0;
+        if(TextUtils.isDigitsOnly(tution)){
+            r = Long.valueOf(tution);
+            r = r * 100;
+        }
+        reqEntity.tuition = r;
+        reqEntity.clazz = clazz;
+        reqEntity.class_start = class_start;
+        reqEntity.class_end = class_end;
+        reqEntity.course_consultant = course_consultant;
+        reqEntity.group_pic = group_pic;
+        reqEntity.training_pic = training_pic;
+        reqEntity.insured_type = insured_type;
         return addTask(reqEntity,callBack);
     }
 }

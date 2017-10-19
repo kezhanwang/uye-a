@@ -14,6 +14,9 @@
     <string name="common_pic_requesting">图片请求中[%d]..</string>
     <string name="common_pic_path_failure">获取图片路径失败</string>
     <string name="common_cfg_error">配置下发错误</string>
+    <string name="common_course_empty">课程列表无数据</string>
+    <string name="common_request_succ">提交成功</string>
+
     <!--tab目录-->
     <string name="tab_main">首页</string>
     <string name="tab_uye">U业</string>
@@ -127,5 +130,22 @@
     <string name="face_auth_sdk_k12_result_checking">人脸相似度低...</string>
 
     <string name="img_uploading_progress">图片正在上传中%s</string>
+
+
+    <!--订单信息-->
+    <string name="order_info_title">订单信息</string>
+    <string name="order_info_cname">课程名</string>
+    <string name="order_info_cname_tips">请选择您学习的课程名称</string>
+    <string name="order_info_tution">学费金额</string>
+    <string name="order_info_tution_tips">请输入您的实际学费金额</string>
+    <string name="order_info_clazz_name">班级名称</string>
+    <string name="order_info_clazz_name_tips">请输入您所在的班级名称</string>
+    <string name="order_info_train_date">培训日期</string>
+    <string name="order_info_train_date_tips">请选择开始日期</string>
+    <string name="order_info_train_date_end_tips">请选择结束日期</string>
+    <string name="order_info_adviser">课程顾问</string>
+    <string name="order_info_advise_tips">请输入您课程顾问的姓名</string>
+    <string name="order_info_upload_pic_hold_tips">请上传手持身份证照片</string>
+    <string name="order_info_upload_pic_protocal_tips">请上传协议照片</string>
 
 </resources>

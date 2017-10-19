@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.bjzt.uye.activity.ApplyIDActivity;
+import com.bjzt.uye.activity.dialog.DialogPicSelect;
 import com.bjzt.uye.global.Global;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -92,6 +93,16 @@ public class PicEntity implements Serializable {
                 entity = new PicEntity();
                 entity.mType = PicEntity.TYPE_ID2;
                 entity.key = PicEntity.KEY_IDCARD_BACK;
+                break;
+            case DialogPicSelect.TYPE_HOLD:
+                entity = new PicEntity();
+                entity.mType = PicEntity.TYPE_HOLDID;
+                entity.key = PicEntity.KEY_PERSONHOLD;
+                break;
+            case DialogPicSelect.TYPE_PROTOCAL:
+                entity = new PicEntity();
+                entity.mType = PicEntity.TYPE_PRO_FIRST;
+                entity.key = PicEntity.KEY_PRO_FIRST;
                 break;
         }
         if(entity != null){

@@ -24,7 +24,9 @@ public class DialogPicSelect extends Dialog implements  View.OnClickListener{
 
     public static final int TYPE_ID_CARD = 1;//身份证
     public static final int TYPE_BANK_CARD = 2;//银行卡
-    public static final int TYPE_ID_CARD_BACK = 3;		//身份证件背面
+    public static final int TYPE_ID_CARD_BACK = 3;//身份证件背面
+    public static final int TYPE_HOLD = 4;    //手持身份证照
+    public static final int TYPE_PROTOCAL = 5;  //协议照
 
 
     private ImageView img_loanDialog;
@@ -104,6 +106,12 @@ public class DialogPicSelect extends Dialog implements  View.OnClickListener{
                 break;
             case TYPE_BANK_CARD:
                 mDrawable = mContext.getResources().getDrawable(R.drawable.dk_tc_pic02);
+                break;
+            case TYPE_HOLD:
+                mDrawable = mContext.getResources().getDrawable(R.drawable.loan_dk_tc_pic_hold);
+                break;
+            case TYPE_PROTOCAL:
+                mDrawable = mContext.getResources().getDrawable(R.drawable.loan_dk_tc_pro);
                 break;
             default:
                 break;

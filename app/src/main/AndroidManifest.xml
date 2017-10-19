@@ -117,6 +117,14 @@
             android:theme="@style/Theme.Youye"
             ></activity>
 
+        <!--订单信息-->
+        <activity
+            android:name=".activity.OrderInfoActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.Youye"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            ></activity>
 
     <!--===========================================相关配置SDK============================ -->
     <service

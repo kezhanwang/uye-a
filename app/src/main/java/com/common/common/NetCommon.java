@@ -36,7 +36,7 @@ public class NetCommon {
     public static final int ERROR_CODE_TIME_OUT = 118;
 
     /**业务错误码**/
-    public static final int ERROR_CODE_CODE_EXCEPTION = 1000;
+    public static final int ERROR_CODE_CODE_EXCEPTION = -1000;
 
     /**正式域名**/
     public static final int NET_TYPE_INDEX_OFFICAL = 0;

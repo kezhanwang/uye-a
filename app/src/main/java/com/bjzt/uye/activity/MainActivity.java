@@ -6,6 +6,7 @@ import android.widget.TabHost;
 import com.bjzt.uye.R;
 import com.bjzt.uye.activity.base.BaseActivity;
 import com.bjzt.uye.adapter.TabsAdapter;
+import com.bjzt.uye.fragments.FragmentHome;
 import com.bjzt.uye.fragments.FragmentMain;
 import com.bjzt.uye.fragments.FragmentMyInfo;
 import com.bjzt.uye.views.component.MainTabView;
@@ -60,7 +61,7 @@ public class MainActivity extends BaseActivity {
             mViewMsg = new MainTabView(getApplicationContext());
             mViewMsg.setTabName(tabName);
             mViewMsg.setIcon(R.drawable.tab_main_selector);
-            mTabsAdapter.addTab(mTabHost.newTabSpec(tabName).setIndicator(mViewMsg),FragmentMain.class, null);
+            mTabsAdapter.addTab(mTabHost.newTabSpec(tabName).setIndicator(mViewMsg),FragmentHome.class, null);
             curTabNames.add(tabName);
         }else if(tabName.equals(getString(R.string.tab_uye))){
             mViewUYe = new MainTabView(getApplicationContext());

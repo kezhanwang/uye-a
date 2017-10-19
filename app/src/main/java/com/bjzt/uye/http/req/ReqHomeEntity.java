@@ -7,11 +7,11 @@ import java.util.Map;
 /**
  * Created by billy on 2017/10/12
  */
-public class ReqLocCityEntity extends ReqBaseEntity{
+public class ReqHomeEntity extends ReqBaseEntity{
 
     @Override
     public String getReqUrl() {
-        return HttpCommon.URL_LOC_CITY;
+        return HttpCommon.URL_HOME;
     }
 
     @Override

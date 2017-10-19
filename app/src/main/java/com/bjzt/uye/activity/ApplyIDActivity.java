@@ -33,6 +33,7 @@ import com.bjzt.uye.http.rsp.RspFaceVerifyCfgEntity;
 import com.bjzt.uye.http.rsp.RspIDentityCfgEntity;
 import com.bjzt.uye.http.rsp.RspIDentityPicEntity;
 import com.bjzt.uye.http.rsp.RspPhoneVerifyEntity;
+import com.bjzt.uye.http.rsp.RspSubmitIDentityEntity;
 import com.bjzt.uye.listener.IHeaderListener;
 import com.bjzt.uye.listener.IItemListener;
 import com.bjzt.uye.util.FileUtil;
@@ -90,11 +91,11 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
     @BindView(R.id.btn_ok)
     Button btnOk;
 
-    private List<Integer> mReqList = new ArrayList<Integer>();
+    public static final int REQ_CODE_ID = DialogPicSelect.TYPE_ID_CARD;
+    public static final int REQ_CODE_ID_BACK = DialogPicSelect.TYPE_ID_CARD_BACK;
 
+    private List<Integer> mReqList = new ArrayList<Integer>();
     private DialogPicSelect mDialogPicSelect;
-    public static final int REQ_CODE_ID = 10;
-    public static final int REQ_CODE_ID_BACK = 11;
     private String mCammerImgPath;
     private DialogConfirmSingle mDialogCfg;
     private DialogBankList mDialogBankList;
@@ -119,6 +120,7 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
     private PBankEntity mBankEntitySelect;
     private PFaceVerifyEntity pFaceVerifyEntity;
     private PIDentityPicEntity pFacePicEntity;
+    private String orgId;
 
     @Override
     protected int getLayoutID() {
@@ -140,7 +142,9 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
 
             @Override
             public void onRightClick() {
-
+                showLoading();
+                int seqNo = ProtocalManager.getInstance().reqFaceVerifyCfg(getCallBack());
+                mReqList.add(seqNo);
             }
         });
 
@@ -268,7 +272,7 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
     private IUploadListener uploadListener = new IUploadListener() {
         @Override
         public void upload(long curLen, long maxLen, String key, int mType) {
-            String str = key + ":" + StrUtil.getProgressStr(curLen, maxLen);
+            String str = StrUtil.getProgressStr(curLen, maxLen);
             String tips = getResources().getString(R.string.img_uploading_progress, str);
             Message msg = Message.obtain();
             msg.what = FLAG_SET_LOADING;
@@ -320,12 +324,6 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
                     showDialogPicSelect(REQ_CODE_ID);
                 }else if(obj == photoViewBack){
                     showDialogPicSelect(REQ_CODE_ID_BACK);
-                }
-            }else if(tag == BindCardPhotoView.TAG_TYPE_CLOSE){
-                if(obj == photoViewFront){
-
-                }else if(obj == photoViewBack){
-
                 }
             }
         }
@@ -588,6 +586,15 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
                     msg.what = FLAG_PIC_INFO;
                     sendMsgDelay(msg,DELAY);
                 }
+            }else if(rsp instanceof RspSubmitIDentityEntity){
+                RspSubmitIDentityEntity rspEntity = (RspSubmitIDentityEntity) rsp;
+                if(isSucc){
+                    setResult(Activity.RESULT_OK);
+                    finish();
+                }else{
+                    String tips = StrUtil.getErrorTipsByCode(errorCode,rspEntity);
+                    showToast(tips);
+                }
             }
         }
     }
@@ -693,7 +700,8 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
 
     @Override
     protected void initExtras(Bundle bundle) {
-
+        Intent intent = getIntent();
+        this.orgId = intent.getStringExtra(IntentUtils.PARA_KEY_PUBLIC);
     }
 
     @Override

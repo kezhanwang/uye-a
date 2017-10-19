@@ -4,6 +4,7 @@
     android:layout_height="@dimen/cash_bind_card_dialog_height"
     android:orientation="vertical"
     android:background="@color/common_white"
+    android:id="@+id/rela_main"
     >
 
     <TextView

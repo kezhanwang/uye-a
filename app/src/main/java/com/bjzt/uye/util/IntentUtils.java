@@ -11,6 +11,7 @@ import com.bjzt.uye.activity.ApplyIDActivity;
 import com.bjzt.uye.activity.DataCheckActivity;
 import com.bjzt.uye.activity.LoginActivity;
 import com.bjzt.uye.activity.MainActivity;
+import com.bjzt.uye.activity.OrderInfoActivity;
 import com.bjzt.uye.activity.RegisterActivity;
 import com.bjzt.uye.activity.SearchActivity;
 import com.bjzt.uye.activity.WebViewActivity;
@@ -155,4 +156,13 @@ public class IntentUtils {
         startMediaStore(context, requestCode, filePath);
     }
 
+    /***
+     * 获取订单配置信息
+     * @param orgID
+     */
+    public static final void startOrderInfoActivity(Activity mContext,String orgID,int reqCode){
+        Intent intent = new Intent(mContext, OrderInfoActivity.class);
+        intent.putExtra(IntentUtils.PARA_KEY_PUBLIC,orgID);
+        mContext.startActivityForResult(intent,reqCode);
+    }
 }

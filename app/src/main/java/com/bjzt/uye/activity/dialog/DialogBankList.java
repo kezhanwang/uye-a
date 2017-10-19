@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import com.bjzt.uye.R;
 import com.bjzt.uye.adapter.BankListAdapter;
 import com.bjzt.uye.entity.PBankEntity;
@@ -22,9 +25,11 @@ import java.util.List;
  * 银行列表dialog
  */
 public class DialogBankList extends Dialog {
-    private ListView mListView;
-    private BankListAdapter mAdapter;
-    private IItemListener mItemListener;
+    protected ListView mListView;
+    protected BankListAdapter mAdapter;
+    protected IItemListener mItemListener;
+    protected RelativeLayout mRelaMain;
+    protected TextView mTxtTitle;
 
     public DialogBankList(Context context, int theme) {
         super(context, theme);
@@ -46,8 +51,9 @@ public class DialogBankList extends Dialog {
 
         LayoutInflater li = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View mView = li.inflate(R.layout.cash_dialog_banklist_layout,null);
-
-        this.mListView = (ListView) mView.findViewById(R.id.dialog_bank_listview);
+        this.mRelaMain = mView.findViewById(R.id.rela_main);
+        this.mTxtTitle = mView.findViewById(R.id.title);
+        this.mListView = mView.findViewById(R.id.dialog_bank_listview);
         int mWidth = DeviceUtil.mWidth;
         int mHeight = (int) getContext().getResources().getDimension(R.dimen.cash_bind_card_dialog_height);
         ViewGroup.LayoutParams llp = new ViewGroup.LayoutParams(mWidth, mHeight);

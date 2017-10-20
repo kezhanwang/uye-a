@@ -7,13 +7,19 @@
     <!--common-->
     <dimen name="common_margin">12dp</dimen>
     <dimen name="common_margin_8">8dp</dimen>
+    <dimen name="common_margin_6">6dp</dimen>
+    <dimen name="common_margin_4">4dp</dimen>
+    <dimen name="common_margin_2">2dp</dimen>
     <dimen name="common_margin_18">18dp</dimen>
     <dimen name="common_margin_left_small">2dp</dimen>
     <dimen name="common_margin_10">10dp</dimen>
 
+    <dimen name="common_font_size_16">16sp</dimen>
+
+    <!--header相关-->
     <dimen name="header_bar_height">52dp</dimen>
     <dimen name="headerview_height">120dp</dimen>
-
+    <dimen name="header_bar_right_width">81dp</dimen>
 
     <!--ItemView-->
     <dimen name="item_view_height">52dp</dimen>

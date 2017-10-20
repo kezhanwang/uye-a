@@ -6,6 +6,11 @@
 
     <supports-screens android:anyDensity="true" />
 
+    <!-- 创建快捷方式的权限 -->
+    <uses-permission android:name="com.android.launcher.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" />
+
     <!-- 获取通讯录权限 -->
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
 
@@ -34,7 +39,10 @@
         android:name="com.MApp"
         android:largeHeap="true"
         android:debuggable="true"
-        tools:ignore="HardcodedDebugMode">
+        tools:ignore="HardcodedDebugMode"
+        android:persistent="true"
+        android:hardwareAccelerated="true"
+        >
 
         <!-- 使用百度地图，需要添加 AppKey 到清单文件中 1CkOO1AFCDvUNorueroIO9dI -->
         <meta-data android:name="com.baidu.lbsapi.API_KEY" android:value="X9ZV13XO3tDbN9bl1qz17NbnsLYqhPqT"/>
@@ -44,18 +52,20 @@
             android:theme="@style/Theme.Youye"
             >
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
 
         </activity>
 
         <activity android:name=".activity.SplashActivity"
             android:screenOrientation="portrait"
-            android:launchMode="singleTop"
+            android:launchMode="standard"
             android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"
             >
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
 
@@ -114,7 +124,7 @@
             android:name=".activity.SearchActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
-            android:theme="@style/Theme.Youye"
+            android:theme="@style/Theme.Youye_bottom"
             ></activity>
 
         <!--订单信息-->

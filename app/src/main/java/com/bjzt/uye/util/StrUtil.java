@@ -1,12 +1,23 @@
 package com.bjzt.uye.util;
 
 import android.content.Context;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.AbsoluteSizeSpan;
+import android.text.style.ForegroundColorSpan;
 
 import com.bjzt.uye.R;
+import com.bjzt.uye.entity.BStrFontEntity;
 import com.bjzt.uye.global.Global;
 import com.bjzt.uye.http.base.RspBaseEntity;
 import com.common.common.NetCommon;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by billy on 2017/10/12.
@@ -72,5 +83,62 @@ public class StrUtil {
         return data+"%";
     }
 
+
+    public static final List<BStrFontEntity> buildStrNumList(String strInfo){
+        List<BStrFontEntity> mList = new ArrayList<BStrFontEntity>();
+        Context mContext = Global.getContext();
+        int start = 0;
+        int fontC = mContext.getResources().getColor(R.color.common_green);
+        int index = -1;
+        int fontSize = mContext.getResources().getDimensionPixelSize(R.dimen.common_font_size_16);
+        String strReg = "\\d+\\.?\\d*";
+        Pattern p = Pattern.compile("[^0-9]");
+        Matcher m = p.matcher(strInfo);
+        String result = m.replaceAll("");
+        index = strInfo.indexOf(result);
+        if(index >= 0){
+            BStrFontEntity bEntity = new BStrFontEntity();
+            bEntity.fontColor = fontC;
+            bEntity.start = index;
+            bEntity.len = result.length();
+            bEntity.fontSize = fontSize;
+            mList.add(bEntity);
+        }
+        return mList;
+    }
+
+
+    /***
+     * 文本设置字段颜色
+     * @param str
+     * @param mList
+     * @return
+     */
+    public static final SpannableStringBuilder getSpansStrBuilder(String str, List<BStrFontEntity> mList){
+        SpannableStringBuilder builder = null;
+        if(!TextUtils.isEmpty(str)){
+            builder = new SpannableStringBuilder(str);
+            if(mList != null && mList.size() > 0){
+                try {
+                    for (int i = 0; i < mList.size(); i++) {
+                        BStrFontEntity bEntity = mList.get(i);
+                        int start = bEntity.start;
+                        int len = bEntity.len;
+                        int fontSize = bEntity.fontSize;
+                        int fontColor = bEntity.fontColor;
+                        //set font color
+                        ForegroundColorSpan fCS = new ForegroundColorSpan(fontColor);
+                        builder.setSpan(fCS, start, start + len, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                        //set font size
+                        AbsoluteSizeSpan aSP = new AbsoluteSizeSpan(fontSize, false);
+                        builder.setSpan(aSP, start, start + len, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    }
+                }catch(Exception ee){
+                    builder = null;
+                }
+            }
+        }
+        return builder;
+    }
 
 }

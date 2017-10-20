@@ -16,7 +16,7 @@
     <string name="common_cfg_error">配置下发错误</string>
     <string name="common_course_empty">课程列表无数据</string>
     <string name="common_request_succ">提交成功</string>
-
+    <string name="common_money_info">¥%s</string>
     <!--tab目录-->
     <string name="tab_main">首页</string>
     <string name="tab_uye">U业</string>
@@ -147,5 +147,8 @@
     <string name="order_info_advise_tips">请输入您课程顾问的姓名</string>
     <string name="order_info_upload_pic_hold_tips">请上传手持身份证照片</string>
     <string name="order_info_upload_pic_protocal_tips">请上传协议照片</string>
+
+    <!--UYe相关-->
+    <string name="uye_order_empty_tips">订单空空如也!\n让U业帮为您的大好前程出把力吧~</string>
 
 </resources>

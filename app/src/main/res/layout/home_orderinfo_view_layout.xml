@@ -21,7 +21,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="180dp"
+    android:layout_height="192dp"
     android:background="@color/common_white"
     >
 
@@ -59,11 +59,20 @@
         android:layout_marginRight="@dimen/common_margin"
         ></View>
 
+    <com.bjzt.uye.views.component.DividerItemView
+        android:id="@+id/bottom_divider"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        ></com.bjzt.uye.views.component.DividerItemView>
+
     <LinearLayout
+        android:id="@+id/home_linear_order"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="horizontal"
         android:layout_below="@id/home_order_line"
+        android:layout_above="@id/bottom_divider"
         >
 
         <RelativeLayout
@@ -72,8 +81,30 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:background="@drawable/more_setting_bg_selector"
+            android:gravity="center_vertical"
             >
 
+            <TextView
+                android:id="@+id/txt_ordercnt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textSize="16.5sp"
+                android:text="0"
+                android:textColor="@color/common_font_3"
+                />
+
+            <TextView
+                android:id="@+id/txt_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="订单"
+                android:layout_below="@id/txt_ordercnt"
+                android:textSize="14sp"
+                android:textColor="@color/common_font_3"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/common_margin_4"
+                />
 
         </RelativeLayout>
 
@@ -91,11 +122,38 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:background="@drawable/more_setting_bg_selector"
+            android:gravity="center_vertical"
             >
+
+            <TextView
+                android:id="@+id/txt_payed_tution"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textSize="16.5sp"
+                android:text="¥00.00"
+                android:textColor="@color/common_font_3"
+                />
+
+
+            <TextView
+                android:id="@+id/txt_payed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="已赔付"
+                android:layout_below="@id/txt_payed_tution"
+                android:textSize="14sp"
+                android:textColor="@color/common_font_3"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/common_margin_4"
+                />
 
 
         </RelativeLayout>
 
     </LinearLayout>
+
+
+
 
 </RelativeLayout>

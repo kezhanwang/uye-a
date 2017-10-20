@@ -15,11 +15,15 @@ public abstract class MutiBaseListAdapter extends BaseListAdapter<BaseItemListen
 	private final String TAG = "MutiBaseListAdapter";
 	
 	public static final int TYPE_FOOTER = 0;
-	public static final int TYPE_PIC_BIG = TYPE_FOOTER + 1;
-	public static final int TYPE_NORMAL = TYPE_PIC_BIG + 1;
-	public static final int[] TYPE_TIMELINE_ARR = {TYPE_FOOTER,TYPE_PIC_BIG,TYPE_NORMAL};
+	public static final int TYPE_HOME_HEADERVIEW = TYPE_FOOTER + 1;
+	public static final int TYPE_HOME_ORDERIINFO = TYPE_HOME_HEADERVIEW + 1;
+	public static final int TYPE_HOME_LOC = TYPE_HOME_ORDERIINFO + 1;
+
+	public static final int[] TYPE_HOME = {TYPE_FOOTER,TYPE_HOME_HEADERVIEW,TYPE_HOME_ORDERIINFO,TYPE_HOME_LOC};
 
 	private int[] mTypeArray = null;
+
+	public static final int ADAPTER_TYPE_HOME = 1;
 
 	public MutiBaseListAdapter(List<BaseItemListener> mList, int mTypeAdapter) {
 		super(mList);
@@ -28,7 +32,11 @@ public abstract class MutiBaseListAdapter extends BaseListAdapter<BaseItemListen
 	}
 	
 	private void init(int mType){
-
+		switch(mType){
+			case ADAPTER_TYPE_HOME:
+				mTypeArray = TYPE_HOME;
+				break;
+		}
 	}
 	
 	@Override

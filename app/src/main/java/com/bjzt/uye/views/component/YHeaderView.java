@@ -39,6 +39,7 @@ public class YHeaderView extends RelativeLayout implements NoConfusion,View.OnCl
     public static final int TYPE_ABOUT = 0;
     public static final int TYPE_RIGHT_TXT = 1; //登录样式，左侧返回，右侧注册
     public static final int TYPE_MYINFO = 2;
+    public static final int TYPE_RIGHT_TXT_ONLY = 3;    //只是右侧的txt
 
     private IHeaderListener mListener;
 
@@ -73,9 +74,12 @@ public class YHeaderView extends RelativeLayout implements NoConfusion,View.OnCl
                 relaLeft.setVisibility(View.VISIBLE);
                 break;
             case TYPE_RIGHT_TXT:
+            case TYPE_RIGHT_TXT_ONLY:
                 mTxtTitle.setVisibility(View.VISIBLE);
                 relaRight.setVisibility(View.VISIBLE);
-                relaLeft.setVisibility(View.VISIBLE);
+                if(this.mType == TYPE_RIGHT_TXT){
+                    relaLeft.setVisibility(View.VISIBLE);
+                }
                 break;
         }
     }

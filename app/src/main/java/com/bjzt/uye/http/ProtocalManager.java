@@ -62,16 +62,6 @@ public class ProtocalManager {
         return seqNo;
     }
 
-    /***
-     * 获取定位城市
-     * @param callBack
-     * @return
-     */
-    public int reqLocCity(ICallBack<Object> callBack){
-        ReqHomeEntity reqEntity = new ReqHomeEntity();
-        return addTask(reqEntity,callBack);
-    }
-
     /****
      * 获取手机验证码
      * @param phone
@@ -311,6 +301,16 @@ public class ProtocalManager {
         reqEntity.group_pic = group_pic;
         reqEntity.training_pic = training_pic;
         reqEntity.insured_type = insured_type;
+        return addTask(reqEntity,callBack);
+    }
+
+    /***
+     * 请求首页配置信息
+     * @param callBack
+     * @return
+     */
+    public int reqHomeInfo(ICallBack<Object> callBack){
+        ReqHomeEntity reqEntity = new ReqHomeEntity();
         return addTask(reqEntity,callBack);
     }
 }

@@ -59,7 +59,7 @@
 
     <ImageView
         android:id="@+id/img_sysmsg"
-        android:layout_width="68dp"
+        android:layout_width="@dimen/header_bar_right_width"
         android:layout_height="fill_parent"
         android:src="@drawable/img_sysmsg"
         android:scaleType="center"

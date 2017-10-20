@@ -23,7 +23,7 @@
 		android:src="@drawable/img_net_error"
 		android:layout_centerHorizontal="true"
 		android:layout_centerVertical="true"
-		android:layout_marginTop="-80dp"
+		android:layout_marginTop="-100dp"
 		/>
 
 	<!-- net work busy -->
@@ -35,11 +35,11 @@
 		android:layout_marginRight="20dp"
 		android:layout_marginTop="12dp"
 		android:text="网络繁忙"
+		android:gravity="center_horizontal"
 		android:layout_centerHorizontal="true"
 		android:layout_below="@id/neterror_img"
 		android:textSize="16.5sp"
 		android:textColor="@color/common_grey"
-		android:singleLine="true"
 		/>
 
 </RelativeLayout>

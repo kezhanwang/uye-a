@@ -1,6 +1,8 @@
 package com.bjzt.uye.views.component;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +29,9 @@ public class BlankEmptyView extends RelativeLayout implements NoConfusion{
     @BindView(R.id.neterror_text)
     TextView netErrorTxt;
 
+    public static final int TYPE_EMPTY_ORDER = 1;
+    private int mType;
+
     public BlankEmptyView(Context context) {
         super(context);
         init();
@@ -46,6 +51,23 @@ public class BlankEmptyView extends RelativeLayout implements NoConfusion{
         netErrorTxt.setOnClickListener(mViewListener);
     }
 
+    public void updateType(int mType){
+        this.mType = mType;
+        String tips = null;
+        Drawable d = null;
+        switch(this.mType){
+            case TYPE_EMPTY_ORDER:
+                d = getResources().getDrawable(R.drawable.empty_img_no_order);
+                tips = getResources().getString(R.string.uye_order_empty_tips);
+                break;
+        }
+        if(d != null){
+            netErrorImg.setImageDrawable(d);
+        }
+        if(!TextUtils.isEmpty(tips)){
+            netErrorTxt.setText(tips);
+        }
+    }
 
     public static abstract class BlankBtnListener{
         public void btnRefresh(){};

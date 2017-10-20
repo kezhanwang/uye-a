@@ -50,4 +50,17 @@
     </style>
 
 
+    <style name="Theme.Youye_bottom" parent="@android:style/Theme.Light">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@style/anim.bottom</item>
+    </style>
+
+    <style name="anim.bottom" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/activity_bottom_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/activity_top_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/activity_top_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/activity_bottom_out</item>
+    </style>
+
 </resources>

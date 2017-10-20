@@ -146,4 +146,11 @@ public class SearchActivity extends BaseActivity{
     protected void initExtras(Bundle bundle) {
 
     }
+
+    @Override
+    public void finish() {
+        super.finish();
+        //关闭窗体动画显示
+        this.overridePendingTransition(0, R.anim.activity_bottom_out);
+    }
 }

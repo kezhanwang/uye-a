@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.bjzt.uye.R;
 import com.bjzt.uye.listener.IItemListener;
@@ -23,6 +24,8 @@ public class HomeHeader extends RelativeLayout implements NoConfusion, View.OnCl
 
     @BindView(R.id.rela_loc)
     RelativeLayout mRelaLoc;
+    @BindView(R.id.txt_loc)
+    TextView mTxtLoc;
     @BindView(R.id.linear_content)
     LinearLayout mLinearContent;
     @BindView(R.id.img_sysmsg)
@@ -62,12 +65,16 @@ public class HomeHeader extends RelativeLayout implements NoConfusion, View.OnCl
     public void onClick(View view) {
         if(this.mListener != null){
             if(view == this.mRelaLoc){
-                this.mListener.onItemClick(null,TAG_LOC);
+                this.mListener.onItemClick(this,TAG_LOC);
             }else if(view == this.mLinearContent){
-                this.mListener.onItemClick(null,TAG_CONTENTS);
+                this.mListener.onItemClick(this,TAG_CONTENTS);
             }else if(view == this.imgSysMsg){
-                this.mListener.onItemClick(null,TAG_SYSMSG);
+                this.mListener.onItemClick(this,TAG_SYSMSG);
             }
         }
+    }
+
+    public void setLocTxt(String strInfo){
+        mTxtLoc.setText(strInfo);
     }
 }

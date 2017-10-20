@@ -1,7 +1,9 @@
 package com.bjzt.uye.activity;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.view.KeyEvent;
 import android.widget.TabHost;
 import com.bjzt.uye.R;
 import com.bjzt.uye.activity.base.BaseActivity;
@@ -9,6 +11,7 @@ import com.bjzt.uye.adapter.TabsAdapter;
 import com.bjzt.uye.fragments.FragmentHome;
 import com.bjzt.uye.fragments.FragmentMain;
 import com.bjzt.uye.fragments.FragmentMyInfo;
+import com.bjzt.uye.fragments.FragmentUYe;
 import com.bjzt.uye.views.component.MainTabView;
 import java.util.ArrayList;
 import butterknife.BindView;
@@ -24,6 +27,7 @@ public class MainActivity extends BaseActivity {
     private MainTabView mViewUYe;
     private MainTabView mViewMine;
     private ArrayList<String> curTabNames = new ArrayList<>();
+    private String KEY_IDNEX = "key_index";
 
     @Override
     protected int getLayoutID() {
@@ -67,7 +71,7 @@ public class MainActivity extends BaseActivity {
             mViewUYe = new MainTabView(getApplicationContext());
             mViewUYe.setTabName(tabName);
             mViewUYe.setIcon(R.drawable.tab_uye_selector);
-            mTabsAdapter.addTab(mTabHost.newTabSpec(tabName).setIndicator(mViewUYe),FragmentMain.class, null);
+            mTabsAdapter.addTab(mTabHost.newTabSpec(tabName).setIndicator(mViewUYe),FragmentUYe.class, null);
             curTabNames.add(tabName);
         }else if(tabName.equals(getString(R.string.tab_mine))){
             mViewMine = new MainTabView(getApplicationContext());
@@ -75,6 +79,41 @@ public class MainActivity extends BaseActivity {
             mViewMine.setIcon(R.drawable.tab_myinfo_selector);
             mTabsAdapter.addTab(mTabHost.newTabSpec(tabName).setIndicator(mViewMine),FragmentMyInfo.class, null);
             curTabNames.add(tabName);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            moveTaskToBack(false);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        int index = mViewPager.getCurrentItem();
+        outState.putInt(KEY_IDNEX,index);
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if(savedInstanceState != null){
+            int index = savedInstanceState.getInt(KEY_IDNEX);
+            mViewPager.setCurrentItem(index);
         }
     }
 }

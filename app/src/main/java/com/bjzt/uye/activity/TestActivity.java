@@ -81,13 +81,13 @@ public class TestActivity extends BaseActivity{
         btnLocCity.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                ProtocalManager.getInstance().reqLocCity(new ICallBack<Object>() {
-                    @Override
-                    public void getResponse(Object rsp, boolean isSucc, int errorCode, int seqNo, int src) {
-
-
-                    }
-                });
+//                ProtocalManager.getInstance().reqLocCity(new ICallBack<Object>() {
+//                    @Override
+//                    public void getResponse(Object rsp, boolean isSucc, int errorCode, int seqNo, int src) {
+//
+//
+//                    }
+//                });
             }
         });
 

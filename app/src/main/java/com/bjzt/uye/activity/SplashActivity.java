@@ -5,8 +5,10 @@ import android.os.Message;
 import android.view.KeyEvent;
 import com.bjzt.uye.R;
 import com.bjzt.uye.activity.base.BaseActivity;
+import com.bjzt.uye.global.Global;
 import com.bjzt.uye.global.MConfiger;
 import com.bjzt.uye.util.IntentUtils;
+import com.common.util.ShortCutUtils;
 
 /**
  * Created by billy on 2017/10/12
@@ -36,16 +38,24 @@ public class SplashActivity extends BaseActivity{
     }
 
     private void delayTask(){
-        Message msg = Message.obtain();
-        msg.what = FLAG_MSG_DELAY;
-        sendMsgDelay(msg, MConfiger.SPLASH_INTERVAL);
+        Global.postDelay(new Runnable() {
+            @Override
+            public void run() {
+                //快捷方式创建
+                //
+                ShortCutUtils.createShortCut(SplashActivity.this);
+                Message msg = Message.obtain();
+                msg.what = FLAG_MSG_DELAY;
+                sendMsgDelay(msg, MConfiger.SPLASH_INTERVAL);
+            }
+        });
     }
 
     @Override
     protected void handleMsg(Message msg) {
         int what = msg.what;
         if(what == FLAG_MSG_DELAY){
-            IntentUtils.startMainActivity(this);
+            IntentUtils.startMainActivity(this,false);
             finish();
         }
     }

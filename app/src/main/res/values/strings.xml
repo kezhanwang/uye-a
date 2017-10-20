@@ -39,6 +39,7 @@
     <string name="myinfo_title">个人中心</string>
     <string name="myinfo_itemview_cache_clean">清除缓存</string>
     <string name="myinfo_itemview_contact_us">联系我们</string>
+    <string name="myinfo_cache_clear_succ">缓存清理成功~</string>
 
     <!--登录-->
     <string name="login_title">登录</string>
@@ -53,6 +54,8 @@
     <string name="login_tips_input_verify_code">请输入手机验证码</string>
     <string name="login_tips_input_pwd">请输入密码</string>
     <string name="login_tips_succ">登录成功</string>
+    <string name="login_logouting">退出登录中...</string>
+    <string name="login_logout">退出登录</string>
 
     <!--注册-->
     <string name="reg_header_title">注册</string>
@@ -86,6 +89,8 @@
     <string name="cash_data_check_tips_need_contact">请填写完成联络方式</string>
     <string name="data_check_experience_title">个人经历</string>
     <string name="data_check_experience_content">学习就业的经历</string>
+    <string name="data_check_tips_identity_id">请完成身份认证~</string>
+    <string name="data_check_tips_identity_contacts_upload">请完成上传通讯录~</string>
 
     <!--手机通讯录-->
     <string name="contactlist_requesting">手机通讯信息获取中...</string>

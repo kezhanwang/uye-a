@@ -4,6 +4,8 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.bjzt.uye.R;
 import com.bjzt.uye.entity.PHomeOrderEntity;
@@ -18,7 +20,7 @@ import butterknife.ButterKnife;
  * Created by billy on 2017/10/19.
  */
 
-public class HomeOrderInfoView extends BaseItemView<PHomeOrderEntity> implements NoConfusion{
+public class HomeOrderInfoView extends BaseItemView<PHomeOrderEntity> implements NoConfusion, View.OnClickListener{
 
     @BindView(R.id.txtview_max_payout)
     TextView mTxtMaxP;
@@ -26,6 +28,10 @@ public class HomeOrderInfoView extends BaseItemView<PHomeOrderEntity> implements
     TextView mTxtOrderCnt;
     @BindView(R.id.txt_payed_tution)
     TextView mTxtPayOut;
+    @BindView(R.id.home_order_rela_left)
+    RelativeLayout relaLeft;
+    @BindView(R.id.home_order_rela_right)
+    RelativeLayout relaRight;
 
     private PHomeOrderEntity mEntity;
     private IItemListener mListener;
@@ -62,6 +68,9 @@ public class HomeOrderInfoView extends BaseItemView<PHomeOrderEntity> implements
         LayoutInflater li = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         li.inflate(R.layout.home_orderinfo_view_layout,this,true);
         ButterKnife.bind(this);
+
+        relaLeft.setOnClickListener(this);
+        relaRight.setOnClickListener(this);
     }
 
     public void setInfo(String strMax,String orderCnt,String payOut){
@@ -72,5 +81,10 @@ public class HomeOrderInfoView extends BaseItemView<PHomeOrderEntity> implements
         Context mContext = getContext();
         String strPayout = mContext.getResources().getString(R.string.common_money_info,payOut);
         mTxtPayOut.setText(strPayout);
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

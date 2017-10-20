@@ -325,6 +325,12 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
                 }else if(obj == photoViewBack){
                     showDialogPicSelect(REQ_CODE_ID_BACK);
                 }
+            }else if(tag == BindCardPhotoView.TAG_TYPE_CLOSE){
+                if(obj == photoViewFront){
+                    photoViewFront.updateBitmap(null,true);
+                }else if(obj == photoViewBack){
+                    photoViewBack.updateBitmap(null,true);
+                }
             }
         }
     };

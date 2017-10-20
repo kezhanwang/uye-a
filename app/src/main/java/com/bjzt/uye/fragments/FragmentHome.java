@@ -13,6 +13,7 @@ import android.widget.ScrollView;
 import com.bjzt.uye.R;
 import com.bjzt.uye.adapter.AdapterHome;
 import com.bjzt.uye.adapter.HomeAdAdapter;
+import com.bjzt.uye.controller.LBSController;
 import com.bjzt.uye.entity.PAdEntity;
 import com.bjzt.uye.entity.PHomeOrderEntity;
 import com.bjzt.uye.fragments.base.BaseFragment;
@@ -28,6 +29,8 @@ import com.bjzt.uye.views.component.HomeHeader;
 import com.bjzt.uye.views.component.HomeHeaderView;
 import com.bjzt.uye.views.component.HomeLocView;
 import com.bjzt.uye.views.component.HomeOrderInfoView;
+import com.common.controller.LoginController;
+import com.common.listener.ILoginListener;
 import com.common.msglist.MsgPage;
 import com.common.msglist.NLPullRefreshView;
 import com.common.msglist.base.BaseItemListener;
@@ -49,14 +52,6 @@ public class FragmentHome extends BaseFragment{
 
     @BindView(R.id.header)
     HomeHeader mHeader;
-//    @BindView(R.id.home_scrollview)
-//    ScrollView mScrollView;
-//    @BindView(R.id.headerview)
-//    HomeHeaderView mHeaderView;
-//    @BindView(R.id.home_orderinfo)
-//    HomeOrderInfoView mHomeOrderInfo;
-//    @BindView(R.id.home_loc)
-//    HomeLocView mHomeLocView;
     @BindView(R.id.home_msgpage)
     MsgPage mMsgPage;
     @BindView(R.id.home_emptyview)
@@ -82,8 +77,37 @@ public class FragmentHome extends BaseFragment{
         mMsgPage.setVisibility(View.GONE);
         mEmptyView.setVisibility(View.VISIBLE);
         mEmptyView.showLoadingState();
+        LBSController.getInstance().registerListener(mLBSListener);
+        LoginController.getInstance().registerListener(mLoginListener);
+
         int seqNo = ProtocalManager.getInstance().reqHomeInfo(getCallBack());
         mReqList.add(seqNo);
+    }
+
+    private ILoginListener mLoginListener = new ILoginListener() {
+        @Override
+        public void loginSucc() {
+            refreshListener.onRefresh(null);
+        }
+
+        @Override
+        public void logout() {
+            refreshListener.onRefresh(null);
+        }
+    };
+
+    private LBSController.ILBSListener mLBSListener = new LBSController.ILBSListener() {
+        @Override
+        public void onLBSNotify() {
+            refreshListener.onRefresh(null);
+        }
+    };
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        LBSController.getInstance().unRegisterListener(mLBSListener);
+        LoginController.getInstance().unRegisterListener(mLoginListener);
     }
 
     private IRefreshListener refreshListener = new IRefreshListener() {
@@ -128,6 +152,8 @@ public class FragmentHome extends BaseFragment{
                 RspHomeEntity rspEntity = (RspHomeEntity) rsp;
                 if(isSucc){
                     if(rspEntity.mEntity != null){
+                        //set loc
+                        LBSController.getInstance().setLocStr(rspEntity.mEntity.loaction);
                         mEmptyView.loadSucc();
                         mMsgPage.setVisibility(View.VISIBLE);
                         List<BaseItemListener> mList = AdapterHome.buildList(rspEntity.mEntity);
@@ -166,4 +192,5 @@ public class FragmentHome extends BaseFragment{
             }
         });
     }
+
 }

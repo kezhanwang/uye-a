@@ -90,10 +90,12 @@ public abstract class BaseListAdapter<T> extends BaseAdapter {
 	 */
 	public void updatePageFlag(PPageEntity entity){
 		this.mPageEntity = entity;
-		int hasNext = this.mPageEntity.hasnext;
-		if(hasNext > 0){
+		boolean hasNext = this.mPageEntity.hasNext();
+		if(hasNext){
+			setType(BaseListAdapter.ADAPTER_TYPE_NORMAL);
 			updateState(MsgPageBottomView.STATE_LISTVIEW_INIT);
 		}else{
+			setType(BaseListAdapter.ADAPTER_TYPE_NO_BOTTOM);
 			updateState(MsgPageBottomView.STATE_LISTVIEW_NOMORE);
 		}
 	}

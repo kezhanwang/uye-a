@@ -1,19 +1,32 @@
 package com.bjzt.uye.fragments;
 
+import android.app.Activity;
+import android.icu.text.RelativeDateTimeFormatter;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.bjzt.uye.R;
+import com.bjzt.uye.activity.LoginActivity;
+import com.bjzt.uye.activity.MainActivity;
+import com.bjzt.uye.controller.CacheController;
+import com.bjzt.uye.controller.LBSController;
+import com.bjzt.uye.global.Global;
 import com.bjzt.uye.listener.IHeaderListener;
 import com.bjzt.uye.listener.IItemListener;
+import com.bjzt.uye.util.IntentUtils;
 import com.bjzt.uye.views.component.MyInfoHeader;
 import com.bjzt.uye.fragments.base.BaseFragment;
 import com.bjzt.uye.views.component.MyInfoHeaderView;
 import com.bjzt.uye.views.component.MyInfoItemView;
+import com.common.controller.LoginController;
+import com.common.file.SharePreLogin;
+import com.common.listener.ILoginListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,7 +36,7 @@ import butterknife.ButterKnife;
  * Created by billy on 2017/10/13.
  */
 
-public class FragmentMyInfo extends BaseFragment{
+public class FragmentMyInfo extends BaseFragment implements  View.OnClickListener{
 
     @BindView(R.id.myinfo_header)
     MyInfoHeader mHeader;
@@ -35,6 +48,10 @@ public class FragmentMyInfo extends BaseFragment{
     MyInfoItemView mItemContactUs;
     @BindView(R.id.btn_login)
     Button btnLogin;
+
+    private final int FLAG_LOGOUT = 10;
+    private final int FLAG_HIDE_LOADING = 11;
+    private final int FLAG_TOAST_SHOW = 12;
 
     @Nullable
     @Override
@@ -49,14 +66,16 @@ public class FragmentMyInfo extends BaseFragment{
         mHeader.setIListener(new IHeaderListener() {
             @Override
             public void onRightClick() {
-
+                String tips = "开发中~";
+                showToast(tips);
             }
         });
 
         mHeaderView.setIListener(new IItemListener() {
             @Override
             public void onItemClick(Object obj, int tag) {
-
+                String tips = "开发中~";
+                showToast(tips);
             }
         });
 
@@ -64,7 +83,13 @@ public class FragmentMyInfo extends BaseFragment{
         mItemCleanCache.setIListener(new IItemListener() {
             @Override
             public void onItemClick(Object obj, int tag) {
-
+                String tips = "缓存清理中...";
+                Activity ac = getActivity();
+                if(ac != null && ac instanceof  MainActivity){
+                    MainActivity mainAc = (MainActivity) ac;
+                    mainAc.showLoading(tips);
+                }
+                Global.postDelay(rCacheClear);
             }
         });
         mItemCleanCache.showBottomLine(true);
@@ -77,13 +102,127 @@ public class FragmentMyInfo extends BaseFragment{
             }
         });
 
-        btnLogin.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
+        btnLogin.setOnClickListener(this);
+        LBSController.getInstance().registerListener(mLBSListener);
+        LoginController.getInstance().registerListener(mLoginListener);
+        refresh();
+    }
 
+    private void refresh(){
+        boolean isLogin = LoginController.getInstance().isLogin();
+        if(isLogin){
+            String btnTxt = getResources().getString(R.string.login_logout);
+            btnLogin.setText(btnTxt);
+            String faceUrl = LoginController.getInstance().getFaceUrl();
+            String nickName = LoginController.getInstance().getNickName();
+            String strLoc = LBSController.getInstance().getLocStr();
+            mHeaderView.setInfo(faceUrl,nickName,strLoc);
+        }else{
+            String btnTxt = getResources().getString(R.string.login_title);
+            btnLogin.setText(btnTxt);
+            mHeaderView.setInfo("","游客","位置");
+        }
+    }
+
+    private ILoginListener mLoginListener = new ILoginListener() {
+        @Override
+        public void loginSucc() {
+            refresh();
+        }
+
+        @Override
+        public void logout() {
+            refresh();
+        }
+    };
+
+    LBSController.ILBSListener mLBSListener = new LBSController.ILBSListener() {
+        @Override
+        public void onLBSNotify() {
+            refresh();
+        }
+    };
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        LBSController.getInstance().unRegisterListener(mLBSListener);
+        LoginController.getInstance().unRegisterListener(mLoginListener);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v == this.btnLogin){
+            boolean isLogin = LoginController.getInstance().isLogin();
+            if(isLogin){
+                Activity activity = getActivity();
+                if(activity != null && activity instanceof  MainActivity){
+                    String tips = getResources().getString(R.string.login_logouting);
+                    MainActivity mainAc = (MainActivity) activity;
+                    mainAc.showLoading(tips);
+                    Global.postDelay(rLogout);
+                }
+            }else{
+                IntentUtils.startLoginActivity(getActivity(), LoginActivity.TYPE_PHONE_VERIFY_CODE, MainActivity.REQ_CODE_LOGIN);
             }
-        });
+        }
+    }
 
+    private Runnable rLogout = new Runnable() {
+        @Override
+        public void run() {
+            LoginController.getInstance().logout();
+            Message msg = Message.obtain();
+            msg.what = FLAG_LOGOUT;
+            sendMsg(msg);
+        }
+    };
+
+    private Runnable rCacheClear = new Runnable() {
+        @Override
+        public void run() {
+            CacheController.getInstance().clearCache();
+            Message msg = Message.obtain();
+            msg.what = FLAG_HIDE_LOADING;
+            sendMsg(msg);
+
+            msg = Message.obtain();
+            msg.what = FLAG_TOAST_SHOW;
+            msg.obj = getResources().getString(R.string.myinfo_cache_clear_succ);
+            sendMsg(msg);
+        }
+    };
+
+    @Override
+    protected void handleMsg(Message msg) {
+        int what = msg.what;
+        switch(what){
+            case FLAG_LOGOUT:
+                Activity activity = getActivity();
+                if(activity != null && activity instanceof  MainActivity){
+                    MainActivity mainAc = (MainActivity) activity;
+                    mainAc.hideLoadingDialog();
+                }
+                LoginController.getInstance().notifyLogout();
+                break;
+            case FLAG_HIDE_LOADING:
+                activity = getActivity();
+                if(activity != null && activity instanceof  MainActivity){
+                    MainActivity mainAc = (MainActivity) activity;
+                    mainAc.hideLoadingDialog();
+                }
+                break;
+            case FLAG_TOAST_SHOW:
+                String tips = (String) msg.obj;
+                if(!TextUtils.isEmpty(tips)){
+                    activity = getActivity();
+                    if(activity != null && activity instanceof  MainActivity){
+                        MainActivity mainAc = (MainActivity) activity;
+                        mainAc.showToast(tips);
+                    }
+                }
+                break;
+        }
     }
 
 }

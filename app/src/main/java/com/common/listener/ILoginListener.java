@@ -7,4 +7,5 @@ package com.common.listener;
 public abstract class ILoginListener {
     abstract public void loginSucc();
     public void loginFailure(){};
+    abstract  public void logout();
 }

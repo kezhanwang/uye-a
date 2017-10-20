@@ -81,8 +81,9 @@ public class IntentUtils {
      * @param mContext
      * @param requestCode
      */
-    public static final void startDataCheckActivity(Activity mContext,int requestCode){
+    public static final void startDataCheckActivity(Activity mContext,String orgId,int requestCode){
         Intent intent = new Intent(mContext, DataCheckActivity.class);
+        intent.putExtra(IntentUtils.PARA_KEY_PUBLIC,orgId);
         mContext.startActivityForResult(intent,requestCode);
     }
 

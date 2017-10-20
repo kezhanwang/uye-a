@@ -47,4 +47,14 @@ public class SharePreLogin {
         }
         return pEntity;
     }
+
+    /**
+     * 清除文件信息
+     */
+    public void clearInfo(){
+        SharedPreferences sp = Global.getContext().getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.clear();
+        editor.commit();
+    }
 }

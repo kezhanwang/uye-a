@@ -57,6 +57,10 @@ public class SearchHeader extends RelativeLayout implements NoConfusion, View.On
                     if(mListener != null){
                         mListener.onTxtChanged(strInfo);
                     }
+                }else{
+                    if(mListener != null){
+                        mListener.onTxtChanged(null);
+                    }
                 }
             }
         });
@@ -79,6 +83,14 @@ public class SearchHeader extends RelativeLayout implements NoConfusion, View.On
         editTxt.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
         //隐藏键盘
         hideKeyBoard();
+    }
+
+    public String getContentTxt(){
+        return this.editTxt.getText();
+    }
+
+    public void setContentTxt(String str){
+        this.editTxt.setText(str);
     }
 
     public void setHint(String strHint){

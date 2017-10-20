@@ -116,7 +116,7 @@ public class TestActivity extends BaseActivity{
         btnDataCheck.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                IntentUtils.startDataCheckActivity(TestActivity.this,0x10);
+                IntentUtils.startDataCheckActivity(TestActivity.this,"",0x10);
             }
         });
 

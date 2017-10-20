@@ -29,6 +29,8 @@ public class MainActivity extends BaseActivity {
     private ArrayList<String> curTabNames = new ArrayList<>();
     private String KEY_IDNEX = "key_index";
 
+    public static final int REQ_CODE_LOGIN = 0x10;
+
     @Override
     protected int getLayoutID() {
         return R.layout.activity_main;

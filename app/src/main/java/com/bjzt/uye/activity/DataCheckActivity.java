@@ -60,6 +60,9 @@ public class DataCheckActivity extends BaseActivity implements View.OnClickListe
     private DialogConfirmSingle mDialogCfgSingle;
 
     private final int REQ_IDENTITY = 10;
+    private final int REQ_ORDERINFO = 11;
+
+    private String orgId;
 
     @Override
     protected int getLayoutID() {
@@ -203,21 +206,6 @@ public class DataCheckActivity extends BaseActivity implements View.OnClickListe
             hideLoadingDialog();
             if(rsp instanceof  RspUInfoEntity){
                 RspUInfoEntity rspEntity = (RspUInfoEntity) rsp;
-                if(isSucc){
-
-                }else{
-
-                }
-            }else if(rsp instanceof RspUploadPhoneListEntity){
-                RspUploadPhoneListEntity rspEntity = (RspUploadPhoneListEntity) rsp;
-                if(isSucc){
-                    itemPhoneContact.updateTailContent(true);
-                }else{
-                    String tips = StrUtil.getErrorTipsByCode(errorCode,rspEntity);
-                    showToast(tips);
-                }
-            }else if(rsp instanceof  RspUInfoEntity){
-                RspUInfoEntity rspEntity = (RspUInfoEntity) rsp;
                 if(rspEntity != null){
                     if(rspEntity.mEntity != null){
                         itemIDentity.updateTailContent(rspEntity.mEntity.identity);
@@ -229,35 +217,68 @@ public class DataCheckActivity extends BaseActivity implements View.OnClickListe
                     String tips = StrUtil.getErrorTipsByCode(errorCode,rspEntity);
                     showToast(tips);
                 }
+            }else if(rsp instanceof RspUploadPhoneListEntity){
+                RspUploadPhoneListEntity rspEntity = (RspUploadPhoneListEntity) rsp;
+                if(isSucc){
+                    itemPhoneContact.updateTailContent(true);
+                }else{
+                    String tips = StrUtil.getErrorTipsByCode(errorCode,rspEntity);
+                    showToast(tips);
+                }
             }
         }
     }
 
     @Override
     protected void initExtras(Bundle bundle) {
-
+        Intent intent = getIntent();
+        this.orgId = intent.getStringExtra(IntentUtils.PARA_KEY_PUBLIC);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         hideDialogSingle();
+        this.overridePendingTransition(R.anim.activity_left_in, R.anim.activity_right_out);
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        //关闭窗体动画显示
+        this.overridePendingTransition(R.anim.activity_left_in, R.anim.activity_right_out);
     }
 
     @Override
     public void onClick(View view) {
         if(view == this.btnOk){
-
+            boolean isIDIDentity = itemIDentity.isIDentity();
+            boolean isContactListIDentity = itemPhoneContact.isIDentity();
+            if(!isIDIDentity){
+                String tips = getResources().getString(R.string.data_check_tips_identity_id);
+                showToast(tips);
+                return;
+            }
+            if(!isContactListIDentity){
+                String tips = getResources().getString(R.string.data_check_tips_identity_contacts_upload);
+                showToast(tips);
+                return;
+            }
+            IntentUtils.startOrderInfoActivity(DataCheckActivity.this,orgId,REQ_ORDERINFO);
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == Activity.RESULT_OK){
+        if(resultCode == Activity.RESULT_OK){
             switch(requestCode){
                 case REQ_IDENTITY:
                     refresh();
+                    break;
+                case REQ_ORDERINFO:
+                    setResult(Activity.RESULT_OK);
+                    finish();
                     break;
             }
         }
@@ -267,5 +288,10 @@ public class DataCheckActivity extends BaseActivity implements View.OnClickListe
         showLoading();
         int seqNo = ProtocalManager.getInstance().reqUInfoDataCheck(getCallBack());
         mReqList.add(seqNo);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 }

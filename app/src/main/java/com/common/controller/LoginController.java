@@ -21,6 +21,7 @@ public class LoginController {
     private static LoginController instance;
     public PLoginEntity pEntity;
     private Set<ILoginListener> mSet;
+    private boolean isLoaded = false;
 
     private LoginController(){
         mSet = new HashSet<>();
@@ -74,11 +75,18 @@ public class LoginController {
      * @return
      */
     public boolean isLogin(){
+        checkLoad();
         String cookie = getCookie();
         if(!TextUtils.isEmpty(cookie)){
             return true;
         }
         return false;
+    }
+
+    public void checkLoad(){
+        if(!isLoaded){
+            loadInfo();
+        }
     }
 
     public String getUid(){
@@ -110,6 +118,7 @@ public class LoginController {
         if(pLoginEntity != null){
             this.pEntity = pLoginEntity;
         }
+        isLoaded = true;
     }
 
     private void notifySucc(){
@@ -122,5 +131,39 @@ public class LoginController {
 
     public long getMillseconds(){
         return System.currentTimeMillis();
+    }
+
+    public String getNickName(){
+        if(this.pEntity != null){
+            return this.pEntity.username;
+        }
+        return null;
+    }
+
+    public String getFaceUrl(){
+        if(this.pEntity != null){
+            return this.pEntity.head_portrait;
+        }
+        return null;
+    }
+
+    /***
+     * 退出登录
+     */
+    public void logout(){
+        this.pEntity = null;
+        SharePreLogin mSharePre = new SharePreLogin();
+        mSharePre.clearInfo();
+    }
+
+    /**
+     * 通知已经退出登录
+     */
+    public void notifyLogout(){
+        for(ILoginListener mListener : mSet){
+            if(mListener != null){
+                mListener.logout();
+            }
+        }
     }
 }

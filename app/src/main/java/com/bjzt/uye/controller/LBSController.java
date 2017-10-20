@@ -11,7 +11,9 @@ import com.bjzt.uye.listener.ILocListener;
 import com.common.common.MyLog;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by billy on 2017/10/10.
@@ -29,12 +31,31 @@ public class LBSController {
     private List<Integer> mReqList = null;
     private ILocListener mLocListener;
     private final int TIME_DELAY = 10 * 1000;
+    public String strLoc;
+    private Set<ILBSListener> mSet = null;
 
     private LBSController() {
         // TODO Auto-generated constructor stub
         mLocationClient = new LocationClient(Global.mContext);     //声明LocationClient类
         mLocationClient.registerLocationListener(myListener);    //注册监听函数
         mReqList = new ArrayList<Integer>();
+        mSet = new HashSet<>();
+    }
+
+    public void registerListener(ILBSListener mListener){
+        mSet.add(mListener);
+    }
+
+    public void unRegisterListener(ILBSListener mListener){
+        mSet.remove(mListener);
+    }
+
+    private void notifyLBS(){
+        for(ILBSListener mListener : mSet){
+            if(mListener != null){
+                mListener.onLBSNotify();
+            }
+        }
     }
 
     public synchronized  static final LBSController getInstance(){
@@ -42,6 +63,14 @@ public class LBSController {
             instance = new LBSController();
         }
         return instance;
+    }
+
+    public void setLocStr(String strLoc){
+        this.strLoc = strLoc;
+    }
+
+    public String getLocStr(){
+        return this.strLoc;
     }
 
     public class MyLocationListener implements BDLocationListener{
@@ -59,6 +88,8 @@ public class LBSController {
                 }
                 Global.removeDelay(rStop);
                 Global.removeDelay(rTimeOut);
+
+                notifyLBS();
 
                 Global.postDelay(new Runnable() {
                     @Override
@@ -132,4 +163,10 @@ public class LBSController {
     public String getLo(){
         return this.lo;
     }
+
+    public static interface ILBSListener{
+        public void onLBSNotify();
+    }
+
+
 }

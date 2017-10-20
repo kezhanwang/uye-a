@@ -36,7 +36,10 @@ public class BankListItemView extends BaseItemView<PBankEntity> implements View.
         //set icon
         String imgUrl = this.mEntity.icon;
         if(!TextUtils.isEmpty(imgUrl)){
+            this.mImgIcon.setVisibility(View.VISIBLE);
             PicController.getInstance().showPic(mImgIcon,imgUrl);
+        }else{
+            this.mImgIcon.setVisibility(View.GONE);
         }
         //set name
         String strName = this.mEntity.open_bank;

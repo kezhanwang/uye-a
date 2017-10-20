@@ -44,11 +44,11 @@ public abstract class BaseActivity extends FragmentActivity {
         ButterKnife.bind(this);
     }
 
-    protected void showToast(String str){
+    public void showToast(String str){
         showToast(str,Toast.LENGTH_SHORT);
     }
 
-    protected void showToast(String str,int duration){
+    public void showToast(String str,int duration){
         if(!TextUtils.isEmpty(str)){
             if(toast != null){
                 toast.cancel();
@@ -72,14 +72,14 @@ public abstract class BaseActivity extends FragmentActivity {
         }
     }
 
-    protected void hideLoadingDialog(){
+    public void hideLoadingDialog(){
         if(mLoadingDialog != null){
             mLoadingDialog.dismiss();
             mLoadingDialog = null;
         }
     }
 
-    protected void showLoading(String msg,boolean isCancle){
+    public void showLoading(String msg,boolean isCancle){
         hideLoadingDialog();
         if(mLoadingDialog == null){
             mLoadingDialog = new MLoadingDialog(this,R.style.MyDialogBg);
@@ -96,23 +96,23 @@ public abstract class BaseActivity extends FragmentActivity {
     }
 
 
-    protected void showLoading(){
+    public void showLoading(){
         String tips = getResources().getString(R.string.common_request);
         showLoading(tips,true);
     }
 
-    protected void showLoading(String tips){
+    public void showLoading(String tips){
         showLoading(tips,true);
     }
 
-    protected boolean isDialogShowing(){
+    public boolean isDialogShowing(){
         if(this.mLoadingDialog != null && this.mLoadingDialog.isShowing()) {
             return true;
         }
         return false;
     }
 
-    protected void setLoadingTips(String tips){
+    public void setLoadingTips(String tips){
         if(this.mLoadingDialog != null && this.mLoadingDialog.isShowing()){
             if(!TextUtils.isEmpty(tips)){
                 mLoadingDialog.setMyTips(tips);
@@ -123,7 +123,6 @@ public abstract class BaseActivity extends FragmentActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        hideToast();
         uiHandler.removeCallbacksAndMessages(null);
     }
 

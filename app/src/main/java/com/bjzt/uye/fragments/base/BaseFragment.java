@@ -2,6 +2,8 @@ package com.bjzt.uye.fragments.base;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -75,4 +77,30 @@ public class BaseFragment extends Fragment {
     }
 
     protected void onRsp(Object rsp, boolean isSucc, int errorCode, int seqNo, int src){};
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        uiHandler.removeCallbacksAndMessages(null);
+    }
+
+    private Handler uiHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            if(!isRemoving()){
+                handleMsg(msg);
+            }
+        }
+    };
+
+    protected void handleMsg(Message msg){
+
+    }
+
+    /**
+     * @param msg
+     */
+    protected void sendMsg(Message msg){
+        uiHandler.sendMessage(msg);
+    }
 }

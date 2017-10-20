@@ -123,7 +123,7 @@
         <activity
             android:name=".activity.SearchActivity"
             android:screenOrientation="portrait"
-            android:launchMode="singleTask"
+            android:launchMode="singleTop"
             android:theme="@style/Theme.Youye_bottom"
             ></activity>
 
@@ -131,7 +131,7 @@
         <activity
             android:name=".activity.OrderInfoActivity"
             android:screenOrientation="portrait"
-            android:launchMode="singleTask"
+            android:launchMode="singleTop"
             android:theme="@style/Theme.Youye"
             android:windowSoftInputMode="stateAlwaysHidden"
             ></activity>

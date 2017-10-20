@@ -36,6 +36,7 @@ public class DataCheckItemView extends RelativeLayout implements NoConfusion,Vie
     private TextView txtTail;
 
     private IItemListener mItemListener;
+    private boolean isIDentity;
 
     public DataCheckItemView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -136,6 +137,7 @@ public class DataCheckItemView extends RelativeLayout implements NoConfusion,Vie
      * @param isVerify
      */
     public void updateTailContent(boolean isVerify){
+        this.isIDentity = isVerify;
         String str = "";
         int c = 0;
         if(isVerify){
@@ -153,5 +155,13 @@ public class DataCheckItemView extends RelativeLayout implements NoConfusion,Vie
             txtTail.setText(str);
             txtTail.setTextColor(c);
         }
+    }
+
+    /**
+     * 是否已认证
+     * @return
+     */
+    public boolean isIDentity(){
+        return this.isIDentity;
     }
 }

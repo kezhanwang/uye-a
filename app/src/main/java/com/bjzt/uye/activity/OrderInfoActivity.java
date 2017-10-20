@@ -322,8 +322,6 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
             }else if(rsp instanceof RspOrderSubmitEntity) {
                 RspOrderSubmitEntity rspEntity = (RspOrderSubmitEntity) rsp;
                 if (isSucc) {
-                    String tips = getResources().getString(R.string.common_request_succ);
-                    showToast(tips);
                     setResult(Activity.RESULT_OK);
                     finish();
                 } else {
@@ -360,7 +358,6 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
     protected void initExtras(Bundle bundle) {
         Intent intent = getIntent();
         this.orgId = intent.getStringExtra(IntentUtils.PARA_KEY_PUBLIC);
-        this.orgId = "10049";
     }
 
     @Override

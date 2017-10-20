@@ -111,7 +111,7 @@
                 android:layout_marginBottom="42dp"
                 android:gravity="center"
                 android:background="@drawable/btn_login_selector"
-                android:text="@string/login_title"
+                android:text="@string/complete"
                 android:textColor="@color/common_white"
                 android:textSize="18.5sp"
                 />

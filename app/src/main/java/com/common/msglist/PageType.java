@@ -13,7 +13,7 @@ public class PageType {
 	 */
 	public static final int getNextPage(PPageEntity page){
 		if(page != null){
-			return page.p + 1;
+			return page.page + 1;
 		}
 		return FIRST_PAGE;
 	}

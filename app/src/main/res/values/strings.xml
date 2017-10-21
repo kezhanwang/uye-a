@@ -4,6 +4,8 @@
     <string name="cancle">取消</string>
     <string name="complete">完成</string>
     <string name="name">姓名</string>
+    <string name="next">下一步</string>
+
 
     <string name="common_default">---</string>
     <string name="common_request">数据请求中...</string>
@@ -43,7 +45,7 @@
     <string name="myinfo_itemview_contact_us">联系我们</string>
     <string name="myinfo_cache_clear_succ">缓存清理成功~</string>
     <string name="myinfo_kf_title">工作时间：每天9：00——20：00</string>
-
+    <string name="myinfo_phone_nocall">系统未安装拨号电话软件~</string>
 
     <!--登录-->
     <string name="login_title">登录</string>
@@ -160,5 +162,9 @@
     <!--UYe相关-->
     <string name="uye_order_empty_tips">订单空空如也!\n让U业帮为您的大好前程出把力吧~</string>
 
+
+    <!--问卷调查-->
+    <string name="qa_title">就业调查</string>
+    <string name="qa_select_tips">亲，请勾选完成调查问卷~</string>
 
 </resources>

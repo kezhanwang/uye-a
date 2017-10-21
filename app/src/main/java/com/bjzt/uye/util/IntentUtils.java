@@ -12,6 +12,7 @@ import com.bjzt.uye.activity.DataCheckActivity;
 import com.bjzt.uye.activity.LoginActivity;
 import com.bjzt.uye.activity.MainActivity;
 import com.bjzt.uye.activity.OrderInfoActivity;
+import com.bjzt.uye.activity.QAActivity;
 import com.bjzt.uye.activity.RegisterActivity;
 import com.bjzt.uye.activity.SearchActivity;
 import com.bjzt.uye.activity.WebViewActivity;
@@ -183,5 +184,16 @@ public class IntentUtils {
             ee.printStackTrace();;
         }
         return isSucc;
+    }
+
+    /***
+     * 打开就业调查
+     * @param mContext
+     * @param requestCode
+     */
+    public static final void startQAActivity(Activity mContext,String orgId,int requestCode){
+        Intent intent = new Intent(mContext, QAActivity.class);
+        intent.putExtra(IntentUtils.PARA_KEY_PUBLIC,orgId);
+        mContext.startActivityForResult(intent,requestCode);
     }
 }

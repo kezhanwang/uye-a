@@ -3,6 +3,7 @@ package com.bjzt.uye.http;
 import android.text.TextUtils;
 
 import com.bjzt.uye.entity.PBankEntity;
+import com.bjzt.uye.entity.VQAItemEntity;
 import com.bjzt.uye.global.Global;
 import com.bjzt.uye.http.base.ReqBaseEntity;
 import com.bjzt.uye.http.base.TaskCommonV2;
@@ -19,6 +20,8 @@ import com.bjzt.uye.http.req.ReqLogoutEntity;
 import com.bjzt.uye.http.req.ReqOrderInfoEntity;
 import com.bjzt.uye.http.req.ReqOrderSubmitEntity;
 import com.bjzt.uye.http.req.ReqPhoneVerifyEntity;
+import com.bjzt.uye.http.req.ReqQACfgEnttiy;
+import com.bjzt.uye.http.req.ReqQASubmitEntity;
 import com.bjzt.uye.http.req.ReqRegEntity;
 import com.bjzt.uye.http.req.ReqSearchEntity;
 import com.bjzt.uye.http.req.ReqSearchHotWEntity;
@@ -322,6 +325,29 @@ public class ProtocalManager {
      */
     public int req400Contact(ICallBack<Object> callBack){
         Req400ContactEntity reqEntity = new Req400ContactEntity();
+        return addTask(reqEntity,callBack);
+    }
+
+    /**
+     * 获取问答配置
+     * @param callBack
+     * @return
+     */
+    public int reqQACfg(String orgId,ICallBack<Object> callBack){
+        ReqQACfgEnttiy reqEntity = new ReqQACfgEnttiy();
+        reqEntity.org_id = orgId;
+        return addTask(reqEntity,callBack);
+    }
+
+    /**
+     * 提交问答结果
+     * @param mList
+     * @param callBack
+     * @return
+     */
+    public int reqQASubmit(List<VQAItemEntity> mList,ICallBack<Object> callBack){
+        ReqQASubmitEntity reqEntity = new ReqQASubmitEntity();
+        reqEntity.parseInfo(mList);
         return addTask(reqEntity,callBack);
     }
 }

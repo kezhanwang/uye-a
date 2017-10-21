@@ -164,7 +164,11 @@ public class FragmentMyInfo extends BaseFragment implements  View.OnClickListene
             mDialogKF.setDialogClickListener(new DialogPicSelect.DialogClickListener() {
                 @Override
                 public void ItemMiddleClick() {
-                    IntentUtils.startSysCallActivity(mAc,strTel);
+                    boolean isSucc = IntentUtils.startSysCallActivity(mAc,strTel);
+                    if(!isSucc){
+                        String tips = getResources().getString(R.string.myinfo_phone_nocall);
+                        showToast(tips);
+                    }
                 }
             });
             mDialogKF.show();

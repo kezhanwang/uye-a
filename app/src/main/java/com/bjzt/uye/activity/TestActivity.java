@@ -58,6 +58,9 @@ public class TestActivity extends BaseActivity{
     @BindView(R.id.btn_orderinfo)
     Button btnOrderInfo;
 
+    @BindView(R.id.btn_qa)
+    Button btnQA;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -173,6 +176,13 @@ public class TestActivity extends BaseActivity{
             @Override
             public void onClick(View view) {
                 IntentUtils.startOrderInfoActivity(TestActivity.this,"",10);
+            }
+        });
+
+        btnQA.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                IntentUtils.startQAActivity(TestActivity.this,"10049",12);
             }
         });
     }

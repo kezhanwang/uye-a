@@ -178,10 +178,10 @@ public class SearchActivity extends BaseActivity{
                     showToast(tips);
                     break;
                 case SearchItemView.SRC_BTN_OK:
-                    //        this.orgId = "10049";
+                    //        this.orgId = "10049"; test code
                     String orgId = "10049";
 //                    orgId = pEntity.org_id;
-                    IntentUtils.startDataCheckActivity(SearchActivity.this,orgId,REQ_DATA_CHECK);
+                    IntentUtils.startQAActivity(SearchActivity.this,orgId,REQ_DATA_CHECK);
                     break;
             }
         }

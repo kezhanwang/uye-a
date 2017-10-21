@@ -52,7 +52,10 @@
             android:theme="@style/Theme.Youye"
             >
 
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
 
@@ -61,11 +64,6 @@
             android:launchMode="standard"
             android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"
             >
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
 
@@ -134,6 +132,14 @@
             android:launchMode="singleTop"
             android:theme="@style/Theme.Youye"
             android:windowSoftInputMode="stateAlwaysHidden"
+            ></activity>
+
+        <!--就业调查-->
+        <activity
+            android:name=".activity.QAActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.Youye"
             ></activity>
 
     <!--===========================================相关配置SDK============================ -->

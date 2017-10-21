@@ -1,5 +1,6 @@
 package com.bjzt.uye.http;
 
+import com.bjzt.uye.http.rsp.Rsp400ContactEntity;
 import com.bjzt.uye.http.rsp.RspFaceVerifyCfgEntity;
 import com.bjzt.uye.http.rsp.RspIDentityCfgEntity;
 import com.bjzt.uye.http.rsp.RspIDentityInfoEntity;
@@ -48,6 +49,7 @@ public class HttpCommon {
     public static final String URL_IDENTITY_PIC = "/app/identity/pic";          //获取云慧眼图片
     public static final String URL_ORDERINFO = "/app/insured/config";           //获取订单配置
     public static final String URL_ORDER_SUBMIT = "/app/insured/submit";        //保单提交
+    public static final String URL_400_CONTACT = "/common/get400";              //400电话
 
     static{
         //请求定位城市
@@ -84,7 +86,8 @@ public class HttpCommon {
         mMap.put(URL_ORDERINFO, RspOrderInfoEntity.class);
         //保单提交
         mMap.put(URL_ORDER_SUBMIT,RspOrderSubmitEntity.class);
-
+        //400电话
+        mMap.put(URL_400_CONTACT, Rsp400ContactEntity.class);
     }
 
     /***

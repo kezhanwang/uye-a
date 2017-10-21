@@ -7,6 +7,7 @@ import com.bjzt.uye.global.Global;
 import com.bjzt.uye.http.base.ReqBaseEntity;
 import com.bjzt.uye.http.base.TaskCommonV2;
 import com.bjzt.uye.http.listener.ICallBack;
+import com.bjzt.uye.http.req.Req400ContactEntity;
 import com.bjzt.uye.http.req.ReqFaceVerifyCfgEntity;
 import com.bjzt.uye.http.req.ReqIDentityCfgEntity;
 import com.bjzt.uye.http.req.ReqIDentityInfoEntity;
@@ -311,6 +312,16 @@ public class ProtocalManager {
      */
     public int reqHomeInfo(ICallBack<Object> callBack){
         ReqHomeEntity reqEntity = new ReqHomeEntity();
+        return addTask(reqEntity,callBack);
+    }
+
+    /***
+     * 请求400电话配置
+     * @param callBack
+     * @return
+     */
+    public int req400Contact(ICallBack<Object> callBack){
+        Req400ContactEntity reqEntity = new Req400ContactEntity();
         return addTask(reqEntity,callBack);
     }
 }

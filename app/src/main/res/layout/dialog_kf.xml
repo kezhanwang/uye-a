@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <TextView
+        android:id="@+id/textView_dialog_modify_item1"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/modifyDialog_item_height"
+        android:layout_marginBottom="@dimen/modifyDialog_marginBottom"
+        android:background="@drawable/menu_btn_item_top_selector"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textColor="@color/common_green"
+        android:textSize="@dimen/modifyDialog_textSize" />
+
+    <TextView
+        android:id="@+id/textView_dialog_modify_item2"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/modifyDialog_item_height"
+        android:layout_marginBottom="@dimen/modifyDialog_marginBottom"
+        android:background="@drawable/menu_btn_item_middle_selector"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textColor="@color/common_green"
+        android:textSize="@dimen/modifyDialog_textSize" 
+        android:text="tips"
+        />
+    
+	<TextView 
+	    android:id="@+id/textView_dialog_modify_item3"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/modifyDialog_item_height"
+        android:background="@drawable/menu_btn_item_bottom_selector"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textColor="@color/common_green"
+        android:textSize="@dimen/modifyDialog_textSize"/>
+    <TextView
+        android:id="@+id/textView_dialog_modify_cancel"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/modifyDialog_item_height"
+        android:layout_marginBottom="@dimen/modifyDialog_margin"
+        android:layout_marginTop="@dimen/modifyDialog_margin"
+        android:background="@drawable/menu_btn_item_singal_selector"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="@string/cancle"
+        android:textColor="@color/common_font_3"
+        android:textSize="@dimen/modifyDialog_textSize" />
+
+</LinearLayout>

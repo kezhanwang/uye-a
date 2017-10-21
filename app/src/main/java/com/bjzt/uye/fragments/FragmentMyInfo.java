@@ -14,8 +14,11 @@ import android.widget.Button;
 import com.bjzt.uye.R;
 import com.bjzt.uye.activity.LoginActivity;
 import com.bjzt.uye.activity.MainActivity;
+import com.bjzt.uye.activity.dialog.DialogKF;
+import com.bjzt.uye.activity.dialog.DialogPicSelect;
 import com.bjzt.uye.controller.CacheController;
 import com.bjzt.uye.controller.LBSController;
+import com.bjzt.uye.controller.OtherController;
 import com.bjzt.uye.global.Global;
 import com.bjzt.uye.listener.IHeaderListener;
 import com.bjzt.uye.listener.IItemListener;
@@ -52,6 +55,8 @@ public class FragmentMyInfo extends BaseFragment implements  View.OnClickListene
     private final int FLAG_LOGOUT = 10;
     private final int FLAG_HIDE_LOADING = 11;
     private final int FLAG_TOAST_SHOW = 12;
+
+    private DialogKF mDialogKF;
 
     @Nullable
     @Override
@@ -98,7 +103,13 @@ public class FragmentMyInfo extends BaseFragment implements  View.OnClickListene
         mItemContactUs.setIListener(new IItemListener() {
             @Override
             public void onItemClick(Object obj, int tag) {
-
+                String strTel = OtherController.getInstance().getKF();
+                if(!TextUtils.isEmpty(strTel)){
+                    showDialogKF(strTel);
+                }else{
+                    String tips = getResources().getString(R.string.common_cfg_empty);
+                    showToast(tips);
+                }
             }
         });
 
@@ -143,9 +154,34 @@ public class FragmentMyInfo extends BaseFragment implements  View.OnClickListene
         }
     };
 
+    private void showDialogKF(final String strTel){
+        hideDialogKF();
+        final Activity mAc = getActivity();
+        if(mAc != null){
+            mDialogKF = new DialogKF(mAc,R.style.MyDialogBg);
+            mDialogKF.setTel(strTel,strTel);
+            mDialogKF.updateType(DialogKF.TYPE_KF);
+            mDialogKF.setDialogClickListener(new DialogPicSelect.DialogClickListener() {
+                @Override
+                public void ItemMiddleClick() {
+                    IntentUtils.startSysCallActivity(mAc,strTel);
+                }
+            });
+            mDialogKF.show();
+        }
+    }
+
+    private void hideDialogKF(){
+        if(this.mDialogKF != null){
+            this.mDialogKF.dismiss();
+            this.mDialogKF = null;
+        }
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
+        hideDialogKF();
         LBSController.getInstance().unRegisterListener(mLBSListener);
         LoginController.getInstance().unRegisterListener(mLoginListener);
     }

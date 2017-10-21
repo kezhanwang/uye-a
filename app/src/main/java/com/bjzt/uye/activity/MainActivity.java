@@ -8,10 +8,12 @@ import android.widget.TabHost;
 import com.bjzt.uye.R;
 import com.bjzt.uye.activity.base.BaseActivity;
 import com.bjzt.uye.adapter.TabsAdapter;
+import com.bjzt.uye.controller.OtherController;
 import com.bjzt.uye.fragments.FragmentHome;
 import com.bjzt.uye.fragments.FragmentMain;
 import com.bjzt.uye.fragments.FragmentMyInfo;
 import com.bjzt.uye.fragments.FragmentUYe;
+import com.bjzt.uye.global.Global;
 import com.bjzt.uye.views.component.MainTabView;
 import java.util.ArrayList;
 import butterknife.BindView;
@@ -54,7 +56,17 @@ public class MainActivity extends BaseActivity {
         }
         //缓存几个页面
         mViewPager.setOffscreenPageLimit(4);
+
+        Global.postDelay(rDelay);
     }
+
+    private Runnable rDelay = new Runnable() {
+        @Override
+        public void run() {
+            //请求客服电话
+            OtherController.getInstance().requestKFContactInfo();
+        }
+    };
 
     @Override
     protected void initExtras(Bundle bundle) {
@@ -92,6 +104,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Global.removeDelay(rDelay);
     }
 
     @Override

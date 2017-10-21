@@ -2,6 +2,7 @@ package com;
 
 import android.app.Application;
 import com.bjzt.uye.controller.LBSController;
+import com.bjzt.uye.controller.OtherController;
 import com.bjzt.uye.global.Global;
 import com.common.controller.LoginController;
 import com.common.http.HttpEngine;
@@ -36,6 +37,14 @@ public class MApp extends Application{
                 QbSdk.preInit(MApp.this);
             }
         });
+
+        //6秒以后再启动其他
+        Global.postDelay(new Runnable() {
+            @Override
+            public void run() {
+                OtherController.getInstance().loadInfo();
+            }
+        },1000*6);
     }
 
 }

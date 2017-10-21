@@ -30,6 +30,7 @@
     <dimen name="myinfo_headerview_nickname_left_margin">18dp</dimen>
     <dimen name="myinfo_item_height">55dp</dimen>
     <dimen name="myinfo_itemview_top_margin">22dp</dimen>
+    <dimen name="myinfo_textSize_small">15.5sp</dimen>
 
 
     <!--登录页卡-->

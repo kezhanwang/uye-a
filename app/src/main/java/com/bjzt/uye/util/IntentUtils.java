@@ -166,4 +166,22 @@ public class IntentUtils {
         intent.putExtra(IntentUtils.PARA_KEY_PUBLIC,orgID);
         mContext.startActivityForResult(intent,reqCode);
     }
+
+    /**
+     * 跳转到系统拨号界面
+     * @param mContext
+     * @param number
+     */
+    public static final boolean startSysCallActivity(Context mContext,String number){
+        boolean isSucc = false;
+        try {
+            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + number));
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            mContext.startActivity(intent);
+            isSucc = true;
+        }catch(Exception ee){
+            ee.printStackTrace();;
+        }
+        return isSucc;
+    }
 }

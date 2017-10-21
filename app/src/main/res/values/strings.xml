@@ -17,6 +17,8 @@
     <string name="common_course_empty">课程列表无数据</string>
     <string name="common_request_succ">提交成功</string>
     <string name="common_money_info">¥%s</string>
+    <string name="common_cfg_empty">暂无配置信息</string>
+
     <!--tab目录-->
     <string name="tab_main">首页</string>
     <string name="tab_uye">U业</string>
@@ -40,6 +42,8 @@
     <string name="myinfo_itemview_cache_clean">清除缓存</string>
     <string name="myinfo_itemview_contact_us">联系我们</string>
     <string name="myinfo_cache_clear_succ">缓存清理成功~</string>
+    <string name="myinfo_kf_title">工作时间：每天9：00——20：00</string>
+
 
     <!--登录-->
     <string name="login_title">登录</string>
@@ -155,5 +159,6 @@
 
     <!--UYe相关-->
     <string name="uye_order_empty_tips">订单空空如也!\n让U业帮为您的大好前程出把力吧~</string>
+
 
 </resources>

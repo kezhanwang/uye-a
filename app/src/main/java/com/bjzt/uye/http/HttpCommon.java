@@ -10,6 +10,7 @@ import com.bjzt.uye.http.rsp.RspLoginPhoneEntity;
 import com.bjzt.uye.http.rsp.RspLoginPwdEntity;
 import com.bjzt.uye.http.rsp.RspLogoutEntity;
 import com.bjzt.uye.http.rsp.RspOrderInfoEntity;
+import com.bjzt.uye.http.rsp.RspOrderListEntity;
 import com.bjzt.uye.http.rsp.RspOrderSubmitEntity;
 import com.bjzt.uye.http.rsp.RspPhoneVerifyEntity;
 import com.bjzt.uye.http.rsp.RspQACfgEntity;
@@ -54,6 +55,7 @@ public class HttpCommon {
     public static final String URL_400_CONTACT = "/common/get400";              //400电话
     public static final String URL_QA_CFG = "/app/question/config";             //获取问答配置
     public static final String URL_QA_SUBMIT = "/app/question/submit";          //调查问卷提交
+    public static final String URL_ORDER_LIST = "/app/order/list";              //订单列表
 
     static{
         //请求定位城市
@@ -96,6 +98,8 @@ public class HttpCommon {
         mMap.put(URL_QA_CFG, RspQACfgEntity.class);
         //问答提交结果
         mMap.put(URL_QA_SUBMIT, RspQASubmitEntity.class);
+        //订单列表
+        mMap.put(URL_ORDER_LIST,RspOrderListEntity.class);
     }
 
     /***

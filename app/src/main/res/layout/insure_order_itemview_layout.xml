@@ -17,31 +17,24 @@
 */
 -->
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/page_bg"
+    android:orientation="vertical"
     >
 
-    <com.bjzt.uye.views.component.YHeaderView
-        android:id="@+id/u_header"
+    <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        ></com.bjzt.uye.views.component.YHeaderView>
+        android:layout_height="220dp"
+        android:layout_marginLeft="@dimen/common_margin_18"
+        android:layout_marginRight="@dimen/common_margin_18"
+        android:background="@color/common_white"
+        android:layout_marginTop="32dp"
+        >
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/u_viewpager"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@id/u_header"
-        ></android.support.v4.view.ViewPager>
+    </RelativeLayout>
 
-    <com.bjzt.uye.views.component.BlankEmptyView
-        android:id="@+id/u_emptyview"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@id/u_header"
-        ></com.bjzt.uye.views.component.BlankEmptyView>
 
-</RelativeLayout>
+
+</LinearLayout>

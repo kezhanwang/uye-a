@@ -18,6 +18,7 @@ import com.bjzt.uye.http.req.ReqLoginPhoneEntity;
 import com.bjzt.uye.http.req.ReqLoginPwdEntity;
 import com.bjzt.uye.http.req.ReqLogoutEntity;
 import com.bjzt.uye.http.req.ReqOrderInfoEntity;
+import com.bjzt.uye.http.req.ReqOrderListEntity;
 import com.bjzt.uye.http.req.ReqOrderSubmitEntity;
 import com.bjzt.uye.http.req.ReqPhoneVerifyEntity;
 import com.bjzt.uye.http.req.ReqQACfgEnttiy;
@@ -348,6 +349,18 @@ public class ProtocalManager {
     public int reqQASubmit(List<VQAItemEntity> mList,ICallBack<Object> callBack){
         ReqQASubmitEntity reqEntity = new ReqQASubmitEntity();
         reqEntity.parseInfo(mList);
+        return addTask(reqEntity,callBack);
+    }
+
+    /***
+     * 请求订单列表
+     * @param callBack
+     * @return
+     */
+    public int reqOrderList(int page,ICallBack<Object> callBack){
+        ReqOrderListEntity reqEntity = new ReqOrderListEntity();
+        reqEntity.page = page;
+        reqEntity.pageSize = 10;
         return addTask(reqEntity,callBack);
     }
 }

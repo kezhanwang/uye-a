@@ -61,6 +61,9 @@ public class TestActivity extends BaseActivity{
     @BindView(R.id.btn_qa)
     Button btnQA;
 
+    @BindView(R.id.btn_orderlist)
+    Button btnOrderList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -183,6 +186,13 @@ public class TestActivity extends BaseActivity{
             @Override
             public void onClick(View v) {
                 IntentUtils.startQAActivity(TestActivity.this,"10049",12);
+            }
+        });
+
+        btnOrderList.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                int seqNo = ProtocalManager.getInstance().reqOrderList(1,getCallBack());
             }
         });
     }

@@ -5,11 +5,15 @@ import com.bjzt.uye.http.HttpCommon;
 import com.bjzt.uye.http.base.ReqBaseEntity;
 import com.google.gson.Gson;
 
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by billy on 2017/10/21.
@@ -45,6 +49,7 @@ public class ReqQASubmitEntity extends ReqBaseEntity implements  Serializable{
                 rList.add(entity);
             }
         }
+
         Gson gson = new Gson();
         this.question = gson.toJson(rList);
     }

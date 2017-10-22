@@ -25,10 +25,19 @@ public class RspOrderListEntity extends RspBaseEntity{
     }
 
     public List<PInsureOrderEntity> buildList(){
-        List<PInsureOrderEntity> mList = new ArrayList<PInsureOrderEntity>();
-        mList.add(mEntity);
-        mList.add(mEntity);
-        mList.add(mEntity);
+        List<PInsureOrderEntity> mList = new ArrayList<>();
+        if(mEntity != null && mEntity.page != null){
+            for(int i = 0;i < mEntity.page.totalCount;i++){
+                PInsureOrderEntity pEntity = new PInsureOrderEntity();
+                if(i == 0){
+                    pEntity.isFake = false;
+                    pEntity.insured_order = mEntity.insured_order;
+                    pEntity.page = mEntity.page;
+                }
+                pEntity.p = i + 1;
+                mList.add(pEntity);
+            }
+        }
         return mList;
     }
 }

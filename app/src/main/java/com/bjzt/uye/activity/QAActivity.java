@@ -18,6 +18,7 @@ import com.bjzt.uye.http.rsp.RspQACfgEntity;
 import com.bjzt.uye.http.rsp.RspQASubmitEntity;
 import com.bjzt.uye.listener.IHeaderListener;
 import com.bjzt.uye.listener.IItemListener;
+import com.bjzt.uye.msglist.itemview.QAListItemView;
 import com.bjzt.uye.util.IntentUtils;
 import com.bjzt.uye.util.StrUtil;
 import com.bjzt.uye.views.component.BlankEmptyView;
@@ -53,8 +54,8 @@ public class QAActivity extends BaseActivity implements  View.OnClickListener{
     private QAAdapter mAdapter;
 
     private String orgId;
-    private List<Integer> mReqList = new ArrayList<Integer>();
-    private List<VQAItemEntity> mListSelect = new ArrayList<VQAItemEntity>();
+    private List<Integer> mReqList = new ArrayList<>();
+    private List<VQAItemEntity> mListSelect = new ArrayList<>();
 
     private final int REQ_DATA_CHECK = 0x10;
 
@@ -132,16 +133,15 @@ public class QAActivity extends BaseActivity implements  View.OnClickListener{
     private IItemListener mItemListener = new IItemListener() {
         @Override
         public void onItemClick(Object obj, int tag) {
-            VQAItemEntity vEntity = (VQAItemEntity) obj;
+            QAListItemView itemView = (QAListItemView) obj;
+            VQAItemEntity vEntity = itemView.getMsg();
             if(vEntity.isSelect){
                 mListSelect.remove(vEntity);
             }else{
                 mListSelect.add(vEntity);
             }
             vEntity.isSelect = !vEntity.isSelect;
-            if(mAdapter != null){
-                mAdapter.notifyDataSetChanged();
-            }
+            itemView.setMsg(vEntity);
         }
     };
 
@@ -190,4 +190,12 @@ public class QAActivity extends BaseActivity implements  View.OnClickListener{
             }
         }
     }
+
+    @Override
+    public void finish() {
+        super.finish();
+        //关闭窗体动画显示
+        this.overridePendingTransition(R.anim.activity_left_in, R.anim.activity_right_out);
+    }
+
 }

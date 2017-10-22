@@ -98,7 +98,7 @@ public class QAListItemView extends BaseItemView<VQAItemEntity> implements View.
     public void onClick(View v) {
         if(mListener != null){
             if(v == this.mRelaMain){
-                this.mListener.onItemClick(this.mEntity,-1);
+                this.mListener.onItemClick(this,-1);
             }
         }
     }

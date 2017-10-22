@@ -289,9 +289,4 @@ public class DataCheckActivity extends BaseActivity implements View.OnClickListe
         int seqNo = ProtocalManager.getInstance().reqUInfoDataCheck(getCallBack());
         mReqList.add(seqNo);
     }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
 }

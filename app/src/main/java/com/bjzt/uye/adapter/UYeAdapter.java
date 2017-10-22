@@ -22,6 +22,17 @@ public class UYeAdapter extends PagerAdapter{
         this.mContext = mContext;
     }
 
+    public List<PInsureOrderEntity> getList(){
+        return this.mList;
+    }
+
+    public PInsureOrderEntity getItem(int pos){
+        if(mList != null && mList.size() > pos){
+            return mList.get(pos);
+        }
+        return null;
+    }
+
     public void reSetList(List<PInsureOrderEntity> mList){
         this.mList = mList;
         notifyDataSetChanged();
@@ -48,7 +59,9 @@ public class UYeAdapter extends PagerAdapter{
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         // TODO Auto-generated method stub
+        PInsureOrderEntity mEntity = mList.get(position);
         InsureOrderItemView view = new InsureOrderItemView(this.mContext);
+        view.setInfo(mList,mEntity);
         container.addView(view);
         return view;
     }

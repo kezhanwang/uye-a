@@ -17,24 +17,141 @@
 */
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
 
-    <RelativeLayout
+    <ScrollView
+        android:id="@+id/scollview"
         android:layout_width="fill_parent"
-        android:layout_height="220dp"
-        android:layout_marginLeft="@dimen/common_margin_18"
-        android:layout_marginRight="@dimen/common_margin_18"
-        android:background="@color/common_white"
-        android:layout_marginTop="32dp"
+        android:layout_height="fill_parent"
         >
 
-    </RelativeLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="220dp"
+                android:layout_marginLeft="@dimen/common_margin_18"
+                android:layout_marginRight="@dimen/common_margin_18"
+                android:background="@drawable/round_rect_real_white_shape"
+                android:layout_marginTop="32dp"
+                >
+
+                <TextView
+                    android:id="@+id/order_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:text="订单编号"
+                    android:layout_marginTop="@dimen/common_margin_18"
+                    android:layout_marginLeft="@dimen/common_margin"
+                    android:textSize="14sp"
+                    android:textColor="@color/common_font_9"
+                    android:gravity="center"
+                    />
 
 
+                <TextView
+                    android:id="@+id/order_txt_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@id/order_title"
+                    android:layout_marginRight="@dimen/common_margin"
+                    android:textSize="15sp"
+                    android:textColor="@color/common_font_3"
+                    android:text="择业中"
+                    android:gravity="center"
+                    />
 
-</LinearLayout>
+                <View
+                    android:id="@+id/order_divider_line"
+                    android:layout_height="1px"
+                    android:layout_width="fill_parent"
+                    android:layout_below="@id/order_title"
+                    android:layout_marginLeft="@dimen/common_margin"
+                    android:background="@color/common_line_divider"
+                    ></View>
+
+
+                <ImageView
+                    android:id="@+id/img_logo"
+                    android:layout_width="88dp"
+                    android:layout_height="61dp"
+                    android:layout_marginLeft="@dimen/common_margin"
+                    android:background="#f1f1f1"
+                    android:layout_below="@id/order_divider_line"
+                    android:layout_marginTop="@dimen/common_margin"
+                    />
+
+                <TextView
+                    android:id="@+id/txt_course_name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/img_logo"
+                    android:layout_marginLeft="@dimen/common_margin_6"
+                    android:layout_marginRight="@dimen/common_margin"
+                    android:textColor="@color/common_font_3"
+                    android:textSize="16sp"
+                    android:text="北京樱花英语(中关村校区)"
+                    android:layout_alignTop="@id/img_logo"
+                    />
+
+                <TextView
+                    android:id="@+id/txt_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/img_logo"
+                    android:textSize="13sp"
+                    android:textColor="@color/common_font_9"
+                    android:layout_below="@id/txt_course_name"
+                    android:layout_marginTop="@dimen/common_margin_4"
+                    android:layout_marginLeft="@dimen/common_margin_6"
+                    android:text="类型:就业帮"
+                    />
+
+                <TextView
+                    android:id="@+id/txt_tution_tips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/img_logo"
+                    android:layout_marginLeft="@dimen/common_margin_6"
+                    android:layout_below="@id/txt_type"
+                    android:layout_marginTop="@dimen/common_margin_10"
+                    android:textSize="14sp"
+                    android:textColor="@color/common_font_9"
+                    android:text="学费:"
+                    />
+
+                <TextView
+                    android:id="@+id/txt_tution"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/txt_tution_tips"
+                    android:layout_marginLeft="@dimen/common_margin_4"
+                    android:layout_alignTop="@id/txt_tution_tips"
+                    android:textSize="16sp"
+                    android:textColor="@color/common_font_3"
+                    android:text="¥18000"
+                    />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <com.bjzt.uye.views.component.BlankEmptyView
+        android:id="@+id/emptyview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="gone"
+        ></com.bjzt.uye.views.component.BlankEmptyView>
+
+</RelativeLayout>

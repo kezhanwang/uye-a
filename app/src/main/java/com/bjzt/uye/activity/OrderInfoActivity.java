@@ -418,7 +418,7 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
             }
             List<String> mList = new ArrayList<>();
             mList.add(strPicPicProtocal);
-            int seqNo = ProtocalManager.getInstance().reqOrderSubmit(orgId,mCourseEntitySelect.cid,strTution,strClazzName,
+            int seqNo = ProtocalManager.getInstance().reqOrderSubmit(orgId,mCourseEntitySelect.c_id,strTution,strClazzName,
                     strDateStart,strDateEnd,strAdviser,strPicHold,mList,"1",getCallBack());
             mReqList.add(seqNo);
         }

@@ -272,9 +272,6 @@ public class SearchActivity extends BaseActivity{
                     finish();
                     break;
             }
-        }else{
-            setResult(resultCode);
-            finish();
         }
     }
 }

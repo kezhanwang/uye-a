@@ -7,6 +7,7 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ScrollView;
 
 import com.bjzt.uye.R;
 import com.bjzt.uye.activity.base.BaseActivity;
@@ -22,6 +23,7 @@ import com.bjzt.uye.listener.IItemListener;
 import com.bjzt.uye.util.IntentUtils;
 import com.bjzt.uye.util.PhoneUtil;
 import com.bjzt.uye.util.StrUtil;
+import com.bjzt.uye.views.component.BlankEmptyView;
 import com.bjzt.uye.views.component.DataCheckItemView;
 import com.bjzt.uye.views.component.YHeaderView;
 
@@ -39,6 +41,8 @@ public class DataCheckActivity extends BaseActivity implements View.OnClickListe
     @BindView(R.id.header)
     YHeaderView mHeader;
 
+    @BindView(R.id.scrollview)
+    ScrollView mScrollView;
     @BindView(R.id.datacheck_item_identity)
     DataCheckItemView itemIDentity;
     @BindView(R.id.datacheck_item_phonecontact)
@@ -51,6 +55,8 @@ public class DataCheckActivity extends BaseActivity implements View.OnClickListe
     DataCheckItemView itemSesame;
     @BindView(R.id.btn_ok)
     Button btnOk;
+    @BindView(R.id.emptyveiw)
+    BlankEmptyView mEmptyView;
 
     private List<Integer> mReqList = new ArrayList<Integer>();
     private final int FLAG_SHOW_LOADING = 0x10;
@@ -78,6 +84,7 @@ public class DataCheckActivity extends BaseActivity implements View.OnClickListe
         mHeader.setIListener(new IHeaderListener() {
             @Override
             public void onLeftClick() {
+                setResult(Activity.RESULT_CANCELED);
                 finish();
             }
         });
@@ -128,6 +135,9 @@ public class DataCheckActivity extends BaseActivity implements View.OnClickListe
 
         btnOk.setOnClickListener(this);
 
+        mEmptyView.setVisibility(View.VISIBLE);
+        mEmptyView.showLoadingState();
+        mScrollView.setVisibility(View.GONE);
         int seqNo = ProtocalManager.getInstance().reqUInfoDataCheck(getCallBack());
         mReqList.add(seqNo);
     }
@@ -199,6 +209,18 @@ public class DataCheckActivity extends BaseActivity implements View.OnClickListe
         }
     }
 
+    private void initErrorStatus(String tips){
+        mEmptyView.showErrorState();
+        mEmptyView.setErrorTips(tips);
+        mEmptyView.setBlankListener(new BlankEmptyView.BlankBtnListener() {
+            @Override
+            public void btnRefresh() {
+                mEmptyView.showLoadingState();
+                refresh();
+            }
+        });
+    }
+
     @Override
     protected void onRsp(Object rsp, boolean isSucc, int errorCode, int seqNo, int src) {
         super.onRsp(rsp, isSucc, errorCode, seqNo, src);
@@ -208,14 +230,16 @@ public class DataCheckActivity extends BaseActivity implements View.OnClickListe
                 RspUInfoEntity rspEntity = (RspUInfoEntity) rsp;
                 if(rspEntity != null){
                     if(rspEntity.mEntity != null){
+                        mEmptyView.loadSucc();
+                        mScrollView.setVisibility(View.VISIBLE);
                         itemIDentity.updateTailContent(rspEntity.mEntity.identity);
                     }else{
                         String tips = getResources().getString(R.string.common_request_error);
-                        showToast(tips);
+                        initErrorStatus(tips);
                     }
                 }else{
                     String tips = StrUtil.getErrorTipsByCode(errorCode,rspEntity);
-                    showToast(tips);
+                    initErrorStatus(tips);
                 }
             }else if(rsp instanceof RspUploadPhoneListEntity){
                 RspUploadPhoneListEntity rspEntity = (RspUploadPhoneListEntity) rsp;

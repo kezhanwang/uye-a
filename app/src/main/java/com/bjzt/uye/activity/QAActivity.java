@@ -198,6 +198,9 @@ public class QAActivity extends BaseActivity implements  View.OnClickListener{
                     finish();
                     break;
             }
+        }else{
+            setResult(resultCode);
+            finish();
         }
     }
 

@@ -53,6 +53,10 @@
             >
 
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
 
@@ -62,10 +66,6 @@
             android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"
             >
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
 
@@ -141,6 +141,24 @@
             android:name=".activity.QAActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTop"
+            android:theme="@style/Theme.Youye"
+            ></activity>
+
+
+        <!--========================================本地相册==============================-->
+        <!-- 本地相册 -->
+        <activity
+            android:name=".photo.activity.LoanPhotoAlblumActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.Youye"
+            ></activity>
+
+        <!--图片预览Activity-->
+        <activity
+            android:name=".photo.activity.LoanPicScanActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="standard"
             android:theme="@style/Theme.Youye"
             ></activity>
 

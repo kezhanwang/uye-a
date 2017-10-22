@@ -356,7 +356,7 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
 
             @Override
             public void ItemMiddleClick() {
-
+                IntentUtils.startSysGallery(ApplyIDActivity.this,reqCode,1,null);
             }
 
             @Override

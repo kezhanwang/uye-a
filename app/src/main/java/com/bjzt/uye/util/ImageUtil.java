@@ -21,6 +21,7 @@ import android.text.TextUtils;
 
 import com.bjzt.uye.comparator.FileComparator;
 import com.bjzt.uye.entity.VAblumItemEntity;
+import com.bjzt.uye.photo.entity.LoanVAblumItemEntity;
 import com.common.common.MyLog;
 
 import java.io.File;
@@ -219,7 +220,7 @@ public class ImageUtil {
 //		path = picturePath;
 //		c.close();
     	ArrayList<String> mList = new ArrayList<String>();
-    	ArrayList<VAblumItemEntity> resList = null;
+    	ArrayList<LoanVAblumItemEntity> resList = null;
     	if(intent != null){
 			Object o = intent.getSerializableExtra(IntentUtils.PARA_KEY_PUBLIC);
 			ArrayList<Object> rList = (ArrayList<Object>) o;
@@ -227,21 +228,21 @@ public class ImageUtil {
 				Object obj = rList.get(0);
 				if(obj instanceof String){
 					ArrayList<String> strList = (ArrayList<String>) o;
-					resList = new ArrayList<VAblumItemEntity>();
+					resList = new ArrayList<LoanVAblumItemEntity>();
 					for(int i = 0;i < strList.size();i++){
-						VAblumItemEntity vEntity = new VAblumItemEntity();
+						LoanVAblumItemEntity vEntity = new LoanVAblumItemEntity();
 						vEntity.isSelect = false;
 						vEntity.url = strList.get(i);
 						resList.add(vEntity);
 					}
-				}else if(obj instanceof  VAblumItemEntity){
-					resList = (ArrayList<VAblumItemEntity>) o;
+				}else if(obj instanceof LoanVAblumItemEntity){
+					resList = (ArrayList<LoanVAblumItemEntity>) o;
 				}
 			}
 
 			if(resList != null){
     			for(int i = 0;i < resList.size();i++){
-    				VAblumItemEntity entity = resList.get(i);
+					LoanVAblumItemEntity entity = resList.get(i);
     				mList.add(entity.url);
     			}
     		}

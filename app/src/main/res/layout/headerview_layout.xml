@@ -22,6 +22,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/header_bar_height"
     android:background="@color/common_white"
+    android:id="@+id/rela_main"
     >
 
     <RelativeLayout

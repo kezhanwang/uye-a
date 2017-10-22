@@ -110,4 +110,15 @@
     <dimen name="loan_datepicker_itemwidth">68dp</dimen>
     <dimen name="loan_datepicker_itemwidth_l">86dp</dimen>
 
+    <!-- 本地相册 -->
+    <dimen name="loan_pic_local_imgview_margin">7dp</dimen>
+    <!-- 图片预览 -->
+    <dimen name="loan_ablum_height">52dp</dimen>
+    <dimen name="loan_ablum_left_width">72dp</dimen>
+    <dimen name="loan_ablum_textSize">17sp</dimen>
+    <dimen name="loan_ablum_right_width">102dp</dimen>
+    <dimen name="loan_ablum_right_textSize">13.5sp</dimen>
+    <dimen name="loan_ablum_margin1">12dp</dimen>
+    <dimen name="loan_ablum_margin2">6dp</dimen>
+
 </resources>

@@ -16,9 +16,12 @@ import com.bjzt.uye.activity.QAActivity;
 import com.bjzt.uye.activity.RegisterActivity;
 import com.bjzt.uye.activity.SearchActivity;
 import com.bjzt.uye.activity.WebViewActivity;
+import com.bjzt.uye.photo.activity.LoanPhotoAlblumActivity;
+import com.bjzt.uye.photo.activity.LoanPicScanActivity;
 import com.common.common.MyLog;
 
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * Created by billy on 2017/10/12.
@@ -31,6 +34,10 @@ public class IntentUtils {
     public static final String KEY_WEB_URL = "key_web_url";
     public static final String KEY_TITLE = "key_title";
     public static final String KEY_PHONE = "key_phone";
+    public static final String PARA_KEY_SIZE = "key_size";
+    public static final String PARA_KEY_POS = "key_pos";
+    public static final String PARA_KEY_TYPE = "key_type";
+    public static final String PARA_KEY_LIST = "key_list";
 
     /**
      * 打开首页
@@ -197,4 +204,44 @@ public class IntentUtils {
         intent.putExtra(IntentUtils.PARA_KEY_PUBLIC,orgId);
         mContext.startActivityForResult(intent,requestCode);
     }
+
+    /***
+     * 打开系统相册
+     */
+    public static final void startSysGallery(Activity context,int requestCode,int size,ArrayList<String> mSelectPath){
+//		Intent intent = new Intent();
+//		intent.setType("image/*");
+//		intent.setAction(Intent.ACTION_GET_CONTENT);
+//		context.startActivityForResult(intent,requestCode);
+        Intent intent = new Intent(context,LoanPhotoAlblumActivity.class);
+        intent.putExtra(IntentUtils.PARA_KEY_SIZE, size);
+        intent.putStringArrayListExtra(IntentUtils.PARA_KEY_PUBLIC, mSelectPath);
+        context.startActivityForResult(intent, requestCode);
+    }
+
+    /***
+     * 本地相册图片浏览
+     * @param mContext
+     * @param requestCode
+     * @param mList
+     * @param pos
+     */
+    public static final void startPicScanAblueActivity(Context mContext,int requestCode,ArrayList<String> mList,int pos){
+        startPicScaneActivity(mContext, requestCode, mList, pos, LoanPicScanActivity.TYPE_ABLUM_LOC);
+    }
+
+    private static final void startPicScaneActivity(Context mContext,int requestCode,ArrayList<String> mList,int pos,int type){
+        Intent intent = new Intent(mContext,LoanPicScanActivity.class);
+        intent.putStringArrayListExtra(IntentUtils.PARA_KEY_PUBLIC, mList);
+        intent.putExtra(IntentUtils.PARA_KEY_POS, pos);
+        intent.putExtra(IntentUtils.PARA_KEY_TYPE, type);
+        if(mContext instanceof Activity){
+            Activity activity = (Activity) mContext;
+            activity.startActivityForResult(intent,requestCode);
+        }else{
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            mContext.startActivity(intent);
+        }
+    }
+
 }

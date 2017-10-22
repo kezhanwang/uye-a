@@ -24,7 +24,7 @@
     <color name="common_grey">#909090</color>
     <color name="common_line_divider">@color/common_font_ccc</color>
     <color name="common_orange">#f08300</color>
-
+    <color name="common_black">#333333</color>
     <color name="common_green">#00c29a</color>
     <color name="common_green_press">#00c2ba</color>
     <color name="common_dc">#dcdcdc</color>
@@ -53,5 +53,10 @@
 
     <!--date picker-->
     <color name="loan_province_line_border">#D0D0D0</color>
-    
+
+    <!-- PicPhotoAblum 本地相册图片-->
+    <color name="loan_ablum_font_color_normal">#0aaaf5</color>
+    <color name="loan_ablum_font_color_nor">#a1a1a1</color>
+    <color name="loan_ablum_rela_bg_color_press">#e1e1e1</color>
+
 </resources>

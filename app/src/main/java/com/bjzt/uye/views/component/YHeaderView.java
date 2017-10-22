@@ -1,6 +1,7 @@
 package com.bjzt.uye.views.component;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,8 @@ import butterknife.ButterKnife;
 
 public class YHeaderView extends RelativeLayout implements NoConfusion,View.OnClickListener{
 
+    @BindView(R.id.rela_main)
+    RelativeLayout mRelaMain;
     @BindView(R.id.rela_left)
     RelativeLayout relaLeft;
     @BindView(R.id.img_back)
@@ -40,6 +43,9 @@ public class YHeaderView extends RelativeLayout implements NoConfusion,View.OnCl
     public static final int TYPE_RIGHT_TXT = 1; //登录样式，左侧返回，右侧注册
     public static final int TYPE_MYINFO = 2;
     public static final int TYPE_RIGHT_TXT_ONLY = 3;    //只是右侧的txt
+    public static final int TYPE_PIC_SCANNE = 4;	//左面是箭头,右边是imgIcon,图片浏览类型
+    public static final int TYPE_ABOUT_ABLUME = 5;
+    public static final int TYPE_IMAGE_RIGHT_ABLUME = 6;
 
     private IHeaderListener mListener;
 
@@ -64,7 +70,7 @@ public class YHeaderView extends RelativeLayout implements NoConfusion,View.OnCl
         relaLeft.setVisibility(View.GONE);
         relaRight.setVisibility(View.GONE);
         mTxtTitle.setVisibility(View.GONE);
-
+        mImgRight.setVisibility(View.GONE);
         relaLeft.setOnClickListener(this);
         relaRight.setOnClickListener(this);
 
@@ -81,9 +87,22 @@ public class YHeaderView extends RelativeLayout implements NoConfusion,View.OnCl
                     relaLeft.setVisibility(View.VISIBLE);
                 }
                 break;
+            case TYPE_PIC_SCANNE:
+            case TYPE_IMAGE_RIGHT_ABLUME:
+                relaLeft.setVisibility(View.VISIBLE);
+                mTxtTitle.setVisibility(View.VISIBLE);
+                relaRight.setVisibility(View.VISIBLE);
+                mImgRight.setVisibility(View.VISIBLE);
+                int c = getResources().getColor(R.color.common_black);
+                mRelaMain.setBackgroundDrawable(new ColorDrawable(c));
+                break;
         }
     }
 
+    //设置右侧
+    public void setRightImage(int resId){
+        this.mImgRight.setImageResource(resId);
+    }
 
     public void setTitle(String title){
         mTxtTitle.setText(title);

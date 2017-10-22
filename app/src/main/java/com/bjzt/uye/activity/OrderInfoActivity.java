@@ -468,7 +468,7 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
 
             @Override
             public void ItemMiddleClick() {
-
+                IntentUtils.startSysGallery(OrderInfoActivity.this,reqCode,1,null);
             }
 
             @Override

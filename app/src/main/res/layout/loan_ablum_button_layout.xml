@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/loan_ablum_height"
+    android:minHeight="@dimen/loan_ablum_height"
+    android:background="#f6f6f6"
+    >
+    
+    <View
+        android:id="@+id/view_line"
+        android:layout_height="1px"
+        android:layout_width="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:background="#cfcfcf"
+        ></View>
+
+    <RelativeLayout 
+        android:id="@+id/rela_left"
+        android:layout_height="fill_parent"
+        android:layout_width="@dimen/loan_ablum_left_width"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/view_line"
+        >
+        <TextView 
+            android:id="@+id/txt_left"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="预览"
+            android:textSize="@dimen/loan_ablum_textSize"
+            android:textColor="@color/common_green"
+            android:visibility="invisible"
+            />
+    </RelativeLayout>
+    
+    <TextView
+        android:id="@+id/btn_right"
+        android:layout_height="fill_parent"
+        android:layout_width="@dimen/loan_ablum_right_width"
+        android:background="@drawable/btn_login_selector"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/loan_ablum_margin2"
+        android:layout_marginBottom="@dimen/loan_ablum_margin2"
+        android:text="@string/cancle"
+        android:textSize="12.5sp"
+        android:textColor="@color/common_white"
+        android:layout_marginRight="@dimen/loan_ablum_margin1"
+        android:singleLine="true"
+        android:gravity="center"
+        />
+    
+</RelativeLayout>

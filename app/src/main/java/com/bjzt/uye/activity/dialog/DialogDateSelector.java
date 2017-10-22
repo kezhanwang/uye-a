@@ -86,7 +86,7 @@ public class DialogDateSelector extends Dialog implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LayoutInflater li= (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View mView=li.inflate(R.layout.loan_my_time_selector_dialog, null);
+        View mView=li.inflate(R.layout.my_time_selector_dialog, null);
 
         btnOk= (TextView) mView.findViewById(R.id.text_ok);
         btnOk.setOnClickListener(this);

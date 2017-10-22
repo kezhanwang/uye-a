@@ -1,5 +1,7 @@
 package com.bjzt.uye.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -13,6 +15,7 @@ import com.bjzt.uye.http.rsp.RspRegEntity;
 import com.bjzt.uye.listener.IHeaderListener;
 import com.bjzt.uye.listener.IItemListener;
 import com.bjzt.uye.listener.ITextListener;
+import com.bjzt.uye.util.IntentUtils;
 import com.bjzt.uye.util.StrUtil;
 import com.bjzt.uye.views.component.ExtendEditText;
 import com.bjzt.uye.views.component.TimerDownTextView;
@@ -43,6 +46,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     Button btnReg;
 
     private List<Integer> mReqList = new ArrayList<Integer>();
+    private String phone;
 
     @Override
     protected int getLayoutID() {
@@ -149,6 +153,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 showToast(tips);
                 return;
             }
+            this.phone = phone;
             showLoading();
             int seqNo = ProtocalManager.getInstance().reqReg(phone,code,pwd,getCallBack());
             mReqList.add(seqNo);
@@ -175,7 +180,10 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             }else if(rsp instanceof RspRegEntity){
                 RspRegEntity rspEntity = (RspRegEntity) rsp;
                 if(isSucc && rspEntity != null){
-
+                    Intent intent = new Intent();
+                    intent.putExtra(IntentUtils.KEY_PHONE,this.phone);
+                    setResult(Activity.RESULT_OK,intent);
+                    finish();
                 }else{
                     String tips = StrUtil.getErrorTipsByCode(errorCode);
                     if(!TextUtils.isEmpty(tips)){

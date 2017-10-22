@@ -7,16 +7,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.bjzt.uye.R;
+import com.bjzt.uye.activity.LoginActivity;
+import com.bjzt.uye.activity.MainActivity;
 import com.bjzt.uye.adapter.UYeAdapter;
+import com.bjzt.uye.controller.OtherController;
 import com.bjzt.uye.entity.PInsureOrderEntity;
 import com.bjzt.uye.fragments.base.BaseFragment;
 import com.bjzt.uye.global.Global;
 import com.bjzt.uye.http.ProtocalManager;
 import com.bjzt.uye.http.rsp.RspOrderListEntity;
 import com.bjzt.uye.msglist.itemview.InsureOrderItemView;
+import com.bjzt.uye.util.IntentUtils;
 import com.bjzt.uye.util.StrUtil;
 import com.bjzt.uye.views.component.BlankEmptyView;
 import com.bjzt.uye.views.component.YHeaderView;
+import com.common.controller.LoginController;
+import com.common.listener.ILoginListener;
 import com.common.msglist.PageType;
 
 import java.util.ArrayList;
@@ -60,9 +66,38 @@ public class FragmentUYe extends BaseFragment{
         mEmptyView.showLoadingState();
         mViewPager.setVisibility(View.GONE);
         mViewPager.setOnPageChangeListener(mPageChangeListener);
+
+        OtherController.getInstance().registerRefreshListener(mDataRefreshListener);
+        LoginController.getInstance().registerListener(mLoginListener);
         int seqNo = ProtocalManager.getInstance().reqOrderList(PageType.FIRST_PAGE,getCallBack());
         mReqList.add(seqNo);
     }
+
+    private ILoginListener mLoginListener = new ILoginListener() {
+        @Override
+        public void loginSucc() {
+            int seqNo = ProtocalManager.getInstance().reqOrderList(PageType.FIRST_PAGE,getCallBack());
+            mReqList.add(seqNo);
+        }
+
+        @Override
+        public void logout() {
+            mEmptyView.setVisibility(View.VISIBLE);
+            mEmptyView.reSetState();
+            mEmptyView.showErrorState();
+            mViewPager.setVisibility(View.GONE);
+            mAdapter = null;
+            reSetRightTxtTips(0);
+        }
+    };
+
+    private OtherController.DataRefreshListener mDataRefreshListener = new OtherController.DataRefreshListener() {
+        @Override
+        public void onRefresh() {
+            int seqNo = ProtocalManager.getInstance().reqOrderList(PageType.FIRST_PAGE,getCallBack());
+            mReqList.add(seqNo);
+        }
+    };
 
     ViewPager.OnPageChangeListener mPageChangeListener = new ViewPager.OnPageChangeListener() {
         @Override
@@ -126,7 +161,12 @@ public class FragmentUYe extends BaseFragment{
                         initErrorStatus(tips);
                     }
                 }else{
-                    String tips = StrUtil.getErrorTipsByCode(errorCode,rspEntity);
+                    String tips;
+                    if(rspEntity.code == 1013){
+                        tips = getResources().getString(R.string.uye_order_empty_tips);
+                    }else{
+                        tips = StrUtil.getErrorTipsByCode(errorCode,rspEntity);
+                    }
                     initErrorStatus(tips);
                 }
             }
@@ -139,11 +179,21 @@ public class FragmentUYe extends BaseFragment{
         mEmptyView.setBlankListener(new BlankEmptyView.BlankBtnListener() {
             @Override
             public void btnRefresh() {
-                mEmptyView.showLoadingState();
-                int seqNo = ProtocalManager.getInstance().reqOrderList(1,getCallBack());
-                mReqList.add(seqNo);
+                if(LoginController.getInstance().isLogin()){
+                    mEmptyView.showLoadingState();
+                    int seqNo = ProtocalManager.getInstance().reqOrderList(1,getCallBack());
+                    mReqList.add(seqNo);
+                }else{
+                    IntentUtils.startLoginActivity(getActivity(), LoginActivity.TYPE_PHONE_VERIFY_CODE,MainActivity.REQ_CODE_LOGIN);
+                }
             }
         });
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        OtherController.getInstance().unRegisterRefreshListener(mDataRefreshListener);
+        LoginController.getInstance().unRegisterListener(mLoginListener);
+    }
 }

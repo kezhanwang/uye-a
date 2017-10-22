@@ -21,6 +21,7 @@ import java.util.Set;
 
 public class ReqQASubmitEntity extends ReqBaseEntity implements  Serializable{
     public String question;
+    public String org_id;
 
     @Override
     public String getReqUrl() {
@@ -31,6 +32,7 @@ public class ReqQASubmitEntity extends ReqBaseEntity implements  Serializable{
     public Map<String, Object> getReqData() {
         Map<String,Object> mReqMap = new HashMap<>();
         mReqMap.put("question",question);
+        mReqMap.put("org_id",org_id);
         return mReqMap;
     }
 

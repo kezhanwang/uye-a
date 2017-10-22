@@ -162,9 +162,11 @@
     <!--UYe相关-->
     <string name="uye_order_empty_tips">订单空空如也!\n让U业帮为您的大好前程出把力吧~</string>
 
-
     <!--问卷调查-->
     <string name="qa_title">就业调查</string>
     <string name="qa_select_tips">亲，请勾选完成调查问卷~</string>
+
+    <!--搜索页卡-->
+    <string name="search_result_empty">没有发现任何搜索结果~</string>
 
 </resources>

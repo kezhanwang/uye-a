@@ -233,8 +233,12 @@ public class LoginActivity extends BaseActivity implements  View.OnClickListener
                     finish();
                     break;
                 case REQ_CODE_REG:
-                    setResult(Activity.RESULT_CANCELED);
-                    finish();
+                    String phone = data.getStringExtra(IntentUtils.KEY_PHONE);
+                    if(!TextUtils.isEmpty(phone)){
+                        editTel.setText(phone);
+                    }
+                    mType = TYPE_PWD;
+                    refresh();
                     break;
             }
         }

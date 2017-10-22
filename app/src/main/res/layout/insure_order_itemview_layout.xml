@@ -180,6 +180,7 @@
                 android:background="@drawable/round_rect_real_white_shape"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="@dimen/common_margin"
+                android:paddingBottom="@dimen/common_margin_6"
                 >
 
                 <TextView

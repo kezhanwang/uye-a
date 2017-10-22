@@ -6,10 +6,11 @@ import com.bjzt.uye.global.Global;
 import com.bjzt.uye.http.ProtocalManager;
 import com.bjzt.uye.http.listener.ICallBack;
 import com.bjzt.uye.http.rsp.Rsp400ContactEntity;
-import com.common.file.SharePreLogin;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by billy on 2017/10/21.
@@ -21,6 +22,7 @@ public class OtherController {
     private static OtherController instance;
     private List<Integer> mReqList = new ArrayList<Integer>();
     private P400ContactEntity m400ContactEntity;
+    private Set<DataRefreshListener> mSet = new HashSet<>();
 
     private OtherController(){
 
@@ -82,5 +84,23 @@ public class OtherController {
             return this.m400ContactEntity.company_phone;
         }
         return null;
+    }
+
+    public static interface DataRefreshListener {
+        public void onRefresh();
+    }
+
+    public void registerRefreshListener(DataRefreshListener mListener){
+        mSet.add(mListener);
+    }
+
+    public void unRegisterRefreshListener(DataRefreshListener mListener){
+        mSet.remove(mListener);
+    }
+
+    public void notifyRefresh(){
+        for(DataRefreshListener mListener : mSet){
+            mListener.onRefresh();
+        }
     }
 }

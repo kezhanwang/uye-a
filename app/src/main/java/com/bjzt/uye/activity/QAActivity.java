@@ -95,14 +95,24 @@ public class QAActivity extends BaseActivity implements  View.OnClickListener{
             if(rsp instanceof RspQACfgEntity){
                 RspQACfgEntity rspEntity = (RspQACfgEntity) rsp;
                 if(isSucc){
-                    if(rspEntity != null && rspEntity.mEntity != null && rspEntity.mEntity.questions != null && rspEntity.mEntity.questions.size() > 0){
-                        mEmptyView.loadSucc();
-                        mScrollView.setVisibility(View.VISIBLE);
-                        initParams(rspEntity.mEntity.questions);
+                    if(rspEntity.mEntity != null){
+                        if(rspEntity.mEntity.need_question){
+                            if(rspEntity != null && rspEntity.mEntity != null && rspEntity.mEntity.questions != null && rspEntity.mEntity.questions.size() > 0){
+                                mEmptyView.loadSucc();
+                                mScrollView.setVisibility(View.VISIBLE);
+                                initParams(rspEntity.mEntity.questions);
+                            }else{
+                                String tips = getResources().getString(R.string.common_cfg_empty);
+                                initErrorStatus(tips);
+                            }
+                        }else{
+                            IntentUtils.startDataCheckActivity(QAActivity.this,orgId,REQ_DATA_CHECK);
+                        }
                     }else{
                         String tips = getResources().getString(R.string.common_cfg_empty);
                         initErrorStatus(tips);
                     }
+
                 }else{
                     String tips = StrUtil.getErrorTipsByCode(errorCode,rspEntity);
                     initErrorStatus(tips);
@@ -169,7 +179,7 @@ public class QAActivity extends BaseActivity implements  View.OnClickListener{
         if(v == this.btnOk){
             if(mListSelect.size() > 0){
                 showLoading();
-                int seqNo = ProtocalManager.getInstance().reqQASubmit(mListSelect,getCallBack());
+                int seqNo = ProtocalManager.getInstance().reqQASubmit(this.orgId,mListSelect,getCallBack());
                 mReqList.add(seqNo);
             }else{
                 String tips = getResources().getString(R.string.qa_select_tips);

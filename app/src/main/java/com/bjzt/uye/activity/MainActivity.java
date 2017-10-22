@@ -1,5 +1,7 @@
 package com.bjzt.uye.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -32,6 +34,7 @@ public class MainActivity extends BaseActivity {
     private String KEY_IDNEX = "key_index";
 
     public static final int REQ_CODE_LOGIN = 0x10;
+    public static final int REQ_SEARCH = 0x11;
 
     @Override
     protected int getLayoutID() {
@@ -129,6 +132,18 @@ public class MainActivity extends BaseActivity {
         if(savedInstanceState != null){
             int index = savedInstanceState.getInt(KEY_IDNEX);
             mViewPager.setCurrentItem(index);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == Activity.RESULT_OK){
+            switch(requestCode){
+                case REQ_SEARCH:
+                    OtherController.getInstance().notifyRefresh();
+                    break;
+            }
         }
     }
 }

@@ -22,6 +22,7 @@ import com.bjzt.uye.util.StrUtil;
 import com.bjzt.uye.views.component.BlankEmptyView;
 import com.bjzt.uye.views.component.QAPublishCatView;
 import com.bjzt.uye.views.component.SearchHeader;
+import com.common.controller.LoginController;
 import com.common.msglist.MsgPage;
 import com.common.msglist.MsgPageBottomView;
 import com.common.msglist.NLPullRefreshView;
@@ -65,6 +66,7 @@ public class SearchActivity extends BaseActivity{
     private SearchAdapter mAdapter;
 
     private final int REQ_DATA_CHECK = 10;
+    private final int REQ_LOGIN = 11;
 
     @Override
     protected int getLayoutID() {
@@ -159,6 +161,9 @@ public class SearchActivity extends BaseActivity{
                         }
                         this.mAdapter.updatePageFlag(rspEntitiy.mEntity.page);
                         udpatePageStatus(false);
+                    }else{
+                        String tips = getResources().getString(R.string.search_result_empty);
+                        showToast(tips);
                     }
                 }else{
                     String tips = StrUtil.getErrorTipsByCode(errorCode,rspEntitiy);
@@ -181,7 +186,11 @@ public class SearchActivity extends BaseActivity{
                     //        this.orgId = "10049"; test code
                     String orgId = "10049";
 //                    orgId = pEntity.org_id;
-                    IntentUtils.startQAActivity(SearchActivity.this,orgId,REQ_DATA_CHECK);
+                    if(LoginController.getInstance().isLogin()){
+                        IntentUtils.startQAActivity(SearchActivity.this,orgId,REQ_DATA_CHECK);
+                    }else{
+                        IntentUtils.startLoginActivity(SearchActivity.this,LoginActivity.TYPE_PHONE_VERIFY_CODE,REQ_LOGIN);
+                    }
                     break;
             }
         }
@@ -259,9 +268,13 @@ public class SearchActivity extends BaseActivity{
                 case REQ_DATA_CHECK:
                     String tips = "申请成功~";
                     showToast(tips);
+                    setResult(Activity.RESULT_OK);
                     finish();
                     break;
             }
+        }else{
+            setResult(resultCode);
+            finish();
         }
     }
 }

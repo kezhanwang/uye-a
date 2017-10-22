@@ -171,7 +171,7 @@ public class TestActivity extends BaseActivity{
         btnSearch.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                IntentUtils.startSearchActivity(TestActivity.this);
+                IntentUtils.startSearchActivity(TestActivity.this,22);
             }
         });
 

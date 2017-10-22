@@ -30,6 +30,7 @@ public class IntentUtils {
     public static final String PARA_KEY_PUBLIC = "key_public";
     public static final String KEY_WEB_URL = "key_web_url";
     public static final String KEY_TITLE = "key_title";
+    public static final String KEY_PHONE = "key_phone";
 
     /**
      * 打开首页
@@ -130,9 +131,9 @@ public class IntentUtils {
      * 打开搜索页卡
      * @param mContext
      */
-    public static final void startSearchActivity(Activity mContext){
+    public static final void startSearchActivity(Activity mContext,int reqCode){
         Intent intent = new Intent(mContext, SearchActivity.class);
-        mContext.startActivity(intent);
+        mContext.startActivityForResult(intent,reqCode);
     }
 
     /***

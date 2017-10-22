@@ -346,9 +346,10 @@ public class ProtocalManager {
      * @param callBack
      * @return
      */
-    public int reqQASubmit(List<VQAItemEntity> mList,ICallBack<Object> callBack){
+    public int reqQASubmit(String orgId,List<VQAItemEntity> mList,ICallBack<Object> callBack){
         ReqQASubmitEntity reqEntity = new ReqQASubmitEntity();
         reqEntity.parseInfo(mList);
+        reqEntity.org_id = orgId;
         return addTask(reqEntity,callBack);
     }
 

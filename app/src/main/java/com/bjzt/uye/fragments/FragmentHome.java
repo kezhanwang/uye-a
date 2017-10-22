@@ -1,24 +1,18 @@
 package com.bjzt.uye.fragments;
 
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ScrollView;
 
 import com.bjzt.uye.R;
+import com.bjzt.uye.activity.MainActivity;
 import com.bjzt.uye.adapter.AdapterHome;
-import com.bjzt.uye.adapter.HomeAdAdapter;
 import com.bjzt.uye.controller.LBSController;
-import com.bjzt.uye.entity.PAdEntity;
-import com.bjzt.uye.entity.PHomeOrderEntity;
+import com.bjzt.uye.controller.OtherController;
 import com.bjzt.uye.fragments.base.BaseFragment;
 import com.bjzt.uye.http.ProtocalManager;
-import com.bjzt.uye.http.listener.ICallBack;
 import com.bjzt.uye.http.rsp.RspHomeEntity;
 import com.bjzt.uye.listener.IItemListener;
 import com.bjzt.uye.listener.IViewPagerListener;
@@ -26,9 +20,7 @@ import com.bjzt.uye.util.IntentUtils;
 import com.bjzt.uye.util.StrUtil;
 import com.bjzt.uye.views.component.BlankEmptyView;
 import com.bjzt.uye.views.component.HomeHeader;
-import com.bjzt.uye.views.component.HomeHeaderView;
 import com.bjzt.uye.views.component.HomeLocView;
-import com.bjzt.uye.views.component.HomeOrderInfoView;
 import com.common.controller.LoginController;
 import com.common.listener.ILoginListener;
 import com.common.msglist.MsgPage;
@@ -79,10 +71,17 @@ public class FragmentHome extends BaseFragment{
         mEmptyView.showLoadingState();
         LBSController.getInstance().registerListener(mLBSListener);
         LoginController.getInstance().registerListener(mLoginListener);
-
+        OtherController.getInstance().registerRefreshListener(mDataRefreshListener);
         int seqNo = ProtocalManager.getInstance().reqHomeInfo(getCallBack());
         mReqList.add(seqNo);
     }
+
+    private OtherController.DataRefreshListener mDataRefreshListener = new OtherController.DataRefreshListener(){
+        @Override
+        public void onRefresh() {
+            refreshListener.onRefresh(null);
+        }
+    };
 
     private ILoginListener mLoginListener = new ILoginListener() {
         @Override
@@ -108,6 +107,7 @@ public class FragmentHome extends BaseFragment{
         super.onDestroy();
         LBSController.getInstance().unRegisterListener(mLBSListener);
         LoginController.getInstance().unRegisterListener(mLoginListener);
+        OtherController.getInstance().unRegisterRefreshListener(mDataRefreshListener);
     }
 
     private IRefreshListener refreshListener = new IRefreshListener() {
@@ -124,7 +124,7 @@ public class FragmentHome extends BaseFragment{
             if(obj == mHeader){
                 switch(tag){
                     case HomeHeader.TAG_CONTENTS:
-                        IntentUtils.startSearchActivity(getActivity());
+                        IntentUtils.startSearchActivity(getActivity(),MainActivity.REQ_SEARCH);
                         break;
                     case HomeHeader.TAG_LOC:
                         showToast("开发中~");
@@ -133,6 +133,8 @@ public class FragmentHome extends BaseFragment{
                         showToast("开发中~");
                         break;
                 }
+            }else if(obj instanceof HomeLocView){
+                showToast("开发中~");
             }
         }
     };

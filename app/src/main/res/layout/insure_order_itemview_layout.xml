@@ -38,7 +38,7 @@
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="220dp"
+                android:layout_height="210dp"
                 android:layout_marginLeft="@dimen/common_margin_18"
                 android:layout_marginRight="@dimen/common_margin_18"
                 android:background="@drawable/round_rect_real_white_shape"
@@ -63,7 +63,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="32dp"
                     android:layout_alignParentRight="true"
-                    android:layout_alignTop="@id/order_title"
                     android:layout_marginRight="@dimen/common_margin"
                     android:textSize="15sp"
                     android:textColor="@color/common_font_3"
@@ -83,8 +82,8 @@
 
                 <ImageView
                     android:id="@+id/img_logo"
-                    android:layout_width="88dp"
-                    android:layout_height="61dp"
+                    android:layout_width="98dp"
+                    android:layout_height="72dp"
                     android:layout_marginLeft="@dimen/common_margin"
                     android:background="#f1f1f1"
                     android:layout_below="@id/order_divider_line"
@@ -95,9 +94,10 @@
                     android:id="@+id/txt_course_name"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:singleLine="true"
                     android:layout_toRightOf="@id/img_logo"
                     android:layout_marginLeft="@dimen/common_margin_6"
-                    android:layout_marginRight="@dimen/common_margin"
+                    android:layout_marginRight="@dimen/common_margin_4"
                     android:textColor="@color/common_font_3"
                     android:textSize="16sp"
                     android:text="北京樱花英语(中关村校区)"
@@ -140,6 +140,209 @@
                     android:textSize="16sp"
                     android:textColor="@color/common_font_3"
                     android:text="¥18000"
+                    />
+
+                    <Button
+                        android:id="@+id/btn_employ_pross"
+                        android:layout_width="80dp"
+                        android:layout_height="32dp"
+                        android:text="就业进展"
+                        android:textSize="14sp"
+                        android:textColor="@color/common_green"
+                        android:gravity="center"
+                        android:background="@drawable/rect_white_fill_green_border_shape"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="@dimen/common_margin"
+                        />
+
+                  <Button
+                      android:id="@+id/btn_employed"
+                      android:layout_width="80dp"
+                      android:layout_height="32dp"
+                      android:text="我已就业"
+                      android:textSize="14sp"
+                      android:textColor="@color/common_font_3"
+                      android:gravity="center"
+                      android:background="@drawable/rect_white_fill_black_border_shape"
+                      android:layout_toLeftOf="@id/btn_employ_pross"
+                      android:layout_marginRight="@dimen/common_margin_8"
+                      android:layout_alignTop="@id/btn_employ_pross"
+                      />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/common_margin_18"
+                android:layout_marginRight="@dimen/common_margin_18"
+                android:background="@drawable/round_rect_real_white_shape"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="@dimen/common_margin"
+                >
+
+                <TextView
+                    android:id="@+id/txt_tips_orderinfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="18dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/common_font_6"
+                    android:text="订单信息"
+                    android:layout_marginTop="@dimen/common_margin"
+                    android:layout_marginLeft="@dimen/common_margin"
+                    />
+
+                <View
+                    android:id="@+id/view_line"
+                    android:layout_height="1px"
+                    android:layout_width="fill_parent"
+                    android:layout_below="@id/txt_tips_orderinfo"
+                    android:background="@color/common_line_divider"
+                    android:layout_marginTop="@dimen/common_margin_6"
+                    ></View>
+
+
+                <TextView
+                    style="@style/txt_type_order_normal"
+                    android:id="@+id/txt_payout_tips"
+                    android:layout_below="@id/view_line"
+                    android:text="赔付上限"
+                    />
+
+                <TextView
+                    style="@style/txt_type_order_normal"
+                    android:id="@+id/txt_payout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/txt_payout_tips"
+                    android:layout_toRightOf="@id/txt_payout_tips"
+                    android:text="¥20000"
+                    android:layout_margin="0dp"
+                    />
+
+
+                <TextView
+                    style="@style/txt_type_order_normal"
+                    android:id="@+id/txt_tips_employ_date"
+                    android:layout_below="@id/txt_payout_tips"
+                    android:layout_marginLeft="0dp"
+                    android:layout_alignLeft="@id/txt_payout_tips"
+                    android:textColor="@color/common_green"
+                    android:text="择业日期"
+                    />
+
+                <TextView
+                    style="@style/txt_type_order_normal"
+                    android:id="@+id/txt_employ_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/txt_tips_employ_date"
+                    android:layout_alignLeft="@id/txt_payout"
+                    android:textColor="@color/common_green"
+                    android:text="2017.08.01~2017.10.1"
+                    android:layout_margin="0dp"
+                    />
+
+                <TextView
+                    style="@style/txt_type_order_normal"
+                    android:id="@+id/txt_tips_payout_date"
+                    android:layout_below="@id/txt_tips_employ_date"
+                    android:layout_alignLeft="@id/txt_tips_employ_date"
+                    android:layout_marginLeft="0dp"
+                    android:text="理赔日期"
+                    />
+
+                <TextView
+                    style="@style/txt_type_order_normal"
+                    android:id="@+id/txt_payout_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txt_tips_employ_date"
+                    android:layout_alignTop="@id/txt_tips_payout_date"
+                    android:layout_alignLeft="@id/txt_employ_date"
+                    android:text="2017.08.01~2017.10.1"
+                    android:layout_margin="0dp"
+                    />
+
+
+
+                <TextView
+                    android:id="@+id/txt_train_tips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="18dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/common_font_6"
+                    android:text="培训信息"
+                    android:layout_marginTop="@dimen/common_margin_18"
+                    android:layout_marginLeft="@dimen/common_margin"
+                    android:layout_below="@id/txt_payout_date"
+                    />
+
+                <View
+                    android:id="@+id/view_line_second"
+                    android:layout_height="1px"
+                    android:layout_width="fill_parent"
+                    android:layout_below="@id/txt_train_tips"
+                    android:background="@color/common_line_divider"
+                    android:layout_marginTop="@dimen/common_margin_6"
+                    ></View>
+
+
+                <TextView
+                    style="@style/txt_type_order_normal"
+                    android:id="@+id/txt_tips_train_date"
+                    android:layout_below="@id/view_line_second"
+                    android:layout_marginTop="@dimen/common_margin"
+                    android:textSize="15sp"
+                    android:text="培训日期"
+                    />
+
+                <TextView
+                    style="@style/txt_type_order_normal"
+                    android:id="@+id/txt_train_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/txt_tips_train_date"
+                    android:layout_toRightOf="@id/txt_tips_train_date"
+                    android:layout_margin="0dp"
+                    android:text="2017.08.01~2017.10.1"
+                    />
+
+                <TextView
+                    style="@style/txt_type_order_normal"
+                    android:id="@+id/txt_tips_retrain_date"
+                    android:layout_below="@id/txt_train_date"
+                    android:text="再培训日期"
+                    />
+
+                <TextView
+                    style="@style/txt_type_order_normal"
+                    android:id="@+id/txt_retrain_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/txt_train_date"
+                    android:layout_alignTop="@id/txt_tips_retrain_date"
+                    android:layout_margin="0dp"
+                    android:text="2017.08.01~2017.10.1"
+                    />
+
+                <TextView
+                    style="@style/txt_type_order_normal"
+                    android:id="@+id/txt_tips_gradu_date"
+                    android:layout_below="@id/txt_tips_retrain_date"
+                    android:text="结业日期"
+                    />
+
+                <TextView
+                    style="@style/txt_type_order_normal"
+                    android:id="@+id/txt_gradu_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/txt_retrain_date"
+                    android:layout_alignTop="@id/txt_tips_gradu_date"
+                    android:layout_margin="0dp"
+                    android:text="2017.08.01~2017.10.1"
                     />
 
             </RelativeLayout>

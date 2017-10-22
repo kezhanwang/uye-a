@@ -141,4 +141,16 @@ public class StrUtil {
         return builder;
     }
 
+    public static final String getInsureOrderSimple(String strInfo){
+        String result = "";
+        if(!TextUtils.isEmpty(strInfo) && strInfo.length() > 20){
+            int startIndex = strInfo.length() - 10;
+            result = strInfo.substring(startIndex);
+        }
+        return result;
+    }
+
+    public static final String getMoneyInfoByFen(long tution){
+        return "¥" + (tution / 100);
+    }
 }

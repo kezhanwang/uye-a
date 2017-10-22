@@ -76,7 +76,10 @@ public class FragmentUYe extends BaseFragment{
                 View mView = mViewPager.getChildAt(i);
                 if(mView instanceof InsureOrderItemView){
                     InsureOrderItemView itemView = (InsureOrderItemView) mView;
-                    itemView.setInfo(mAdapter.getList(),pEntity);
+                    PInsureOrderEntity mEntity = itemView.getMsgEntity();
+                    if(mEntity.p - 1 == position){
+                        itemView.reqInfo(pEntity);
+                    }
                 }
             }
         }
@@ -110,6 +113,7 @@ public class FragmentUYe extends BaseFragment{
                                 this.mAdapter = new UYeAdapter(Global.getContext(),mList);
                                 reSetRightTxtTips(PageType.FIRST_PAGE);
                                 this.mViewPager.setAdapter(this.mAdapter);
+                                this.mViewPager.setCurrentItem(0);
                             }else{
                                 mAdapter.reSetList(mList);
                             }

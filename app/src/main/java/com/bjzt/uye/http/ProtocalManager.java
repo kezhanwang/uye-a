@@ -3,6 +3,7 @@ package com.bjzt.uye.http;
 import android.text.TextUtils;
 
 import com.bjzt.uye.entity.PBankEntity;
+import com.bjzt.uye.entity.PIDentityInfoEntity;
 import com.bjzt.uye.entity.VQAItemEntity;
 import com.bjzt.uye.global.Global;
 import com.bjzt.uye.http.base.ReqBaseEntity;
@@ -201,36 +202,24 @@ public class ProtocalManager {
 
     /***
      * 提交身份信息
-     * @param name
-     * @param idCard
-     * @param idCardStart
-     * @param idCardEnd
-     * @param addr
-     * @param picFront
-     * @param picBack
-     * @param authMobile
-     * @param code
+     * @param mEntity
      * @param udOrder
      * @param callBack
      * @return
      */
-    public int reqIDentitySubmit(String name,String idCard,String idCardStart,String idCardEnd,
-                                 String addr,String picFront,String picBack,String authMobile,
-                                 String bankNo,PBankEntity bankEntity,
-                                 String code,String udOrder,ICallBack<Object> callBack
-    ){
+    public int reqIDentitySubmit(PIDentityInfoEntity mEntity,PBankEntity bankEntity, String udOrder,ICallBack<Object> callBack){
         ReqSubmitIDentityEntity reqEntity = new ReqSubmitIDentityEntity();
-        reqEntity.full_name = name;
-        reqEntity.id_card = idCard;
-        reqEntity.id_card_start = idCardStart;
-        reqEntity.id_card_end = idCardEnd;
-        reqEntity.id_card_address = addr;
-        reqEntity.id_card_info_pic = picFront;
-        reqEntity.id_card_nation_pic = picBack;
-        reqEntity.auth_mobile = authMobile;
-        reqEntity.bank_card_number = bankNo;
+        reqEntity.full_name = mEntity.full_name;
+        reqEntity.id_card = mEntity.id_card;
+        reqEntity.id_card_start = mEntity.id_card_start;
+        reqEntity.id_card_end = mEntity.id_card_end;
+        reqEntity.id_card_address = mEntity.id_card_address;
+        reqEntity.id_card_info_pic = mEntity.id_card_info_pic;
+        reqEntity.id_card_nation_pic = mEntity.id_card_nation_pic;
+        reqEntity.auth_mobile = mEntity.auth_mobile;
+        reqEntity.bank_card_number = mEntity.bank_card_number;
         reqEntity.open_bank_code = bankEntity.open_bank_code;
-        reqEntity.code = code;
+        reqEntity.code = mEntity.vCode;
         reqEntity.open_bank = bankEntity.open_bank;
         reqEntity.udcredit_order = udOrder;
         return addTask(reqEntity,callBack);

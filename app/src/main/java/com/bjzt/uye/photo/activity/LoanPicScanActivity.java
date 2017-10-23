@@ -86,7 +86,7 @@ public class LoanPicScanActivity extends BaseActivity implements View.OnClickLis
     }
 
     @Override
-    protected void initLayout() {
+    protected void initLayout(Bundle bundle) {
         mHeader = (YHeaderView) this.findViewById(R.id.header);
         mHeader.setIListener(new IHeaderListener() {
             @Override

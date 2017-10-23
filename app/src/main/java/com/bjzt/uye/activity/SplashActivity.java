@@ -33,7 +33,7 @@ public class SplashActivity extends BaseActivity{
     }
 
     @Override
-    protected void initLayout() {
+    protected void initLayout(Bundle bundle) {
 
     }
 

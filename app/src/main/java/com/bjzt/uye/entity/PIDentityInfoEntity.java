@@ -19,4 +19,8 @@ public class PIDentityInfoEntity implements Serializable{
     public String bank_card_number;
     public String open_bank_code;
     public String open_bank;
+
+    public boolean isSucc;
+    public String vMsg;
+    public String vCode;
 }

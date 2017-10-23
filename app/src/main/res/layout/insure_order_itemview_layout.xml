@@ -38,11 +38,12 @@
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="210dp"
+                android:layout_height="240dp"
                 android:layout_marginLeft="@dimen/common_margin_18"
                 android:layout_marginRight="@dimen/common_margin_18"
-                android:background="@drawable/round_rect_real_white_shape"
+                android:background="@drawable/order_item_bg_above"
                 android:layout_marginTop="32dp"
+                android:paddingTop="30dp"
                 >
 
                 <TextView
@@ -57,7 +58,6 @@
                     android:gravity="center"
                     />
 
-
                 <TextView
                     android:id="@+id/order_txt_status"
                     android:layout_width="wrap_content"
@@ -68,6 +68,7 @@
                     android:textColor="@color/common_font_3"
                     android:text="择业中"
                     android:gravity="center"
+                    android:layout_marginTop="@dimen/common_margin_4"
                     />
 
                 <View
@@ -153,7 +154,8 @@
                         android:background="@drawable/rect_white_fill_green_border_shape"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="@dimen/common_margin"
+                        android:layout_marginBottom="@dimen/common_margin_18"
+                        android:layout_marginRight="@dimen/common_margin"
                         />
 
                   <Button
@@ -174,20 +176,19 @@
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="310dp"
                 android:layout_marginLeft="@dimen/common_margin_18"
                 android:layout_marginRight="@dimen/common_margin_18"
-                android:background="@drawable/round_rect_real_white_shape"
-                android:layout_marginTop="8dp"
+                android:background="@drawable/order_item_bg_below"
+                android:paddingTop="@dimen/common_margin"
                 android:layout_marginBottom="@dimen/common_margin"
-                android:paddingBottom="@dimen/common_margin_6"
                 >
 
                 <TextView
                     android:id="@+id/txt_tips_orderinfo"
                     android:layout_width="wrap_content"
                     android:layout_height="18dp"
-                    android:textSize="15sp"
+                    android:textSize="16sp"
                     android:textColor="@color/common_font_6"
                     android:text="订单信息"
                     android:layout_marginTop="@dimen/common_margin"
@@ -266,13 +267,11 @@
                     android:layout_margin="0dp"
                     />
 
-
-
                 <TextView
                     android:id="@+id/txt_train_tips"
                     android:layout_width="wrap_content"
                     android:layout_height="18dp"
-                    android:textSize="15sp"
+                    android:textSize="16sp"
                     android:textColor="@color/common_font_6"
                     android:text="培训信息"
                     android:layout_marginTop="@dimen/common_margin_18"

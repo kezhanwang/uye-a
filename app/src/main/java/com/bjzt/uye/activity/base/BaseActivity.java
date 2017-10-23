@@ -31,12 +31,12 @@ public abstract class BaseActivity extends FragmentActivity {
         setContentView(getLayoutID());
         initExtras(savedInstanceState);
         bindView();
-        initLayout();
+        initLayout(savedInstanceState);
     }
 
     abstract protected int getLayoutID();
 
-    abstract  protected void initLayout();
+    abstract  protected void initLayout(Bundle bundle);
 
     abstract  protected  void initExtras(Bundle bundle);
 

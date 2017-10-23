@@ -76,7 +76,7 @@ public class DataCheckActivity extends BaseActivity implements View.OnClickListe
     }
 
     @Override
-    protected void initLayout() {
+    protected void initLayout(Bundle bundle) {
         mHeader.updateType(YHeaderView.TYPE_ABOUT);
         String title = getResources().getString(R.string.cash_data_title);
         mHeader.setTitle(title);

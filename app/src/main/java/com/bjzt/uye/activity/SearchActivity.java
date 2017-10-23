@@ -12,6 +12,7 @@ import com.bjzt.uye.activity.base.BaseActivity;
 import com.bjzt.uye.adapter.SearchAdapter;
 import com.bjzt.uye.entity.PAgencyEntity;
 import com.bjzt.uye.entity.POrganizeEntity;
+import com.bjzt.uye.global.MConfiger;
 import com.bjzt.uye.http.ProtocalManager;
 import com.bjzt.uye.http.rsp.RspSearchEntity;
 import com.bjzt.uye.http.rsp.RspSearchWEntity;
@@ -74,7 +75,7 @@ public class SearchActivity extends BaseActivity{
     }
 
     @Override
-    protected void initLayout() {
+    protected void initLayout(Bundle bundle) {
         mHeader.setISearchListener(new SearchHeader.ISearchListener() {
             @Override
             public void onSearch(String msg) {
@@ -83,6 +84,7 @@ public class SearchActivity extends BaseActivity{
 
             @Override
             public void onTxtCancle() {
+                setResult(Activity.RESULT_CANCELED);
                 finish();
             }
 
@@ -184,7 +186,7 @@ public class SearchActivity extends BaseActivity{
                     break;
                 case SearchItemView.SRC_BTN_OK:
                     //        this.orgId = "10049"; test code
-                    String orgId = "10049";
+                    String orgId = MConfiger.TEST_ORG_ID;
 //                    orgId = pEntity.org_id;
                     if(LoginController.getInstance().isLogin()){
                         IntentUtils.startQAActivity(SearchActivity.this,orgId,REQ_DATA_CHECK);

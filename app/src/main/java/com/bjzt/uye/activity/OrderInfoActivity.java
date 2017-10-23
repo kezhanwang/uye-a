@@ -106,7 +106,7 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
     }
 
     @Override
-    protected void initLayout() {
+    protected void initLayout(Bundle bundle) {
         mHeader.updateType(YHeaderView.TYPE_ABOUT);
         String title = getString(R.string.order_info_title);
         mHeader.setTitle(title);

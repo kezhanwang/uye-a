@@ -22,6 +22,7 @@ import com.bjzt.uye.controller.UploadPicController;
 import com.bjzt.uye.entity.PAuthFaceResultEntity;
 import com.bjzt.uye.entity.PBankEntity;
 import com.bjzt.uye.entity.PFaceVerifyEntity;
+import com.bjzt.uye.entity.PIDentityInfoEntity;
 import com.bjzt.uye.entity.PIDentityPicEntity;
 import com.bjzt.uye.entity.PicEntity;
 import com.bjzt.uye.entity.PicResultEntity;
@@ -121,6 +122,9 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
     private PFaceVerifyEntity pFaceVerifyEntity;
     private PIDentityPicEntity pFacePicEntity;
     private String orgId;
+    private final String KEY_ENTITY = "key_entity";
+    private final String KEY_BANK_ENTITY = "key_bank_entity";
+    private final String KEY_RSP_CFG = "key_rsp_cfg";
 
     @Override
     protected int getLayoutID() {
@@ -128,7 +132,7 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
     }
 
     @Override
-    protected void initLayout() {
+    protected void initLayout(Bundle bundle) {
         mHeader.updateType(YHeaderView.TYPE_RIGHT_TXT);
         String title = getString(R.string.apply_id_title);
         mHeader.setTitle(title);
@@ -260,13 +264,80 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
 
         btnOk.setOnClickListener(this);
 
-        //设置图片
+        //设置图片上传监听器
         UploadPicController.getInstance().setUploadListener(uploadListener);
 //        mEmptyView.showLoadingState();
 //        int seqNo = ProtocalManager.getInstance().reqFaceVerifyCfg(getCallBack());
 //        mReqList.add(seqNo);
-        int seqNo = ProtocalManager.getInstance().reqIDentityCfg(getCallBack());
-        mReqList.add(seqNo);
+
+        if(bundle != null){
+            PBankEntity bankEntity = (PBankEntity) bundle.getSerializable(KEY_BANK_ENTITY);
+            if(bankEntity != null){
+                this.mBankEntitySelect = bankEntity;
+            }
+            PIDentityInfoEntity pEntity = (PIDentityInfoEntity) bundle.getSerializable(KEY_ENTITY);
+            if(pEntity != null){
+                initParamsNormal(pEntity);
+            }
+            //init rsp cfg
+            RspIDentityCfgEntity rspEntity = (RspIDentityCfgEntity) bundle.getSerializable(KEY_RSP_CFG);
+            if(rspEntity != null){
+                this.mRspEntity = rspEntity;
+            }
+        }else{
+            int seqNo = ProtocalManager.getInstance().reqIDentityCfg(getCallBack());
+            mReqList.add(seqNo);
+        }
+    }
+
+    private void initParamsNormal(PIDentityInfoEntity pEntity){
+        //init name
+        String name = pEntity.full_name;
+        setItemViewVal(itemName,name);
+        //init id number
+        String idNumber = pEntity.id_card;
+        setItemViewVal(itemID,idNumber);
+        //init id card date start
+        String idDateStart = pEntity.id_card_start;
+        setItemViewVal(itemStart,idDateStart);
+        //init id card date end
+        String idDateEnd = pEntity.id_card_end;
+        setItemViewVal(itemEnd,idDateEnd);
+        //init id addr
+        String strAddr = pEntity.id_card_address;
+        setItemViewVal(itemAddr,strAddr);
+        //id card pic front
+        String picFront = pEntity.id_card_info_pic;
+        if(!TextUtils.isEmpty(picFront)){
+            photoViewFront.updatePicInfo(this,picFront,true);
+        }
+        //id card pic bank
+        String picBack = pEntity.id_card_nation_pic;
+        if(!TextUtils.isEmpty(picBack)){
+            photoViewBack.updatePicInfo(this,picBack,true);
+        }
+        //bank card no
+        String bankCardNum = pEntity.bank_card_number;
+        setItemViewVal(itemBankCard,bankCardNum);
+        //bank name
+        if(mBankEntitySelect != null){
+            String bankName = pEntity.open_bank;
+            setItemViewVal(itemBank,bankName);
+        }
+        //手机号码
+        String strPhone = itemPhone.getInputTxt();
+        setItemViewVal(itemPhone,strPhone);
+        //验证码
+        String strCode = itemVerify.getInputTxt();
+        setItemViewVal(itemVerify,strCode);
+    }
+
+    private void setItemViewVal(ItemView itemView,String strInfo){
+        if(!TextUtils.isEmpty(strInfo)){
+            itemView.setEditTxt(strInfo);
+        }else{
+            itemView.setEditTxt("");
+        }
     }
 
     private IUploadListener uploadListener = new IUploadListener() {
@@ -713,79 +784,19 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
     @Override
     public void onClick(View view) {
         if(view == this.btnOk){
-            String strName = itemName.getInputTxt();
-            if(TextUtils.isEmpty(strName)){
-                String tips = getString(R.string.apply_id_input_name);
+            PIDentityInfoEntity pEntity = buildAuthFaceEntity(true);
+            if(!pEntity.isSucc){
+                String tips = pEntity.vMsg;
                 showToast(tips);
-                return;
-            }
-            String strIDNo = itemID.getInputTxt();
-            if(TextUtils.isEmpty(strIDNo)){
-                String tips = getString(R.string.apply_id_tips_input_idno);
-                showToast(tips);
-                return;
-            }
-            String strDateStart = itemStart.getInputTxt();
-            if(TextUtils.isEmpty(strDateStart)){
-                String tips = getString(R.string.apply_id_tips_input_start);
-                showToast(tips);
-                return;
-            }
-            String strDateEnd = itemEnd.getInputTxt();
-            if(TextUtils.isEmpty(strDateEnd)){
-                String tips = getString(R.string.apply_id_tips_input_end);
-                showToast(tips);
-                return;
-            }
-            String strAddr = itemAddr.getInputTxt();
-            if(TextUtils.isEmpty(strAddr)){
-                String tips = getString(R.string.apply_id_tips_input_addr);
-                showToast(tips);
-                return;
-            }
-            String picUrlFront = photoViewFront.getUrl();
-            if(TextUtils.isEmpty(picUrlFront)){
-                String tips = getResources().getString(R.string.apply_id_tips_front);
-                showToast(tips);
-                return;
-            }
-            String picUrlBack = photoViewBack.getUrl();
-            if(TextUtils.isEmpty(picUrlBack)){
-                String tips = getString(R.string.apply_id_tips_back);
-                showToast(tips);
-                return;
-            }
-            String strBankNo = itemBankCard.getInputTxt();
-            if(TextUtils.isEmpty(strBankNo)){
-               String tips = getString(R.string.apply_id_tips_input_bankno);
-                showToast(tips);
-                return;
-            }
-            if(mBankEntitySelect == null){
-                String tips = getString(R.string.apply_id_input_bankname);
-                showToast(tips);
-                return;
-            }
-            String strPhone = itemPhone.getInputTxt();
-            if(TextUtils.isEmpty(strPhone)){
-                String tips = getString(R.string.apply_id_inputphone);
-                showToast(tips);
-                return;
-            }
-            String strVerifyCode = itemVerify.getInputTxt();
-            if(TextUtils.isEmpty(strVerifyCode)){
-                String tips = getString(R.string.apply_id_input_verifycode);
-                showToast(tips);
-                return;
-            }
-            String udOrder = "";
+            }else{
+                String udOrder = "";
 //            if(pFaceVerifyEntity != null){
 //                udOrder = pFaceVerifyEntity.user_id;
 //            }
-            showLoading();
-            int seqNo = ProtocalManager.getInstance().reqIDentitySubmit(strName,strIDNo,strDateStart,strDateEnd,strAddr,
-                    picUrlFront,picUrlBack,strPhone,strBankNo,mBankEntitySelect,strVerifyCode,udOrder,getCallBack());
-            mReqList.add(seqNo);
+                showLoading();
+                int seqNo = ProtocalManager.getInstance().reqIDentitySubmit(pEntity,mBankEntitySelect,udOrder,getCallBack());
+                mReqList.add(seqNo);
+            }
         }
     }
 
@@ -807,6 +818,114 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
                     showToast(tips);
                 }
             }
+        }
+    }
+
+    //PAuthFaceResultEntity
+    private PIDentityInfoEntity buildAuthFaceEntity(boolean isInterrupt){
+        PIDentityInfoEntity mEntity = new PIDentityInfoEntity();
+        //name
+        String strName = itemName.getInputTxt();
+        mEntity.full_name = strName;
+        if(isInterrupt && TextUtils.isEmpty(strName)){
+            String tips = getString(R.string.apply_id_input_name);
+            mEntity.vMsg = tips;
+            return mEntity;
+        }
+        //init ID number
+        String strIDNumm = itemID.getInputTxt();
+        mEntity.id_card = strIDNumm;
+        if(isInterrupt && TextUtils.isEmpty(strIDNumm)){
+            String tips = getString(R.string.apply_id_tips_input_idno);
+            mEntity.vMsg = tips;
+            return mEntity;
+        }
+        //init ID date start
+        String strDateStart = itemStart.getInputTxt();
+        mEntity.id_card_start = strDateStart;
+        if(isInterrupt && TextUtils.isEmpty(strDateStart)){
+            String tips = getString(R.string.apply_id_tips_input_start);
+            mEntity.vMsg = tips;
+            return mEntity;
+        }
+        //init ID date end
+        String strDateEnd = itemEnd.getInputTxt();
+        mEntity.id_card_end = strDateEnd;
+        if(isInterrupt && TextUtils.isEmpty(strDateEnd)){
+            String tips = getString(R.string.apply_id_tips_input_end);
+            mEntity.vMsg = tips;
+            return mEntity;
+        }
+        //init addr
+        String strAddr = itemAddr.getInputTxt();
+        mEntity.id_card_address = strAddr;
+        if(isInterrupt && TextUtils.isEmpty(strAddr)){
+            String tips = getString(R.string.apply_id_tips_input_addr);
+            mEntity.vMsg = tips;
+            return mEntity;
+        }
+        //证件照片正面照
+        String idPic = photoViewFront.getUrl();
+        mEntity.id_card_info_pic = idPic;
+        if(isInterrupt && TextUtils.isEmpty(idPic)){
+            String tips = getString(R.string.apply_id_tips_front);
+            mEntity.vMsg = tips;
+            return mEntity;
+        }
+        //证件国徽照
+        String idPicBack = photoViewBack.getUrl();
+        mEntity.id_card_nation_pic = idPicBack;
+        if(isInterrupt && TextUtils.isEmpty(idPicBack)){
+            String tips = getString(R.string.apply_id_tips_back);
+            mEntity.vMsg = tips;
+            return mEntity;
+        }
+        //银行卡号
+        String bankNumber = itemBankCard.getInputTxt();
+        mEntity.bank_card_number = bankNumber;
+        if(isInterrupt && TextUtils.isEmpty(bankNumber)){
+            String tips = getResources().getString(R.string.apply_id_tips_input_bankno);
+            mEntity.vMsg = tips;
+            return mEntity;
+        }
+        //开户行
+        String strBankName = itemBank.getInputTxt();
+        mEntity.open_bank = strBankName;
+        if(isInterrupt && TextUtils.isEmpty(strBankName)){
+            String tips = getResources().getString(R.string.apply_id_input_bankname);
+            mEntity.vMsg = tips;
+            return mEntity;
+        }
+        //手机号码
+        String strPhone = itemPhone.getInputTxt();
+        mEntity.auth_mobile = strPhone;
+        if(isInterrupt && TextUtils.isEmpty(strPhone)){
+            String tips = getResources().getString(R.string.apply_id_inputphone);
+            mEntity.vMsg = tips;
+            return mEntity;
+        }
+        //验证码
+        String strVerCode = itemVerify.getInputTxt();
+        mEntity.vCode = strVerCode;
+        if(isInterrupt && TextUtils.isEmpty(strVerCode)){
+            String tips = getResources().getString(R.string.apply_id_input_verifycode);
+            mEntity.vMsg = tips;
+            return mEntity;
+        }
+        mEntity.isSucc = true;
+        return mEntity;
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        PIDentityInfoEntity pEntity = buildAuthFaceEntity(false);
+        outState.putSerializable(KEY_ENTITY,pEntity);
+        if(mBankEntitySelect != null){
+            outState.putSerializable(KEY_BANK_ENTITY,pEntity);
+        }
+        if(mRspEntity != null){
+            outState.putSerializable(KEY_RSP_CFG,mRspEntity);
         }
     }
 }

@@ -65,7 +65,7 @@ public class QAActivity extends BaseActivity implements  View.OnClickListener{
     }
 
     @Override
-    protected void initLayout() {
+    protected void initLayout(Bundle bundle) {
         mHeader.updateType(YHeaderView.TYPE_ABOUT);
         mHeader.setIListener(new IHeaderListener() {
             @Override

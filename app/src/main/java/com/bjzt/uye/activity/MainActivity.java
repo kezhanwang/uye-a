@@ -35,6 +35,7 @@ public class MainActivity extends BaseActivity {
 
     public static final int REQ_CODE_LOGIN = 0x10;
     public static final int REQ_SEARCH = 0x11;
+    public static final int REQ_START_APPLY = 0x12;
 
     @Override
     protected int getLayoutID() {
@@ -42,7 +43,7 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    protected void initLayout(){
+    protected void initLayout(Bundle bundle){
         mTabHost = findViewById(android.R.id.tabhost);
         mTabHost.setup();
         mTabsAdapter = new TabsAdapter(this, mTabHost, mViewPager);
@@ -142,6 +143,10 @@ public class MainActivity extends BaseActivity {
             switch(requestCode){
                 case REQ_SEARCH:
                     OtherController.getInstance().notifyRefresh();
+                    break;
+                case REQ_START_APPLY:
+                    String tips = "申请成功~";
+                    showToast(tips);
                     break;
             }
         }

@@ -51,7 +51,7 @@ public class LoanPhotoAlblumActivity extends BaseActivity{
 		ThreadPool.getInstance().submmitJob(rLoad);
 	}
 
-	protected void initLayout(){
+	protected void initLayout(Bundle bundle){
 		mHeader = (YHeaderView) this.findViewById(R.id.header);
 		String str = getResources().getString(R.string.loan_alblum);
 		mHeader.setTitle(str);

@@ -76,7 +76,7 @@ public class TestActivity extends BaseActivity{
         return R.layout.activity_test_layout;
     }
 
-    protected void initLayout(){
+    protected void initLayout(Bundle bundle){
         btnLoc.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {

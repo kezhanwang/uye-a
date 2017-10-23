@@ -54,7 +54,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     }
 
     @Override
-    protected void initLayout() {
+    protected void initLayout(Bundle bundle) {
         String title = getResources().getString(R.string.reg_header_title);
         mHeader.updateType(YHeaderView.TYPE_ABOUT);
         mHeader.setTitle(title);

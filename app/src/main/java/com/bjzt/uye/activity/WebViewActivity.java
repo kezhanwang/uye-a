@@ -57,7 +57,7 @@ public class WebViewActivity extends BaseActivity{
     }
 
     @Override
-    protected void initLayout() {
+    protected void initLayout(Bundle bundle) {
         mHeader.updateType(YHeaderView.TYPE_ABOUT);
         String title = getResources().getString(R.string.webview_title);
         if(!TextUtils.isEmpty(mTitle)){

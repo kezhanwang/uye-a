@@ -1,5 +1,6 @@
 package com.bjzt.uye.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -7,11 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bjzt.uye.R;
+import com.bjzt.uye.activity.LoginActivity;
 import com.bjzt.uye.activity.MainActivity;
+import com.bjzt.uye.activity.SearchActivity;
 import com.bjzt.uye.adapter.AdapterHome;
 import com.bjzt.uye.controller.LBSController;
 import com.bjzt.uye.controller.OtherController;
+import com.bjzt.uye.entity.PHomeEntity;
 import com.bjzt.uye.fragments.base.BaseFragment;
+import com.bjzt.uye.global.MConfiger;
 import com.bjzt.uye.http.ProtocalManager;
 import com.bjzt.uye.http.rsp.RspHomeEntity;
 import com.bjzt.uye.listener.IItemListener;
@@ -51,6 +56,7 @@ public class FragmentHome extends BaseFragment{
 
     private AdapterHome mAdapter;
     private List<Integer> mReqList = new ArrayList<Integer>();
+    private PHomeEntity pEntity;
 
     @Nullable
     @Override
@@ -134,7 +140,28 @@ public class FragmentHome extends BaseFragment{
                         break;
                 }
             }else if(obj instanceof HomeLocView){
-                showToast("开发中~");
+                Activity ac = getActivity();
+                switch(tag){
+                    case HomeLocView.TAG_BTN_SIGN:
+                        if(pEntity != null){
+                            if(ac != null){
+                                if(LoginController.getInstance().isLogin()){
+                                    IntentUtils.startQAActivity(ac,MConfiger.TEST_ORG_ID,MainActivity.REQ_START_APPLY);
+                                }else{
+                                    IntentUtils.startLoginActivity(ac, LoginActivity.TYPE_PHONE_VERIFY_CODE,MainActivity.REQ_CODE_LOGIN);
+                                }
+                            }
+                        }else{
+                            String tips = getContext().getResources().getString(R.string.common_cfg_error);
+                            showToast(tips);
+                        }
+                        break;
+                    case HomeLocView.TAG_TXT_BTN_LOC:
+                        if(ac != null){
+                            IntentUtils.startSearchActivity(getActivity(),MainActivity.REQ_SEARCH);
+                        }
+                        break;
+                }
             }
         }
     };
@@ -154,6 +181,7 @@ public class FragmentHome extends BaseFragment{
                 RspHomeEntity rspEntity = (RspHomeEntity) rsp;
                 if(isSucc){
                     if(rspEntity.mEntity != null){
+                        this.pEntity = rspEntity.mEntity;
                         //set loc
                         LBSController.getInstance().setLocStr(rspEntity.mEntity.loaction);
                         mEmptyView.loadSucc();

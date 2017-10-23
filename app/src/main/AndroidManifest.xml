@@ -45,7 +45,7 @@
         >
 
         <!-- 使用百度地图，需要添加 AppKey 到清单文件中 1CkOO1AFCDvUNorueroIO9dI -->
-        <meta-data android:name="com.baidu.lbsapi.API_KEY" android:value="X9ZV13XO3tDbN9bl1qz17NbnsLYqhPqT"/>
+        <meta-data android:name="com.baidu.lbsapi.API_KEY" android:value="DbKbEh8KjoUidyHZKOIbGkrn5NVrqVd2"/>
 
         <activity
             android:name=".activity.TestActivity"

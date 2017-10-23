@@ -1,5 +1,7 @@
 package com.bjzt.uye.entity;
 
+import android.text.TextUtils;
+
 import java.io.Serializable;
 
 /**
@@ -23,4 +25,14 @@ public class PIDentityInfoEntity implements Serializable{
     public boolean isSucc;
     public String vMsg;
     public String vCode;
+
+    public PBankEntity buildBankEntity(){
+        PBankEntity mEntity = null;
+        if(!TextUtils.isEmpty(open_bank) && !TextUtils.isEmpty(open_bank_code)){
+            mEntity = new PBankEntity();
+            mEntity.open_bank = this.open_bank;
+            mEntity.open_bank_code = this.open_bank_code;
+        }
+        return mEntity;
+    }
 }

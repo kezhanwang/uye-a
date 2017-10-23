@@ -227,7 +227,7 @@ public class BindCardPhotoView extends RelativeLayout implements NoConfusion,Vie
             this.imgView.setVisibility(View.GONE);
             this.mRelaContent.setVisibility(View.VISIBLE);
             this.imgContent.setVisibility(View.VISIBLE);
-            PicController.getInstance().showPic(imgView,pic);
+            PicController.getInstance().showPic(imgContent,pic);
         }else{
             this.imgView.setVisibility(View.VISIBLE);
             this.mRelaContent.setVisibility(View.GONE);

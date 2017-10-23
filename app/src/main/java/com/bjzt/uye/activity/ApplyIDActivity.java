@@ -32,6 +32,7 @@ import com.bjzt.uye.http.ProtocalManager;
 import com.bjzt.uye.http.listener.IUploadListener;
 import com.bjzt.uye.http.rsp.RspFaceVerifyCfgEntity;
 import com.bjzt.uye.http.rsp.RspIDentityCfgEntity;
+import com.bjzt.uye.http.rsp.RspIDentityInfoEntity;
 import com.bjzt.uye.http.rsp.RspIDentityPicEntity;
 import com.bjzt.uye.http.rsp.RspPhoneVerifyEntity;
 import com.bjzt.uye.http.rsp.RspSubmitIDentityEntity;
@@ -103,7 +104,7 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
     private DialogDateSelector mDialogDate;
     private int cnt = 1;
     private int MAX_CNT = 10;
-    private int DELAY  = 1000 * 2;
+    private int DELAY  = 1500;
 
     private final int FLAG_AUTH = 0x10;
     private final int FLAG_VERIFY_ERROR = 0x11;
@@ -125,6 +126,7 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
     private final String KEY_ENTITY = "key_entity";
     private final String KEY_BANK_ENTITY = "key_bank_entity";
     private final String KEY_RSP_CFG = "key_rsp_cfg";
+    private final String KEY_RSP_FACE_AUTH = "key_face_auth_rsp";
 
     @Override
     protected int getLayoutID() {
@@ -266,9 +268,6 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
 
         //设置图片上传监听器
         UploadPicController.getInstance().setUploadListener(uploadListener);
-//        mEmptyView.showLoadingState();
-//        int seqNo = ProtocalManager.getInstance().reqFaceVerifyCfg(getCallBack());
-//        mReqList.add(seqNo);
 
         if(bundle != null){
             PBankEntity bankEntity = (PBankEntity) bundle.getSerializable(KEY_BANK_ENTITY);
@@ -277,12 +276,17 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
             }
             PIDentityInfoEntity pEntity = (PIDentityInfoEntity) bundle.getSerializable(KEY_ENTITY);
             if(pEntity != null){
-                initParamsNormal(pEntity);
+                initParamsNormal(pEntity,this.mBankEntitySelect);
             }
             //init rsp cfg
             RspIDentityCfgEntity rspEntity = (RspIDentityCfgEntity) bundle.getSerializable(KEY_RSP_CFG);
             if(rspEntity != null){
                 this.mRspEntity = rspEntity;
+            }
+            //init face auth rsp
+            PFaceVerifyEntity pFaceVerifyEntity = (PFaceVerifyEntity) bundle.getSerializable(KEY_RSP_FACE_AUTH);
+            if(pFaceVerifyEntity != null){
+                this.pFaceVerifyEntity = pFaceVerifyEntity;
             }
         }else{
             int seqNo = ProtocalManager.getInstance().reqIDentityCfg(getCallBack());
@@ -290,7 +294,7 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
         }
     }
 
-    private void initParamsNormal(PIDentityInfoEntity pEntity){
+    private void initParamsNormal(PIDentityInfoEntity pEntity,PBankEntity mBankEntity){
         //init name
         String name = pEntity.full_name;
         setItemViewVal(itemName,name);
@@ -320,15 +324,15 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
         String bankCardNum = pEntity.bank_card_number;
         setItemViewVal(itemBankCard,bankCardNum);
         //bank name
-        if(mBankEntitySelect != null){
+        if(mBankEntity != null){
             String bankName = pEntity.open_bank;
             setItemViewVal(itemBank,bankName);
         }
         //手机号码
-        String strPhone = itemPhone.getInputTxt();
+        String strPhone = pEntity.auth_mobile;
         setItemViewVal(itemPhone,strPhone);
         //验证码
-        String strCode = itemVerify.getInputTxt();
+        String strCode = pEntity.vCode;
         setItemViewVal(itemVerify,strCode);
     }
 
@@ -521,6 +525,11 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
         hideDialogDateSelector();
     }
 
+    /***
+     * 云慧眼返回数据设置
+     * @param entity
+     * @param isEditable
+     */
     private void initParmas(PAuthFaceResultEntity entity,boolean isEditable){
         //init name
         String name = entity.id_name;
@@ -537,21 +546,26 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
         //init addr
         String strAddr = entity.addr_card;
         itemAddr.setEditTxt(strAddr);
-        //id card front 身份证件正面照
-        String picFont = "";
-        String picBack = "";
-        if(pFacePicEntity != null){
-            picFont = pFacePicEntity.id_card_info_pic;
-            picBack = pFacePicEntity.id_card_nation_pic;
-        }
-        if(!TextUtils.isEmpty(picFont) && !TextUtils.isEmpty(picBack)){
+        //id card front 身份证件正面照 照片请求
+        if(pFaceVerifyEntity != null && !TextUtils.isEmpty(pFaceVerifyEntity.order)){
             String tips = getResources().getString(R.string.common_pic_requesting);
             showLoading(tips);
-            int seqNo = ProtocalManager.getInstance().reqIDentityPic(null,getCallBack());
-            mReqList.add(seqNo);
+            String strOrder = pFaceVerifyEntity.order;
             Message msg = Message.obtain();
             msg.what = FLAG_PIC_INFO;
-            sendMsgDelay(msg,DELAY);
+            msg.obj = strOrder;
+            sendMsg(msg);
+        }
+    }
+
+    private void initPicInfo(PIDentityPicEntity mEntity){
+        String picFont = mEntity.id_card_info_pic;
+        if(!TextUtils.isEmpty(picFont)){
+            photoViewFront.updatePicInfo(this,picFont,true);
+        }
+        String picBack = mEntity.id_card_nation_pic;
+        if(!TextUtils.isEmpty(picBack)){
+            photoViewBack.updatePicInfo(this,picBack,true);
         }
     }
 
@@ -598,7 +612,8 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
                 }
                 break;
             case FLAG_PIC_INFO:
-                int seqNo = ProtocalManager.getInstance().reqIDentityPic(null,getCallBack());
+                String orderInfo = (String) msg.obj;
+                int seqNo = ProtocalManager.getInstance().reqIDentityPic(orderInfo,getCallBack());
                 mReqList.add(seqNo);
                 break;
         }
@@ -609,7 +624,13 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
         super.onRsp(rsp, isSucc, errorCode, seqNo, src);
         if(mReqList.contains(Integer.valueOf(seqNo))){
             hideLoadingDialog();
-            if(rsp instanceof RspFaceVerifyCfgEntity){
+            if(rsp instanceof RspIDentityInfoEntity){
+                RspIDentityInfoEntity rspEntity = (RspIDentityInfoEntity) rsp;
+                if(isSucc && rspEntity.mEntity != null){
+                    mBankEntitySelect = rspEntity.mEntity.buildBankEntity();
+                    initParamsNormal(rspEntity.mEntity,mBankEntitySelect);
+                }
+            }else if(rsp instanceof RspFaceVerifyCfgEntity){
                 RspFaceVerifyCfgEntity rspEntity = (RspFaceVerifyCfgEntity) rsp;
                 if(isSucc){
                     if(rspEntity.mEntity != null){
@@ -628,19 +649,21 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
                 if(isSucc){
                     if(rspEntity != null && rspEntity.mList != null && rspEntity.mList.size() > 0){
                         this.mRspEntity = rspEntity;
+                        String tips = getResources().getString(R.string.apply_id_tips_requesting_user_cfg);
+                        showLoading(tips);
+                        seqNo = ProtocalManager.getInstance().reqIDentifyInfo(getCallBack());
+                        mReqList.add(seqNo);
                     }else{
                         String tips = getResources().getString(R.string.common_cfg_error);
-                        showDialogCfg(tips);
+                        showDialogCfg(tips,false);
                     }
                 }else{
                     String tips = StrUtil.getErrorTipsByCode(errorCode,rspEntity);
-                    showDialogCfg(tips);
+                    showDialogCfg(tips,false);
                 }
             }else if(rsp instanceof RspPhoneVerifyEntity){
                 RspPhoneVerifyEntity rspEntity = (RspPhoneVerifyEntity) rsp;
-                if(isSucc){
-
-                }else{
+                if(!isSucc){
                     String tips = StrUtil.getErrorTipsByCode(errorCode,rspEntity);
                     showToast(tips);
                 }
@@ -652,15 +675,19 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
                     if(rspEntity.mEntity != null && rspEntity.mEntity.isLegal()){
                         this.pFacePicEntity = rspEntity.mEntity;
                         succ = true;
+                        initPicInfo(rspEntity.mEntity);
                     }
-                }else{
-
                 }
                 if(cnt <= MAX_CNT && !succ){
                     String tips = getResources().getString(R.string.common_pic_requesting,cnt);
                     showLoading(tips,false);
                     Message msg = Message.obtain();
+                    String orderInfo = null;
+                    if(pFaceVerifyEntity != null){
+                        orderInfo = pFaceVerifyEntity.order;
+                    }
                     msg.what = FLAG_PIC_INFO;
+                    msg.obj = orderInfo;
                     sendMsgDelay(msg,DELAY);
                 }
             }else if(rsp instanceof RspSubmitIDentityEntity){
@@ -676,10 +703,11 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
         }
     }
 
-    private void showDialogCfg(String tips){
+    private void showDialogCfg(String tips,boolean isCancleable){
         hideDialogCfg();
         this.mDialogCfg = new DialogConfirmSingle(this,R.style.MyDialog);
         this.mDialogCfg.show();
+        this.mDialogCfg.setMCancleable(isCancleable);
         this.mDialogCfg.updateType(DialogConfirmSingle.TYPE_CONTACTLIST_CFG);
         this.mDialogCfg.setIBtnListener(new IItemListener() {
             @Override
@@ -702,9 +730,6 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
         String orderId = pEntity.order;
         String authKey = pEntity.key;
         String notifyUrl = pEntity.notify_url;
-        if(TextUtils.isEmpty(notifyUrl)){
-            notifyUrl = HttpEngine.getInstance().getRefer(NetCommon.NET_INTERFACE_TYPE_UYE);
-        }
         MyLog.d(TAG,"[openFaceAuth]" + " orderId:" + orderId + " authKey:" + authKey + " notifyUrl:" + notifyUrl + " userId:" + pEntity.user_id);
         AuthBuilder builder = new AuthBuilder(orderId, authKey, notifyUrl,mUDListener);
         builder.faceAuth(ApplyIDActivity.this);
@@ -790,9 +815,9 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
                 showToast(tips);
             }else{
                 String udOrder = "";
-//            if(pFaceVerifyEntity != null){
-//                udOrder = pFaceVerifyEntity.user_id;
-//            }
+                if(pFaceVerifyEntity != null){
+                    udOrder = pFaceVerifyEntity.order;
+                }
                 showLoading();
                 int seqNo = ProtocalManager.getInstance().reqIDentitySubmit(pEntity,mBankEntitySelect,udOrder,getCallBack());
                 mReqList.add(seqNo);
@@ -926,6 +951,9 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
         }
         if(mRspEntity != null){
             outState.putSerializable(KEY_RSP_CFG,mRspEntity);
+        }
+        if(this.pFaceVerifyEntity != null){
+            outState.putSerializable(KEY_RSP_FACE_AUTH,this.pFaceVerifyEntity);
         }
     }
 }

@@ -11,5 +11,5 @@ public class PFaceVerifyEntity implements Serializable{
     public String order;
     public String user_id;
     public String notify_url;
-    public String safe_mode;
+    public int safe_mode;
 }

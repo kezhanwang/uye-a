@@ -61,7 +61,7 @@ public class IntentUtils {
      * @param mContext
      */
     public static final void startMainActivity(Context mContext){
-        startMainActivity(mContext,true);
+        startMainActivity(mContext,false);
     }
 
     /***

@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import com.bjzt.uye.entity.PInsureOrderEntity;
 import com.bjzt.uye.entity.PInsureOrderItemEntity;
+import com.bjzt.uye.listener.IItemListener;
 import com.bjzt.uye.msglist.itemview.InsureOrderItemView;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import java.util.List;
 public class UYeAdapter extends PagerAdapter{
     private List<PInsureOrderEntity> mList;
     private Context mContext;
+    private IItemListener mListener;
 
     public UYeAdapter(Context mContext,List<PInsureOrderEntity> mList){
         this.mList = mList;
@@ -31,6 +33,10 @@ public class UYeAdapter extends PagerAdapter{
             return mList.get(pos);
         }
         return null;
+    }
+
+    public void setListener(IItemListener mListener){
+        this.mListener = mListener;
     }
 
     public void reSetList(List<PInsureOrderEntity> mList){
@@ -62,6 +68,7 @@ public class UYeAdapter extends PagerAdapter{
         PInsureOrderEntity mEntity = mList.get(position);
         InsureOrderItemView view = new InsureOrderItemView(this.mContext);
         view.setInfo(mList,mEntity);
+        view.setIItemListener(this.mListener);
         container.addView(view);
         return view;
     }

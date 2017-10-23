@@ -16,6 +16,7 @@ import com.bjzt.uye.fragments.base.BaseFragment;
 import com.bjzt.uye.global.Global;
 import com.bjzt.uye.http.ProtocalManager;
 import com.bjzt.uye.http.rsp.RspOrderListEntity;
+import com.bjzt.uye.listener.IItemListener;
 import com.bjzt.uye.msglist.itemview.InsureOrderItemView;
 import com.bjzt.uye.util.IntentUtils;
 import com.bjzt.uye.util.StrUtil;
@@ -132,6 +133,18 @@ public class FragmentUYe extends BaseFragment{
         mHeader.setRightTxt(tips);
     }
 
+    private IItemListener mItemListener = new IItemListener() {
+        @Override
+        public void onItemClick(Object obj, int tag) {
+            switch(tag){
+                case InsureOrderItemView.SRC_EMPLOYED:
+                case InsureOrderItemView.SRC_EMPOY_PROGRESS:
+                    showToast("开发中~");
+                    break;
+            }
+        }
+    };
+
     @Override
     protected void onRsp(Object rsp, boolean isSucc, int errorCode, int seqNo, int src) {
         super.onRsp(rsp, isSucc, errorCode, seqNo, src);
@@ -146,6 +159,7 @@ public class FragmentUYe extends BaseFragment{
                             mViewPager.setVisibility(View.VISIBLE);
                             if(this.mAdapter == null){
                                 this.mAdapter = new UYeAdapter(Global.getContext(),mList);
+                                this.mAdapter.setListener(mItemListener);
                                 reSetRightTxtTips(PageType.FIRST_PAGE);
                                 this.mViewPager.setAdapter(this.mAdapter);
                                 this.mViewPager.setCurrentItem(0);

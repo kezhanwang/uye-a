@@ -68,11 +68,11 @@ android {
         preDexLibraries = false
     }
 
-    lintOptions {
-        quiet true
-        abortOnError false
-        ignoreWarnings true
-    }
+//    lintOptions {
+//        quiet true
+//        abortOnError false
+//        ignoreWarnings true
+//    }
 
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES.txt'
@@ -92,6 +92,8 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:multidex:1.0.1'
+
     compile(name: 'udidsafe-V4.0-2017_08_21', ext: 'aar')
     apt 'com.jakewharton:butterknife-compiler:8.3.0'
     compile 'com.jakewharton:butterknife:8.3.0'

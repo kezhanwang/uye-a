@@ -59,4 +59,7 @@
     <color name="loan_ablum_font_color_nor">#a1a1a1</color>
     <color name="loan_ablum_rela_bg_color_press">#e1e1e1</color>
 
+    <!--人脸识别SDK header bar颜色-->
+    <color name="super_real_nav_bar">@color/common_green</color>
+
 </resources>

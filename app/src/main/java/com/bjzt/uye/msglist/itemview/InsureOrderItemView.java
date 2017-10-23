@@ -57,10 +57,16 @@ public class InsureOrderItemView extends LinearLayout implements  View.OnClickLi
     TextView mTxtEmployDate;
     @BindView(R.id.txt_payout_date)
     TextView mTxtPayoutDate;
+    @BindView(R.id.txt_tips_train_date)
+    TextView mTxtTrainDateTitle;
     @BindView(R.id.txt_train_date)
     TextView mTxtTrainDate;
+    @BindView(R.id.txt_tips_retrain_date)
+    TextView mTxtReTrainDateTitle;
     @BindView(R.id.txt_retrain_date)
     TextView mTxtReTrainDate;
+    @BindView(R.id.txt_tips_gradu_date)
+    TextView mTxtEndTrainDateTitle;
     @BindView(R.id.txt_gradu_date)
     TextView mTxtEndTrainDate;
 
@@ -151,12 +157,29 @@ public class InsureOrderItemView extends LinearLayout implements  View.OnClickLi
             PTrainEntity pTrain = this.mEntity.insured_order.train;
             if(pTrain != null){
                 mTxtTrainDate.setText(pTrain.first_train);
-                mTxtReTrainDate.setText(pTrain.second_train);
-                mTxtEndTrainDate.setText(pTrain.end_train);
+                if(!TextUtils.isEmpty(pTrain.second_train)){
+                    mTxtReTrainDateTitle.setVisibility(View.VISIBLE);
+                    mTxtReTrainDate.setVisibility(View.VISIBLE);
+                    mTxtReTrainDate.setText(pTrain.second_train);
+                }else{
+                    mTxtReTrainDateTitle.setVisibility(View.INVISIBLE);
+                    mTxtReTrainDate.setVisibility(View.INVISIBLE);
+                }
+                if(!TextUtils.isEmpty(pTrain.end_train)){
+                    mTxtEndTrainDateTitle.setVisibility(View.VISIBLE);
+                    mTxtEndTrainDate.setVisibility(View.VISIBLE);
+                    mTxtEndTrainDate.setText(pTrain.end_train);
+                }else{
+                    mTxtEndTrainDateTitle.setVisibility(View.INVISIBLE);
+                    mTxtEndTrainDate.setVisibility(View.INVISIBLE);
+                }
             }else{
-                mTxtTrainDate.setText("");
-                mTxtReTrainDate.setText("");
-                mTxtEndTrainDate.setText("");
+                mTxtTrainDateTitle.setVisibility(View.INVISIBLE);
+                mTxtTrainDate.setVisibility(View.INVISIBLE);
+                mTxtReTrainDateTitle.setVisibility(View.INVISIBLE);
+                mTxtReTrainDate.setVisibility(View.INVISIBLE);
+                mTxtEndTrainDateTitle.setVisibility(View.INVISIBLE);
+                mTxtEndTrainDate.setVisibility(View.INVISIBLE);
             }
         }
     }

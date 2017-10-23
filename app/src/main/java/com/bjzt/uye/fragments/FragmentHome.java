@@ -146,7 +146,7 @@ public class FragmentHome extends BaseFragment{
                         if(pEntity != null){
                             if(ac != null){
                                 if(LoginController.getInstance().isLogin()){
-                                    IntentUtils.startQAActivity(ac,MConfiger.TEST_ORG_ID,MainActivity.REQ_START_APPLY);
+                                    IntentUtils.startApplyFirstTransActivity(ac,MConfiger.TEST_ORG_ID,MainActivity.REQ_START_APPLY);
                                 }else{
                                     IntentUtils.startLoginActivity(ac, LoginActivity.TYPE_PHONE_VERIFY_CODE,MainActivity.REQ_CODE_LOGIN);
                                 }

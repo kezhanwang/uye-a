@@ -54,6 +54,7 @@ public class QAActivity extends BaseActivity implements  View.OnClickListener{
     private QAAdapter mAdapter;
 
     private String orgId;
+    private RspQACfgEntity mRspEntity;
     private List<Integer> mReqList = new ArrayList<>();
     private List<VQAItemEntity> mListSelect = new ArrayList<>();
 
@@ -80,11 +81,17 @@ public class QAActivity extends BaseActivity implements  View.OnClickListener{
 
         btnOk.setOnClickListener(this);
 
-        mScrollView.setVisibility(View.GONE);
-        mEmptyView.setVisibility(View.VISIBLE);
-        mEmptyView.showLoadingState();
-        int seqNo = ProtocalManager.getInstance().reqQACfg(this.orgId,getCallBack());
-        mReqList.add(seqNo);
+        if(this.mRspEntity != null && this.mRspEntity.mEntity != null){
+            mScrollView.setVisibility(View.VISIBLE);
+            mEmptyView.loadSucc();
+            initParams(this.mRspEntity.mEntity.questions);
+        }else{
+            mScrollView.setVisibility(View.GONE);
+            mEmptyView.setVisibility(View.VISIBLE);
+            mEmptyView.showLoadingState();
+            int seqNo = ProtocalManager.getInstance().reqQACfg(this.orgId,getCallBack());
+            mReqList.add(seqNo);
+        }
     }
 
     @Override
@@ -172,6 +179,7 @@ public class QAActivity extends BaseActivity implements  View.OnClickListener{
     protected void initExtras(Bundle bundle) {
         Intent intent = getIntent();
         this.orgId = intent.getStringExtra(IntentUtils.PARA_KEY_PUBLIC);
+        this.mRspEntity = (RspQACfgEntity) intent.getSerializableExtra(IntentUtils.PARA_KEY_DATA);
     }
 
     @Override
@@ -203,12 +211,12 @@ public class QAActivity extends BaseActivity implements  View.OnClickListener{
             finish();
         }
     }
-
-    @Override
-    public void finish() {
-        super.finish();
-        //关闭窗体动画显示
-        this.overridePendingTransition(R.anim.activity_left_in, R.anim.activity_right_out);
-    }
+//
+//    @Override
+//    public void finish() {
+//        super.finish();
+//        //关闭窗体动画显示
+//        this.overridePendingTransition(R.anim.activity_left_in, R.anim.activity_right_out);
+//    }
 
 }

@@ -169,6 +169,12 @@
             android:theme="@style/Theme.Youye"
             ></activity>
 
+        <!--开始进入到申请流程-->
+        <activity android:name=".activity.ApplyFirstTransferActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="standard"
+            android:theme="@style/Theme.YouyeTrans"
+            ></activity>
     <!--===========================================相关配置SDK============================ -->
     <service
         android:name="com.baidu.location.f"

@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 
+import com.bjzt.uye.activity.ApplyFirstTransferActivity;
 import com.bjzt.uye.activity.ApplyIDActivity;
 import com.bjzt.uye.activity.DataCheckActivity;
 import com.bjzt.uye.activity.LoginActivity;
@@ -16,6 +17,7 @@ import com.bjzt.uye.activity.QAActivity;
 import com.bjzt.uye.activity.RegisterActivity;
 import com.bjzt.uye.activity.SearchActivity;
 import com.bjzt.uye.activity.WebViewActivity;
+import com.bjzt.uye.http.rsp.RspQACfgEntity;
 import com.bjzt.uye.photo.activity.LoanPhotoAlblumActivity;
 import com.bjzt.uye.photo.activity.LoanPicScanActivity;
 import com.common.common.MyLog;
@@ -31,6 +33,7 @@ public class IntentUtils {
     private static final String TAG = "IntentUtils";
 
     public static final String PARA_KEY_PUBLIC = "key_public";
+    public static final String PARA_KEY_DATA = "key_data";
     public static final String KEY_WEB_URL = "key_web_url";
     public static final String KEY_TITLE = "key_title";
     public static final String KEY_PHONE = "key_phone";
@@ -205,6 +208,20 @@ public class IntentUtils {
         mContext.startActivityForResult(intent,requestCode);
     }
 
+    /**
+     * 跳转到调查问卷
+     * @param mContext
+     * @param orgId
+     * @param rspEntity
+     * @param reqCode
+     */
+    public static final void startQAActivity(Activity mContext, String orgId, RspQACfgEntity  rspEntity,int reqCode){
+        Intent intent = new Intent(mContext, QAActivity.class);
+        intent.putExtra(IntentUtils.PARA_KEY_PUBLIC,orgId);
+        intent.putExtra(IntentUtils.PARA_KEY_DATA,rspEntity);
+        mContext.startActivityForResult(intent,reqCode);
+    }
+
     /***
      * 打开系统相册
      */
@@ -244,4 +261,15 @@ public class IntentUtils {
         }
     }
 
+    /***
+     * 开始进入到申请流程
+     * @param mContext
+     * @param orgId
+     * @param reqCode
+     */
+    public static final void startApplyFirstTransActivity(Activity mContext,String orgId,int reqCode){
+        Intent intent = new Intent(mContext, ApplyFirstTransferActivity.class);
+        intent.putExtra(IntentUtils.PARA_KEY_PUBLIC,orgId);
+        mContext.startActivityForResult(intent,reqCode);
+    }
 }

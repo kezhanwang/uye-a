@@ -189,7 +189,8 @@ public class SearchActivity extends BaseActivity{
                     String orgId = MConfiger.TEST_ORG_ID;
 //                    orgId = pEntity.org_id;
                     if(LoginController.getInstance().isLogin()){
-                        IntentUtils.startQAActivity(SearchActivity.this,orgId,REQ_DATA_CHECK);
+//                        IntentUtils.startQAActivity(SearchActivity.this,orgId,REQ_DATA_CHECK);
+                        IntentUtils.startApplyFirstTransActivity(SearchActivity.this,orgId,REQ_DATA_CHECK);
                     }else{
                         IntentUtils.startLoginActivity(SearchActivity.this,LoginActivity.TYPE_PHONE_VERIFY_CODE,REQ_LOGIN);
                     }

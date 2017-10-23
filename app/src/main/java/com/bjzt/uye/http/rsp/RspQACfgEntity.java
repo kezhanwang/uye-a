@@ -8,13 +8,15 @@ import com.bjzt.uye.http.base.RspBaseEntity;
 import com.google.gson.Gson;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by billy on 2017/10/21.
  */
 
-public class RspQACfgEntity extends RspBaseEntity{
+public class RspQACfgEntity extends RspBaseEntity implements Serializable{
     public PQACfgEnttiy mEntity;
 
     @Override

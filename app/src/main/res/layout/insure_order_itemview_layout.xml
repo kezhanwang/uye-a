@@ -42,7 +42,7 @@
                 android:layout_marginLeft="@dimen/common_margin_18"
                 android:layout_marginRight="@dimen/common_margin_18"
                 android:background="@drawable/order_item_bg_above"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="@dimen/common_margin_18"
                 android:paddingTop="30dp"
                 >
 

@@ -18,7 +18,7 @@
     <string name="common_cfg_error">配置下发错误</string>
     <string name="common_course_empty">课程列表无数据</string>
     <string name="common_request_succ">提交成功</string>
-    <string name="common_money_info">¥%s</string>
+    <string name="common_money_info">¥%d</string>
     <string name="common_cfg_empty">暂无配置信息</string>
 
     <!--tab目录-->

@@ -16,6 +16,7 @@ import com.bjzt.uye.activity.base.BaseActivity;
 import com.bjzt.uye.activity.dialog.DialogBankList;
 import com.bjzt.uye.activity.dialog.DialogConfirmSingle;
 import com.bjzt.uye.activity.dialog.DialogDateSelector;
+import com.bjzt.uye.activity.dialog.DialogIDGuide;
 import com.bjzt.uye.activity.dialog.DialogPicSelect;
 import com.bjzt.uye.controller.AuthFaceController;
 import com.bjzt.uye.controller.UploadPicController;
@@ -27,6 +28,7 @@ import com.bjzt.uye.entity.PIDentityPicEntity;
 import com.bjzt.uye.entity.PicEntity;
 import com.bjzt.uye.entity.PicResultEntity;
 import com.bjzt.uye.entity.VDateEntity;
+import com.bjzt.uye.file.SharePreID;
 import com.bjzt.uye.global.Global;
 import com.bjzt.uye.http.ProtocalManager;
 import com.bjzt.uye.http.listener.IUploadListener;
@@ -102,6 +104,8 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
     private DialogConfirmSingle mDialogCfg;
     private DialogBankList mDialogBankList;
     private DialogDateSelector mDialogDate;
+    private DialogIDGuide mDialogGuide;
+
     private int cnt = 1;
     private int MAX_CNT = 10;
     private int DELAY  = 1500;
@@ -113,6 +117,7 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
     private final int FLAG_SHOW_TOAST = 0x14;
     private final int FLAG_FILL_BITMAP = 0x15;
     private final int FLAG_PIC_INFO = 0x16;
+    private final int FLAG_DIALOG_GUIDE = 0x17;
 
     private final int SRC_ID_START = 1;
     private final int SRC_ID_END = 2;
@@ -140,19 +145,7 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
         mHeader.setTitle(title);
         String txtRight = getString(R.string.apply_id_start_rec);
         mHeader.setRightTxt(txtRight);
-        mHeader.setIListener(new IHeaderListener() {
-            @Override
-            public void onLeftClick() {
-                finish();
-            }
-
-            @Override
-            public void onRightClick() {
-                showLoading();
-                int seqNo = ProtocalManager.getInstance().reqFaceVerifyCfg(getCallBack());
-                mReqList.add(seqNo);
-            }
-        });
+        mHeader.setIListener(mHeaderListener);
 
         //init name
         String hint = getString(R.string.apply_id_input_name);
@@ -223,7 +216,7 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
             @Override
             public void onClick(View view) {
                 if(mRspEntity != null && mRspEntity.mList != null && mRspEntity.mList.size() > 0){
-                    showDialogBankList(mRspEntity.mList);
+                    showDialogBankList(mRspEntity.mList,mBankEntitySelect);
                 }else{
                     String tips = "银行列表为空~";
                     showToast(tips);
@@ -251,6 +244,7 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
                     showToast(tips);
                     return;
                 }
+                itemPhone.startTimerDown();
                 showLoading();
                 int seqNo = ProtocalManager.getInstance().reqPhoneVerify(strTel,getCallBack());
                 mReqList.add(seqNo);
@@ -293,6 +287,20 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
             mReqList.add(seqNo);
         }
     }
+
+    private IHeaderListener mHeaderListener = new IHeaderListener() {
+        @Override
+        public void onLeftClick() {
+            finish();
+        }
+
+        @Override
+        public void onRightClick() {
+            showLoading();
+            int seqNo = ProtocalManager.getInstance().reqFaceVerifyCfg(getCallBack());
+            mReqList.add(seqNo);
+        }
+    };
 
     private void initParamsNormal(PIDentityInfoEntity pEntity,PBankEntity mBankEntity){
         //init name
@@ -448,7 +456,7 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
         }
     }
 
-    private void showDialogBankList(List<PBankEntity> mList){
+    private void showDialogBankList(List<PBankEntity> mList,PBankEntity mEntity){
         hideDialogBankList();
         this.mDialogBankList = new DialogBankList(this,R.style.MyDialogBg);
         this.mDialogBankList.show();
@@ -467,6 +475,7 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
             }
         });
         this.mDialogBankList.setInfo(mList);
+        this.mDialogBankList.setSelectInfo(mEntity);
     }
 
     private void hideDialogBankList(){
@@ -517,12 +526,33 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
         }
     }
 
+    private void showDialogGuide(){
+        hideDialogGuide();
+        this.mDialogGuide = new DialogIDGuide(this,R.style.MyDialogBg);
+        this.mDialogGuide.show();
+        this.mDialogGuide.setListener(new IItemListener() {
+            @Override
+            public void onItemClick(Object obj, int tag) {
+                hideDialogGuide();
+                mHeaderListener.onRightClick();
+            }
+        });
+    }
+
+    private void hideDialogGuide(){
+        if(this.mDialogGuide != null){
+            this.mDialogGuide.dismiss();
+            this.mDialogGuide = null;
+        }
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         hideDialogPicSelect();
         hideDialogCfg();
         hideDialogDateSelector();
+        hideDialogGuide();
     }
 
     /***
@@ -616,8 +646,26 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
                 int seqNo = ProtocalManager.getInstance().reqIDentityPic(orderInfo,getCallBack());
                 mReqList.add(seqNo);
                 break;
+            case FLAG_DIALOG_GUIDE:
+                showDialogGuide();
+                break;
         }
     }
+
+    private Runnable rDelay = new Runnable() {
+        @Override
+        public void run() {
+            SharePreID mSharePre = new SharePreID();
+            boolean isFirst = mSharePre.loadFirstFlag();
+            if(isFirst){
+//                Message msg = Message.obtain();
+//                msg.what = FLAG_DIALOG_GUIDE;
+//                sendMsg(msg);
+
+                mSharePre.saveFirstFlag(false);
+            }
+        }
+    };
 
     @Override
     protected void onRsp(Object rsp, boolean isSucc, int errorCode, int seqNo, int src) {
@@ -626,7 +674,7 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
             hideLoadingDialog();
             if(rsp instanceof RspIDentityInfoEntity){
                 RspIDentityInfoEntity rspEntity = (RspIDentityInfoEntity) rsp;
-                if(isSucc && rspEntity.mEntity != null){
+                if(isSucc && rspEntity.mEntity != null && rspEntity.mEntity.isOkay()){
                     mBankEntitySelect = rspEntity.mEntity.buildBankEntity();
                     initParamsNormal(rspEntity.mEntity,mBankEntitySelect);
                 }
@@ -653,6 +701,7 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
                         showLoading(tips);
                         seqNo = ProtocalManager.getInstance().reqIDentifyInfo(getCallBack());
                         mReqList.add(seqNo);
+                        Global.postDelay(rDelay);
                     }else{
                         String tips = getResources().getString(R.string.common_cfg_error);
                         showDialogCfg(tips,false);
@@ -705,7 +754,7 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
 
     private void showDialogCfg(String tips,boolean isCancleable){
         hideDialogCfg();
-        this.mDialogCfg = new DialogConfirmSingle(this,R.style.MyDialog);
+        this.mDialogCfg = new DialogConfirmSingle(this,R.style.MyDialogBg);
         this.mDialogCfg.show();
         this.mDialogCfg.setMCancleable(isCancleable);
         this.mDialogCfg.updateType(DialogConfirmSingle.TYPE_CONTACTLIST_CFG);

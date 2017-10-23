@@ -11,8 +11,8 @@ import java.io.Serializable;
 
 public class PHomeOrderEntity implements Serializable,BaseItemListener{
     public String compensation;
-    public String count;
-    public String paid_compensation;
+    public int count;
+    public int paid_compensation;
 
     @Override
     public int getType() {

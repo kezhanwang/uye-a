@@ -35,4 +35,8 @@ public class PIDentityInfoEntity implements Serializable{
         }
         return mEntity;
     }
+
+    public boolean isOkay(){
+        return !TextUtils.isEmpty(uid) && !TextUtils.isEmpty(full_name) && !TextUtils.isEmpty(id_card);
+    }
 }

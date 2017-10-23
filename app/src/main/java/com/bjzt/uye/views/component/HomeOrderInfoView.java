@@ -73,11 +73,11 @@ public class HomeOrderInfoView extends BaseItemView<PHomeOrderEntity> implements
         relaRight.setOnClickListener(this);
     }
 
-    public void setInfo(String strMax,String orderCnt,String payOut){
+    public void setInfo(String strMax,int orderCnt,int payOut){
         if(!TextUtils.isEmpty(strMax)){
             mTxtMaxP.setText(strMax);
         }
-        mTxtOrderCnt.setText(orderCnt);
+        mTxtOrderCnt.setText(orderCnt+"");
         Context mContext = getContext();
         String strPayout = mContext.getResources().getString(R.string.common_money_info,payOut);
         mTxtPayOut.setText(strPayout);

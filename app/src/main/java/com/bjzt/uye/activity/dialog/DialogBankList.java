@@ -75,4 +75,18 @@ public class DialogBankList extends Dialog {
     public void setIItemListener(IItemListener mItemListener){
         this.mItemListener = mItemListener;
     }
+
+    public void setSelectInfo(PBankEntity mEntity){
+        if(mEntity != null && this.mAdapter != null){
+            for(int i = 0;i < this.mAdapter.getCount();i++){
+                PBankEntity pEntity = (PBankEntity) this.mAdapter.getItem(i);
+                if(pEntity.open_bank_code.equals(mEntity.open_bank_code)){
+                    pEntity.vIsSelected = true;
+                }else{
+                    pEntity.vIsSelected = false;
+                }
+            }
+            mAdapter.notifyDataSetChanged();
+        }
+    }
 }

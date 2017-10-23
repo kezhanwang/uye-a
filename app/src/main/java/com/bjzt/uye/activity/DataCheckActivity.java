@@ -112,6 +112,7 @@ public class DataCheckActivity extends BaseActivity implements View.OnClickListe
             }
         });
         itemContact.updateTailContent(true);
+        itemContact.setVisibility(View.GONE);
 
         //个人经历
         itemExperience.updateType(DataCheckItemView.TYPE_EXPERIENCE);
@@ -122,6 +123,7 @@ public class DataCheckActivity extends BaseActivity implements View.OnClickListe
             }
         });
         itemExperience.updateTailContent(true);
+        itemExperience.setVisibility(View.GONE);
 
         //芝麻信用
         itemSesame.updateType(DataCheckItemView.TYPE_SESAME);

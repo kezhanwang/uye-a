@@ -134,6 +134,7 @@ public class DataCheckActivity extends BaseActivity implements View.OnClickListe
             }
         });
         itemSesame.updateTailContent(true);
+        itemSesame.setVisibility(View.GONE);
 
         btnOk.setOnClickListener(this);
 

@@ -171,6 +171,7 @@ public class HttpUtils {
         final DefaultHttpClient client = getApiHttpClient();
         //每次请求client的cookieStore，免得服务器的cookie覆盖了客户端的cookie
         client.getCookieStore().clear();
+        client.setCookieStore(null);
         String refer = HttpEngine.getInstance().getRefer(interfaceType);
         HttpPost httpPost = null;
         if(isForceUse){

@@ -7,6 +7,7 @@ import com.bjzt.uye.entity.PIDentityInfoEntity;
 import com.bjzt.uye.entity.VOrderInfoEntity;
 import com.bjzt.uye.entity.VQAItemEntity;
 import com.bjzt.uye.global.Global;
+import com.bjzt.uye.global.MConfiger;
 import com.bjzt.uye.http.base.ReqBaseEntity;
 import com.bjzt.uye.http.base.TaskCommonV2;
 import com.bjzt.uye.http.listener.ICallBack;
@@ -30,6 +31,7 @@ import com.bjzt.uye.http.req.ReqSearchEntity;
 import com.bjzt.uye.http.req.ReqSearchHotWEntity;
 import com.bjzt.uye.http.req.ReqSubmitIDentityEntity;
 import com.bjzt.uye.http.req.ReqUInfoEntity;
+import com.bjzt.uye.http.req.ReqUpgradeEntity;
 import com.bjzt.uye.http.req.ReqUploadPhoneListEntity;
 import com.common.http.HttpEngine;
 
@@ -345,6 +347,17 @@ public class ProtocalManager {
         ReqOrderListEntity reqEntity = new ReqOrderListEntity();
         reqEntity.page = page;
         reqEntity.pageSize = 10;
+        return addTask(reqEntity,callBack);
+    }
+
+    /***
+     * 获取升级配置
+     * @param callBack
+     * @return
+     */
+    public int reqUpgradeInfo(ICallBack<Object> callBack){
+        ReqUpgradeEntity reqEntity = new ReqUpgradeEntity();
+        reqEntity.version_code = MConfiger.VERSION;
         return addTask(reqEntity,callBack);
     }
 }

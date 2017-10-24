@@ -24,12 +24,13 @@ import java.util.List;
  * Created by diaosi on 2017/2/27.
  * 银行列表dialog
  */
-public class DialogBankList extends Dialog {
+public class DialogBankList extends Dialog implements View.OnClickListener{
     protected ListView mListView;
     protected BankListAdapter mAdapter;
     protected IItemListener mItemListener;
     protected RelativeLayout mRelaMain;
     protected TextView mTxtTitle;
+    protected TextView mTxtCancle;
 
     public DialogBankList(Context context, int theme) {
         super(context, theme);
@@ -51,6 +52,7 @@ public class DialogBankList extends Dialog {
 
         LayoutInflater li = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View mView = li.inflate(R.layout.cash_dialog_banklist_layout,null);
+        this.mTxtCancle = mView.findViewById(R.id.txt_cancle);
         this.mRelaMain = mView.findViewById(R.id.rela_main);
         this.mTxtTitle = mView.findViewById(R.id.title);
         this.mListView = mView.findViewById(R.id.dialog_bank_listview);
@@ -59,6 +61,8 @@ public class DialogBankList extends Dialog {
         ViewGroup.LayoutParams llp = new ViewGroup.LayoutParams(mWidth, mHeight);
         setContentView(mView, llp);
         this.getWindow().setGravity(Gravity.BOTTOM);
+
+        mTxtCancle.setOnClickListener(this);
     }
 
     public void setInfo(List<PBankEntity> mList){
@@ -87,6 +91,13 @@ public class DialogBankList extends Dialog {
                 }
             }
             mAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v == this.mTxtCancle){
+            dismiss();
         }
     }
 }

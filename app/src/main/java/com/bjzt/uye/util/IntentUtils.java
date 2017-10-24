@@ -272,4 +272,20 @@ public class IntentUtils {
         intent.putExtra(IntentUtils.PARA_KEY_PUBLIC,orgId);
         mContext.startActivityForResult(intent,reqCode);
     }
+
+
+    /*****
+     * 下载apk
+     * @param mContext
+     * @param downLoadUrl
+     */
+    public static final void startDownLoadApk(Context mContext,String downLoadUrl){
+        Intent intent= new Intent();
+        intent.setAction("android.intent.action.VIEW");
+        Uri content_url = Uri.parse(downLoadUrl);
+        intent.setData(content_url);
+        mContext.startActivity(intent);
+    }
+
+
 }

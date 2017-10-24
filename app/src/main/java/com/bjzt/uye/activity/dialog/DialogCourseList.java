@@ -23,10 +23,18 @@ public class DialogCourseList extends DialogBankList{
         super(context, theme);
     }
 
-    public void setCourseList(List<PCourseEntity> mList){
+    public void setCourseList(List<PCourseEntity> mList,PCourseEntity pSelectCourse){
         int cnt = 0;
         if(mList != null){
             cnt = mList.size();
+            if(pSelectCourse != null){
+                for(int i = 0;i < mList.size();i++){
+                    PCourseEntity pEntity = mList.get(i);
+                    if(pEntity != null && pEntity.c_id.equals(pSelectCourse.c_id)){
+                        pEntity.vIsSelected = true;
+                    }
+                }
+            }
         }
         if(mAdapter == null){
             mAdapter = new DCourseListAdapter(mList);
@@ -48,7 +56,6 @@ public class DialogCourseList extends DialogBankList{
         llp.height = (int) h;
         mRelaMain.setLayoutParams(llp);
 
-        //
         String title = "选择课程";
         this.mTxtTitle.setText(title);
     }

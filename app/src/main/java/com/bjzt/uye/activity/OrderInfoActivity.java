@@ -1,6 +1,7 @@
 package com.bjzt.uye.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -139,7 +140,7 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
             @Override
             public void onClick(View view) {
                 if(mRspEntity != null && mRspEntity.mEntity != null && mRspEntity.mEntity.courses != null && mRspEntity.mEntity.courses.size() > 0){
-                    showDialogCourseList(mRspEntity.mEntity.courses);
+                    showDialogCourseList(mRspEntity.mEntity.courses,mCourseEntitySelect);
                 }else{
                     String tips = getResources().getString(R.string.common_course_empty);
                     showToast(tips);
@@ -351,11 +352,18 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
     private IItemListener mPhotoViewListener = new IItemListener() {
         @Override
         public void onItemClick(Object obj, int tag) {
+            Context mContext = Global.getContext();
             if(tag == BindCardPhotoView.TAG_TYPE_IMG_ADD){
                 if(obj == photoViewHold){
                     showDialogPicSelect(REQ_CODE_HOLD);
                 }else if(obj == photoViewProtocal){
                     showDialogPicSelect(REQ_CODE_PROTOCAL);
+                }
+            }else if(tag == BindCardPhotoView.TAG_TYPE_CLOSE){
+                if(obj == photoViewHold){
+                    photoViewHold.updatePicInfo(mContext,null,true);
+                }else if(obj == photoViewProtocal){
+                    photoViewProtocal.updatePicInfo(mContext,null,true);
                 }
             }
         }
@@ -637,7 +645,7 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
         }
     }
 
-    private void showDialogCourseList(List<PCourseEntity> mList){
+    private void showDialogCourseList(List<PCourseEntity> mList,PCourseEntity mPSelectCourse){
         hideDialogCourseList();
         this.mDialogCourse = new DialogCourseList(this,R.style.MyDialogBg);
         this.mDialogCourse.show();
@@ -651,7 +659,7 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
                 hideDialogCourseList();
             }
         });
-        this.mDialogCourse.setCourseList(mList);
+        this.mDialogCourse.setCourseList(mList,mPSelectCourse);
     }
 
     private void hideDialogCourseList(){

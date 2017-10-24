@@ -18,6 +18,18 @@
         android:textColor="@color/common_font_3"
         />
 
+    <TextView
+        android:id="@+id/txt_cancle"
+        android:layout_width="92dp"
+        android:layout_height="@dimen/cash_bind_card_title_height"
+        android:background="@drawable/more_setting_bg_selector"
+        android:layout_alignParentRight="true"
+        android:textSize="16sp"
+        android:textColor="@color/common_green"
+        android:gravity="center"
+        android:text="@string/cancle"
+        />
+
     <View
         android:id="@+id/dialog_banklist_line"
         android:layout_height="1px"

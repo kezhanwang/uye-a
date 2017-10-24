@@ -15,7 +15,7 @@
     <dimen name="common_margin_10">10dp</dimen>
 
     <dimen name="common_font_size_16">16sp</dimen>
-
+    <dimen name="common_font_size_17">17sp</dimen>
     <!--header相关-->
     <dimen name="header_bar_height">52dp</dimen>
     <dimen name="headerview_height">120dp</dimen>
@@ -125,5 +125,12 @@
     <dimen name="orderinfo_img_width">12.5dp</dimen>
     <dimen name="orderinfo_title_width">76dp</dimen>
     <dimen name="orderinfo_title_width_max">80dp</dimen>
+
+    <!--升级对话框-->
+    <dimen name="dialog_upgrade_title_txt_size">15sp</dimen>
+    <dimen name="dialog_upgrade_time_txt_size">13sp</dimen>
+    <dimen name="dialog_upgrade_btn_txt_size">17sp</dimen>
+    <dimen name="dialog_uograde_padding">10dp</dimen>
+    <dimen name="dialog_upgrade_line_height">2px</dimen>
 
 </resources>

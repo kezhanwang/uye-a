@@ -20,6 +20,7 @@ import com.bjzt.uye.http.rsp.RspSearchEntity;
 import com.bjzt.uye.http.rsp.RspSearchWEntity;
 import com.bjzt.uye.http.rsp.RspSubmitIDentityEntity;
 import com.bjzt.uye.http.rsp.RspUInfoEntity;
+import com.bjzt.uye.http.rsp.RspUpgradeEntity;
 import com.bjzt.uye.http.rsp.RspUploadPhoneListEntity;
 import com.common.common.NetCommon;
 import com.common.http.HttpEngine;
@@ -56,6 +57,7 @@ public class HttpCommon {
     public static final String URL_QA_CFG = "/app/question/config";             //获取问答配置
     public static final String URL_QA_SUBMIT = "/app/question/submit";          //调查问卷提交
     public static final String URL_ORDER_LIST = "/app/order/list";              //订单列表
+    public static final String URL_UPGRADE = "/app/config/version";             //升级逻辑
 
     static{
         //请求定位城市
@@ -100,6 +102,8 @@ public class HttpCommon {
         mMap.put(URL_QA_SUBMIT, RspQASubmitEntity.class);
         //订单列表
         mMap.put(URL_ORDER_LIST,RspOrderListEntity.class);
+        //升级逻辑
+        mMap.put(URL_UPGRADE, RspUpgradeEntity.class);
     }
 
     /***

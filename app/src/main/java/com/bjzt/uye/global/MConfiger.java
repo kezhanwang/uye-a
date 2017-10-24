@@ -5,7 +5,7 @@ package com.bjzt.uye.global;
  */
 
 public class MConfiger {
-    public static final int VERSION = 100;       //业务版本号码
+    public static final int VERSION = 101;       //业务版本号码
 
     public static final String TEST_ORG_ID = "10049";
 

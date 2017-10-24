@@ -62,4 +62,9 @@
     <!--人脸识别SDK header bar颜色-->
     <color name="super_real_nav_bar">@color/common_green</color>
 
+    <!-- 升级dialog -->
+    <color name="dialog_upgrade_titleColor">#333333</color>
+    <color name="dialog_upgrade_timeColor">#999999</color>
+    <color name="dialog_upgrade_lineColor">#b3b3b3</color>
+
 </resources>

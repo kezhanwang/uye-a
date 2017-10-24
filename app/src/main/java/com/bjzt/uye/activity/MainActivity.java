@@ -5,19 +5,28 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.widget.TabHost;
 import com.bjzt.uye.R;
 import com.bjzt.uye.activity.base.BaseActivity;
+import com.bjzt.uye.activity.dialog.DialogUpgrade;
 import com.bjzt.uye.adapter.TabsAdapter;
 import com.bjzt.uye.controller.OtherController;
+import com.bjzt.uye.entity.PUpgradeEntity;
 import com.bjzt.uye.fragments.FragmentHome;
 import com.bjzt.uye.fragments.FragmentMain;
 import com.bjzt.uye.fragments.FragmentMyInfo;
 import com.bjzt.uye.fragments.FragmentUYe;
 import com.bjzt.uye.global.Global;
+import com.bjzt.uye.http.ProtocalManager;
+import com.bjzt.uye.http.rsp.RspUpgradeEntity;
+import com.bjzt.uye.listener.IItemListener;
+import com.bjzt.uye.util.IntentUtils;
 import com.bjzt.uye.views.component.MainTabView;
 import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -36,6 +45,9 @@ public class MainActivity extends BaseActivity {
     public static final int REQ_CODE_LOGIN = 0x10;
     public static final int REQ_SEARCH = 0x11;
     public static final int REQ_START_APPLY = 0x12;
+
+    private DialogUpgrade mDialogUpgrade;
+    private List<Integer> mReqList = new ArrayList<Integer>();
 
     @Override
     protected int getLayoutID() {
@@ -69,6 +81,9 @@ public class MainActivity extends BaseActivity {
         public void run() {
             //请求客服电话
             OtherController.getInstance().requestKFContactInfo();
+            //升级配置
+            int seqNo = ProtocalManager.getInstance().reqUpgradeInfo(getCallBack());
+            mReqList.add(seqNo);
         }
     };
 
@@ -77,6 +92,19 @@ public class MainActivity extends BaseActivity {
 
     }
 
+
+    @Override
+    protected void onRsp(Object rsp, boolean isSucc, int errorCode, int seqNo, int src) {
+        super.onRsp(rsp, isSucc, errorCode, seqNo, src);
+        if(mReqList.contains(Integer.valueOf(seqNo))){
+            if(rsp instanceof RspUpgradeEntity){
+                RspUpgradeEntity rspEntity = (RspUpgradeEntity) rsp;
+                if(isSucc && rspEntity.mEntity != null && rspEntity.mEntity.isUpdate){
+                    showDialogUpgrade(rspEntity.mEntity);
+                }
+            }
+        }
+    }
 
     private void createTabView(String tabName){
         if(tabName.equals(getString(R.string.tab_main))){
@@ -100,6 +128,37 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    private void hideDialogUpgrade(){
+        if(this.mDialogUpgrade != null){
+            this.mDialogUpgrade.dismiss();
+            this.mDialogUpgrade = null;
+        }
+    }
+
+    private void showDialogUpgrade(final PUpgradeEntity pEntity){
+        hideDialogUpgrade();
+        this.mDialogUpgrade = new DialogUpgrade(this,R.style.MyDialogBg);
+        this.mDialogUpgrade.show();
+        this.mDialogUpgrade.setInfo(pEntity);
+        this.mDialogUpgrade.setIItemListener(new IItemListener() {
+            @Override
+            public void onItemClick(Object obj, int tag) {
+                if(tag == DialogUpgrade.SRC_OK){
+                    String url = pEntity.url;
+                    if(!TextUtils.isEmpty(url)){
+                        IntentUtils.startDownLoadApk(MainActivity.this,url);
+                    }
+                }else{
+                    if(pEntity.forceUpdate){
+                        finish();
+                    }else{
+                        hideDialogUpgrade();
+                    }
+                }
+            }
+        });
+    }
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -108,6 +167,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        hideDialogUpgrade();
         Global.removeDelay(rDelay);
     }
 

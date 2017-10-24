@@ -9,7 +9,7 @@
 
     <color name="common_d6">#d6d6d6</color>
     <color name="common_font_blue">#0aaaf5</color>
-    <color name="common_red">#ee0000</color>
+    <color name="common_red">#fa0000</color>
     <color name="common_bg_color_grey">@color/page_bg</color>
     <color name="common_font_3">#333333</color>
     <color name="common_font_6">#666666</color>

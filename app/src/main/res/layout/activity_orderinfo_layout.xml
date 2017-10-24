@@ -95,11 +95,11 @@
                 android:layout_marginTop="@dimen/common_margin"
                 ></com.bjzt.uye.views.component.BindCardPhotoView>
 
-            <com.bjzt.uye.views.component.BindCardPhotoView
-                android:id="@+id/photoview_protocal"
+            <com.bjzt.uye.views.component.PicSelectView
+                android:id="@+id/picselect_protocal"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                ></com.bjzt.uye.views.component.BindCardPhotoView>
+                ></com.bjzt.uye.views.component.PicSelectView>
 
             <Button
                 android:id="@+id/btn_ok"

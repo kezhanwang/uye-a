@@ -98,7 +98,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="102dp"
-        android:layout_marginLeft="@dimen/common_margin_18"
+        android:layout_marginLeft="@dimen/common_margin"
         android:layout_marginRight="@dimen/common_margin"
         android:textSize="13sp"
         android:textColor="#fa0000"

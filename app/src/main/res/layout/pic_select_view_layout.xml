@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+/* //device/apps/common/assets/res/layout/tab_content.xml
+**
+** Copyright 2011, The Android Open Source Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License");
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
+-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/common_white"
+    >
+
+    <RelativeLayout
+        android:id="@+id/rela_title"
+        android:layout_width="@dimen/orderinfo_title_width"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/common_margin"
+        android:layout_marginTop="@dimen/common_margin"
+        >
+
+        <TextView
+            android:id="@+id/txt_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="卡正面照"
+            android:textSize="15sp"
+            android:textColor="@color/common_font_3"
+            android:gravity="left"
+            android:maxLines="2"
+            />
+
+        <TextView
+            android:id="@+id/txt_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/txt_title"
+            android:text="*"
+            android:textSize="14.5sp"
+            android:layout_centerVertical="true"
+            android:textColor="@color/common_red"
+            android:visibility="visible"
+            />
+
+    </RelativeLayout>
+
+    <com.bjzt.uye.views.MGridView
+        android:id="@+id/gridview"
+        android:layout_width="fill_parent"
+        android:layout_height="120dp"
+        android:layout_toRightOf="@id/rela_title"
+        android:numColumns="3"
+        android:verticalSpacing="6dp"
+        android:horizontalSpacing="2dp"
+        android:layout_marginTop="@dimen/common_margin"
+        android:layout_marginRight="@dimen/common_margin"
+        android:listSelector="@color/translucent"
+        android:cacheColorHint="@color/translucent"
+        android:background="@null"
+        ></com.bjzt.uye.views.MGridView>
+
+    <TextView
+        android:id="@+id/txt_tips"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/gridview"
+        android:textSize="13sp"
+        android:textColor="@color/common_red"
+        android:layout_marginLeft="@dimen/common_margin"
+        android:layout_marginTop="@dimen/common_margin"
+        android:layout_marginRight="@dimen/common_margin"
+        android:text="@string/cash_data_check_tips"
+        />
+
+    <View
+        android:layout_height="1px"
+        android:layout_width="fill_parent"
+        android:layout_below="@id/txt_tips"
+        android:layout_marginTop="@dimen/common_margin_8"
+        android:background="@color/common_line_divider"
+        android:layout_marginLeft="@dimen/common_margin"
+        ></View>
+
+</RelativeLayout>

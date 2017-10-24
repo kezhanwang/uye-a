@@ -180,4 +180,8 @@
     <string name="loan_pic_scanne_tips_del_succ">已删除</string>
     <string name="loan_alblum">相册</string>
 
+    <!--多图控件-->
+    <string name="pic_select_title_protocal">培训协议</string>
+    <string name="pic_select_tips_protocal">注: 请上传培训协议或收据,需要包括机构名称、课程、价格、时间等重要信息。</string>
+
 </resources>

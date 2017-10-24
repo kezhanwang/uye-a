@@ -1,6 +1,7 @@
 package com.bjzt.uye.util;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -269,4 +270,10 @@ public class BitmapUtil {
 		}
 		return result;
 	}
+
+
+	public static Bitmap getBitmap(byte[] data){
+		return BitmapFactory.decodeByteArray(data, 0, data.length);//从字节数组解码位图
+	}
+
 }

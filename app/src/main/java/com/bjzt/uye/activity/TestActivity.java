@@ -9,12 +9,17 @@ import com.authreal.api.OnResultListener;
 import com.bjzt.uye.R;
 import com.bjzt.uye.activity.base.BaseActivity;
 import com.bjzt.uye.controller.LBSController;
+import com.bjzt.uye.entity.VPicFileEntity;
 import com.bjzt.uye.global.MConfiger;
 import com.bjzt.uye.http.ProtocalManager;
 import com.bjzt.uye.http.listener.ICallBack;
 import com.bjzt.uye.util.IntentUtils;
+import com.bjzt.uye.views.component.PicSelectView;
 import com.common.common.MyLog;
 import com.common.util.DeviceUtil;
+
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -64,6 +69,9 @@ public class TestActivity extends BaseActivity{
 
     @BindView(R.id.btn_orderlist)
     Button btnOrderList;
+
+    @BindView(R.id.pic_select_view)
+    PicSelectView mPicSeletView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -194,6 +202,19 @@ public class TestActivity extends BaseActivity{
             @Override
             public void onClick(View v) {
                 int seqNo = ProtocalManager.getInstance().reqOrderList(1,getCallBack());
+            }
+        });
+
+        mPicSeletView.initData(PicSelectView.TYPE_PROTOCAL);
+        mPicSeletView.setOnItemClickListener(new PicSelectView.ISelectPicItemClickListener() {
+            @Override
+            public void selectPic(int type) {
+
+            }
+
+            @Override
+            public void showBigPic(int type, ArrayList<VPicFileEntity> mList, int pos) {
+
             }
         });
     }

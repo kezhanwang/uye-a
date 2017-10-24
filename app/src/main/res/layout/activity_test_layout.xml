@@ -141,4 +141,10 @@
 
     </LinearLayout>
 
+
+    <com.bjzt.uye.views.component.PicSelectView
+        android:id="@+id/pic_select_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        ></com.bjzt.uye.views.component.PicSelectView>
 </LinearLayout>

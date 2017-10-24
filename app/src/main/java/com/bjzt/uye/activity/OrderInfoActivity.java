@@ -23,6 +23,7 @@ import com.bjzt.uye.entity.PicEntity;
 import com.bjzt.uye.entity.PicResultEntity;
 import com.bjzt.uye.entity.VDateEntity;
 import com.bjzt.uye.entity.VOrderInfoEntity;
+import com.bjzt.uye.entity.VPicFileEntity;
 import com.bjzt.uye.file.SharePreOrderInfo;
 import com.bjzt.uye.global.Global;
 import com.bjzt.uye.http.ProtocalManager;
@@ -39,6 +40,7 @@ import com.bjzt.uye.views.component.BindCardPhotoView;
 import com.bjzt.uye.views.component.BlankEmptyView;
 import com.bjzt.uye.views.component.ItemView;
 import com.bjzt.uye.views.component.OrderHeaderView;
+import com.bjzt.uye.views.component.PicSelectView;
 import com.bjzt.uye.views.component.YHeaderView;
 import java.io.File;
 import java.util.ArrayList;
@@ -72,8 +74,8 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
     ItemView itemAdvise;
     @BindView(R.id.photoview_hold)
     BindCardPhotoView photoViewHold;
-    @BindView(R.id.photoview_protocal)
-    BindCardPhotoView photoViewProtocal;
+    @BindView(R.id.picselect_protocal)
+    PicSelectView picSelectView;
     @BindView(R.id.btn_ok)
     Button btnOk;
 
@@ -195,9 +197,8 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
         photoViewHold.setIItemListener(mPhotoViewListener);
         photoViewHold.showStar(true);
 
-        photoViewProtocal.updateType(BindCardPhotoView.TYPE_IMG_PROTOCAL);
-        photoViewProtocal.setIItemListener(mPhotoViewListener);
-        photoViewProtocal.showStar(true);
+        picSelectView.initData(PicSelectView.TYPE_PROTOCAL);
+        picSelectView.setOnItemClickListener(mSelectPicListener);
 
         btnOk.setOnClickListener(this);
 
@@ -292,7 +293,7 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
         List<String> strProtocalPic = vEntity.training_pic;
         if(strProtocalPic.size() > 0){
             String strInfo = strProtocalPic.get(0);
-            photoViewProtocal.updatePicInfo(this,strInfo,true);
+//            photoViewProtocal.updatePicInfo(this,strInfo,true);
         }
     }
 
@@ -351,6 +352,18 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
         }
     };
 
+    private PicSelectView.ISelectPicItemClickListener mSelectPicListener = new PicSelectView.ISelectPicItemClickListener() {
+        @Override
+        public void selectPic(int type) {
+            showDialogPicSelect(REQ_CODE_PROTOCAL);
+        }
+
+        @Override
+        public void showBigPic(int type, ArrayList<VPicFileEntity> mList, int pos) {
+
+        }
+    };
+
     private IItemListener mPhotoViewListener = new IItemListener() {
         @Override
         public void onItemClick(Object obj, int tag) {
@@ -358,14 +371,10 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
             if(tag == BindCardPhotoView.TAG_TYPE_IMG_ADD){
                 if(obj == photoViewHold){
                     showDialogPicSelect(REQ_CODE_HOLD);
-                }else if(obj == photoViewProtocal){
-                    showDialogPicSelect(REQ_CODE_PROTOCAL);
                 }
             }else if(tag == BindCardPhotoView.TAG_TYPE_CLOSE){
                 if(obj == photoViewHold){
                     photoViewHold.updatePicInfo(mContext,null,true);
-                }else if(obj == photoViewProtocal){
-                    photoViewProtocal.updatePicInfo(mContext,null,true);
                 }
             }
         }
@@ -397,8 +406,12 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
                 PicEntity mEntity = UploadPicController.getInstance().getItemBySuccList(arg1);
                 if(arg1 ==  PicEntity.TYPE_HOLDID){
                     photoViewHold.updateBitmapAdd(bitmap,mEntity.mNetPath);
-                }else if(arg1 ==  PicEntity.TYPE_PRO_FIRST){
-                    photoViewProtocal.updateBitmapAdd(bitmap,mEntity.mNetPath);
+                }else if(arg1 == PicEntity.TYPE_PRO_FIRST){
+                    VPicFileEntity vPicEntity = new VPicFileEntity();
+                    vPicEntity.filePath = mEntity.path;
+                    vPicEntity.url = mEntity.mNetPath;
+                    vPicEntity.mBitmap = bitmap;
+                    picSelectView.insertLastBefore(vPicEntity);
                 }
                 break;
             case FLAG_FILL_VAL:
@@ -533,7 +546,7 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
             vEntity.msg = tips;
             return vEntity;
         }
-        String strPicProtocal = photoViewProtocal.getUrl();
+        String strPicProtocal = null;
         if(!TextUtils.isEmpty(strPicProtocal)){
             vEntity.training_pic.add(strPicProtocal);
         }

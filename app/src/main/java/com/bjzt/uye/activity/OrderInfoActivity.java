@@ -6,12 +6,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Message;
-import android.os.PersistableBundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ScrollView;
-
 import com.bjzt.uye.R;
 import com.bjzt.uye.activity.base.BaseActivity;
 import com.bjzt.uye.activity.dialog.DialogCourseList;
@@ -25,7 +23,6 @@ import com.bjzt.uye.entity.PicEntity;
 import com.bjzt.uye.entity.PicResultEntity;
 import com.bjzt.uye.entity.VDateEntity;
 import com.bjzt.uye.entity.VOrderInfoEntity;
-import com.bjzt.uye.file.SharePreID;
 import com.bjzt.uye.file.SharePreOrderInfo;
 import com.bjzt.uye.global.Global;
 import com.bjzt.uye.http.ProtocalManager;
@@ -43,7 +40,6 @@ import com.bjzt.uye.views.component.BlankEmptyView;
 import com.bjzt.uye.views.component.ItemView;
 import com.bjzt.uye.views.component.OrderHeaderView;
 import com.bjzt.uye.views.component.YHeaderView;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -223,6 +219,12 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
             VOrderInfoEntity vEntity = (VOrderInfoEntity) bundle.getSerializable(KEY_SAVE_VENTITY);
             if(vEntity != null){
                 fillParams(vEntity,pCEntity);
+                //数据保护，防止系统控件造成数据错乱
+                Message msg = Message.obtain();
+                msg.what = FLAG_FILL_VAL;
+                vEntity.vCourseEntity = pCEntity;
+                msg.obj = vEntity;
+                sendMsgDelay(msg,1500);
             }
         }else{
             needReq = true;

@@ -91,6 +91,7 @@ public class QAActivity extends BaseActivity implements  View.OnClickListener{
         if(this.mRspEntity != null && this.mRspEntity.mEntity != null){
             mScrollView.setVisibility(View.VISIBLE);
             mEmptyView.loadSucc();
+            mMap = mRspEntity.mEntity.buildHashMap();
             initParams(this.mRspEntity.mEntity.questions);
         }else{
             mScrollView.setVisibility(View.GONE);

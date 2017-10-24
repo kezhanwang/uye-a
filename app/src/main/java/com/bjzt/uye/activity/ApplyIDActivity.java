@@ -118,6 +118,7 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
     private final int FLAG_FILL_BITMAP = 0x15;
     private final int FLAG_PIC_INFO = 0x16;
     private final int FLAG_DIALOG_GUIDE = 0x17;
+    private final int FLAG_FILL_VAL = 0x18;
 
     private final int SRC_ID_START = 1;
     private final int SRC_ID_END = 2;
@@ -271,6 +272,11 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
             PIDentityInfoEntity pEntity = (PIDentityInfoEntity) bundle.getSerializable(KEY_ENTITY);
             if(pEntity != null){
                 initParamsNormal(pEntity,this.mBankEntitySelect);
+                //数据保护，防止系统控件数据错乱
+                Message msg = Message.obtain();
+                msg.what = FLAG_FILL_VAL;
+                msg.obj = pEntity;
+                sendMsgDelay(msg,1500);
             }
             //init rsp cfg
             RspIDentityCfgEntity rspEntity = (RspIDentityCfgEntity) bundle.getSerializable(KEY_RSP_CFG);
@@ -647,6 +653,12 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
                 break;
             case FLAG_DIALOG_GUIDE:
                 showDialogGuide();
+                break;
+            case FLAG_FILL_VAL:
+                PIDentityInfoEntity pEntity = (PIDentityInfoEntity) msg.obj;
+                if(pEntity != null){
+                    initParamsNormal(pEntity,this.mBankEntitySelect);
+                }
                 break;
         }
     }

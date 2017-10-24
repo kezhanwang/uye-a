@@ -24,6 +24,9 @@ import com.bjzt.uye.entity.PicEntity;
 import com.bjzt.uye.entity.PicResultEntity;
 import com.bjzt.uye.entity.VDateEntity;
 import com.bjzt.uye.entity.VOrderInfoEntity;
+import com.bjzt.uye.file.SharePreID;
+import com.bjzt.uye.file.SharePreOrderInfo;
+import com.bjzt.uye.global.Global;
 import com.bjzt.uye.http.ProtocalManager;
 import com.bjzt.uye.http.listener.IUploadListener;
 import com.bjzt.uye.http.rsp.RspOrderInfoEntity;
@@ -88,6 +91,7 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
     private final int FLAG_HIDE_LOADING = 11;
     private final int FLAG_SHOW_TOAST = 12;
     private final int FLAG_FILL_BITMAP = 13;
+    private final int FLAG_FILL_VAL = 15;
 
     private final int SRC_COURSE_START = 1;
     private final int SRC_COURSE_END = 2;
@@ -237,6 +241,24 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
         }
     }
 
+    private void delayTask(){
+        Global.postDelay(new Runnable() {
+            @Override
+            public void run() {
+                SharePreOrderInfo mSharePre = new SharePreOrderInfo();
+                VOrderInfoEntity vEntity = mSharePre.loadOrderInfoEntity(orgId);
+                PCourseEntity pCourseEntity = mSharePre.loadCourseInfo(orgId);
+                if(vEntity != null){
+                    vEntity.vCourseEntity = pCourseEntity;
+                    Message msg = Message.obtain();
+                    msg.what = FLAG_FILL_VAL;
+                    msg.obj = vEntity;
+                    sendMsg(msg);
+                }
+            }
+        });
+    }
+
     private void fillParams(VOrderInfoEntity vEntity,PCourseEntity pCourse){
         //course name
         if(pCourse != null){
@@ -369,6 +391,28 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
                     photoViewProtocal.updateBitmapAdd(bitmap,mEntity.mNetPath);
                 }
                 break;
+            case FLAG_FILL_VAL:
+                VOrderInfoEntity vEntity = (VOrderInfoEntity) msg.obj;
+                PCourseEntity pCEntity = vEntity.vCourseEntity;
+                boolean isFind = false;
+                if(mRspEntity != null && mRspEntity.mEntity != null && mRspEntity.mEntity.courses != null){
+                    List<PCourseEntity> mList = mRspEntity.mEntity.courses;
+                    for(int i = 0;i < mList.size();i++){
+                        PCourseEntity tempEntity = mList.get(i);
+                        if(tempEntity != null && tempEntity.c_id.equals(pCEntity.c_id)){
+                            pCEntity = tempEntity;
+                            isFind = true;
+                            break;
+                        }
+                    }
+                    if(!isFind){
+                        pCEntity = null;
+                    }else{
+                        this.mCourseEntitySelect = pCEntity;
+                    }
+                }
+                fillParams(vEntity,pCEntity);
+                break;
         }
     }
 
@@ -385,6 +429,7 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
                         mScrollView.setVisibility(View.VISIBLE);
                         this.mRspEntity = rspEntity;
                         initParams(rspEntity.mEntity);
+                        delayTask();
                     }else{
                         String tips = getResources().getString(R.string.common_cfg_error);
                         initErrorStatus(tips);
@@ -505,13 +550,29 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
                 }else{
                     insureType = 1;
                 }
-                int seqNo = ProtocalManager.getInstance().reqOrderSubmit(orgId,mCourseEntitySelect.c_id,vEntity,insureType,getCallBack());
-                mReqList.add(seqNo);
+                onReqAction(orgId,mCourseEntitySelect,vEntity,insureType);
+//                int seqNo = ProtocalManager.getInstance().reqOrderSubmit(orgId,mCourseEntitySelect.c_id,vEntity,insureType,getCallBack());
+//                mReqList.add(seqNo);
             }else{
                 String tips = vEntity.msg;
                 showToast(tips);
             }
         }
+    }
+
+    private void onReqAction(final String orgId,final PCourseEntity pCourseEntity,final VOrderInfoEntity vEntity,final int insureType){
+        Global.postDelay(new Runnable() {
+            @Override
+            public void run() {
+                SharePreOrderInfo mSharePre = new SharePreOrderInfo();
+                //save course
+                mSharePre.saveCourseInfo(orgId,pCourseEntity);
+                //save orderinfo
+                mSharePre.saveOrderInfo(orgId,vEntity);
+                int seqNo = ProtocalManager.getInstance().reqOrderSubmit(orgId,pCourseEntity.c_id,vEntity,insureType,getCallBack());
+                mReqList.add(seqNo);
+            }
+        });
     }
 
     private void showDialogDateSelector(final int src){

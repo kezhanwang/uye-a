@@ -20,8 +20,23 @@ public class VOrderInfoEntity implements Serializable{
 
     public boolean isSucc;
     public String msg;
+    public PCourseEntity vCourseEntity;
 
     public VOrderInfoEntity(){
         this.isSucc = false;
+    }
+
+    public PCourseEntity getSelectCourseEntity(ArrayList<PCourseEntity> mList,PCourseEntity sCourseEntity){
+        PCourseEntity pEntity = null;
+        if(mList != null && mList.size() > 0){
+            for(int i = 0;i < mList.size();i++){
+                PCourseEntity tempEntity = mList.get(i);
+                if(tempEntity != null && tempEntity.c_id.equals(sCourseEntity.c_id)){
+                    pEntity = tempEntity;
+                    break;
+                }
+            }
+        }
+        return pEntity;
     }
 }

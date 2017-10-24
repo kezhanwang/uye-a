@@ -108,5 +108,4 @@ dependencies {
     compile files('libs/BaiduLBS_Android.jar')
     compile files('libs/tbs_sdk_thirdapp_v3.5.0.1004_43500.jar')
 
-    compile 'com.squareup.picasso:picasso:2.5.2'
 }

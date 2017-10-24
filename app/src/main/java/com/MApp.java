@@ -16,6 +16,8 @@ public class MApp extends Application{
     @Override
     public void onCreate() {
         super.onCreate();
+        //multidex lib
+        android.support.multidex.MultiDex.install(this);
         Global.init(this.getApplicationContext());
 
         delayTask();

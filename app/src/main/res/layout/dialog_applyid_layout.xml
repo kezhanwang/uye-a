@@ -27,25 +27,33 @@
         android:id="@+id/img_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/img_sysmsg"
-        android:layout_marginRight="@dimen/common_margin"
-        android:layout_marginTop="@dimen/common_margin"
+        android:src="@drawable/apply_id_guide_img"
+        android:layout_marginRight="@dimen/common_margin_6"
+        android:layout_marginTop="@dimen/common_margin_8"
         android:layout_alignParentRight="true"
         />
 
-    <Button
-        android:id="@+id/btn_ok"
-        android:layout_width="80dp"
-        android:layout_height="30dp"
+
+    <ImageView
+        android:id="@+id/btn_try"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:background="@drawable/btn_login_selector"
         android:layout_below="@id/img_icon"
-        android:layout_marginTop="@dimen/common_margin"
+        android:background="@drawable/apply_id_guide_btn_try"
+        android:layout_marginTop="@dimen/common_margin_18"
         android:layout_marginRight="@dimen/common_margin"
-        android:text="知道啦"
-        android:textColor="@color/common_white"
-        android:textSize="12sp"
-        android:gravity="center"
         />
+
+    <ImageView
+        android:id="@+id/btn_know"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/apply_id_guide_btn_know"
+        android:layout_alignTop="@id/btn_try"
+        android:layout_toLeftOf="@id/btn_try"
+        android:layout_marginRight="@dimen/common_margin_18"
+        />
+
 
 </RelativeLayout>

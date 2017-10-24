@@ -9,7 +9,7 @@ import com.bjzt.uye.global.Global;
  */
 public class SharePreID {
     private final String FILE_NAME = "RMS_CFG_ID";
-    private final String KEY = "key";
+    private final String KEY = "key_flag";
 
     /***
      * 保存la,lo信息

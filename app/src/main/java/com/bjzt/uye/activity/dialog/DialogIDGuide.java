@@ -24,8 +24,10 @@ public class DialogIDGuide extends Dialog implements View.OnClickListener{
 
     @BindView(R.id.img_icon)
     ImageView imgLogo;
-    @BindView(R.id.btn_ok)
-    Button btnOk;
+    @BindView(R.id.btn_know)
+    ImageView btnKnow;
+    @BindView(R.id.btn_try)
+    ImageView btnTry;
 
     private IItemListener mListener;
 
@@ -35,7 +37,6 @@ public class DialogIDGuide extends Dialog implements View.OnClickListener{
     }
 
     private void init(){
-        Window window = getWindow();
         setCancelable(true);
         setCanceledOnTouchOutside(true);
     }
@@ -47,7 +48,8 @@ public class DialogIDGuide extends Dialog implements View.OnClickListener{
         View mView = li.inflate(R.layout.dialog_applyid_layout, null);
         ButterKnife.bind(this,mView);
 
-        btnOk.setOnClickListener(this);
+        btnKnow.setOnClickListener(this);
+        btnTry.setOnClickListener(this);
 
         int width = DeviceUtil.mWidth;
         int height = DeviceUtil.mHeight;
@@ -62,9 +64,10 @@ public class DialogIDGuide extends Dialog implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if(mListener != null){
-            if(v == this.btnOk){
+            if(v == this.btnTry){
                 this.mListener.onItemClick(null,-1);
             }
         }
+        dismiss();
     }
 }

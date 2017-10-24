@@ -533,7 +533,6 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
         this.mDialogGuide.setListener(new IItemListener() {
             @Override
             public void onItemClick(Object obj, int tag) {
-                hideDialogGuide();
                 mHeaderListener.onRightClick();
             }
         });
@@ -658,10 +657,9 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
             SharePreID mSharePre = new SharePreID();
             boolean isFirst = mSharePre.loadFirstFlag();
             if(isFirst){
-//                Message msg = Message.obtain();
-//                msg.what = FLAG_DIALOG_GUIDE;
-//                sendMsg(msg);
-
+                Message msg = Message.obtain();
+                msg.what = FLAG_DIALOG_GUIDE;
+                sendMsg(msg);
                 mSharePre.saveFirstFlag(false);
             }
         }

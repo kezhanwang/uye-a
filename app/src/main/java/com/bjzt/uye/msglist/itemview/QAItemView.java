@@ -27,6 +27,9 @@ public class QAItemView extends BaseItemView<PQACfgItemEntity> implements View.O
 
     @BindView(R.id.txt_title)
     TextView mTxtTitle;
+    @BindView(R.id.txt_question_type)
+    TextView mTxtQAType;
+
     @BindView(R.id.listview)
     ListView mListView;
 
@@ -46,6 +49,12 @@ public class QAItemView extends BaseItemView<PQACfgItemEntity> implements View.O
             mTxtTitle.setText(title);
         }else{
             mTxtTitle.setText("");
+        }
+        int mType = this.mEntity.type;
+        if(mType == PQACfgItemEntity.TYPE_SINGLE){
+            mTxtQAType.setVisibility(View.GONE);
+        }else{
+            mTxtQAType.setVisibility(View.VISIBLE);
         }
         //init adapter
         if(mAdapter == null){

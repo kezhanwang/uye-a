@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bjzt.uye.R;
 import com.bjzt.uye.entity.VQAItemEntity;
 import com.bjzt.uye.listener.IItemListener;
+import com.common.common.MyLog;
 import com.common.msglist.base.BaseItemView;
 
 import butterknife.BindView;
@@ -67,6 +68,7 @@ public class QAListItemView extends BaseItemView<VQAItemEntity> implements View.
         }else{
             this.mImgSelect.setImageDrawable(dSelectUn);
         }
+        MyLog.d(TAG,"[setMsg]" + " setIsSelected -> " + isSelect);
         //is bottom
         boolean isBottom = this.mEntity.isBottom;
         int leftMargin;

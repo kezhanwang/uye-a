@@ -3,6 +3,7 @@ package com.bjzt.uye.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -13,6 +14,9 @@ import com.bjzt.uye.activity.base.BaseActivity;
 import com.bjzt.uye.adapter.QAAdapter;
 import com.bjzt.uye.entity.PQACfgItemEntity;
 import com.bjzt.uye.entity.VQAItemEntity;
+import com.bjzt.uye.entity.VQAResultEntity;
+import com.bjzt.uye.entity.VQATitleEntity;
+import com.bjzt.uye.global.MConfiger;
 import com.bjzt.uye.http.ProtocalManager;
 import com.bjzt.uye.http.rsp.RspQACfgEntity;
 import com.bjzt.uye.http.rsp.RspQASubmitEntity;
@@ -24,10 +28,13 @@ import com.bjzt.uye.util.StrUtil;
 import com.bjzt.uye.views.component.BlankEmptyView;
 import com.bjzt.uye.views.component.TipsSubHeaderView;
 import com.bjzt.uye.views.component.YHeaderView;
+import com.common.common.MyLog;
 import com.common.msglist.base.BaseListAdapter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 
@@ -56,7 +63,7 @@ public class QAActivity extends BaseActivity implements  View.OnClickListener{
     private String orgId;
     private RspQACfgEntity mRspEntity;
     private List<Integer> mReqList = new ArrayList<>();
-    private List<VQAItemEntity> mListSelect = new ArrayList<>();
+    private Map<Integer,ArrayList<VQAItemEntity>> mMap = new HashMap<>();
 
     private final int REQ_DATA_CHECK = 0x10;
 
@@ -103,10 +110,12 @@ public class QAActivity extends BaseActivity implements  View.OnClickListener{
                 RspQACfgEntity rspEntity = (RspQACfgEntity) rsp;
                 if(isSucc){
                     if(rspEntity.mEntity != null){
+                        this.mRspEntity = rspEntity;
                         if(rspEntity.mEntity.need_question){
                             if(rspEntity != null && rspEntity.mEntity != null && rspEntity.mEntity.questions != null && rspEntity.mEntity.questions.size() > 0){
                                 mEmptyView.loadSucc();
                                 mScrollView.setVisibility(View.VISIBLE);
+                                mMap = rspEntity.mEntity.buildHashMap();
                                 initParams(rspEntity.mEntity.questions);
                             }else{
                                 String tips = getResources().getString(R.string.common_cfg_empty);
@@ -152,13 +161,44 @@ public class QAActivity extends BaseActivity implements  View.OnClickListener{
         public void onItemClick(Object obj, int tag) {
             QAListItemView itemView = (QAListItemView) obj;
             VQAItemEntity vEntity = itemView.getMsg();
-            if(vEntity.isSelect){
-                mListSelect.remove(vEntity);
+            int qaId = vEntity.vQAId;
+            int type = vEntity.vType;
+            //获取当前的答案
+            ArrayList<VQAItemEntity> mAsList = mMap.get(Integer.valueOf(qaId));
+            MyLog.d(TAG,"[onItemClick]" + "" + mAsList);
+            if(type == PQACfgItemEntity.TYPE_SINGLE){
+                if(mAsList.size() <= 0){
+                    vEntity.isSelect = true;
+                    vEntity.itemView = itemView;
+                    itemView.setMsg(vEntity);
+                    mAsList.add(vEntity);
+                }else{
+                    //clear all
+                    for(int i = 0;i < mAsList.size();i++){
+                        VQAItemEntity tempEntity = mAsList.get(i);
+                        if(tempEntity.itemView != null){
+                            VQAItemEntity tEntity = tempEntity.itemView.getMsg();
+                            tEntity.isSelect = false;
+                            tempEntity.itemView.setMsg(tEntity);
+                            tempEntity.itemView = null;
+                        }
+                    }
+                    mAsList.clear();
+                    //选择当前选项
+                    vEntity.isSelect = true;
+                    vEntity.itemView = itemView;
+                    itemView.setMsg(vEntity);
+                    mAsList.add(vEntity);
+                }
             }else{
-                mListSelect.add(vEntity);
+                if(vEntity.isSelect){
+                    mAsList.remove(vEntity);
+                }else{
+                    mAsList.add(vEntity);
+                }
+                vEntity.isSelect = !vEntity.isSelect;
+                itemView.setMsg(vEntity);
             }
-            vEntity.isSelect = !vEntity.isSelect;
-            itemView.setMsg(vEntity);
         }
     };
 
@@ -185,15 +225,45 @@ public class QAActivity extends BaseActivity implements  View.OnClickListener{
     @Override
     public void onClick(View v) {
         if(v == this.btnOk){
-            if(mListSelect.size() > 0){
-                showLoading();
-                int seqNo = ProtocalManager.getInstance().reqQASubmit(this.orgId,mListSelect,getCallBack());
-                mReqList.add(seqNo);
+            if(mRspEntity != null && mRspEntity.mEntity != null && mRspEntity.mEntity.questions != null && mRspEntity.mEntity.questions.size() > 0){
+                VQAResultEntity rEntity = buildResultEntity(mRspEntity.mEntity.questions);
+                if(rEntity.isSucc){
+                    showLoading();
+                    int seqNo = ProtocalManager.getInstance().reqQASubmit(this.orgId,rEntity.mList,getCallBack());
+                    mReqList.add(seqNo);
+                }else{
+                    String msg = rEntity.msg;
+                    String tips = getResources().getString(R.string.qa_select_tips,msg);
+                    showToast(tips);
+                }
             }else{
-                String tips = getResources().getString(R.string.qa_select_tips);
+                String tips = getResources().getString(R.string.common_cfg_empty);
                 showToast(tips);
             }
         }
+    }
+
+    private VQAResultEntity buildResultEntity(List<PQACfgItemEntity> mList){
+        VQAResultEntity vEntity = new VQAResultEntity();
+        List<VQAItemEntity> rList = new ArrayList<>();
+        vEntity.mList = rList;
+        vEntity.isSucc = true;
+        if(mList != null){
+            for(Map.Entry<Integer,ArrayList<VQAItemEntity>> entry : mMap.entrySet()){
+                ArrayList<VQAItemEntity> val = entry.getValue();
+                if(val == null || val.size() <= 0){
+                    vEntity.isSucc = false;
+                    for(int j = 0;j < mList.size();j++){
+                        PQACfgItemEntity pEntity = mList.get(j);
+                        if(pEntity.id == entry.getKey()){
+                            vEntity.msg = pEntity.question;
+                        }
+                    }
+                }
+                rList.addAll(val);
+            }
+        }
+        return vEntity;
     }
 
     @Override

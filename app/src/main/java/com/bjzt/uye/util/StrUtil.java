@@ -142,11 +142,11 @@ public class StrUtil {
     }
 
     public static final String getInsureOrderSimple(String strInfo){
-        String result = "";
-        if(!TextUtils.isEmpty(strInfo) && strInfo.length() > 20){
-            int startIndex = strInfo.length() - 10;
-            result = strInfo.substring(startIndex);
-        }
+        String result = strInfo;
+//        if(!TextUtils.isEmpty(strInfo) && strInfo.length() > 20){
+//            int startIndex = strInfo.length() - 10;
+//            result = strInfo.substring(startIndex);
+//        }
         return result;
     }
 

@@ -165,7 +165,7 @@
 
     <!--问卷调查-->
     <string name="qa_title">就业调查</string>
-    <string name="qa_select_tips">亲，请勾选完成调查问卷~</string>
+    <string name="qa_select_tips">亲，请勾选完成[%s]该项调查~</string>
     <string name="qa_request_cfg_error">调查问卷配置获取失败~</string>
 
     <!--搜索页卡-->

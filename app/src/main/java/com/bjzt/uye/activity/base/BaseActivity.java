@@ -97,6 +97,7 @@ public abstract class BaseActivity extends FragmentActivity {
 
 
     public void showLoading(){
+        hideLoadingDialog();
         String tips = getResources().getString(R.string.common_request);
         showLoading(tips,true);
     }

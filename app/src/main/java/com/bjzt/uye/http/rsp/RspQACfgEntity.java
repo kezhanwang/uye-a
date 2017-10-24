@@ -26,6 +26,10 @@ public class RspQACfgEntity extends RspBaseEntity implements Serializable{
         if(this.mEntity.questions != null){
             for(int i = 0;i < this.mEntity.questions.size();i++){
                 PQACfgItemEntity item = this.mEntity.questions.get(i);
+                //test code
+                if(i == 1){
+                    item.type = PQACfgItemEntity.TYPE_MUTI;
+                }
                 if(item != null && item.answer != null){
                     ArrayList<VQAItemEntity> mList = new ArrayList<VQAItemEntity>();
                     for(int j = 0;j < item.answer.size();j++){
@@ -38,6 +42,8 @@ public class RspQACfgEntity extends RspBaseEntity implements Serializable{
                         if(j >= item.answer.size() - 1){
                             vEntity.isBottom = true;
                         }
+                        vEntity.vQAId = item.id;
+                        vEntity.vType = item.type;
                     }
                     item.vAnswer = mList;
                 }

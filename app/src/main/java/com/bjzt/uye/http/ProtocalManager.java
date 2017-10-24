@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import com.bjzt.uye.entity.PBankEntity;
 import com.bjzt.uye.entity.PIDentityInfoEntity;
+import com.bjzt.uye.entity.VOrderInfoEntity;
 import com.bjzt.uye.entity.VQAItemEntity;
 import com.bjzt.uye.global.Global;
 import com.bjzt.uye.http.base.ReqBaseEntity;
@@ -264,37 +265,30 @@ public class ProtocalManager {
      * 提交保单
      * @param orgId
      * @param cid
-     * @param tution
-     * @param clazz
-     * @param class_start
-     * @param class_end
-     * @param course_consultant
-     * @param group_pic
-     * @param training_pic
+     * @param vEntity
      * @param insured_type
      * @param callBack
      * @return
      */
-    public int reqOrderSubmit(String orgId, String cid, String tution, String clazz,
-                              String class_start, String class_end, String course_consultant,
-                              String group_pic, List<String> training_pic, String insured_type,
+    public int reqOrderSubmit(String orgId, String cid, VOrderInfoEntity vEntity,int insured_type,
                               ICallBack<Object> callBack){
         ReqOrderSubmitEntity reqEntity = new ReqOrderSubmitEntity();
         reqEntity.org_id = orgId;
         reqEntity.c_id = cid;
         long r = 0;
+        String tution = vEntity.tuition;
         if(TextUtils.isDigitsOnly(tution)){
             r = Long.valueOf(tution);
             r = r * 100;
         }
         reqEntity.tuition = r;
-        reqEntity.clazz = clazz;
-        reqEntity.class_start = class_start;
-        reqEntity.class_end = class_end;
-        reqEntity.course_consultant = course_consultant;
-        reqEntity.group_pic = group_pic;
-        reqEntity.training_pic = training_pic;
-        reqEntity.insured_type = insured_type;
+        reqEntity.clazz = vEntity.clazz;
+        reqEntity.class_start = vEntity.class_start;
+        reqEntity.class_end = vEntity.class_end;
+        reqEntity.course_consultant = vEntity.course_consultant;
+        reqEntity.group_pic = vEntity.group_pic;
+        reqEntity.training_pic = vEntity.training_pic;
+        reqEntity.insured_type = insured_type+"";
         return addTask(reqEntity,callBack);
     }
 

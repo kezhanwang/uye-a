@@ -121,4 +121,9 @@
     <dimen name="loan_ablum_margin1">12dp</dimen>
     <dimen name="loan_ablum_margin2">6dp</dimen>
 
+    <!--订单信息-->
+    <dimen name="orderinfo_img_width">12.5dp</dimen>
+    <dimen name="orderinfo_title_width">76dp</dimen>
+    <dimen name="orderinfo_title_width_max">80dp</dimen>
+
 </resources>

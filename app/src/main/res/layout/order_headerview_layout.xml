@@ -53,10 +53,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/txt_course_name"
         android:layout_alignLeft="@id/txt_course_name"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="@dimen/common_margin_10"
         android:text="IT"
         android:textSize="13sp"
         android:textColor="@color/common_font_blue"
+        android:background="@drawable/rect_white_fill_blue_border_shape"
+        android:paddingLeft="@dimen/common_margin_8"
+        android:paddingRight="@dimen/common_margin_8"
         />
 
     <TextView
@@ -71,17 +74,37 @@
         android:layout_marginLeft="@dimen/common_margin"
         />
 
+    <com.bjzt.uye.views.component.ScoreView
+        android:id="@+id/scoreview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/txt_tips"
+        android:layout_toRightOf="@id/txt_tips"
+        android:layout_marginLeft="@dimen/common_margin_4"
+        android:layout_marginTop="@dimen/common_margin_2"
+        ></com.bjzt.uye.views.component.ScoreView>
+
+
     <TextView
         android:id="@+id/txt_tips_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txt_cat"
         android:layout_alignLeft="@id/txt_cat"
-        android:layout_marginTop="@dimen/common_margin_10"
-        android:text="均价"
-        android:textSize="14sp"
+        android:layout_alignBottom="@id/img_icon"
+        android:text="均价: "
+        android:textSize="13.5sp"
         android:textColor="@color/common_font_9"
         />
 
+    <TextView
+        android:id="@+id/txt_average_price"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_alignTop="@id/txt_tips_price"
+        android:layout_toRightOf="@id/txt_tips_price"
+        android:textSize="15sp"
+        android:textColor="@color/common_orange"
+        android:text="80"
+        />
 
 </RelativeLayout>

@@ -27,8 +27,20 @@ public class POrganizeEntity implements Serializable{
     public String address;
     public String category_1;
     public String phone;
-    public String employment_index;
+    public double employment_index;
     public String avg_course_price;
     public String category;
     public String distance;
+
+    /**
+     * 获取投保类型
+     * @return
+     * 1：就业帮 2：高薪帮
+     */
+    public int getInsureType(){
+        if(is_high_salary > 0){
+            return 2;
+        }
+        return 1;
+    }
 }

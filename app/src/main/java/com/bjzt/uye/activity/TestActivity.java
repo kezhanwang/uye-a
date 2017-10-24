@@ -9,6 +9,7 @@ import com.authreal.api.OnResultListener;
 import com.bjzt.uye.R;
 import com.bjzt.uye.activity.base.BaseActivity;
 import com.bjzt.uye.controller.LBSController;
+import com.bjzt.uye.global.MConfiger;
 import com.bjzt.uye.http.ProtocalManager;
 import com.bjzt.uye.http.listener.ICallBack;
 import com.bjzt.uye.util.IntentUtils;
@@ -178,7 +179,7 @@ public class TestActivity extends BaseActivity{
         btnOrderInfo.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                IntentUtils.startOrderInfoActivity(TestActivity.this,"",10);
+                IntentUtils.startOrderInfoActivity(TestActivity.this,MConfiger.TEST_ORG_ID,10);
             }
         });
 

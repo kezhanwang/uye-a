@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -29,8 +30,10 @@ public class OrderHeaderView extends RelativeLayout implements NoConfusion{
     TextView mTxtName;
     @BindView(R.id.txt_cat)
     TextView mTxtCat;
-    @BindView(R.id.txt_tips_price)
-    TextView mTxtTution;
+    @BindView(R.id.scoreview)
+    ScoreView mScoreView;
+    @BindView(R.id.txt_average_price)
+    TextView mTxtAvPrice;
 
     public OrderHeaderView(Context context) {
         super(context);
@@ -46,7 +49,6 @@ public class OrderHeaderView extends RelativeLayout implements NoConfusion{
         LayoutInflater li = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         li.inflate(R.layout.order_headerview_layout,this,true);
         ButterKnife.bind(this);
-
     }
 
     public void setInfo(POrganizeEntity pEntity){
@@ -61,17 +63,23 @@ public class OrderHeaderView extends RelativeLayout implements NoConfusion{
         if(!TextUtils.isEmpty(imgUrl)){
             PicController.getInstance().showPic(imgIcon,imgUrl);
         }
+        //score
+        double score = this.mEntity.employment_index;
+        mScoreView.setData((float)score);
         String strCat = this.mEntity.category;
         if(!TextUtils.isEmpty(strCat)){
+            mTxtCat.setVisibility(View.VISIBLE);
             mTxtCat.setText(strCat);
         }else{
+            mTxtCat.setVisibility(View.INVISIBLE);
             mTxtCat.setText("");
         }
         String strTution = this.mEntity.avg_course_price;
         if(!TextUtils.isEmpty(strTution)){
-            mTxtTution.setText(strTution);
+            String strInfo = getResources().getString(R.string.common_money_info_str,strTution);
+            mTxtAvPrice.setText(strInfo);
         }else{
-            mTxtTution.setText("");
+            mTxtAvPrice.setText("");
         }
     }
 }

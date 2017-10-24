@@ -109,6 +109,9 @@ public class BindCardPhotoView extends RelativeLayout implements NoConfusion,Vie
                 imgWidth = (int) getResources().getDimension(R.dimen.photo_view_img_width);
                 imgHeight = (int) getResources().getDimension(R.dimen.photo_view_img_height);
                 d = getResources().getDrawable(R.drawable.img_add);
+                RelativeLayout.LayoutParams llp = (LayoutParams) mRelaTitle.getLayoutParams();
+                llp.width = (int) getResources().getDimension(R.dimen.orderinfo_title_width_max);
+                mRelaTitle.setLayoutParams(llp);
                 break;
             case TYPE_IMG_PROTOCAL:
                 mTxtBottomTips.setVisibility(View.VISIBLE);
@@ -118,6 +121,9 @@ public class BindCardPhotoView extends RelativeLayout implements NoConfusion,Vie
                 imgWidth = (int) getResources().getDimension(R.dimen.photo_view_img_width);
                 imgHeight = (int) getResources().getDimension(R.dimen.photo_view_img_height);
                 d = getResources().getDrawable(R.drawable.img_add);
+                llp = (LayoutParams) mRelaTitle.getLayoutParams();
+                llp.width = (int) getResources().getDimension(R.dimen.orderinfo_title_width_max);
+                mRelaTitle.setLayoutParams(llp);
                 break;
             case TYPE_IMG_ID_BACK:
             case TYPE_IMG_ID:
@@ -126,7 +132,7 @@ public class BindCardPhotoView extends RelativeLayout implements NoConfusion,Vie
                 mRelaTitle.setVisibility(View.GONE);
                 int relaWidth = (int) getResources().getDimension(R.dimen.photo_view_rela_width_s);
                 int relaHeight = (int) getResources().getDimension(R.dimen.photo_view_rela_height_s);
-                RelativeLayout.LayoutParams llp = (LayoutParams) mRelaContent.getLayoutParams();
+                llp = (LayoutParams) mRelaContent.getLayoutParams();
                 llp.width = relaWidth;
                 llp.height = relaHeight;
                 llp.leftMargin = 0;

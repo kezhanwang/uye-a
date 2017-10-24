@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Message;
+import android.os.PersistableBundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,7 @@ import com.bjzt.uye.entity.POrganizeEntity;
 import com.bjzt.uye.entity.PicEntity;
 import com.bjzt.uye.entity.PicResultEntity;
 import com.bjzt.uye.entity.VDateEntity;
+import com.bjzt.uye.entity.VOrderInfoEntity;
 import com.bjzt.uye.http.ProtocalManager;
 import com.bjzt.uye.http.listener.IUploadListener;
 import com.bjzt.uye.http.rsp.RspOrderInfoEntity;
@@ -99,6 +101,10 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
     private String mCammerImgPath;
     private RspOrderInfoEntity mRspEntity;
     private PCourseEntity mCourseEntitySelect;
+
+    private final String KEY_SAVE_VENTITY = "key_v_entity";
+    private final String KEY_RSP = "key_rsp";
+    private final String KEY_COURSE = "key_course";
 
     @Override
     protected int getLayoutID() {
@@ -194,13 +200,83 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
 
         btnOk.setOnClickListener(this);
 
-//        mEmptyView.setVisibility(View.VISIBLE);
-//        mScrollView.setVisibility(View.GONE);
-//        mEmptyView.showLoadingState();
-        int seqNo = ProtocalManager.getInstance().reqOrderInfo(this.orgId,getCallBack());
-        mReqList.add(seqNo);
-
         UploadPicController.getInstance().setUploadListener(mUploadListener);
+        boolean needReq = false;
+        if(bundle != null){
+            RspOrderInfoEntity rspEntity = (RspOrderInfoEntity) bundle.getSerializable(KEY_RSP);
+            if(rspEntity != null){
+                this.mRspEntity = rspEntity;
+            }else{
+                needReq = true;
+            }
+            //pcourse select
+            PCourseEntity pCEntity = (PCourseEntity) bundle.getSerializable(KEY_COURSE);
+            if(pCEntity != null){
+                this.mCourseEntitySelect = pCEntity;
+            }
+            //vEntity
+            VOrderInfoEntity vEntity = (VOrderInfoEntity) bundle.getSerializable(KEY_SAVE_VENTITY);
+            if(vEntity != null){
+                fillParams(vEntity,pCEntity);
+            }
+        }else{
+            needReq = true;
+        }
+        if(needReq){
+            mEmptyView.setVisibility(View.VISIBLE);
+            mScrollView.setVisibility(View.GONE);
+            mEmptyView.showLoadingState();
+            int seqNo = ProtocalManager.getInstance().reqOrderInfo(this.orgId,getCallBack());
+            mReqList.add(seqNo);
+        }else{
+            if(this.mRspEntity != null && mRspEntity.mEntity != null) {
+                mEmptyView.loadSucc();
+                mScrollView.setVisibility(View.VISIBLE);
+                initParams(this.mRspEntity.mEntity);
+            }
+        }
+    }
+
+    private void fillParams(VOrderInfoEntity vEntity,PCourseEntity pCourse){
+        //course name
+        if(pCourse != null){
+            String cName = pCourse.c_name;
+            setItemView(itemCName,cName);
+        }else{
+            setItemView(itemCName,"");
+        }
+        //tution
+        String strTution = vEntity.tuition;
+        setItemView(itemTution,strTution);
+        //clazz
+        String clazz = vEntity.clazz;
+        setItemView(itemClazz,clazz);
+        //date start
+        String strDateStart = vEntity.class_start;
+        setItemView(itemDateStart,strDateStart);
+        //date end
+        String strDateEnd = vEntity.class_end;
+        setItemView(itemDateEnd,strDateEnd);
+        //advisor
+        String strAdvisor = vEntity.course_consultant;
+        setItemView(itemAdvise,strAdvisor);
+        //hold pic
+        String strPicHold = vEntity.group_pic;
+        photoViewHold.updatePicInfo(this,strPicHold,true);
+        //train protocal
+        List<String> strProtocalPic = vEntity.training_pic;
+        if(strProtocalPic.size() > 0){
+            String strInfo = strProtocalPic.get(0);
+            photoViewProtocal.updatePicInfo(this,strInfo,true);
+        }
+    }
+
+    private void setItemView(ItemView mItemView,String val){
+        if(!TextUtils.isEmpty(val)){
+            mItemView.setEditTxt(val);
+        }else{
+            mItemView.setEditTxt("");
+        }
     }
 
     private IUploadListener mUploadListener = new IUploadListener() {
@@ -259,8 +335,6 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
                 }else if(obj == photoViewProtocal){
                     showDialogPicSelect(REQ_CODE_PROTOCAL);
                 }
-            }else{
-
             }
         }
     };
@@ -360,67 +434,83 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
         this.orgId = intent.getStringExtra(IntentUtils.PARA_KEY_PUBLIC);
     }
 
+    private VOrderInfoEntity buildOrderEntity(boolean isInterrupt){
+        VOrderInfoEntity vEntity = new VOrderInfoEntity();
+        String strTution = itemTution.getInputTxt();
+        vEntity.tuition = strTution;
+        if(isInterrupt && TextUtils.isEmpty(strTution)){
+            String tips = getString(R.string.order_info_cname_tips);
+            vEntity.msg = tips;
+            return vEntity;
+        }
+        String strClazzName = itemClazz.getInputTxt();
+        vEntity.clazz = strClazzName;
+        if(isInterrupt && TextUtils.isEmpty(strClazzName)){
+            String tips = getResources().getString(R.string.order_info_clazz_name_tips);
+            vEntity.msg = tips;
+            return vEntity;
+        }
+        String strDateStart = itemDateStart.getInputTxt();
+        vEntity.class_start = strDateStart;
+        if(isInterrupt && TextUtils.isEmpty(strDateStart)){
+            String tips = getResources().getString(R.string.order_info_train_date_tips);
+            vEntity.msg = tips;
+            return vEntity;
+        }
+        String strDateEnd = itemDateEnd.getInputTxt();
+        vEntity.class_end = strDateEnd;
+        if(isInterrupt && TextUtils.isEmpty(strDateEnd)){
+            String tips = getResources().getString(R.string.order_info_train_date_end_tips);
+            vEntity.msg = tips;
+            return vEntity;
+        }
+        String strAdviser = itemAdvise.getInputTxt();
+        vEntity.course_consultant = strAdviser;
+        if(isInterrupt && TextUtils.isEmpty(strAdviser)){
+            String tips = getResources().getString(R.string.order_info_advise_tips);
+            vEntity.msg = tips;
+            return vEntity;
+        }
+        String strPicHold = photoViewHold.getUrl();
+        vEntity.group_pic = strPicHold;
+        if(isInterrupt && TextUtils.isEmpty(strPicHold)) {
+            String tips = getResources().getString(R.string.order_info_upload_pic_hold_tips);
+            vEntity.msg = tips;
+            return vEntity;
+        }
+        String strPicProtocal = photoViewProtocal.getUrl();
+        if(!TextUtils.isEmpty(strPicProtocal)){
+            vEntity.training_pic.add(strPicProtocal);
+        }
+        if(isInterrupt && TextUtils.isEmpty(strPicProtocal)){
+            String tips = getResources().getString(R.string.order_info_upload_pic_protocal_tips);
+            vEntity.msg = tips;
+            return vEntity;
+        }
+        vEntity.isSucc = true;
+        return vEntity;
+    }
+
     @Override
     public void onClick(View view) {
         if(view == this.btnOk){
-            String strCourseName = itemCName.getInputTxt();
-            if(TextUtils.isEmpty(strCourseName)){
-                String tips = getString(R.string.order_info_cname_tips);
+            VOrderInfoEntity vEntity = buildOrderEntity(true);
+            if(vEntity.isSucc){
+                showLoading();
+                String orgId = "";
+                int insureType = -1;
+                if(mRspEntity != null && mRspEntity.mEntity != null && mRspEntity.mEntity.organize != null){
+                    orgId = mRspEntity.mEntity.organize.org_id;
+                    insureType = mRspEntity.mEntity.organize.getInsureType();
+                }else{
+                    insureType = 1;
+                }
+                int seqNo = ProtocalManager.getInstance().reqOrderSubmit(orgId,mCourseEntitySelect.c_id,vEntity,insureType,getCallBack());
+                mReqList.add(seqNo);
+            }else{
+                String tips = vEntity.msg;
                 showToast(tips);
-                return;
             }
-            String strTution = itemTution.getInputTxt();
-            if(TextUtils.isEmpty(strTution)){
-                String tips = getResources().getString(R.string.order_info_tution_tips);
-                showToast(tips);
-                return;
-            }
-            String strClazzName = itemClazz.getInputTxt();
-            if(TextUtils.isEmpty(strClazzName)){
-                String tips = getResources().getString(R.string.order_info_clazz_name_tips);
-                showToast(tips);
-                return;
-            }
-            String strDateStart = itemDateStart.getInputTxt();
-            if(TextUtils.isEmpty(strDateStart)){
-                String tips = getResources().getString(R.string.order_info_train_date_tips);
-                showToast(tips);
-                return;
-            }
-            String strDateEnd = itemDateEnd.getInputTxt();
-            if(TextUtils.isEmpty(strDateEnd)){
-                String tips = getResources().getString(R.string.order_info_train_date_end_tips);
-                showToast(tips);
-                return;
-            }
-            String strAdviser = itemAdvise.getInputTxt();
-            if(TextUtils.isEmpty(strAdviser)){
-                String tips = getResources().getString(R.string.order_info_advise_tips);
-                showToast(tips);
-                return;
-            }
-            String strPicHold = photoViewHold.getUrl();
-            if(TextUtils.isEmpty(strPicHold)){
-                String tips = getResources().getString(R.string.order_info_upload_pic_hold_tips);
-                showToast(tips);
-                return;
-            }
-            String strPicPicProtocal = photoViewProtocal.getUrl();
-            if(TextUtils.isEmpty(strPicPicProtocal)){
-                String tips = getResources().getString(R.string.order_info_upload_pic_protocal_tips);
-                showToast(tips);
-                return;
-            }
-            showLoading();
-            String orgId = "";
-            if(mRspEntity != null && mRspEntity.mEntity != null && mRspEntity.mEntity.organize != null){
-                orgId = mRspEntity.mEntity.organize.org_id;
-            }
-            List<String> mList = new ArrayList<>();
-            mList.add(strPicPicProtocal);
-            int seqNo = ProtocalManager.getInstance().reqOrderSubmit(orgId,mCourseEntitySelect.c_id,strTution,strClazzName,
-                    strDateStart,strDateEnd,strAdviser,strPicHold,mList,"1",getCallBack());
-            mReqList.add(seqNo);
         }
     }
 
@@ -537,6 +627,22 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
                     showToast(tips);
                 }
             }
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        //view entity
+        VOrderInfoEntity vEntity = buildOrderEntity(false);
+        outState.putSerializable(KEY_SAVE_VENTITY,vEntity);
+        //rsp enttiy
+        if(this.mRspEntity != null){
+            outState.putSerializable(KEY_RSP,this.mRspEntity);
+        }
+        //course entity
+        if(this.mCourseEntitySelect != null){
+            outState.putSerializable(KEY_COURSE,mCourseEntitySelect);
         }
     }
 }

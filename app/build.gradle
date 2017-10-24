@@ -68,11 +68,11 @@ android {
         preDexLibraries = false
     }
 
-//    lintOptions {
-//        quiet true
-//        abortOnError false
-//        ignoreWarnings true
-//    }
+    lintOptions {
+        quiet true
+        abortOnError false
+        ignoreWarnings true
+    }
 
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES.txt'

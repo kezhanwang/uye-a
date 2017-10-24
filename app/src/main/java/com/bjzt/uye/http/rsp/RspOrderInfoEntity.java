@@ -8,11 +8,13 @@ import com.google.gson.Gson;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 /**
  * Created by billy on 2017/10/18.
  */
 
-public class RspOrderInfoEntity extends RspBaseEntity{
+public class RspOrderInfoEntity extends RspBaseEntity implements Serializable{
     public POrderInfoEntity mEntity;
 
     @Override

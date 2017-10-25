@@ -108,13 +108,29 @@
                 android:layout_marginLeft="@dimen/common_margin"
                 android:layout_marginRight="@dimen/common_margin"
                 android:layout_marginTop="28dp"
-                android:layout_marginBottom="42dp"
                 android:gravity="center"
                 android:background="@drawable/btn_login_selector"
                 android:text="@string/complete"
                 android:textColor="@color/common_white"
                 android:textSize="18.5sp"
                 />
+
+            <com.bjzt.uye.views.component.ProtocalItemView
+                android:id="@+id/proto_item_service"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/common_margin"
+                android:layout_marginTop="@dimen/common_margin_18"
+                ></com.bjzt.uye.views.component.ProtocalItemView>
+
+            <com.bjzt.uye.views.component.ProtocalItemView
+                android:id="@+id/proto_item_auth"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/common_margin"
+                android:layout_marginTop="@dimen/common_margin_10"
+                android:layout_marginBottom="42dp"
+                ></com.bjzt.uye.views.component.ProtocalItemView>
 
         </LinearLayout>
 

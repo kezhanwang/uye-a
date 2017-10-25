@@ -36,7 +36,7 @@ public class PicController {
      * @param imgView
      * @param url
      */
-    public void showPic(ImageView imgView,String url){
+    public void showPic(ImageView imgView,String url,boolean isRound){
         Context mContext = Global.getContext();
         if(!TextUtils.isEmpty(url)){
             if(!url.startsWith("http") && !url.startsWith("https")){
@@ -57,6 +57,9 @@ public class PicController {
             builder.into(imgView);
 
         }
+    }
 
+    public void showPic(ImageView imgView,String url){
+        showPic(imgView,url,true);
     }
 }

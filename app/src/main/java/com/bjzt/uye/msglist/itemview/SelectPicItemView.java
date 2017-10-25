@@ -32,7 +32,7 @@ public class SelectPicItemView extends BaseItemView<VPicFileEntity> {
             img_add.setVisibility(GONE);
             String url=mEntity.url;
             if (!TextUtils.isEmpty(url)){
-                PicController.getInstance().showPic(img_itemView,url);
+                PicController.getInstance().showPic(img_itemView,url,false);
             }else{
                 if (mEntity.mBitmapByte != null && mEntity.mBitmapByte.length>2){
                     mEntity.mBitmap= BitmapUtil.getBitmap(mEntity.mBitmapByte);

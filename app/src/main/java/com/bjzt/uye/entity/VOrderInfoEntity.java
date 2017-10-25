@@ -16,6 +16,8 @@ public class VOrderInfoEntity implements Serializable{
     public String course_consultant;
     public String group_pic;
     public List<String> training_pic = new ArrayList<>();
+    public boolean isSelectService;
+    public boolean isSelectAuth;
     public String insured_type;
 
     public boolean isSucc;

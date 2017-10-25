@@ -2,13 +2,16 @@ package com.bjzt.uye.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.bjzt.uye.R;
 import com.bjzt.uye.activity.base.BaseActivity;
+import com.bjzt.uye.global.MConfiger;
 import com.bjzt.uye.http.ProtocalManager;
 import com.bjzt.uye.http.rsp.RspPhoneVerifyEntity;
 import com.bjzt.uye.http.rsp.RspRegEntity;
@@ -44,6 +47,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     ExtendEditText editPwd;
     @BindView(R.id.reg_register)
     Button btnReg;
+    @BindView(R.id.txt_bottom_tips)
+    TextView mTxtProtocal;
 
     private List<Integer> mReqList = new ArrayList<Integer>();
     private String phone;
@@ -102,6 +107,10 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
         btnReg.setOnClickListener(this);
         btnReg.setEnabled(false);
+
+        mTxtProtocal.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+        mTxtProtocal.getPaint().setAntiAlias(true);//抗锯齿
+        mTxtProtocal.setOnClickListener(this);
     }
 
     private ITextListener mTxtChangeListener = new ITextListener() {
@@ -129,7 +138,9 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
-        if(view == btnReg){
+        if(view == this.mTxtProtocal){
+            IntentUtils.startWebViewActivity(this, MConfiger.URL_PROTOCAL_REG);
+        }else if(view == btnReg){
             String phone = editPhone.getText();
             String code = editVerify.getText();
             String pwd = editPwd.getText();

@@ -159,7 +159,11 @@
     <string name="order_info_advise_tips">请输入您课程顾问的姓名</string>
     <string name="order_info_upload_pic_hold_tips">请上传手持身份证照片</string>
     <string name="order_info_upload_pic_protocal_tips">请上传协议照片</string>
-
+    <string name="order_info_protocal_service">U业帮服务协议</string>
+    <string name="order_info_protocal_auth">U业帮用户授权协议</string>
+    <string name="order_info_protocal_formate">&#060;%s&#062;</string>
+    <string name="order_info_protocal_service_tips">请阅读并同意勾选&#060;U业帮服务协议&#062;</string>
+    <string name="order_info_protocal_auth_tips">请阅读并同意勾选&#060;U业帮用户授权协议&#062;</string>
     <!--UYe相关-->
     <string name="uye_order_empty_tips">订单空空如也!\n让U业帮为您的大好前程出把力吧~</string>
 

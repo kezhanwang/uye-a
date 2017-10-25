@@ -41,6 +41,7 @@ import com.bjzt.uye.views.component.BlankEmptyView;
 import com.bjzt.uye.views.component.ItemView;
 import com.bjzt.uye.views.component.OrderHeaderView;
 import com.bjzt.uye.views.component.PicSelectView;
+import com.bjzt.uye.views.component.ProtocalItemView;
 import com.bjzt.uye.views.component.YHeaderView;
 import java.io.File;
 import java.util.ArrayList;
@@ -78,6 +79,10 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
     PicSelectView picSelectView;
     @BindView(R.id.btn_ok)
     Button btnOk;
+    @BindView(R.id.proto_item_service)
+    ProtocalItemView proItemService;
+    @BindView(R.id.proto_item_auth)
+    ProtocalItemView proItemAuth;
 
     @BindView(R.id.emptyview)
     BlankEmptyView mEmptyView;
@@ -200,6 +205,11 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
         picSelectView.initData(PicSelectView.TYPE_PROTOCAL);
         picSelectView.setOnItemClickListener(mSelectPicListener);
 
+        proItemService.updateType(ProtocalItemView.TYPE_SERVICE);
+        proItemService.setIItemListener(mProItemListener);
+        proItemAuth.updateType(ProtocalItemView.TYPE_AUTH);
+        proItemAuth.setIItemListener(mProItemListener);
+
         btnOk.setOnClickListener(this);
 
         UploadPicController.getInstance().setUploadListener(mUploadListener);
@@ -290,11 +300,15 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
         String strPicHold = vEntity.group_pic;
         photoViewHold.updatePicInfo(this,strPicHold,true);
         //train protocal
-        List<String> strProtocalPic = vEntity.training_pic;
-        if(strProtocalPic.size() > 0){
-            String strInfo = strProtocalPic.get(0);
-//            photoViewProtocal.updatePicInfo(this,strInfo,true);
+        List<String> strProtocalPics = vEntity.training_pic;
+        if(strProtocalPics.size() > 0){
+            picSelectView.insertList(strProtocalPics);
         }
+        //boolean isSerivice select
+        boolean isSelectService = vEntity.isSelectService;
+        proItemService.setIsSelect(isSelectService);
+        boolean isSelectAuth = vEntity.isSelectAuth;
+        proItemAuth.setIsSelect(isSelectAuth);
     }
 
     private void setItemView(ItemView mItemView,String val){
@@ -304,6 +318,29 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
             mItemView.setEditTxt("");
         }
     }
+
+    private IItemListener mProItemListener = new IItemListener() {
+        @Override
+        public void onItemClick(Object obj, int tag) {
+            if(tag == ProtocalItemView.SRC_TXT_CLICK){
+                if(obj == proItemService){
+                    if(mRspEntity != null && mRspEntity.mEntity != null){
+                        String url = mRspEntity.mEntity.contract;
+                        if(!TextUtils.isEmpty(url)){
+                            IntentUtils.startWebViewActivity(OrderInfoActivity.this,url);
+                        }
+                    }
+                }else if(obj == proItemAuth){
+                    if(mRspEntity != null && mRspEntity.mEntity != null){
+                        String url = mRspEntity.mEntity.authcontract;
+                        if(!TextUtils.isEmpty(url)){
+                            IntentUtils.startWebViewActivity(OrderInfoActivity.this,url);
+                        }
+                    }
+                }
+            }
+        }
+    };
 
     private IUploadListener mUploadListener = new IUploadListener() {
         @Override
@@ -546,12 +583,24 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
             vEntity.msg = tips;
             return vEntity;
         }
-        String strPicProtocal = null;
-        if(!TextUtils.isEmpty(strPicProtocal)){
-            vEntity.training_pic.add(strPicProtocal);
-        }
-        if(isInterrupt && TextUtils.isEmpty(strPicProtocal)){
+        List<String> mProtocalPics = picSelectView.getNetUrlList();
+        vEntity.training_pic = mProtocalPics;
+        if(isInterrupt && (mProtocalPics == null || mProtocalPics.size() <= 0)){
             String tips = getResources().getString(R.string.order_info_upload_pic_protocal_tips);
+            vEntity.msg = tips;
+            return vEntity;
+        }
+        boolean isSelectService = proItemService.getIsSelect();
+        vEntity.isSelectService = isSelectService;
+        if(isInterrupt && !isSelectService){
+            String tips = getResources().getString(R.string.order_info_protocal_service_tips);
+            vEntity.msg = tips;
+            return vEntity;
+        }
+        boolean isSelectAuth = proItemAuth.getIsSelect();
+        vEntity.isSelectAuth = isSelectAuth;
+        if(isInterrupt && !isSelectAuth){
+            String tips = getResources().getString(R.string.order_info_protocal_auth_tips);
             vEntity.msg = tips;
             return vEntity;
         }

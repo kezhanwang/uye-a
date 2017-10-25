@@ -8,7 +8,8 @@ import java.util.ArrayList;
  */
 
 public class POrderInfoEntity implements Serializable{
-//    public PContractEntity contract;
+    public String contract;
+    public String authcontract;
     public POrganizeEntity organize;
     public ArrayList<PCourseEntity> courses;
 }

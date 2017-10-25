@@ -133,4 +133,9 @@
     <dimen name="dialog_uograde_padding">10dp</dimen>
     <dimen name="dialog_upgrade_line_height">2px</dimen>
 
+    <!-- 贷款第四个步骤 -->
+    <dimen name="pro_font_small">12sp</dimen>
+    <dimen name="pro_font_large">13.5sp</dimen>
+
+
 </resources>

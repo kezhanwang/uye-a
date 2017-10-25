@@ -1,8 +1,6 @@
 package com.bjzt.uye.views.component;
 
 import android.content.Context;
-import android.support.annotation.IdRes;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +10,6 @@ import android.widget.HeaderViewListAdapter;
 import android.widget.ListAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.bjzt.uye.R;
 import com.bjzt.uye.adapter.AdapterSelectPic;
 import com.bjzt.uye.entity.VPicFileEntity;
@@ -46,6 +43,9 @@ public class PicSelectView extends RelativeLayout implements NoConfusion{
     private ArrayList<VPicFileEntity> mList;
     private ISelectPicItemClickListener mListener;
 
+    private static final int MAX_CNT = 10;
+    private int maxCnt = MAX_CNT;
+
     public PicSelectView(Context context) {
         super(context);
         init();
@@ -70,6 +70,10 @@ public class PicSelectView extends RelativeLayout implements NoConfusion{
             case TYPE_PROTOCAL:
                 break;
         }
+    }
+
+    public void setMaxCnt(int maxCnt){
+        this.maxCnt = maxCnt;
     }
 
     public void clearData(){
@@ -98,6 +102,9 @@ public class PicSelectView extends RelativeLayout implements NoConfusion{
             case TYPE_PROTOCAL:
                 title = getResources().getString(R.string.pic_select_title_protocal);
                 tips = getResources().getString(R.string.pic_select_tips_protocal);
+                RelativeLayout.LayoutParams llp = (LayoutParams) mRelaTitle.getLayoutParams();
+                llp.width = (int) getResources().getDimension(R.dimen.orderinfo_title_width_max);
+                mRelaTitle.setLayoutParams(llp);
                 break;
         }
         text_name.setText(title);
@@ -106,10 +113,23 @@ public class PicSelectView extends RelativeLayout implements NoConfusion{
 
     public void insertLastBefore(VPicFileEntity entity){
         mAdapter.insertLastBefore(entity);
+        checkMaxCnt();
     }
 
-    public void checkMaxCnt(int cnt){
-        mAdapter.checkMaxCnt(cnt);
+    public void insertList(List<String> mList){
+        if(mList != null && mList.size() > 0){
+            for(int i = 0;i < mList.size();i++){
+                String str = mList.get(i);
+                VPicFileEntity vEntity = new VPicFileEntity();
+                vEntity.url = str;
+                vEntity.isAddPic = false;
+                insertLastBefore(vEntity);
+            }
+        }
+    }
+
+    private void checkMaxCnt(){
+        mAdapter.checkMaxCnt(this.maxCnt);
     }
     public List<String> getPublishList(){
         return mAdapter.getPublishList();

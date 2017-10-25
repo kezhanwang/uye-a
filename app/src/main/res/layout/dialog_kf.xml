@@ -12,7 +12,7 @@
         android:background="@drawable/menu_btn_item_top_selector"
         android:gravity="center"
         android:singleLine="true"
-        android:textColor="@color/common_green"
+        android:textColor="@color/common_font_3"
         android:textSize="@dimen/modifyDialog_textSize" />
 
     <TextView
@@ -23,7 +23,7 @@
         android:background="@drawable/menu_btn_item_middle_selector"
         android:gravity="center"
         android:singleLine="true"
-        android:textColor="@color/common_green"
+        android:textColor="@color/common_font_3"
         android:textSize="@dimen/modifyDialog_textSize" 
         android:text="tips"
         />
@@ -35,8 +35,9 @@
         android:background="@drawable/menu_btn_item_bottom_selector"
         android:gravity="center"
         android:singleLine="true"
-        android:textColor="@color/common_green"
+        android:textColor="@color/common_font_3"
         android:textSize="@dimen/modifyDialog_textSize"/>
+
     <TextView
         android:id="@+id/textView_dialog_modify_cancel"
         android:layout_width="fill_parent"

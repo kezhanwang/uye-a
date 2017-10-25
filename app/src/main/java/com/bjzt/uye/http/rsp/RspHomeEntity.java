@@ -18,5 +18,9 @@ public class RspHomeEntity extends RspBaseEntity{
     public void parseData(JSONObject jsonObj, JSONArray jsonArray, boolean isArray, ReqBaseEntity reqEntity){
         Gson gson = new Gson();
         mEntity = gson.fromJson(jsonObj.toString(),PHomeEntity.class);
+        long top = mEntity.premium_amount_top;
+        if(mEntity.insured_order != null){
+            mEntity.insured_order.vTop = top;
+        }
     }
 }

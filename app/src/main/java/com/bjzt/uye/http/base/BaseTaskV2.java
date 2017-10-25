@@ -3,15 +3,18 @@ package com.bjzt.uye.http.base;
 import android.text.TextUtils;
 
 import com.bjzt.uye.controller.LBSController;
+import com.bjzt.uye.controller.WifiController;
 import com.bjzt.uye.global.Global;
 import com.bjzt.uye.global.MConfiger;
 import com.bjzt.uye.util.StrUtil;
 import com.common.common.MyLog;
 import com.common.common.NetCommon;
 import com.common.controller.LoginController;
+import com.common.entity.BWifiEntity;
 import com.common.entity.PHttpHeader;
 import com.common.http.HttpBaseTask;
 import com.common.http.HttpUtils;
+import com.common.util.APNUtils;
 import com.common.util.DeviceUtil;
 
 import org.apache.http.entity.mime.MultipartEntity;
@@ -79,6 +82,15 @@ public class BaseTaskV2<T> extends HttpBaseTask implements ITaskListener {
                 if(!TextUtils.isEmpty(la) && !TextUtils.isEmpty(lo)){
                     mMap.put("map_lat",la);
                     mMap.put("map_lng",lo);
+                }
+                //添加wifi信息
+                boolean isWifi = APNUtils.isWifi();
+                if(isWifi){
+                    BWifiEntity bEntity = WifiController.getInstance().getWifiEntity();
+                    if(bEntity != null && !TextUtils.isEmpty(bEntity.mac)){
+                        mMap.put("mac",bEntity.mac);
+                        mMap.put("ssid",bEntity.ssid);
+                    }
                 }
 //                //添加areaid
 //                PHotCityEntity pHotEntity = CityListController.getInstance().getCurCityEntity();

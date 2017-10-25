@@ -8,6 +8,8 @@ public class MConfiger {
     public static final int VERSION = 101;       //业务版本号码
 
     public static final String TEST_ORG_ID = "10049";
+    public static final String JPUSH_ID = "0000";
+    public static String CHANNEL_ID = "6000";
 
     public static final boolean isDebug = true; //是否开启debug开关
     public static final boolean isJsonDebug = true; //json解析debug开关是否打开

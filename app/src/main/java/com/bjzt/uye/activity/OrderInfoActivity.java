@@ -21,6 +21,7 @@ import com.bjzt.uye.entity.POrderInfoEntity;
 import com.bjzt.uye.entity.POrganizeEntity;
 import com.bjzt.uye.entity.PicEntity;
 import com.bjzt.uye.entity.PicResultEntity;
+import com.bjzt.uye.entity.VActivityResultEntity;
 import com.bjzt.uye.entity.VDateEntity;
 import com.bjzt.uye.entity.VOrderInfoEntity;
 import com.bjzt.uye.entity.VPicFileEntity;
@@ -32,6 +33,8 @@ import com.bjzt.uye.http.rsp.RspOrderInfoEntity;
 import com.bjzt.uye.http.rsp.RspOrderSubmitEntity;
 import com.bjzt.uye.listener.IHeaderListener;
 import com.bjzt.uye.listener.IItemListener;
+import com.bjzt.uye.photo.activity.LoanPicScanActivity;
+import com.bjzt.uye.util.ActivityResultUtil;
 import com.bjzt.uye.util.FileUtil;
 import com.bjzt.uye.util.IntentUtils;
 import com.bjzt.uye.util.PicUtils;
@@ -90,6 +93,7 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
     private final int REQ_CODE_HOLD = DialogPicSelect.TYPE_HOLD;
     private final int REQ_CODE_PROTOCAL = DialogPicSelect.TYPE_PROTOCAL;
     private final int REQ_DATA_CHECK = 100;
+    private final int REQ_CODE_PIC_SCANE = 101;
 
     private final int FLAG_SET_LOADING = 10;
     private final int FLAG_HIDE_LOADING = 11;
@@ -397,7 +401,13 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
 
         @Override
         public void showBigPic(int type, ArrayList<VPicFileEntity> mList, int pos) {
-
+            ArrayList<String> rList = new ArrayList<>();
+            if(mList != null){
+                for(int i = 0;i < mList.size();i++){
+                    rList.add(mList.get(i).url);
+                }
+            }
+            IntentUtils.startPicScaneActivity(OrderInfoActivity.this,REQ_CODE_PIC_SCANE,rList,pos,LoanPicScanActivity.TYPE_NET);
         }
     };
 
@@ -758,6 +768,13 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
                 }else{
                     String tips = getString(R.string.common_pic_path_failure);
                     showToast(tips);
+                }
+            }else if(requestCode == REQ_CODE_PIC_SCANE){
+                List<String> mList = picSelectView.getNetUrlList();
+                VActivityResultEntity vEntity = ActivityResultUtil.onActivityReult(mList,data);
+                if(vEntity != null && vEntity.isDel){
+                    picSelectView.clearData();
+                    picSelectView.insertList(vEntity.mList);
                 }
             }
         }

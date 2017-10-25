@@ -28,7 +28,7 @@
         android:layout_width="fill_parent"
         android:minHeight="52dp"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/btn_login_selector"
+        android:background="@color/common_green"
         android:textColor="@color/common_white"
         android:text="@string/complete"
         android:textSize="19sp"

@@ -1,6 +1,7 @@
 package com.bjzt.uye.controller;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.widget.ImageView;
@@ -8,6 +9,12 @@ import com.bjzt.uye.R;
 import com.bjzt.uye.global.Global;
 import com.bumptech.glide.DrawableRequestBuilder;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.Request;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SizeReadyCallback;
+import com.bumptech.glide.request.target.Target;
 import com.common.common.NetCommon;
 import com.common.http.HttpEngine;
 
@@ -59,7 +66,16 @@ public class PicController {
         }
     }
 
+    public void loadPic(String url,final IPicDownLoadListener mListener){
+        Context mContext = Global.getContext();
+    }
+
     public void showPic(ImageView imgView,String url){
         showPic(imgView,url,true);
+    }
+
+    public interface IPicDownLoadListener{
+        public void downloadSucc(Bitmap bitmap);
+        public void downLoadFailure();
     }
 }

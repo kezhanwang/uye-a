@@ -2,6 +2,7 @@ package com.bjzt.uye.views.component;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -95,6 +96,14 @@ public class YHeaderView extends RelativeLayout implements NoConfusion,View.OnCl
                 mImgRight.setVisibility(View.VISIBLE);
                 int c = getResources().getColor(R.color.common_black);
                 mRelaMain.setBackgroundDrawable(new ColorDrawable(c));
+                Drawable d = getResources().getDrawable(R.drawable.loan_header_rela_bg_ablum);
+                relaLeft.setBackgroundDrawable(d);
+                d = getResources().getDrawable(R.drawable.loan_header_rela_bg_ablum);
+                relaRight.setBackgroundDrawable(d);
+                int cWhtite = getResources().getColor(R.color.common_white);
+                mTxtTitle.setTextColor(cWhtite);
+                d = getResources().getDrawable(R.drawable.super_back);
+                imgBack.setImageDrawable(d);
                 break;
         }
     }

@@ -13,14 +13,19 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.bjzt.uye.R;
+import com.bjzt.uye.controller.PicController;
 import com.bjzt.uye.photo.activity.LoanPicScanActivity;
 import com.bjzt.uye.photo.listener.LoanIPublishListener;
 import com.bjzt.uye.util.BitmapUtil;
 import com.bjzt.uye.util.FileUtil;
+import com.bjzt.uye.util.StrUtil;
+import com.bumptech.glide.Glide;
 import com.common.common.MyLog;
 import com.common.thread.ThreadPool;
 import com.common.util.DeviceUtil;
 import com.common.util.Utils;
+
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by billy on 2017/10/22.
@@ -79,15 +84,40 @@ public class LoanPicScaneItemView extends RelativeLayout implements View.OnClick
         String str = getResources().getString(R.string.loan_pic_scanne_tips_pic_loading);
         mLoadingView.showLoading(str);
         this.picUrl = picUrl;
-        if(mType == LoanPicScanActivity.TYPE_LOC || mType == LoanPicScanActivity.TYPE_ABLUM_LOC || mType == LoanPicScanActivity.TYPE_LOAN){
+        if(mType == LoanPicScanActivity.TYPE_LOC || mType == LoanPicScanActivity.TYPE_ABLUM_LOC){
             ThreadPool.getInstance().removeJob(r);
             ThreadPool.getInstance().submmitJob(r);
         }else if(mType == LoanPicScanActivity.TYPE_NET){
-//			ThreadPool.getInstance().removeJob(rNet);
-//			ThreadPool.getInstance().submmitJob(rNet);
+           ThreadPool.getInstance().removeJob(rNet);
+           ThreadPool.getInstance().submmitJob(rNet);
         }
     }
 
+    private Runnable rNet = new Runnable() {
+        @Override
+        public void run() {
+            boolean isSucc = false;
+            try {
+                int width = DeviceUtil.mWidth;
+                int height = DeviceUtil.mHeight;
+                Bitmap bitmap = Glide.with(getContext()).load(picUrl).asBitmap().centerCrop().into(width,height).get();
+                Message msg = Message.obtain();
+                msg.what = FLAG_SET_BITMAP_LOC;
+                msg.obj = bitmap;
+                uiHandler.sendMessage(msg);
+                isSucc = true;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+            if(!isSucc){
+                Message msg = Message.obtain();
+                msg.what = FLAG_ERROR;
+                uiHandler.sendMessage(msg);
+            }
+        }
+    };
 
     private Runnable r = new Runnable() {
         @Override

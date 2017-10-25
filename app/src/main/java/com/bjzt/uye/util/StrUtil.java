@@ -153,4 +153,26 @@ public class StrUtil {
     public static final String getMoneyInfoByFen(long tution){
         return "¥" + (tution / 100);
     }
+
+    public static final String getHomeTutionStr(long tution){
+        String str = "";
+        StringBuilder builder = new StringBuilder();
+        if(tution > 0){
+            String s = tution+"";
+            s = new StringBuilder(s).reverse().toString();
+            for(int i = 0;i < s.length();i++){
+                char c = s.charAt(i);
+                builder.append(c);
+                if(i == 1){
+                    builder.append(".");
+                }else if((i - 2) > 0 && (i - 2) %  3 == 0){
+                    builder.append(",");
+                }
+            }
+            str = builder.reverse().toString();
+        }else{
+            str = "0.00";
+        }
+        return str;
+    }
 }

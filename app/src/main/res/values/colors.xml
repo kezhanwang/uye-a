@@ -41,6 +41,8 @@
     <color name="tab_txt_color_normal">#747474</color>
     <!-- header先关-->
     <color name="header_rela_bg_press">#f1f1f1</color>
+    <color name="loan_header_rela_bg_ablum">#333333</color>
+    <color name="loan_header_rela_bg_ablum_press">#991e1e1e</color>
 
     <!--MyInfo个人中心相关-->
     <color name="myinfo_nick_txt_color">#666666</color>

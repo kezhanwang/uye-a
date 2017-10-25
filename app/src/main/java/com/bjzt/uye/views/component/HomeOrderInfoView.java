@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.bjzt.uye.R;
 import com.bjzt.uye.entity.PHomeOrderEntity;
 import com.bjzt.uye.listener.IItemListener;
+import com.bjzt.uye.util.StrUtil;
 import com.common.listener.NoConfusion;
 import com.common.msglist.base.BaseItemView;
 
@@ -51,7 +52,7 @@ public class HomeOrderInfoView extends BaseItemView<PHomeOrderEntity> implements
     @Override
     public void setMsg(PHomeOrderEntity pHomeOrderEntity) {
         this.mEntity = pHomeOrderEntity;
-        setInfo(null,this.mEntity.count,this.mEntity.paid_compensation);
+        setInfo(this.mEntity.vTop,this.mEntity.count,this.mEntity.paid_compensation);
     }
 
     @Override
@@ -73,10 +74,10 @@ public class HomeOrderInfoView extends BaseItemView<PHomeOrderEntity> implements
         relaRight.setOnClickListener(this);
     }
 
-    public void setInfo(String strMax,int orderCnt,int payOut){
-        if(!TextUtils.isEmpty(strMax)){
-            mTxtMaxP.setText(strMax);
-        }
+    public void setInfo(long maxPayout,int orderCnt,int payOut){
+        //max tution
+        String str = StrUtil.getHomeTutionStr(maxPayout);
+        mTxtMaxP.setText(str);
         mTxtOrderCnt.setText(orderCnt+"");
         Context mContext = getContext();
         String strPayout = mContext.getResources().getString(R.string.common_money_info,payOut);

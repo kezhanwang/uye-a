@@ -6,9 +6,7 @@ import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.bjzt.uye.R;
 import com.bjzt.uye.adapter.HomeAdAdapter;
 import com.bjzt.uye.entity.BStrFontEntity;
@@ -18,10 +16,8 @@ import com.bjzt.uye.listener.IViewPagerListener;
 import com.bjzt.uye.util.StrUtil;
 import com.common.listener.NoConfusion;
 import com.common.msglist.base.BaseItemView;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

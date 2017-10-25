@@ -150,7 +150,7 @@ public class HttpUtils {
     	 String refer = HttpEngine.getInstance().getRefer(interfaceType);
     	 HttpGet httpGet = new HttpGet(refer + url);
          httpGet.addHeader("Accept-Language", "zh-cn");
-         httpGet.addHeader("User-Agent", Global.getQUA());
+         httpGet.addHeader("User-Agent", Global.getYouyeUAInfo());
          try {
              HttpResponse response = client.execute(httpGet);
              return decodeResponse(url, response,null);
@@ -182,7 +182,7 @@ public class HttpUtils {
      	httpPost.addHeader("Referer",refer);
 //        httpPost.setHeader("Connection", "Keep-Alive");
         httpPost.addHeader("charset", HTTP.UTF_8);
-        httpPost.addHeader("kzua",Global.getQUA());
+        httpPost.addHeader("HTTP_UYEUA",Global.getYouyeUAInfo());
         String ua = System.getProperty("http.agent");
         httpPost.addHeader("User-Agent",ua);
         httpPost.addHeader("HTTP_USER_AGENT",ua);
@@ -255,7 +255,7 @@ public class HttpUtils {
         HttpPost httpPost = new HttpPost(refer + url);
         httpPost.addHeader("Referer",refer);
         httpPost.setHeader("Connection", "Keep-Alive");
-        httpPost.addHeader("User-Agent", Global.getQUA());
+        httpPost.addHeader("User-Agent", Global.getYouyeUAInfo());
         
         String loginStatus = getLoginStatus();
         if (!TextUtils.isEmpty(loginStatus)) {

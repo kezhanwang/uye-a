@@ -3,6 +3,7 @@ package com;
 import android.app.Application;
 import com.bjzt.uye.controller.LBSController;
 import com.bjzt.uye.controller.OtherController;
+import com.bjzt.uye.controller.WifiController;
 import com.bjzt.uye.global.Global;
 import com.common.controller.LoginController;
 import com.common.http.HttpEngine;
@@ -29,6 +30,8 @@ public class MApp extends Application{
             public void run() {
                 //加载LBS信息
                 LBSController.getInstance().loadInfo();
+                //加载wifi信息
+                WifiController.getInstance().loadInfo();
                 //加载登录信息
                 LoginController.getInstance().loadInfo();
 

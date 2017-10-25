@@ -1,6 +1,7 @@
 package com.bjzt.uye.photo.view;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,6 +60,11 @@ public class LoadingView extends RelativeLayout implements NoConfusion {
         int cWhite = getResources().getColor(R.color.common_white);
         txtView.setTextColor(cWhite);
         txtView.setVisibility(View.VISIBLE);
+    }
+
+    public void showErrorStatus(){
+        Drawable d = getContext().getResources().getDrawable(R.drawable.img_net_error);
+        imgView.setImageDrawable(d);
     }
 
     @Override

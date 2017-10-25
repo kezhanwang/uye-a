@@ -247,7 +247,7 @@ public class IntentUtils {
         startPicScaneActivity(mContext, requestCode, mList, pos, LoanPicScanActivity.TYPE_ABLUM_LOC);
     }
 
-    private static final void startPicScaneActivity(Context mContext,int requestCode,ArrayList<String> mList,int pos,int type){
+    public static final void startPicScaneActivity(Context mContext,int requestCode,ArrayList<String> mList,int pos,int type){
         Intent intent = new Intent(mContext,LoanPicScanActivity.class);
         intent.putStringArrayListExtra(IntentUtils.PARA_KEY_PUBLIC, mList);
         intent.putExtra(IntentUtils.PARA_KEY_POS, pos);
@@ -286,6 +286,5 @@ public class IntentUtils {
         intent.setData(content_url);
         mContext.startActivity(intent);
     }
-
 
 }

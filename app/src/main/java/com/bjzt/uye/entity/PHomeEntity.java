@@ -13,4 +13,5 @@ public class PHomeEntity implements Serializable{
     public PHomeOrderEntity insured_order;
     public List<POrganizeEntity> organize;
     public ArrayList<PAdEntity> ad_list;
+    public long premium_amount_top;
 }

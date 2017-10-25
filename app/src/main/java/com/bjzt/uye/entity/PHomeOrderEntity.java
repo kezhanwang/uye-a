@@ -13,6 +13,7 @@ public class PHomeOrderEntity implements Serializable,BaseItemListener{
     public String compensation;
     public int count;
     public int paid_compensation;
+    public long vTop;
 
     @Override
     public int getType() {

@@ -46,7 +46,6 @@ public class LoanPicScanActivity extends BaseActivity implements View.OnClickLis
     public static final int TYPE_LOC = 1;
     public static final int TYPE_NET = 2;
     public static final int TYPE_ABLUM_LOC = 3;
-    public static final int TYPE_LOAN = 4;
 
     private final int FLAG_FINISH = 0x100;
     private final int FLAG_DEL_ACTION = 0x101;
@@ -68,21 +67,23 @@ public class LoanPicScanActivity extends BaseActivity implements View.OnClickLis
         Intent intent = getIntent();
         curPos = intent.getIntExtra(IntentUtils.PARA_KEY_POS,0);
         mType = intent.getIntExtra(IntentUtils.PARA_KEY_TYPE,TYPE_LOC);
-        if(mType == TYPE_LOAN){
-            mPicList = (ArrayList<PicEntity>) intent.getSerializableExtra(IntentUtils.PARA_KEY_LIST);
-            if(mPicList != null){
-                mList = new ArrayList<String>();
-                if(mPicList != null){
-                    for(int i = 0;i < mPicList.size();i++){
-                        PicEntity vEntity = mPicList.get(i);
-                        String path = vEntity.path;
-                        mList.add(path);
-                    }
-                }
-            }
-        }else{
-            mList = intent.getStringArrayListExtra(IntentUtils.PARA_KEY_PUBLIC);
-        }
+        mList = intent.getStringArrayListExtra(IntentUtils.PARA_KEY_PUBLIC);
+        MyLog.d(TAG,"[initExtras]" + " mList:" + mList);
+//        if(mType == TYPE_NET){
+//            mPicList = (ArrayList<PicEntity>) intent.getSerializableExtra(IntentUtils.PARA_KEY_LIST);
+//            if(mPicList != null){
+//                mList = new ArrayList<String>();
+//                if(mPicList != null){
+//                    for(int i = 0;i < mPicList.size();i++){
+//                        PicEntity vEntity = mPicList.get(i);
+//                        String path = vEntity.path;
+//                        mList.add(path);
+//                    }
+//                }
+//            }
+//        }else{
+//            mList = intent.getStringArrayListExtra(IntentUtils.PARA_KEY_PUBLIC);
+//        }
     }
 
     @Override
@@ -97,17 +98,16 @@ public class LoanPicScanActivity extends BaseActivity implements View.OnClickLis
 
             @Override
             public void onRightClick() {
-                if(mType == TYPE_ABLUM_LOC){
+                if(mType == TYPE_NET){
                     String str = mAdapter.getPicUrl(curPos);
-                    if(mDelList.contains(str)){
-                        mDelList.remove(str);
-                        mHeader.setRightImage(R.drawable.loan_pic_ablum_flag_selected);
-                    }else{
-                        mDelList.add(str);
-                        mHeader.setRightImage(R.drawable.loan_pic_ablum_flag_nor);
+                    mDelList.add(str);
+                    mAdapter.deleteItemByPos(curPos);
+                    refreshHeader(null);
+                    if(mAdapter.getCount() <= 0){
+                        checkDataGoBack();
+                        finish();
                     }
-                    refreshBtn();
-                }else if(mType == TYPE_LOC || mType == TYPE_LOAN){
+                }else if(mType == TYPE_LOC){
                     showDialogExist();
                 }
             }
@@ -115,11 +115,9 @@ public class LoanPicScanActivity extends BaseActivity implements View.OnClickLis
 
         String str = "标题";
         mHeader.setTitle(str);
-        if(mType == TYPE_LOC || mType == TYPE_LOAN){
+        if(mType == TYPE_LOC || mType == TYPE_NET){
             mHeader.updateType(YHeaderView.TYPE_PIC_SCANNE);
             mHeader.setRightImage(R.drawable.loan_icon_del);
-        }else if(mType == TYPE_NET){
-            mHeader.updateType(YHeaderView.TYPE_ABOUT_ABLUME);
         }else if(mType == TYPE_ABLUM_LOC){
             mHeader.updateType(YHeaderView.TYPE_IMAGE_RIGHT_ABLUME);
             mHeader.setRightImage(R.drawable.loan_pic_ablum_flag_selected);
@@ -146,20 +144,17 @@ public class LoanPicScanActivity extends BaseActivity implements View.OnClickLis
         mBottomBtn.setOnClickListener(this);
 
         refreshHeader(null);
-        refreshBtn();
     }
 
     private void refreshBtn(){
-        if(mType == TYPE_ABLUM_LOC){
+        if(mType == TYPE_NET){
             mBottomBtn.setVisibility(View.VISIBLE);
             int size = mList.size() - mDelList.size();
             Drawable d = null;
             if(size <= 0){
                 d = getResources().getDrawable(R.drawable.loan_uploadpic_sure_not);
-                mBottomBtn.setOnClickListener(null);
             }else{
                 d = getResources().getDrawable(R.drawable.loan_btn_ablume_selector);
-                mBottomBtn.setOnClickListener(this);
             }
             mBottomBtn.setBackgroundDrawable(d);
             String str = getResources().getString(R.string.complete);
@@ -195,26 +190,11 @@ public class LoanPicScanActivity extends BaseActivity implements View.OnClickLis
             }else{
                 mHeader.setRightImage(R.drawable.loan_pic_ablum_flag_selected);
             }
-        }else if(mType == TYPE_LOAN){
-            if(mPicList != null){
-                if(rList != null){
-                    int index = findDelItem(rList);
-                    if(index >= 0 && index < mPicList.size()){
-                        mPicList.remove(index);
-
-                        if(curPos >= mPicList.size()){
-                            curPos = mPicList.size() - 1;
-                        }
-                    }
-                }
-                if(curPos < mPicList.size()){
-                    PicEntity vEntity = mPicList.get(curPos);
-                    String title = vEntity.tips;
-                    if(!TextUtils.isEmpty(title)){
-                        mHeader.setTitle(title);
-                    }
-                }
-            }
+        }else if(mType == TYPE_NET){
+            int sum = mAdapter.getCount();
+            int cur = curPos + 1;
+            String str = "" + cur + "/" + sum;
+            mHeader.setTitle(str);
         }else{
             int sum = mAdapter.getCount();
             int cur = curPos + 1;
@@ -250,15 +230,7 @@ public class LoanPicScanActivity extends BaseActivity implements View.OnClickLis
 
     private void checkDataGoBack(){
         Intent intent = new Intent();
-        if(mType == TYPE_ABLUM_LOC){
-            for(int i = 0;i < mDelList.size();i++){
-                String str = mDelList.get(i);
-                mList.remove(str);
-            }
-            intent.putStringArrayListExtra(IntentUtils.PARA_KEY_PUBLIC,(ArrayList<String>)mList);
-        }else{
-            intent.putStringArrayListExtra(IntentUtils.PARA_KEY_PUBLIC,(ArrayList<String>)mAdapter.getList());
-        }
+        intent.putStringArrayListExtra(IntentUtils.PARA_KEY_PUBLIC,(ArrayList<String>)mAdapter.getList());
         setResult(Activity.RESULT_OK,intent);
     }
 

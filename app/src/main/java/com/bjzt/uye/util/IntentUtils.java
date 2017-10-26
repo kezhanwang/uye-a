@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 
+import com.bjzt.uye.activity.ApplyEmployProActivity;
+import com.bjzt.uye.activity.ApplyEmployProAddActivity;
 import com.bjzt.uye.activity.ApplyFirstTransferActivity;
 import com.bjzt.uye.activity.ApplyIDActivity;
 import com.bjzt.uye.activity.DataCheckActivity;
@@ -287,4 +289,27 @@ public class IntentUtils {
         mContext.startActivity(intent);
     }
 
+    /***
+     * 职业进展
+     * @param mContext
+     * @param orgId
+     * @param reqCode
+     */
+    public static final void startEmployProActivity(Activity mContext,String orgId,int reqCode){
+        Intent intent = new Intent(mContext, ApplyEmployProActivity.class);
+        intent.putExtra(IntentUtils.PARA_KEY_PUBLIC,orgId);
+        mContext.startActivityForResult(intent,reqCode);
+    }
+
+    /****
+     * 新增就业进展
+     * @param mContext
+     * @param orgId
+     * @param reqCode
+     */
+    public static final void startEmployProAddActivity(Activity mContext,String orgId,int reqCode){
+        Intent intent = new Intent(mContext, ApplyEmployProAddActivity.class);
+        intent.putExtra(IntentUtils.PARA_KEY_PUBLIC,orgId);
+        mContext.startActivityForResult(intent,reqCode);
+    }
 }

@@ -27,7 +27,7 @@ public class DialogPicSelect extends Dialog implements  View.OnClickListener{
     public static final int TYPE_ID_CARD_BACK = 3;//身份证件背面
     public static final int TYPE_HOLD = 4;    //手持身份证照
     public static final int TYPE_PROTOCAL = 5;  //协议照
-
+    public static final int TYPE_EMPLOY_TRACKS = 6; //足迹
 
     private ImageView img_loanDialog;
     private TextView textView_loanDialog_item1;

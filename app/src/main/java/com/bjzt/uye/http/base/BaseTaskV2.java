@@ -84,14 +84,14 @@ public class BaseTaskV2<T> extends HttpBaseTask implements ITaskListener {
                     mMap.put("map_lng",lo);
                 }
                 //添加wifi信息
-                boolean isWifi = APNUtils.isWifi();
-                if(isWifi){
+//                boolean isWifi = APNUtils.isWifi();
+//                if(isWifi){
                     BWifiEntity bEntity = WifiController.getInstance().getWifiEntity();
                     if(bEntity != null && !TextUtils.isEmpty(bEntity.mac)){
                         mMap.put("mac",bEntity.mac);
                         mMap.put("ssid",bEntity.ssid);
                     }
-                }
+//                }
 //                //添加areaid
 //                PHotCityEntity pHotEntity = CityListController.getInstance().getCurCityEntity();
 //                if(pHotEntity != null && !TextUtils.isEmpty(pHotEntity.areaid)){

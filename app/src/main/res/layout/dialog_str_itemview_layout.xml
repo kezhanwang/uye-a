@@ -1,0 +1,41 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="62dp"
+    android:orientation="vertical"
+    android:background="@drawable/more_setting_bg_selector"
+    android:id="@+id/dialog_rela_main"
+    >
+
+    <TextView
+        android:id="@+id/txtview_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="招商银行"
+        android:textSize="17sp"
+        android:layout_marginLeft="@dimen/common_margin"
+        android:textColor="@color/common_font_3"
+        android:layout_marginRight="@dimen/common_margin_18"
+        />
+
+    <ImageView
+        android:id="@+id/imgview_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/common_margin"
+        android:background="@drawable/banklist_img_select"
+        android:layout_centerVertical="true"
+        />
+
+    <View
+        android:layout_height="1px"
+        android:layout_width="fill_parent"
+        android:background="@color/common_d6"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/common_margin"
+        ></View>
+
+</RelativeLayout>

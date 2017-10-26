@@ -70,8 +70,11 @@ public class TestActivity extends BaseActivity{
     @BindView(R.id.btn_orderlist)
     Button btnOrderList;
 
-    @BindView(R.id.pic_select_view)
-    PicSelectView mPicSeletView;
+    @BindView(R.id.btn_employ_pross)
+    Button btnEmployPro;
+
+    @BindView(R.id.btn_employ_pross_add)
+    Button btnEmployProAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -205,16 +208,18 @@ public class TestActivity extends BaseActivity{
             }
         });
 
-        mPicSeletView.initData(PicSelectView.TYPE_PROTOCAL);
-        mPicSeletView.setOnItemClickListener(new PicSelectView.ISelectPicItemClickListener() {
-            @Override
-            public void selectPic(int type) {
 
+        btnEmployPro.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                IntentUtils.startEmployProActivity(TestActivity.this,"",12);
             }
+        });
 
+        btnEmployProAdd.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void showBigPic(int type, ArrayList<VPicFileEntity> mList, int pos) {
-
+            public void onClick(View v) {
+                IntentUtils.startEmployProAddActivity(TestActivity.this,"",15);
             }
         });
     }

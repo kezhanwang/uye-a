@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/confirm_mainview"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:gravity="bottom"
+	android:layout_gravity="bottom"
+	>
+
+	<RelativeLayout
+		android:layout_width="fill_parent"
+		android:layout_height="42dp"
+		android:background="@color/common_white"
+		>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerInParent="true"
+			android:text="所在地区"
+			android:textSize="17.5sp"
+			android:textColor="@color/common_font_3"
+			/>
+
+		<ImageView
+			android:id="@+id/img_close"
+			android:layout_width="42dp"
+			android:layout_height="fill_parent"
+			android:src="@drawable/loan_dialog_close"
+			android:scaleType="center"
+			android:layout_centerVertical="true"
+			android:layout_alignParentRight="true"
+			/>
+	</RelativeLayout>
+
+	<View
+		android:layout_height="1px"
+		android:layout_width="fill_parent"
+		android:background="@color/common_line_divider"
+		></View>
+
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="32dp"
+		android:orientation="horizontal"
+		android:background="@color/common_white"
+		>
+
+		<LinearLayout
+			android:id="@+id/linear_first"
+			android:layout_width="100dp"
+			android:layout_height="fill_parent"
+			android:orientation="vertical"
+			>
+			<TextView
+				android:id="@+id/txt_loc_first"
+				android:layout_width="fill_parent"
+				android:layout_height="0dp"
+				android:layout_weight="1"
+				android:textSize="16sp"
+				android:textColor="@color/common_font_3"
+				android:text="省"
+				android:gravity="center"
+				android:singleLine="true"
+				android:ellipsize="end"
+				/>
+			<View
+				android:id="@+id/line_first"
+				android:layout_height="1dp"
+				android:layout_width="fill_parent"
+				android:background="@color/common_green"
+				android:visibility="visible"
+				></View>
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/linear_second"
+			android:layout_width="120dp"
+			android:layout_height="fill_parent"
+			android:orientation="vertical"
+			>
+
+			<TextView
+				android:id="@+id/txt_loc_second"
+				android:layout_width="fill_parent"
+				android:layout_height="0dp"
+				android:layout_weight="1"
+				android:textSize="16sp"
+				android:textColor="@color/common_font_3"
+				android:text="城市"
+				android:gravity="center"
+				android:singleLine="true"
+				android:ellipsize="end"
+				/>
+			<View
+				android:id="@+id/line_second"
+				android:layout_height="1dp"
+				android:layout_width="fill_parent"
+				android:background="@color/common_green"
+				android:visibility="invisible"
+				></View>
+		</LinearLayout>
+
+
+		<LinearLayout
+			android:id="@+id/linear_third"
+			android:layout_width="0dp"
+			android:layout_height="fill_parent"
+			android:layout_weight="1"
+			android:orientation="vertical"
+			>
+			<TextView
+				android:id="@+id/txt_loc_third"
+				android:layout_width="fill_parent"
+				android:layout_height="0dp"
+				android:layout_weight="1"
+				android:textSize="16sp"
+				android:textColor="@color/common_font_3"
+				android:text="地区"
+				android:gravity="center"
+				android:singleLine="true"
+				android:ellipsize="end"
+				/>
+			<View
+				android:id="@+id/line_third"
+				android:layout_height="1dp"
+				android:layout_width="fill_parent"
+				android:background="@color/common_green"
+				android:visibility="invisible"
+				></View>
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<View
+		android:layout_height="1px"
+		android:layout_width="fill_parent"
+		android:background="@color/common_line_divider"
+		></View>
+
+	<ListView
+		android:id="@+id/listview"
+		android:layout_width="fill_parent"
+		android:layout_height="320dp"
+		android:background="@color/common_white"
+		android:dividerHeight="1px"
+		android:listSelector="@color/translucent"
+		android:divider="@color/common_line_divider"
+		></ListView>
+
+
+	<com.bjzt.uye.views.component.BlankEmptyView
+		android:id="@+id/emptyview"
+		android:layout_width="fill_parent"
+		android:layout_height="320dp"
+		android:visibility="gone"
+		></com.bjzt.uye.views.component.BlankEmptyView>
+
+</LinearLayout>

@@ -5,7 +5,8 @@
     <string name="complete">完成</string>
     <string name="name">姓名</string>
     <string name="next">下一步</string>
-
+    <string name="commit">提交</string>
+    <string name="time">时间</string>
 
     <string name="common_default">---</string>
     <string name="common_request">数据请求中...</string>
@@ -187,5 +188,27 @@
     <!--多图控件-->
     <string name="pic_select_title_protocal">培训协议</string>
     <string name="pic_select_tips_protocal">注: 请上传培训协议或收据,需要包括机构名称、课程、价格、时间等重要信息。</string>
+    <string name="pic_select_title_employ_track">就业足迹</string>
+    <string name="pic_select_tips_employ_track">注: 请上传面试通知、面试场景、问答等图片，为您的就业努力留下回忆（最多可上传9张哦~）</string>
+
+
+    <!--就业进展-->
+    <string name="employ_progress_title">就业进展</string>
+    <string name="employ_progress_add">新增进展</string>
+
+    <!--新增就业进展-->
+    <string name="employ_progress_add_title">新增就业进展</string>
+    <string name="employ_progress_add_select_time">请选择就业时间</string>
+    <string name="employ_progress_add_work_addr">工作地点</string>
+    <string name="employ_progress_add_select_addr">请选择省市区</string>
+    <string name="employ_progress_add_cp">工作单位</string>
+    <string name="employ_progress_add_cp_hint">请输入工作单位</string>
+    <string name="employ_progress_add_pos">担任职位</string>
+    <string name="employ_progress_add_pos_hint">请输入应聘职位名称</string>
+    <string name="employ_progress_add_salary">月薪</string>
+    <string name="employ_progress_add_salary_hint">请选择月薪范围</string>
+    <string name="employ_progress_add_workstatus">是否录用</string>
+    <string name="employ_progress_add_workstatus_hint">请选择当前工作状态</string>
+
 
 </resources>

@@ -18,7 +18,6 @@ import com.common.msglist.base.BaseItemView;
  */
 public class DCourseListItemView extends BaseItemView<PCourseEntity> implements View.OnClickListener{
     private PCourseEntity mEntity;
-    private ImageView mImgIcon;
     private TextView mTxtName;
     private ImageView imgSelect;
     private RelativeLayout mRela;
@@ -55,10 +54,9 @@ public class DCourseListItemView extends BaseItemView<PCourseEntity> implements 
     @Override
     public void onInflate() {
         LayoutInflater li = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        li.inflate(R.layout.banklist_itemview_layout,this,true);
+        li.inflate(R.layout.dialog_course_itemview_layout,this,true);
         this.mRela = (RelativeLayout) this.findViewById(R.id.dialog_rela_main);
         this.mRela.setOnClickListener(this);
-        this.mImgIcon = (ImageView) this.findViewById(R.id.banklist_imgview_icon);
         this.mTxtName = (TextView) this.findViewById(R.id.banklist_txtview_name);
         this.imgSelect = (ImageView) this.findViewById(R.id.banklist_imgview_select);
     }

@@ -39,6 +39,8 @@ public class PicSelectView extends RelativeLayout implements NoConfusion{
 
     private AdapterSelectPic mAdapter;
     public static final int TYPE_PROTOCAL = 1;
+    public static final int TYPE_EMPLOY_TRACK = 2;  //就业印记
+
     private int mType;
     private ArrayList<VPicFileEntity> mList;
     private ISelectPicItemClickListener mListener;
@@ -105,6 +107,11 @@ public class PicSelectView extends RelativeLayout implements NoConfusion{
                 RelativeLayout.LayoutParams llp = (LayoutParams) mRelaTitle.getLayoutParams();
                 llp.width = (int) getResources().getDimension(R.dimen.orderinfo_title_width_max);
                 mRelaTitle.setLayoutParams(llp);
+                break;
+            case TYPE_EMPLOY_TRACK:
+                mTxtDot.setVisibility(View.INVISIBLE);
+                title = getResources().getString(R.string.pic_select_title_employ_track);
+                tips = getResources().getString(R.string.pic_select_tips_employ_track);
                 break;
         }
         text_name.setText(title);

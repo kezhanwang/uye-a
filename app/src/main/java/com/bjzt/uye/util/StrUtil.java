@@ -10,6 +10,7 @@ import android.text.style.ForegroundColorSpan;
 
 import com.bjzt.uye.R;
 import com.bjzt.uye.entity.BStrFontEntity;
+import com.bjzt.uye.entity.PLocItemEntity;
 import com.bjzt.uye.global.Global;
 import com.bjzt.uye.http.base.RspBaseEntity;
 import com.common.common.NetCommon;
@@ -172,6 +173,27 @@ public class StrUtil {
             str = builder.reverse().toString();
         }else{
             str = "0.00";
+        }
+        return str;
+    }
+
+    /***
+     * 获取位置信息
+     * @param mLocPro
+     * @param mLocCity
+     * @param mLocArea
+     * @return
+     */
+    public static final String getLocAddrStr(PLocItemEntity mLocPro,PLocItemEntity mLocCity,PLocItemEntity mLocArea){
+        String str = "";
+        if(mLocPro != null){
+            str += mLocPro.name;
+        }
+        if(mLocCity != null && !TextUtils.isEmpty(mLocCity.name)){
+            str += "-" + mLocCity.name;
+        }
+        if(mLocArea != null){
+            str += "-" + mLocArea.name;
         }
         return str;
     }

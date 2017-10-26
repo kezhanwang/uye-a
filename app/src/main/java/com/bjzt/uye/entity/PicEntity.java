@@ -24,6 +24,7 @@ public class PicEntity implements Serializable {
     public static final int TYPE_PRO_FIRST = 8; //协议照
     public static final int TYPE_PRO_SECOND = 9; //协议签字照
     public static final int TYPE_STUIDCARD = 10;  //学生证，学籍照
+    public static final int TYPE_EMPLOY_TRACKS = 11;//就业足迹
 
     public static final String KEY_IDCARD = "idcard_pic";
     public static final String KEY_IDCARD_BACK = "idcard_pic_back";
@@ -35,6 +36,7 @@ public class PicEntity implements Serializable {
     public static final String KEY_PRO_FIRST = "training_contract_first";    //协议照正面
     public static final String KEY_PRO_SECOND = "training_contract_end";     //协议签字照
     public static final String KEY_STUIDCARD = "stu_id_card";
+    public static final String KEY_EMPLOY_TRACKS = "employee_tracks";
 
     public int mType;
     public String path;
@@ -103,6 +105,11 @@ public class PicEntity implements Serializable {
                 entity = new PicEntity();
                 entity.mType = PicEntity.TYPE_PRO_FIRST;
                 entity.key = PicEntity.KEY_PRO_FIRST;
+                break;
+            case DialogPicSelect.TYPE_EMPLOY_TRACKS:
+                entity = new PicEntity();
+                entity.mType = PicEntity.TYPE_EMPLOY_TRACKS;
+                entity.key = PicEntity.KEY_EMPLOY_TRACKS;
                 break;
         }
         if(entity != null){

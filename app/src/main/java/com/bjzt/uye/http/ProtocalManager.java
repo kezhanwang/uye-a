@@ -17,6 +17,9 @@ import com.bjzt.uye.http.req.ReqIDentityCfgEntity;
 import com.bjzt.uye.http.req.ReqIDentityInfoEntity;
 import com.bjzt.uye.http.req.ReqIDentityPicEntity;
 import com.bjzt.uye.http.req.ReqHomeEntity;
+import com.bjzt.uye.http.req.ReqLocAreaEntity;
+import com.bjzt.uye.http.req.ReqLocCityEntity;
+import com.bjzt.uye.http.req.ReqLocProEntity;
 import com.bjzt.uye.http.req.ReqLoginPhoneEntity;
 import com.bjzt.uye.http.req.ReqLoginPwdEntity;
 import com.bjzt.uye.http.req.ReqLogoutEntity;
@@ -358,6 +361,43 @@ public class ProtocalManager {
     public int reqUpgradeInfo(ICallBack<Object> callBack){
         ReqUpgradeEntity reqEntity = new ReqUpgradeEntity();
         reqEntity.version_code = MConfiger.VERSION;
+        return addTask(reqEntity,callBack);
+    }
+
+    /***
+     * 获取省份列表
+     * @param callBack
+     * @return
+     */
+    public int reqLocProList(ICallBack<Object> callBack){
+        ReqLocProEntity reqEntity = new ReqLocProEntity();
+        reqEntity.isJsonArray = true;
+        return addTask(reqEntity,callBack);
+    }
+
+    /**
+     * 获取城市列表
+     * @param proId
+     * @param callBack
+     * @return
+     */
+    public int reqLocCityList(String proId,ICallBack<Object> callBack){
+        ReqLocCityEntity reqEntity = new ReqLocCityEntity();
+        reqEntity.isJsonArray = true;
+        reqEntity.province = proId;
+        return addTask(reqEntity,callBack);
+    }
+
+    /***
+     * 获取地区列表
+     * @param cityId
+     * @param callBack
+     * @return
+     */
+    public int reqLocAreaList(String cityId,ICallBack<Object> callBack) {
+        ReqLocAreaEntity reqEntity = new ReqLocAreaEntity();
+        reqEntity.isJsonArray = true;
+        reqEntity.city = cityId;
         return addTask(reqEntity,callBack);
     }
 }

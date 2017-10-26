@@ -6,6 +6,9 @@ import com.bjzt.uye.http.rsp.RspIDentityCfgEntity;
 import com.bjzt.uye.http.rsp.RspIDentityInfoEntity;
 import com.bjzt.uye.http.rsp.RspIDentityPicEntity;
 import com.bjzt.uye.http.rsp.RspHomeEntity;
+import com.bjzt.uye.http.rsp.RspLocAreaEntity;
+import com.bjzt.uye.http.rsp.RspLocCityEntity;
+import com.bjzt.uye.http.rsp.RspLocProEntity;
 import com.bjzt.uye.http.rsp.RspLoginPhoneEntity;
 import com.bjzt.uye.http.rsp.RspLoginPwdEntity;
 import com.bjzt.uye.http.rsp.RspLogoutEntity;
@@ -58,6 +61,9 @@ public class HttpCommon {
     public static final String URL_QA_SUBMIT = "/app/question/submit";          //调查问卷提交
     public static final String URL_ORDER_LIST = "/app/order/list";              //订单列表
     public static final String URL_UPGRADE = "/app/config/version";             //升级逻辑
+    public static final String URL_LOC_PROVINCE = "/common/province";           //获取省市列表
+    public static final String URL_LOC_CITYLIST = "/common/city";               //获取城市列表
+    public static final String URL_LOC_AREA = "/common/area";                   //获取地区列表
 
     static{
         //请求定位城市
@@ -104,6 +110,12 @@ public class HttpCommon {
         mMap.put(URL_ORDER_LIST,RspOrderListEntity.class);
         //升级逻辑
         mMap.put(URL_UPGRADE, RspUpgradeEntity.class);
+        //获取省份列表
+        mMap.put(URL_LOC_PROVINCE, RspLocProEntity.class);
+        //获取城市列表
+        mMap.put(URL_LOC_CITYLIST,RspLocCityEntity.class);
+        //获取地区列表
+        mMap.put(URL_LOC_AREA, RspLocAreaEntity.class);
     }
 
     /***

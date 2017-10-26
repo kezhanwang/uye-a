@@ -31,74 +31,63 @@
         ></com.bjzt.uye.views.component.YHeaderView>
 
     <ScrollView
-        android:id="@+id/scrollview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@id/header"
         >
-
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical"
             >
-
-            <com.bjzt.uye.views.component.OrderHeaderView
-                android:id="@+id/headerview"
+            <!--时间-->
+            <com.bjzt.uye.views.component.ItemView
+                android:id="@+id/item_time"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                ></com.bjzt.uye.views.component.OrderHeaderView>
-
-
-            <com.bjzt.uye.views.component.ItemView
-                android:id="@+id/item_coursename"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin"
                 ></com.bjzt.uye.views.component.ItemView>
 
+            <!--工作地点-->
             <com.bjzt.uye.views.component.ItemView
-                android:id="@+id/item_tution"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                ></com.bjzt.uye.views.component.ItemView>
-
-            <com.bjzt.uye.views.component.ItemView
-                android:id="@+id/item_clazz"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                ></com.bjzt.uye.views.component.ItemView>
-
-            <com.bjzt.uye.views.component.ItemView
-                android:id="@+id/item_datestart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                ></com.bjzt.uye.views.component.ItemView>
-
-            <com.bjzt.uye.views.component.ItemView
-                android:id="@+id/item_dateend"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                ></com.bjzt.uye.views.component.ItemView>
-
-            <com.bjzt.uye.views.component.ItemView
-                android:id="@+id/item_adviser"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                ></com.bjzt.uye.views.component.ItemView>
-
-
-            <com.bjzt.uye.views.component.BindCardPhotoView
-                android:id="@+id/photoview_hold"
+                android:id="@+id/item_addr"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin"
-                ></com.bjzt.uye.views.component.BindCardPhotoView>
+                ></com.bjzt.uye.views.component.ItemView>
 
+            <!--工作单位-->
+            <com.bjzt.uye.views.component.ItemView
+                android:id="@+id/item_cp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                ></com.bjzt.uye.views.component.ItemView>
+
+            <!--担任职位-->
+            <com.bjzt.uye.views.component.ItemView
+                android:id="@+id/item_position"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                ></com.bjzt.uye.views.component.ItemView>
+
+            <!--月薪-->
+            <com.bjzt.uye.views.component.ItemView
+                android:id="@+id/item_salary"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                ></com.bjzt.uye.views.component.ItemView>
+
+            <!--工作状态-->
+            <com.bjzt.uye.views.component.ItemView
+                android:id="@+id/item_work_status"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                ></com.bjzt.uye.views.component.ItemView>
+
+            <!--就业印记-->
             <com.bjzt.uye.views.component.PicSelectView
-                android:id="@+id/picselect_protocal"
-                android:layout_width="fill_parent"
+                android:id="@+id/pic_select_view"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin"
                 ></com.bjzt.uye.views.component.PicSelectView>
 
             <Button
@@ -107,42 +96,17 @@
                 android:layout_height="@dimen/login_btn_height"
                 android:layout_marginLeft="@dimen/common_margin"
                 android:layout_marginRight="@dimen/common_margin"
-                android:layout_marginTop="28dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="42dp"
                 android:gravity="center"
                 android:background="@drawable/btn_login_selector"
-                android:text="@string/complete"
+                android:text="@string/commit"
                 android:textColor="@color/common_white"
                 android:textSize="18.5sp"
                 />
 
-            <com.bjzt.uye.views.component.ProtocalItemView
-                android:id="@+id/proto_item_service"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/common_margin"
-                android:layout_marginTop="@dimen/common_margin_18"
-                android:layout_marginBottom="42dp"
-                ></com.bjzt.uye.views.component.ProtocalItemView>
-
-            <com.bjzt.uye.views.component.ProtocalItemView
-                android:id="@+id/proto_item_auth"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/common_margin"
-                android:layout_marginTop="@dimen/common_margin_10"
-                android:visibility="gone"
-                ></com.bjzt.uye.views.component.ProtocalItemView>
-
         </LinearLayout>
 
     </ScrollView>
-
-    <com.bjzt.uye.views.component.BlankEmptyView
-        android:id="@+id/emptyview"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@id/header"
-        android:visibility="gone"
-        ></com.bjzt.uye.views.component.BlankEmptyView>
 
 </RelativeLayout>

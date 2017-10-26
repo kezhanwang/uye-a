@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.text.TextUtils;
-
 import com.bjzt.uye.controller.WifiController;
 
 /**
@@ -21,7 +20,7 @@ public class NetReceiver extends BroadcastReceiver{
         NetworkInfo netInfo;
         if(intent != null && context != null){
             String action = intent.getAction();
-            if(!TextUtils.isEmpty(action)){
+            if(!TextUtils.isEmpty(action) && action.equals(ConnectivityManager.CONNECTIVITY_ACTION)){
                 mConnectivityManager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
                 netInfo = mConnectivityManager.getActiveNetworkInfo();
                 if(netInfo != null && netInfo.isAvailable()){

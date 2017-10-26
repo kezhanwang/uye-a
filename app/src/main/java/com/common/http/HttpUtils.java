@@ -508,6 +508,8 @@ public class HttpUtils {
             }
         } else if(code == 500){
             return new byte[] { NetCommon.ERROR_HTTP_RESPONSE_HTTP_CODE_500 };
+        }else if(code == 404){
+            return new byte[] { NetCommon.ERROR_HTTP_RESPONSE_HTTP_CODE_404 };
         }else{
             return new byte[] { NetCommon.ERROR_HTTP_RESPONSE_HTTP_CODE };
         }

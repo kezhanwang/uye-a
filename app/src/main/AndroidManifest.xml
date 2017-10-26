@@ -170,6 +170,15 @@
             android:windowSoftInputMode="stateAlwaysHidden|stateHidden"
             ></activity>
 
+        <!--联系信息-->
+        <activity
+            android:name=".activity.ApplyContactInfoActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.Youye"
+            android:windowSoftInputMode="stateAlwaysHidden|stateHidden"
+            ></activity>
+
         <!--========================================本地相册==============================-->
         <!-- 本地相册 -->
         <activity

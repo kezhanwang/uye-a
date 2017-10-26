@@ -76,6 +76,9 @@ public class TestActivity extends BaseActivity{
     @BindView(R.id.btn_employ_pross_add)
     Button btnEmployProAdd;
 
+    @BindView(R.id.btn_contactinfo)
+    Button btnContactInfo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -220,6 +223,13 @@ public class TestActivity extends BaseActivity{
             @Override
             public void onClick(View v) {
                 IntentUtils.startEmployProAddActivity(TestActivity.this,"",15);
+            }
+        });
+
+        btnContactInfo.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                IntentUtils.startContactInActivity(TestActivity.this,"",16);
             }
         });
     }

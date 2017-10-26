@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 
+import com.bjzt.uye.activity.ApplyContactInfoActivity;
 import com.bjzt.uye.activity.ApplyEmployProActivity;
 import com.bjzt.uye.activity.ApplyEmployProAddActivity;
 import com.bjzt.uye.activity.ApplyFirstTransferActivity;
@@ -312,4 +313,17 @@ public class IntentUtils {
         intent.putExtra(IntentUtils.PARA_KEY_PUBLIC,orgId);
         mContext.startActivityForResult(intent,reqCode);
     }
+
+    /***
+     * 联系信息
+     * @param mContext
+     * @param orgId
+     * @param reqCode
+     */
+    public static final void startContactInActivity(Activity mContext,String orgId,int reqCode){
+        Intent intent = new Intent(mContext, ApplyContactInfoActivity.class);
+        intent.putExtra(IntentUtils.PARA_KEY_PUBLIC,orgId);
+        mContext.startActivityForResult(intent,reqCode);
+    }
+
 }

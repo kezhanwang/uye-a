@@ -48,6 +48,7 @@
         />
 
     <TextView
+        style="@style/style_txtcat"
         android:id="@+id/txt_cat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -55,11 +56,6 @@
         android:layout_alignLeft="@id/txt_course_name"
         android:layout_marginTop="@dimen/common_margin_10"
         android:text="IT"
-        android:textSize="13sp"
-        android:textColor="@color/common_font_blue"
-        android:background="@drawable/rect_white_fill_blue_border_shape"
-        android:paddingLeft="@dimen/common_margin_8"
-        android:paddingRight="@dimen/common_margin_8"
         />
 
     <TextView

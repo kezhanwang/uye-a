@@ -26,6 +26,7 @@ import com.bjzt.uye.http.req.ReqLogoutEntity;
 import com.bjzt.uye.http.req.ReqOrderInfoEntity;
 import com.bjzt.uye.http.req.ReqOrderListEntity;
 import com.bjzt.uye.http.req.ReqOrderSubmitEntity;
+import com.bjzt.uye.http.req.ReqOrgDetailEntity;
 import com.bjzt.uye.http.req.ReqPhoneVerifyEntity;
 import com.bjzt.uye.http.req.ReqQACfgEnttiy;
 import com.bjzt.uye.http.req.ReqQASubmitEntity;
@@ -398,6 +399,18 @@ public class ProtocalManager {
         ReqLocAreaEntity reqEntity = new ReqLocAreaEntity();
         reqEntity.isJsonArray = true;
         reqEntity.city = cityId;
+        return addTask(reqEntity,callBack);
+    }
+
+    /****
+     * 获取机构详情
+     * @param orgId
+     * @param callBack
+     * @return
+     */
+    public int reqOrgDetail(String orgId,ICallBack<Object> callBack){
+        ReqOrgDetailEntity reqEntity = new ReqOrgDetailEntity();
+        reqEntity.org_id = orgId;
         return addTask(reqEntity,callBack);
     }
 }

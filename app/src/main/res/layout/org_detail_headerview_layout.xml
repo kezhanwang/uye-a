@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+/* //device/apps/common/assets/res/layout/tab_content.xml
+**
+** Copyright 2011, The Android Open Source Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License");
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
+-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <RelativeLayout
+        android:id="@+id/rela_header"
+        android:layout_width="fill_parent"
+        android:layout_height="130dp"
+        android:background="@drawable/more_setting_bg_selector"
+        >
+
+        <ImageView
+            android:id="@+id/img_icon"
+            android:layout_width="120dp"
+            android:layout_height="86dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/common_margin"
+            android:background="@drawable/loan_bg_img_rect_border"
+            />
+
+
+        <TextView
+            android:id="@+id/txt_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/img_icon"
+            android:layout_alignTop="@id/img_icon"
+            android:layout_marginLeft="@dimen/common_margin_6"
+            android:textSize="15sp"
+            android:text="北京完美动力影视动画培训学校"
+            android:layout_marginRight="@dimen/common_margin"
+            />
+
+        <TextView
+            style="@style/style_txtcat"
+            android:id="@+id/txt_cat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/img_icon"
+            android:layout_alignLeft="@id/txt_name"
+            android:layout_below="@id/txt_name"
+            android:layout_marginTop="@dimen/common_margin_4"
+            android:text="IT"
+            />
+
+        <TextView
+            android:id="@+id/txt_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/img_icon"
+            android:layout_toRightOf="@id/img_icon"
+            android:layout_alignLeft="@id/txt_name"
+            android:textSize="13sp"
+            android:textColor="@color/common_font_9"
+            android:text="就业指数"
+            />
+
+        <com.bjzt.uye.views.component.ScoreView
+            android:id="@+id/score_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/txt_tips"
+            android:layout_alignTop="@id/txt_tips"
+            android:layout_marginLeft="@dimen/common_margin"
+            ></com.bjzt.uye.views.component.ScoreView>
+
+
+        <View
+            android:layout_height="1px"
+            android:layout_width="fill_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/common_margin"
+            android:background="@color/common_line_divider"
+            ></View>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

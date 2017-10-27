@@ -17,7 +17,8 @@
 */
 -->
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -42,6 +43,12 @@
             android:layout_height="fill_parent"
             android:orientation="vertical"
             >
+
+            <com.bjzt.uye.views.component.ItemViewTitle
+                android:id="@+id/itemview_title_info"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                ></com.bjzt.uye.views.component.ItemViewTitle>
 
             <com.bjzt.uye.views.component.ItemView
                 android:id="@+id/item_addr"
@@ -79,11 +86,17 @@
                 android:layout_height="wrap_content"
                 ></com.bjzt.uye.views.component.ItemView>
 
+            <com.bjzt.uye.views.component.ItemViewTitle
+                android:id="@+id/itemview_title_sec"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin_18"
+                ></com.bjzt.uye.views.component.ItemViewTitle>
+
             <com.bjzt.uye.views.component.ItemView
                 android:id="@+id/item_sec_rela"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin_18"
                 ></com.bjzt.uye.views.component.ItemView>
 
             <com.bjzt.uye.views.component.ItemView

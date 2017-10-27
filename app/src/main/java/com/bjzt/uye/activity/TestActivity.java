@@ -79,6 +79,9 @@ public class TestActivity extends BaseActivity{
     @BindView(R.id.btn_contactinfo)
     Button btnContactInfo;
 
+    @BindView(R.id.btn_org_detail)
+    Button btnOrgDetail;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -230,6 +233,13 @@ public class TestActivity extends BaseActivity{
             @Override
             public void onClick(View v) {
                 IntentUtils.startContactInActivity(TestActivity.this,"",16);
+            }
+        });
+
+        btnOrgDetail.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                IntentUtils.startOrgDetailActivity(TestActivity.this,"10049",12);
             }
         });
     }

@@ -16,6 +16,7 @@ import com.bjzt.uye.activity.DataCheckActivity;
 import com.bjzt.uye.activity.LoginActivity;
 import com.bjzt.uye.activity.MainActivity;
 import com.bjzt.uye.activity.OrderInfoActivity;
+import com.bjzt.uye.activity.OrgDetailActivity;
 import com.bjzt.uye.activity.QAActivity;
 import com.bjzt.uye.activity.RegisterActivity;
 import com.bjzt.uye.activity.SearchActivity;
@@ -326,4 +327,15 @@ public class IntentUtils {
         mContext.startActivityForResult(intent,reqCode);
     }
 
+    /***
+     * 打开机构详情
+     * @param mContext
+     * @param orgId
+     * @param reqCode
+     */
+    public static final void startOrgDetailActivity(Activity mContext,String orgId,int reqCode){
+        Intent intent = new Intent(mContext, OrgDetailActivity.class);
+        intent.putExtra(IntentUtils.PARA_KEY_PUBLIC,orgId);
+        mContext.startActivityForResult(intent,reqCode);
+    }
 }

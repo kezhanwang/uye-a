@@ -129,7 +129,7 @@
         android:layout_width="fill_parent"
         android:layout_alignParentBottom="true"
         android:background="@color/common_font_ccc"
-        android:layout_marginLeft="@dimen/common_margin_18"
+        android:layout_marginLeft="@dimen/item_margin_s"
         ></View>
 
 

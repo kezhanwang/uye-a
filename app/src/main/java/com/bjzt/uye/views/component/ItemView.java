@@ -321,9 +321,9 @@ public class ItemView extends RelativeLayout implements NoConfusion,View.OnClick
         this.mEditTxt.setFilters(filters);
     }
 
-    public void setBottomLineMargin(int margin){
+    public void setBottomLineMargin(){
         RelativeLayout.LayoutParams llp = (LayoutParams) mViewLineBottom.getLayoutParams();
-        int leftMargin = (int) getResources().getDimension(R.dimen.common_margin_18);
+        int leftMargin = (int) (getResources().getDimension(R.dimen.item_textWidth_ss) + getResources().getDimension(R.dimen.common_margin) + getResources().getDimension(R.dimen.common_margin_4));
         llp.leftMargin = leftMargin;
         mViewLineBottom.setLayoutParams(llp);
     }

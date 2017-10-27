@@ -80,5 +80,12 @@
         <item name="android:windowBackground">@color/translucent</item>
     </style>
 
+    <style name="style_txtcat">
+        <item name="android:background">@drawable/rect_white_fill_blue_border_shape</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:paddingLeft">@dimen/common_margin_8</item>
+        <item name="android:paddingRight">@dimen/common_margin_8</item>
+        <item name="android:textColor">@color/common_font_blue</item>
+    </style>
 
 </resources>

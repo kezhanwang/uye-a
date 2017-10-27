@@ -9,5 +9,6 @@ import java.io.Serializable;
 public class PCourseEntity implements Serializable{
     public String c_id;
     public String c_name;
+    public String logo;
     public boolean vIsSelected;
 }

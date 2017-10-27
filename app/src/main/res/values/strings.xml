@@ -215,9 +215,9 @@
     <string name="contact_info_title">联系信息</string>
     <string name="contact_info_addr">住址</string>
     <string name="contact_info_addr_hint">请选择省市区</string>
-    <string name="contact_info_addr_detail_hint">详细住址，精确到门牌号"</string>
+    <string name="contact_info_addr_detail_hint">请填写详细住址，精确到门牌号"</string>
     <string name="contact_info_marriage">婚姻状况</string>
-    <string name="contact_info_marriage_hint">选择婚姻状况</string>
+    <string name="contact_info_marriage_hint">请选择婚姻状况</string>
     <string name="contact_info_email">电子邮箱</string>
     <string name="contact_info_email_hint">请填写电子邮箱</string>
     <string name="contact_info_wechat">微信</string>
@@ -228,6 +228,8 @@
     <string name="contact_info_sec_hint">请选择</string>
     <string name="contact_info_sec_name_hint">紧急联系人姓名</string>
     <string name="contact_info_sec_phone">手机号码</string>
-    <string name="contact_info_sec_phone_hint">紧急联系人手机号码</string>
+    <string name="contact_info_sec_phone_hint">请填写紧急联系人手机号码</string>
+    <string name="contact_info_sec">紧急联系人</string>
+    <string name="contact_info_info">联系人信息</string>
 
 </resources>

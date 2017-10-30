@@ -13,7 +13,8 @@ public class PContactInfoEntity implements Serializable{
     public String home_province;
     public String home_city;
     public String home_area;
-    public String homt_address;
+    public String home;
+    public String home_address;
     public String email;
     public String qq;
     public String wechat;
@@ -26,4 +27,23 @@ public class PContactInfoEntity implements Serializable{
     public boolean isOk(){
         return !TextUtils.isEmpty(marriage) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(qq) && !TextUtils.isEmpty(wechat);
     }
+
+    public PLocItemEntity buildLocPro(){
+        PLocItemEntity pEntity = new PLocItemEntity();
+        pEntity.id = home_province;
+        return pEntity;
+    }
+
+    public PLocItemEntity buildLocCity(){
+        PLocItemEntity pEntity = new PLocItemEntity();
+        pEntity.id = home_city;
+        return pEntity;
+    }
+
+    public PLocItemEntity buildLocArea(){
+        PLocItemEntity pEntity = new PLocItemEntity();
+        pEntity.id = home_area;
+        return pEntity;
+    }
+
 }

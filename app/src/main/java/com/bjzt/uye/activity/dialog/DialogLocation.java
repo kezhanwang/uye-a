@@ -83,23 +83,23 @@ public class DialogLocation extends Dialog implements  View.OnClickListener{
         //reset status
         reSetStatus(INDEX_AREA);
         //set text
-        String strPro = this.mSelectPro.joinname;
-        if(!TextUtils.isEmpty(strPro)){
-            TextView mTxtView = getTxtByIndex(INDEX_PROVINCE);
-            mTxtView.setText(strPro);
-        }
-        String strCity = this.mSelectCity.name;
-        if(!TextUtils.isEmpty(strCity)){
-            TextView mTxtView = getTxtByIndex(INDEX_CITY);
-            mTxtView.setText(strCity);
-        }
-        String strArea = this.mSelectArea.name;
-        if(!TextUtils.isEmpty(strArea)){
-            TextView mTxtView = getTxtByIndex(INDEX_AREA);
-            mTxtView.setText(strArea);
-        }
-        //set select
-        setIndex(INDEX_PROVINCE,false);
+//        String strPro = this.mSelectPro.id;
+//        if(!TextUtils.isEmpty(strPro)){
+//            TextView mTxtView = getTxtByIndex(INDEX_PROVINCE);
+//            mTxtView.setText(strPro);
+//        }
+//        String strCity = this.mSelectCity.id;
+//        if(!TextUtils.isEmpty(strCity)){
+//            TextView mTxtView = getTxtByIndex(INDEX_CITY);
+//            mTxtView.setText(strCity);
+//        }
+//        String strArea = this.mSelectArea.id;
+//        if(!TextUtils.isEmpty(strArea)){
+//            TextView mTxtView = getTxtByIndex(INDEX_AREA);
+//            mTxtView.setText(strArea);
+//        }
+//        //set select
+//        setIndex(INDEX_PROVINCE,false);
     }
 
     @Override

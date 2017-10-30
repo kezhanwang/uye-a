@@ -223,6 +223,9 @@ public class ApplyContactInfoActivity extends BaseActivity implements  View.OnCl
             }else if(rsp instanceof RspContactInfoEntity){
                 RspContactInfoEntity rspEntity = (RspContactInfoEntity) rsp;
                 if(isSucc && rspEntity.mEntity != null && rspEntity.mEntity.isOk()){
+                    this.mLocPro = rspEntity.mEntity.buildLocPro();
+                    this.mLocCity = rspEntity.mEntity.buildLocCity();
+                    this.mLocArea = rspEntity.mEntity.buildLocArea();
                     initParams(rspEntity.mEntity);
                 }
             }else if(rsp instanceof RspContactSubmitEntity){
@@ -259,6 +262,12 @@ public class ApplyContactInfoActivity extends BaseActivity implements  View.OnCl
         //phone
         String strPhone = pEntity.contact1_phone;
         setItemTxt(mItemSecPhone,strPhone);
+        //addr
+        String strAddr = pEntity.home_address;
+        setItemTxt(mItemAddrDetail,strAddr);
+        //home
+        String strHome = pEntity.home;
+        setItemTxt(mItemAddr,strHome);
     }
 
     private void setItemTxt(ItemView itemView,String strInfo){

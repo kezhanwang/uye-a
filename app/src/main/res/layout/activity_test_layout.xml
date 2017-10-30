@@ -176,6 +176,51 @@
             android:text="机构详情"
             />
 
+
+        <Button
+            android:id="@+id/btn_experi_base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="个人经历-基本信息"
+            />
+
+        <Button
+            android:id="@+id/btn_experi_occ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="职业"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <Button
+            android:id="@+id/btn_experi_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="添加职业"
+            />
+
+        <Button
+            android:id="@+id/btn_degreelist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="学历列表"
+            />
+
+        <Button
+            android:id="@+id/btn_degree_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="添加学历"
+            />
+
     </LinearLayout>
 
 </LinearLayout>

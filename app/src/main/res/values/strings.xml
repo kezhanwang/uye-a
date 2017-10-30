@@ -7,6 +7,8 @@
     <string name="next">下一步</string>
     <string name="commit">提交</string>
     <string name="time">时间</string>
+    <string name="save">保存</string>
+
 
     <string name="common_default">---</string>
     <string name="common_request">数据请求中...</string>
@@ -210,7 +212,6 @@
     <string name="employ_progress_add_workstatus">是否录用</string>
     <string name="employ_progress_add_workstatus_hint">请选择当前工作状态</string>
 
-
     <!--联系信息-->
     <string name="contact_info_title">联系信息</string>
     <string name="contact_info_addr">住址</string>
@@ -231,5 +232,10 @@
     <string name="contact_info_sec_phone_hint">请填写紧急联系人手机号码</string>
     <string name="contact_info_sec">紧急联系人</string>
     <string name="contact_info_info">联系人信息</string>
+
+    <!--个人经历-基本信息-->
+    <string name="myexperience_base_title">个人经历-基本信息</string>
+
+
 
 </resources>

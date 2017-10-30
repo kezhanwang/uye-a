@@ -12,6 +12,10 @@ import com.bjzt.uye.activity.ApplyEmployProActivity;
 import com.bjzt.uye.activity.ApplyEmployProAddActivity;
 import com.bjzt.uye.activity.ApplyFirstTransferActivity;
 import com.bjzt.uye.activity.ApplyIDActivity;
+import com.bjzt.uye.activity.ApplyMyExperienceBaseActivity;
+import com.bjzt.uye.activity.ApplyMyExperienceDegreeAddActivity;
+import com.bjzt.uye.activity.ApplyMyExperienceOccDegreeActivity;
+import com.bjzt.uye.activity.ApplyMyExperienceOccAddActivity;
 import com.bjzt.uye.activity.DataCheckActivity;
 import com.bjzt.uye.activity.LoginActivity;
 import com.bjzt.uye.activity.MainActivity;
@@ -335,6 +339,68 @@ public class IntentUtils {
      */
     public static final void startOrgDetailActivity(Activity mContext,String orgId,int reqCode){
         Intent intent = new Intent(mContext, OrgDetailActivity.class);
+        intent.putExtra(IntentUtils.PARA_KEY_PUBLIC,orgId);
+        mContext.startActivityForResult(intent,reqCode);
+    }
+
+    /***
+     * 打开个人经历
+     * @param mContext
+     * @param orgId
+     * @param reqCode
+     */
+    public static final void startMyExperienceBaseActivity(Activity mContext,String orgId,int reqCode){
+        Intent intent = new Intent(mContext, ApplyMyExperienceBaseActivity.class);
+        intent.putExtra(IntentUtils.PARA_KEY_PUBLIC,orgId);
+        mContext.startActivityForResult(intent,reqCode);
+    }
+
+    /***
+     * 个人经历-职业列表
+     * @param mContext
+     * @param orgId
+     * @param reqCode
+     */
+    public static final void startMyExperienceOccActivity(Activity mContext,String orgId,int reqCode){
+        Intent intent = new Intent(mContext, ApplyMyExperienceOccDegreeActivity.class);
+        intent.putExtra(IntentUtils.PARA_KEY_PUBLIC,orgId);
+        intent.putExtra(IntentUtils.PARA_KEY_TYPE,ApplyMyExperienceOccDegreeActivity.TYPE_OCC);
+        mContext.startActivityForResult(intent,reqCode);
+    }
+
+    /***
+     * 个人经历-职业添加
+     * @param mContext
+     * @param orgId
+     * @param reqCode
+     */
+    public static final void startMyExperienceOccAddActivity(Activity mContext,String orgId,int reqCode){
+        Intent intent = new Intent(mContext, ApplyMyExperienceOccAddActivity.class);
+        intent.putExtra(IntentUtils.PARA_KEY_PUBLIC,orgId);
+        mContext.startActivityForResult(intent,reqCode);
+    }
+
+    /***
+     * 个人经历-学历列表
+     * @param mContext
+     * @param orgId
+     * @param reqCode
+     */
+    public static final void startMyExperienceDegreeActivity(Activity mContext,String orgId,int reqCode){
+        Intent intent = new Intent(mContext, ApplyMyExperienceOccDegreeActivity.class);
+        intent.putExtra(IntentUtils.PARA_KEY_PUBLIC,orgId);
+        intent.putExtra(IntentUtils.PARA_KEY_TYPE,ApplyMyExperienceOccDegreeActivity.TYPE_DEGREE);
+        mContext.startActivityForResult(intent,reqCode);
+    }
+
+    /***
+     * 个人经历-学历添加
+     * @param mContext
+     * @param orgId
+     * @param reqCode
+     */
+    public static final void startMyExperienceDegreeAddActivity(Activity mContext,String orgId,int reqCode){
+        Intent intent = new Intent(mContext, ApplyMyExperienceDegreeAddActivity.class);
         intent.putExtra(IntentUtils.PARA_KEY_PUBLIC,orgId);
         mContext.startActivityForResult(intent,reqCode);
     }

@@ -10,7 +10,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.widget.TextView;
-
 import com.bjzt.uye.R;
 import com.bjzt.uye.entity.PUpgradeEntity;
 import com.bjzt.uye.listener.IItemListener;
@@ -70,7 +69,7 @@ public class DialogUpgrade extends Dialog implements OnClickListener {
 		
 		int mWidth = DeviceUtil.mWidth;
 		int lrMargin = (int) getContext().getResources().getDimension(R.dimen.common_margin);
-		mWidth -= (lrMargin*2);
+		mWidth -= (lrMargin*4);
 		LayoutParams llp = new LayoutParams(mWidth, LayoutParams.WRAP_CONTENT);
 		this.setContentView(mView,llp);
 	}

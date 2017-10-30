@@ -82,6 +82,21 @@ public class TestActivity extends BaseActivity{
     @BindView(R.id.btn_org_detail)
     Button btnOrgDetail;
 
+    @BindView(R.id.btn_experi_base)
+    Button btnExperiBase;
+
+    @BindView(R.id.btn_experi_occ)
+    Button btnExperiOcc;
+
+    @BindView(R.id.btn_experi_add)
+    Button btnExperiOccAdd;
+
+    @BindView(R.id.btn_degreelist)
+    Button btnDegreeList;
+
+    @BindView(R.id.btn_degree_add)
+    Button btnDegreeAdd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -242,7 +257,43 @@ public class TestActivity extends BaseActivity{
                 IntentUtils.startOrgDetailActivity(TestActivity.this,"10049",12);
             }
         });
+
+        btnExperiBase.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                IntentUtils.startMyExperienceBaseActivity(TestActivity.this,"",10);
+            }
+        });
+
+        btnExperiOcc.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                IntentUtils.startMyExperienceOccActivity(TestActivity.this,"",10);
+            }
+        });
+
+        btnExperiOccAdd.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                IntentUtils.startMyExperienceOccAddActivity(TestActivity.this,"",11);
+            }
+        });
+
+        btnDegreeList.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                IntentUtils.startMyExperienceDegreeActivity(TestActivity.this,"",11);
+            }
+        });
+
+        btnDegreeAdd.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                IntentUtils.startMyExperienceDegreeAddActivity(TestActivity.this,"",11);
+            }
+        });
     }
+
 
     @Override
     protected void initExtras(Bundle bundle) {

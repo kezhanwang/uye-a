@@ -2,6 +2,7 @@ package com.bjzt.uye.activity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import com.bjzt.uye.R;
 import com.bjzt.uye.activity.base.BaseActivity;
@@ -15,7 +16,7 @@ import butterknife.BindView;
  * Created by billy on 2017/10/30.
  * 个人经历-基本信息
  */
-public class ApplyMyExperienceBaseActivity extends BaseActivity{
+public class ApplyMyExperienceBaseActivity extends BaseActivity implements  View.OnClickListener{
 
     @BindView(R.id.header)
     YHeaderView mHeader;
@@ -28,6 +29,8 @@ public class ApplyMyExperienceBaseActivity extends BaseActivity{
     ItemView mItemViewIncome;
     @BindView(R.id.item_house)
     ItemView mItemViewHouse;
+    @BindView(R.id.btn_ok)
+    Button btnOk;
 
     @BindView(R.id.emptyview)
     BlankEmptyView mEmptyView;
@@ -49,37 +52,39 @@ public class ApplyMyExperienceBaseActivity extends BaseActivity{
         String title = getResources().getString(R.string.myexperience_base_title);
         mHeader.setTitle(title);
 
-        title = "最高学历";
-        String hint = "请选择您的学历";
+        title = getResources().getString(R.string.myexperience_base_edu_title);
+        String hint = getResources().getString(R.string.myexperience_base_edu_hint);
         mItemViewHighEdu.setTitle(title);
         mItemViewHighEdu.setHint(hint);
         mItemViewHighEdu.setEditAble(false);
         mItemViewHighEdu.showArrow();
         mItemViewHighEdu.setEditTxtBtnListener(mItemClickListener);
 
-        title = "职业";
-        hint = "请选择您的职业";
+        title = getResources().getString(R.string.myexperience_base_occ_title);
+        hint = getResources().getString(R.string.myexperience_base_occ_hint);
         mItemViewOcc.setTitle(title);
         mItemViewOcc.setHint(hint);
         mItemViewOcc.setEditAble(false);
         mItemViewOcc.showArrow();
         mItemViewOcc.setEditTxtBtnListener(mItemClickListener);
 
-        title = "月收入";
-        hint = "请选择您的月收入";
+        title = getResources().getString(R.string.myexperience_base_income_title);
+        hint = getResources().getString(R.string.myexperience_base_income_hint);
         mItemViewIncome.setTitle(title);
         mItemViewIncome.setHint(hint);
         mItemViewIncome.setEditAble(false);
         mItemViewIncome.showArrow();
         mItemViewIncome.setEditTxtBtnListener(mItemClickListener);
 
-        title = "住房情况";
-        hint = "请选择您的住房情况";
+        title = getResources().getString(R.string.myexperience_base_house_title);
+        hint = getResources().getString(R.string.myexperience_base_house_hint);
         mItemViewHouse.setTitle(title);
         mItemViewHouse.setHint(hint);
         mItemViewHouse.setEditAble(false);
         mItemViewHouse.showArrow();
         mItemViewHouse.setEditTxtBtnListener(mItemClickListener);
+
+        btnOk.setOnClickListener(this);
     }
 
     View.OnClickListener mItemClickListener = new View.OnClickListener(){
@@ -92,5 +97,12 @@ public class ApplyMyExperienceBaseActivity extends BaseActivity{
     @Override
     protected void initExtras(Bundle bundle) {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v == this.btnOk){
+
+        }
     }
 }

@@ -72,6 +72,21 @@
                 android:layout_height="wrap_content"
                 ></com.bjzt.uye.views.component.ItemView>
 
+            <Button
+                android:id="@+id/btn_ok"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/login_btn_height"
+                android:layout_marginLeft="@dimen/common_margin"
+                android:layout_marginRight="@dimen/common_margin"
+                android:layout_marginTop="42dp"
+                android:layout_marginBottom="28dp"
+                android:gravity="center"
+                android:background="@drawable/btn_login_selector"
+                android:text="@string/save"
+                android:textColor="@color/common_white"
+                android:textSize="18.5sp"
+                />
+
         </LinearLayout>
 
     </ScrollView>

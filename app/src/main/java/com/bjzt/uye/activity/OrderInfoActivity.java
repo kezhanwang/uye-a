@@ -27,6 +27,7 @@ import com.bjzt.uye.entity.VOrderInfoEntity;
 import com.bjzt.uye.entity.VPicFileEntity;
 import com.bjzt.uye.file.SharePreOrderInfo;
 import com.bjzt.uye.global.Global;
+import com.bjzt.uye.http.HttpCommon;
 import com.bjzt.uye.http.ProtocalManager;
 import com.bjzt.uye.http.listener.IUploadListener;
 import com.bjzt.uye.http.rsp.RspOrderInfoEntity;
@@ -328,12 +329,7 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
         public void onItemClick(Object obj, int tag) {
             if(tag == ProtocalItemView.SRC_TXT_CLICK){
                 if(obj == proItemService){
-                    if(mRspEntity != null && mRspEntity.mEntity != null){
-                        String url = mRspEntity.mEntity.contract;
-                        if(!TextUtils.isEmpty(url)){
-                            IntentUtils.startWebViewActivity(OrderInfoActivity.this,url);
-                        }
-                    }
+                    IntentUtils.startWebViewActivity(OrderInfoActivity.this, HttpCommon.getServiceProtocal());
                 }else if(obj == proItemAuth){
                     if(mRspEntity != null && mRspEntity.mEntity != null){
                         String url = mRspEntity.mEntity.authcontract;

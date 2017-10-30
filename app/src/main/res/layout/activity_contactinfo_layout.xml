@@ -51,18 +51,6 @@
                 ></com.bjzt.uye.views.component.ItemViewTitle>
 
             <com.bjzt.uye.views.component.ItemView
-                android:id="@+id/item_addr"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                ></com.bjzt.uye.views.component.ItemView>
-
-            <com.bjzt.uye.views.component.ItemView
-                android:id="@+id/item_addr_detail"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                ></com.bjzt.uye.views.component.ItemView>
-
-            <com.bjzt.uye.views.component.ItemView
                 android:id="@+id/item_marriage"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -76,6 +64,18 @@
 
             <com.bjzt.uye.views.component.ItemView
                 android:id="@+id/item_wechat"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                ></com.bjzt.uye.views.component.ItemView>
+
+            <com.bjzt.uye.views.component.ItemView
+                android:id="@+id/item_addr"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                ></com.bjzt.uye.views.component.ItemView>
+
+            <com.bjzt.uye.views.component.ItemView
+                android:id="@+id/item_addr_detail"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 ></com.bjzt.uye.views.component.ItemView>

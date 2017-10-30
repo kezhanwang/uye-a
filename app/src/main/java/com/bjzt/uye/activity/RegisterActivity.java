@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bjzt.uye.R;
 import com.bjzt.uye.activity.base.BaseActivity;
 import com.bjzt.uye.global.MConfiger;
+import com.bjzt.uye.http.HttpCommon;
 import com.bjzt.uye.http.ProtocalManager;
 import com.bjzt.uye.http.rsp.RspPhoneVerifyEntity;
 import com.bjzt.uye.http.rsp.RspRegEntity;
@@ -139,7 +140,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onClick(View view) {
         if(view == this.mTxtProtocal){
-            IntentUtils.startWebViewActivity(this, MConfiger.URL_PROTOCAL_REG);
+            IntentUtils.startWebViewActivity(this, HttpCommon.getRegProtocal());
         }else if(view == btnReg){
             String phone = editPhone.getText();
             String code = editVerify.getText();

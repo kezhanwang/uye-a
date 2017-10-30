@@ -213,7 +213,7 @@
     <string name="employ_progress_add_workstatus_hint">请选择当前工作状态</string>
 
     <!--联系信息-->
-    <string name="contact_info_title">联系信息</string>
+    <string name="contact_info_title">个人信息</string>
     <string name="contact_info_addr">住址</string>
     <string name="contact_info_addr_hint">请选择省市区</string>
     <string name="contact_info_addr_detail_hint">请填写详细住址，精确到门牌号"</string>
@@ -227,7 +227,7 @@
     <string name="contact_info_qq_hint">请填写QQ号码</string>
     <string name="contact_info_sec_rela">与本人关系</string>
     <string name="contact_info_sec_hint">请选择</string>
-    <string name="contact_info_sec_name_hint">紧急联系人姓名</string>
+    <string name="contact_info_sec_name_hint">请填写紧急联系人姓名</string>
     <string name="contact_info_sec_phone">手机号码</string>
     <string name="contact_info_sec_phone_hint">请填写紧急联系人手机号码</string>
     <string name="contact_info_sec">紧急联系人</string>
@@ -235,6 +235,14 @@
 
     <!--个人经历-基本信息-->
     <string name="myexperience_base_title">个人经历-基本信息</string>
+    <string name="myexperience_base_edu_title">最高学历</string>
+    <string name="myexperience_base_edu_hint">请选择您的学历</string>
+    <string name="myexperience_base_occ_title">职业</string>
+    <string name="myexperience_base_occ_hint">请选择您的职业</string>
+    <string name="myexperience_base_income_title">月收入</string>
+    <string name="myexperience_base_income_hint">请选择您的月收入</string>
+    <string name="myexperience_base_house_title">住房情况</string>
+    <string name="myexperience_base_house_hint">请选择您的住房情况</string>
 
 
 

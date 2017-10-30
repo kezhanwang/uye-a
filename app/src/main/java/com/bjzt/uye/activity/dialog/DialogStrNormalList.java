@@ -9,6 +9,8 @@ import com.bjzt.uye.adapter.DStrNorAdapter;
 import com.bjzt.uye.entity.BDialogStrEntity;
 import com.common.msglist.base.BaseListAdapter;
 import com.common.util.DeviceUtil;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,5 +47,17 @@ public class DialogStrNormalList extends DialogBankList{
         mRelaMain.setLayoutParams(llp);
 
         this.mTxtTitle.setText(title);
+    }
+
+    public static final List<BDialogStrEntity> buildNormalList(List<String> mList){
+        List<BDialogStrEntity> rList = new ArrayList<BDialogStrEntity>();
+        if(mList != null){
+            for(int i = 0;i < mList.size();i++){
+                BDialogStrEntity bEntity = new BDialogStrEntity();
+                bEntity.str = mList.get(i);
+                rList.add(bEntity);
+            }
+        }
+        return rList;
     }
 }

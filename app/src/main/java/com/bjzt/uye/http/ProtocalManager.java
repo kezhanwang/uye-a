@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import com.bjzt.uye.entity.PBankEntity;
 import com.bjzt.uye.entity.PIDentityInfoEntity;
+import com.bjzt.uye.entity.VContactInfoEntity;
 import com.bjzt.uye.entity.VOrderInfoEntity;
 import com.bjzt.uye.entity.VQAItemEntity;
 import com.bjzt.uye.global.Global;
@@ -12,6 +13,9 @@ import com.bjzt.uye.http.base.ReqBaseEntity;
 import com.bjzt.uye.http.base.TaskCommonV2;
 import com.bjzt.uye.http.listener.ICallBack;
 import com.bjzt.uye.http.req.Req400ContactEntity;
+import com.bjzt.uye.http.req.ReqContactCfgEntity;
+import com.bjzt.uye.http.req.ReqContactInfoEntity;
+import com.bjzt.uye.http.req.ReqContactSubmitEntity;
 import com.bjzt.uye.http.req.ReqFaceVerifyCfgEntity;
 import com.bjzt.uye.http.req.ReqIDentityCfgEntity;
 import com.bjzt.uye.http.req.ReqIDentityInfoEntity;
@@ -411,6 +415,48 @@ public class ProtocalManager {
     public int reqOrgDetail(String orgId,ICallBack<Object> callBack){
         ReqOrgDetailEntity reqEntity = new ReqOrgDetailEntity();
         reqEntity.org_id = orgId;
+        return addTask(reqEntity,callBack);
+    }
+
+    /**
+     * 获取联系配置信息
+     * @param callBack
+     * @return
+     */
+    public int reqContactCfg(ICallBack<Object> callBack){
+        ReqContactCfgEntity reqEntity = new ReqContactCfgEntity();
+        return addTask(reqEntity,callBack);
+    }
+
+    /***
+     * 获取联系信息
+     * @param callBack
+     * @return
+     */
+    public int reqContactInfo(ICallBack<Object> callBack){
+        ReqContactInfoEntity reqEntity = new ReqContactInfoEntity();
+        return addTask(reqEntity,callBack);
+    }
+
+    /***
+     * 个人信息-提交
+     * @param vEntity
+     * @param callBack
+     * @return
+     */
+    public int reqContactSubmit(VContactInfoEntity vEntity, ICallBack<Object> callBack){
+        ReqContactSubmitEntity reqEntity = new ReqContactSubmitEntity();
+        reqEntity.home_province = vEntity.mLocPro.id;
+        reqEntity.home_city = vEntity.mLocCity.id;
+        reqEntity.home_area = vEntity.mLocArea.id;
+        reqEntity.home_address = vEntity.strAddrDetail;
+        reqEntity.marriage = vEntity.strMarriage;
+        reqEntity.email = vEntity.strMail;
+        reqEntity.qq = vEntity.strQQ;
+        reqEntity.wechat = vEntity.strWechat;
+        reqEntity.contact1_relation = vEntity.strSecRela;
+        reqEntity.contact1_name = vEntity.strSecName;
+        reqEntity.contact1_phone = vEntity.strSecPhone;
         return addTask(reqEntity,callBack);
     }
 }

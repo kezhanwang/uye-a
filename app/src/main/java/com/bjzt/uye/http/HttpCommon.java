@@ -1,6 +1,9 @@
 package com.bjzt.uye.http;
 
 import com.bjzt.uye.http.rsp.Rsp400ContactEntity;
+import com.bjzt.uye.http.rsp.RspContactCfgEntity;
+import com.bjzt.uye.http.rsp.RspContactInfoEntity;
+import com.bjzt.uye.http.rsp.RspContactSubmitEntity;
 import com.bjzt.uye.http.rsp.RspFaceVerifyCfgEntity;
 import com.bjzt.uye.http.rsp.RspIDentityCfgEntity;
 import com.bjzt.uye.http.rsp.RspIDentityInfoEntity;
@@ -66,6 +69,9 @@ public class HttpCommon {
     public static final String URL_LOC_CITYLIST = "/common/city";               //获取城市列表
     public static final String URL_LOC_AREA = "/common/area";                   //获取地区列表
     public static final String URL_ORG_DETAIL = "/app/index/org";               //机构详情
+    public static final String URL_CONTACT_CFG = "/app/contact/config";         //个人信息配置
+    public static final String URL_CONTACT_INFO = "/app/contact/info";          //回填信息
+    public static final String URL_CONTACT_SUBMIT = "/app/contact/submit";      //提交信息
 
     static{
         //请求定位城市
@@ -120,6 +126,12 @@ public class HttpCommon {
         mMap.put(URL_LOC_AREA, RspLocAreaEntity.class);
         //获取机构详情
         mMap.put(URL_ORG_DETAIL, RspOrgDetailEntity.class);
+        //个人信息配置
+        mMap.put(URL_CONTACT_CFG,RspContactCfgEntity.class);
+        //个人信息数据
+        mMap.put(URL_CONTACT_INFO, RspContactInfoEntity.class);
+        //提交信息
+        mMap.put(URL_CONTACT_SUBMIT,RspContactSubmitEntity.class);
     }
 
     /***
@@ -129,5 +141,23 @@ public class HttpCommon {
     public static final String getUploadPicUrl(){
         String refer = HttpEngine.getInstance().getRefer(NetCommon.NET_INTERFACE_TYPE_UYE);
         return refer + "/common/upload";
+    }
+
+    /***
+     * 注册隐私协议
+     * @return
+     */
+    public static final String getRegProtocal(){
+        String refer = HttpEngine.getInstance().getRefer(NetCommon.NET_INTERFACE_TYPE_UYE);
+        return refer + "/html/contract/privacy.html";
+    }
+
+    /***
+     * 服务协议
+     * @return
+     */
+    public static final String getServiceProtocal(){
+        String refer = HttpEngine.getInstance().getRefer(NetCommon.NET_INTERFACE_TYPE_UYE);
+        return refer + "/html/contract/serving.html";
     }
 }

@@ -12,6 +12,7 @@ import android.widget.ScrollView;
 import com.bjzt.uye.R;
 import com.bjzt.uye.activity.base.BaseActivity;
 import com.bjzt.uye.activity.dialog.DialogConfirmSingle;
+import com.bjzt.uye.entity.PUInfoEntity;
 import com.bjzt.uye.entity.PhoneUserEntity;
 import com.bjzt.uye.global.Global;
 import com.bjzt.uye.http.ProtocalManager;
@@ -67,8 +68,11 @@ public class DataCheckActivity extends BaseActivity implements View.OnClickListe
 
     private final int REQ_IDENTITY = 10;
     private final int REQ_ORDERINFO = 11;
+    private final int REQ_CONTACT_INFO = 12;
+    private final int REQ_MYEXPERIENCE = 13;
 
     private String orgId;
+    private PUInfoEntity mEntity;
 
     @Override
     protected int getLayoutID() {
@@ -108,22 +112,18 @@ public class DataCheckActivity extends BaseActivity implements View.OnClickListe
         itemContact.setIItemListener(new IItemListener() {
             @Override
             public void onItemClick(Object obj, int tag) {
-
+                IntentUtils.startContactInActivity(DataCheckActivity.this,orgId,REQ_CONTACT_INFO);
             }
         });
-        itemContact.updateTailContent(true);
-        itemContact.setVisibility(View.GONE);
 
         //个人经历
         itemExperience.updateType(DataCheckItemView.TYPE_EXPERIENCE);
         itemExperience.setIItemListener(new IItemListener() {
             @Override
             public void onItemClick(Object obj, int tag) {
-
+                IntentUtils.startMyExperienceBaseActivity(DataCheckActivity.this,orgId,REQ_MYEXPERIENCE);
             }
         });
-        itemExperience.updateTailContent(true);
-        itemExperience.setVisibility(View.GONE);
 
         //芝麻信用
         itemSesame.updateType(DataCheckItemView.TYPE_SESAME);
@@ -159,6 +159,11 @@ public class DataCheckActivity extends BaseActivity implements View.OnClickListe
                 //无法获取通讯录提示
                 msg = Message.obtain();
                 msg.what = FLAG_CONTACTLIST_FAILURE;
+                sendMsg(msg);
+
+                //hide loading dialog
+                msg = Message.obtain();
+                msg.what = FALG_HIDE_LOADING;
                 sendMsg(msg);
             }else{
                 msg = Message.obtain();
@@ -224,6 +229,21 @@ public class DataCheckActivity extends BaseActivity implements View.OnClickListe
         });
     }
 
+    private void refreshUI(){
+        if(this.mEntity != null){
+            //身份认证
+            itemIDentity.updateTailContent(this.mEntity.identity);
+            //联系信息
+            itemContact.updateTailContent(this.mEntity.contact);
+            //个人经历
+            itemExperience.updateTailContent(this.mEntity.experience);
+        }else{
+            itemIDentity.updateTailContent(false);
+            itemContact.updateTailContent(false);
+            itemExperience.updateTailContent(false);
+        }
+    }
+
     @Override
     protected void onRsp(Object rsp, boolean isSucc, int errorCode, int seqNo, int src) {
         super.onRsp(rsp, isSucc, errorCode, seqNo, src);
@@ -235,7 +255,8 @@ public class DataCheckActivity extends BaseActivity implements View.OnClickListe
                     if(rspEntity.mEntity != null){
                         mEmptyView.loadSucc();
                         mScrollView.setVisibility(View.VISIBLE);
-                        itemIDentity.updateTailContent(rspEntity.mEntity.identity);
+                        mEntity = rspEntity.mEntity;
+                        refreshUI();
                     }else{
                         String tips = getResources().getString(R.string.common_request_error);
                         initErrorStatus(tips);
@@ -279,19 +300,30 @@ public class DataCheckActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         if(view == this.btnOk){
-            boolean isIDIDentity = itemIDentity.isIDentity();
-            boolean isContactListIDentity = itemPhoneContact.isIDentity();
-            if(!isIDIDentity){
-                String tips = getResources().getString(R.string.data_check_tips_identity_id);
+            if(mEntity != null){
+                boolean isIDIDentity = mEntity.identity;
+                boolean isContactListIDentity = mEntity.contact;
+                boolean isContactInfoIDentity = mEntity.experience;
+                if(!isIDIDentity){
+                    String tips = getResources().getString(R.string.data_check_tips_identity_id);
+                    showToast(tips);
+                    return;
+                }
+                if(!isContactListIDentity){
+                    String tips = getResources().getString(R.string.data_check_tips_identity_contacts_upload);
+                    showToast(tips);
+                    return;
+                }
+                if(!isContactInfoIDentity){
+                    String tips = getResources().getString(R.string.data_check_tips_identity_contacts_info);
+                    showToast(tips);
+                    return;
+                }
+                IntentUtils.startOrderInfoActivity(DataCheckActivity.this,orgId,REQ_ORDERINFO);
+            }else{
+                String tips = getResources().getString(R.string.common_cfg_empty);
                 showToast(tips);
-                return;
             }
-            if(!isContactListIDentity){
-                String tips = getResources().getString(R.string.data_check_tips_identity_contacts_upload);
-                showToast(tips);
-                return;
-            }
-            IntentUtils.startOrderInfoActivity(DataCheckActivity.this,orgId,REQ_ORDERINFO);
         }
     }
 
@@ -301,6 +333,7 @@ public class DataCheckActivity extends BaseActivity implements View.OnClickListe
         if(resultCode == Activity.RESULT_OK){
             switch(requestCode){
                 case REQ_IDENTITY:
+                case REQ_MYEXPERIENCE:
                     refresh();
                     break;
                 case REQ_ORDERINFO:

@@ -8,4 +8,6 @@ import java.io.Serializable;
 
 public class PUInfoEntity implements Serializable{
     public boolean identity;
+    public boolean contact; //联系信息
+    public boolean experience;  //个人经历
 }

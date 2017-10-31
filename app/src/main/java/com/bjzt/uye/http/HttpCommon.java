@@ -4,6 +4,11 @@ import com.bjzt.uye.http.rsp.Rsp400ContactEntity;
 import com.bjzt.uye.http.rsp.RspContactCfgEntity;
 import com.bjzt.uye.http.rsp.RspContactInfoEntity;
 import com.bjzt.uye.http.rsp.RspContactSubmitEntity;
+import com.bjzt.uye.http.rsp.RspExperiAddEntity;
+import com.bjzt.uye.http.rsp.RspExperiBaseCfgEntity;
+import com.bjzt.uye.http.rsp.RspExperiBaseCommitEntity;
+import com.bjzt.uye.http.rsp.RspExperiBaseInfoEntity;
+import com.bjzt.uye.http.rsp.RspExperiListEntity;
 import com.bjzt.uye.http.rsp.RspFaceVerifyCfgEntity;
 import com.bjzt.uye.http.rsp.RspIDentityCfgEntity;
 import com.bjzt.uye.http.rsp.RspIDentityInfoEntity;
@@ -72,6 +77,11 @@ public class HttpCommon {
     public static final String URL_CONTACT_CFG = "/app/contact/config";         //个人信息配置
     public static final String URL_CONTACT_INFO = "/app/contact/info";          //回填信息
     public static final String URL_CONTACT_SUBMIT = "/app/contact/submit";      //提交信息
+    public static final String URL_EXPERIENCE_BASE_CFG = "/app/exper/config";   //个人经历基本信息配置
+    public static final String URL_EXPERIENCE_BASE_INFO = "/app/exper/info";    //个人经历基本信息信息
+    public static final String URL_EXPERIENCE_BASE_COMMIT = "/app/exper/submit";//个人经历基本信息提交
+    public static final String URL_EXPERIENCE_LIST = "/app/elist/list";         //个人经历列表
+    public static final String URL_EXPERIENCE_ADD = "/app/elist/submit";        //个人经历提交信息
 
     static{
         //请求定位城市
@@ -132,6 +142,16 @@ public class HttpCommon {
         mMap.put(URL_CONTACT_INFO, RspContactInfoEntity.class);
         //提交信息
         mMap.put(URL_CONTACT_SUBMIT,RspContactSubmitEntity.class);
+        //个人经历配置信息
+        mMap.put(URL_EXPERIENCE_BASE_CFG,RspExperiBaseCfgEntity.class);
+        //个人经历信息
+        mMap.put(URL_EXPERIENCE_BASE_INFO, RspExperiBaseInfoEntity.class);
+        //个人经历基本信息提交
+        mMap.put(URL_EXPERIENCE_BASE_COMMIT,RspExperiBaseCommitEntity.class);
+        //个人经历列表相关
+        mMap.put(URL_EXPERIENCE_LIST,RspExperiListEntity.class);
+        //个人经历信息提交
+        mMap.put(URL_EXPERIENCE_ADD,RspExperiAddEntity.class);
     }
 
     /***

@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="62dp"
+    android:layout_height="@dimen/cash_bind_card_item_height_normal"
     android:orientation="vertical"
     android:background="@drawable/more_setting_bg_selector"
     android:id="@+id/dialog_rela_main"

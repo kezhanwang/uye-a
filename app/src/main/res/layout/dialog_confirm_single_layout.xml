@@ -56,7 +56,7 @@
         android:background="@drawable/single_dialog_btn_selector"
         android:textSize="17.5sp"
         android:textColor="@color/common_font_3"
-        android:text="@string/common_default"
+        android:text="@string/ok"
         >
     </Button>
 

@@ -81,7 +81,7 @@ public class DialogLocation extends Dialog implements  View.OnClickListener{
         this.mSelectCity = mSelectCity;
         this.mSelectArea = mSelectArea;
         //reset status
-        reSetStatus(INDEX_AREA);
+        reSetStatus(INDEX_PROVINCE);
         //set text
 //        String strPro = this.mSelectPro.id;
 //        if(!TextUtils.isEmpty(strPro)){

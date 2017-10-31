@@ -103,6 +103,7 @@
     <dimen name="cash_bind_card_title_height">56dp</dimen>
     <dimen name="cash_bind_card_divider">1px</dimen>
     <dimen name="cash_bind_card_item_height">62dp</dimen>
+    <dimen name="cash_bind_card_item_height_normal">48dp</dimen>
 
     <!--时间控件相关-->
     <dimen name="loan_datepicker_height">220dp</dimen>

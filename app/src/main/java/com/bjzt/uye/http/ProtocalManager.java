@@ -3,8 +3,12 @@ package com.bjzt.uye.http;
 import android.text.TextUtils;
 
 import com.bjzt.uye.entity.PBankEntity;
+import com.bjzt.uye.entity.PExperiEntity;
 import com.bjzt.uye.entity.PIDentityInfoEntity;
 import com.bjzt.uye.entity.VContactInfoEntity;
+import com.bjzt.uye.entity.VExperiDegreeAddEntity;
+import com.bjzt.uye.entity.VExperiOccEntity;
+import com.bjzt.uye.entity.VExperienceBaseEntity;
 import com.bjzt.uye.entity.VOrderInfoEntity;
 import com.bjzt.uye.entity.VQAItemEntity;
 import com.bjzt.uye.global.Global;
@@ -16,6 +20,11 @@ import com.bjzt.uye.http.req.Req400ContactEntity;
 import com.bjzt.uye.http.req.ReqContactCfgEntity;
 import com.bjzt.uye.http.req.ReqContactInfoEntity;
 import com.bjzt.uye.http.req.ReqContactSubmitEntity;
+import com.bjzt.uye.http.req.ReqExperiAddEntity;
+import com.bjzt.uye.http.req.ReqExperiBaseCfgEntity;
+import com.bjzt.uye.http.req.ReqExperiBaseCommitEntity;
+import com.bjzt.uye.http.req.ReqExperiBaseInfoEntity;
+import com.bjzt.uye.http.req.ReqExperiListEntity;
 import com.bjzt.uye.http.req.ReqFaceVerifyCfgEntity;
 import com.bjzt.uye.http.req.ReqIDentityCfgEntity;
 import com.bjzt.uye.http.req.ReqIDentityInfoEntity;
@@ -41,8 +50,10 @@ import com.bjzt.uye.http.req.ReqSubmitIDentityEntity;
 import com.bjzt.uye.http.req.ReqUInfoEntity;
 import com.bjzt.uye.http.req.ReqUpgradeEntity;
 import com.bjzt.uye.http.req.ReqUploadPhoneListEntity;
+import com.bjzt.uye.views.component.EmployArea;
 import com.common.http.HttpEngine;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -457,6 +468,115 @@ public class ProtocalManager {
         reqEntity.contact1_relation = vEntity.strSecRela;
         reqEntity.contact1_name = vEntity.strSecName;
         reqEntity.contact1_phone = vEntity.strSecPhone;
+        return addTask(reqEntity,callBack);
+    }
+
+    /***
+     * 获取个人经历配置信息
+     * @param callBack
+     * @return
+     */
+    public int reqMyExperiBaseCfg(ICallBack<Object> callBack){
+        ReqExperiBaseCfgEntity reqEntity = new ReqExperiBaseCfgEntity();
+        return addTask(reqEntity,callBack);
+    }
+
+    /***
+     * 获取个人经历信息
+     * @param callBack
+     * @return
+     */
+    public int reqMyExperiBaseInfo(ICallBack<Object> callBack){
+        ReqExperiBaseInfoEntity reqEntity = new ReqExperiBaseInfoEntity();
+        return addTask(reqEntity,callBack);
+    }
+
+    /***
+     * 个人基本信息提交
+     * @param vEntity
+     * @param callBack
+     * @return
+     */
+    public int reqMyExperBaseCommit(VExperienceBaseEntity vEntity,ICallBack<Object> callBack){
+        ReqExperiBaseCommitEntity reqEntity = new ReqExperiBaseCommitEntity();
+        reqEntity.highest_education = vEntity.strDegree;
+        reqEntity.profession = vEntity.strOcc;
+        reqEntity.housing_situation = vEntity.strHouse;
+        reqEntity.monthly_income = vEntity.strIncome;
+        List<EmployArea.BLocEntity> mList = vEntity.mLocList;
+        List<String> rList = new ArrayList<>();
+        if(mList != null && mList.size() > 0){
+            for(int i = 0;i < mList.size();i++){
+                EmployArea.BLocEntity bEntity = mList.get(i);
+                rList.add(bEntity.mLocArea.name);
+            }
+        }
+        reqEntity.will_work_city = rList;
+        return addTask(reqEntity,callBack);
+    }
+
+    /***
+     * 个人经历-列表相关
+     * @param callBack
+     * @return
+     */
+    public int reqMyExperiListOcc(ICallBack<Object> callBack){
+        ReqExperiListEntity reqEntity = new ReqExperiListEntity();
+        reqEntity.type = ReqExperiListEntity.TYPE_OCC;
+        reqEntity.isJsonArray = true;
+        return addTask(reqEntity,callBack);
+    }
+
+    /**
+     * 个人经历-学历列表
+     * @param callBack
+     * @return
+     */
+    public int reqMyExperiListDegree(ICallBack<Object> callBack){
+        ReqExperiListEntity reqEntity = new ReqExperiListEntity();
+        reqEntity.type = ReqExperiListEntity.TYPE_DEGREE;
+        reqEntity.isJsonArray = true;
+        return addTask(reqEntity,callBack);
+    }
+
+    /***
+     * 添加我的职业经历
+     * @param vEntity
+     * @param callBack
+     * @return
+     */
+    public int reqMyExperiOccAdd(VExperiOccEntity vEntity, ICallBack<Object> callBack, PExperiEntity pEntity){
+        ReqExperiAddEntity reqEntity = new ReqExperiAddEntity();
+        reqEntity.type = ReqExperiListEntity.TYPE_OCC;
+        reqEntity.date_start = vEntity.strDateStart;
+        reqEntity.date_end = vEntity.strDateEnd;
+        reqEntity.work_name = vEntity.strCpName;
+        reqEntity.work_position = vEntity.strPos;
+        reqEntity.work_salary = vEntity.strIncome;
+        if(pEntity != null){
+            reqEntity.id = pEntity.id;
+        }
+        return addTask(reqEntity,callBack);
+    }
+
+    /**
+     * 添加我的-学历
+     * @param vEntity
+     * @param callBack
+     * @return
+     */
+    public int reqMyExperiDegreeAdd(VExperiDegreeAddEntity vEntity,ICallBack<Object> callBack,PExperiEntity pEntity){
+        ReqExperiAddEntity reqEntity = new ReqExperiAddEntity();
+        reqEntity.type = ReqExperiListEntity.TYPE_DEGREE;
+        reqEntity.date_start = vEntity.strDateStart;
+        reqEntity.date_end = vEntity.strDateEnd;
+        reqEntity.school_name = vEntity.strSchName;
+        reqEntity.school_address = vEntity.strSchAddr;
+        reqEntity.school_profession = vEntity.strMajor;
+        reqEntity.education = vEntity.strDegree;
+        if(pEntity != null){
+            reqEntity.id = pEntity.id;
+        }
         return addTask(reqEntity,callBack);
     }
 }

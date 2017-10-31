@@ -8,7 +8,7 @@
     <string name="commit">提交</string>
     <string name="time">时间</string>
     <string name="save">保存</string>
-
+    <string name="ok">好的</string>
 
     <string name="common_default">---</string>
     <string name="common_request">数据请求中...</string>
@@ -101,6 +101,7 @@
     <string name="data_check_experience_content">学习就业的经历</string>
     <string name="data_check_tips_identity_id">请完成身份认证~</string>
     <string name="data_check_tips_identity_contacts_upload">请完成上传通讯录~</string>
+    <string name="data_check_tips_identity_contacts_info">请完成联系信息~</string>
 
     <!--手机通讯录-->
     <string name="contactlist_requesting">手机通讯信息获取中...</string>
@@ -213,7 +214,7 @@
     <string name="employ_progress_add_workstatus_hint">请选择当前工作状态</string>
 
     <!--联系信息-->
-    <string name="contact_info_title">个人信息</string>
+    <string name="contact_info_title">联系信息</string>
     <string name="contact_info_addr">住址</string>
     <string name="contact_info_addr_hint">请选择省市区</string>
     <string name="contact_info_addr_detail_hint">请填写详细住址，精确到门牌号"</string>
@@ -231,7 +232,7 @@
     <string name="contact_info_sec_phone">手机号码</string>
     <string name="contact_info_sec_phone_hint">请填写紧急联系人手机号码</string>
     <string name="contact_info_sec">紧急联系人</string>
-    <string name="contact_info_info">联系人信息</string>
+    <string name="contact_info_info">个人信息</string>
 
     <!--个人经历-基本信息-->
     <string name="myexperience_base_title">个人经历-基本信息</string>
@@ -243,7 +244,21 @@
     <string name="myexperience_base_income_hint">请选择您的月收入</string>
     <string name="myexperience_base_house_title">住房情况</string>
     <string name="myexperience_base_house_hint">请选择您的住房情况</string>
+    <string name="myexperience_base_locarea_hint">请选择期望工作地区</string>
 
+    <!--个人经历-添加学历-->
+    <string name="myexperience_degree_hint">请选择您的学历</string>
+    <string name="myexperience_degree_schname_hint">请输入您的学校名称</string>
+    <string name="myexperience_degree_schaddr_hint">请输入地址，精确到门牌号</string>
+    <string name="myexperience_degree_major_hint">请输入您的专业名称</string>
+    <string name="myexperience_degree_startdate_hint">请选择入学时间</string>
+    <string name="myexperience_degree_endate_hint">请选择您的毕业时间</string>
 
+    <!--个人经历-添加职业-->
+    <string name="myexperience_degree_cpname_hint">请输入您的单位名称</string>
+    <string name="myexperience_degree_datestart_hint">请选择您的入职时间</string>
+    <string name="myexperience_degree_dateend_hint">请选择您的离职时间</string>
+    <string name="myexperience_degree_pos_hint">请选择职位</string>
+    <string name="myexperience_degree_income_hint">请选择您的薪资范围</string>
 
 </resources>

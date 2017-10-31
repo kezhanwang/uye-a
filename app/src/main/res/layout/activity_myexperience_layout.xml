@@ -33,6 +33,7 @@
 
 
     <ScrollView
+        android:id="@+id/scrollview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@id/header"
@@ -71,6 +72,13 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 ></com.bjzt.uye.views.component.ItemView>
+
+            <!--添加您的就业地区-->
+            <com.bjzt.uye.views.component.EmployArea
+                android:id="@+id/item_employ_area"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                ></com.bjzt.uye.views.component.EmployArea>
 
             <Button
                 android:id="@+id/btn_ok"

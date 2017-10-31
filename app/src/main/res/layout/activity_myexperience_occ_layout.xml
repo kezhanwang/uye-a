@@ -46,7 +46,10 @@
             <com.bjzt.uye.views.component.NoScrollListView
                 android:id="@+id/listview"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_height="wrap_content"
+                android:listSelector="@color/translucent"
+                android:divider="@null"
+                android:dividerHeight="0dp"
                 ></com.bjzt.uye.views.component.NoScrollListView>
 
             <Button
@@ -59,7 +62,7 @@
                 android:layout_marginBottom="28dp"
                 android:gravity="center"
                 android:background="@drawable/btn_login_selector"
-                android:text="@string/save"
+                android:text="@string/next"
                 android:textColor="@color/common_white"
                 android:textSize="18.5sp"
                 />
@@ -67,6 +70,8 @@
         </LinearLayout>
 
     </ScrollView>
+
+
 
 
     <com.bjzt.uye.views.component.BlankEmptyView

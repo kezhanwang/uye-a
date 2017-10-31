@@ -40,7 +40,7 @@ public class DialogStrNormalList extends DialogBankList{
         int mWidth = DeviceUtil.mWidth;
         float h = getContext().getResources().getDimension(R.dimen.cash_bind_card_title_height);
         h += getContext().getResources().getDimension(R.dimen.cash_bind_card_divider);
-        h += (cnt*getContext().getResources().getDimension(R.dimen.cash_bind_card_item_height));
+        h += (cnt*getContext().getResources().getDimension(R.dimen.cash_bind_card_item_height_normal));
         FrameLayout.LayoutParams llp = (FrameLayout.LayoutParams) mRelaMain.getLayoutParams();
         llp.width = mWidth;
         llp.height = (int) h;

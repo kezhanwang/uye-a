@@ -17,6 +17,7 @@ import java.util.List;
 public class QARowItem extends RelativeLayout implements NoConfusion,View.OnClickListener {
     private TextView[] txtArray;
     private List<String> mList;
+    private List<EmployArea.BLocEntity> mLocList;
     private int mRowIndex;
     private int selectIndex = -1;
     private int mIndex;
@@ -63,6 +64,20 @@ public class QARowItem extends RelativeLayout implements NoConfusion,View.OnClic
                 String entity = mList.get(i);
                 txtView.setVisibility(View.VISIBLE);
                 txtView.setText(entity);
+            }else{
+                txtView.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    public void setInfoLoc(List<EmployArea.BLocEntity> mList){
+        this.mLocList = mList;
+        for(int i = 0;i < txtArray.length;i++){
+            TextView txtView = txtArray[i];
+            if(i < mList.size()){
+                EmployArea.BLocEntity entity = mList.get(i);
+                txtView.setVisibility(View.VISIBLE);
+                txtView.setText(entity.mLocArea.name);
             }else{
                 txtView.setVisibility(View.GONE);
             }

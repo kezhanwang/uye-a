@@ -25,6 +25,7 @@ import com.bjzt.uye.activity.QAActivity;
 import com.bjzt.uye.activity.RegisterActivity;
 import com.bjzt.uye.activity.SearchActivity;
 import com.bjzt.uye.activity.WebViewActivity;
+import com.bjzt.uye.entity.PExperiEntity;
 import com.bjzt.uye.http.rsp.RspQACfgEntity;
 import com.bjzt.uye.photo.activity.LoanPhotoAlblumActivity;
 import com.bjzt.uye.photo.activity.LoanPicScanActivity;
@@ -381,6 +382,20 @@ public class IntentUtils {
     }
 
     /***
+     * 个人经历-职业添加
+     * @param mContext
+     * @param orgId
+     * @param reqCode
+     */
+    public static final void startMyExperienceOccAddActivity(Activity mContext, String orgId, int reqCode, PExperiEntity pEntity){
+        Intent intent = new Intent(mContext, ApplyMyExperienceOccAddActivity.class);
+        intent.putExtra(IntentUtils.PARA_KEY_PUBLIC,orgId);
+        intent.putExtra(IntentUtils.PARA_KEY_DATA,pEntity);
+        intent.putExtra(IntentUtils.PARA_KEY_TYPE,ApplyMyExperienceOccAddActivity.TYPE_EDIT);
+        mContext.startActivityForResult(intent,reqCode);
+    }
+
+    /***
      * 个人经历-学历列表
      * @param mContext
      * @param orgId
@@ -404,4 +419,13 @@ public class IntentUtils {
         intent.putExtra(IntentUtils.PARA_KEY_PUBLIC,orgId);
         mContext.startActivityForResult(intent,reqCode);
     }
+
+    public static final void startMyExperienceDegreeAddActivity(Activity mContext,String orgId,int reqCode,PExperiEntity pEntity){
+        Intent intent = new Intent(mContext, ApplyMyExperienceDegreeAddActivity.class);
+        intent.putExtra(IntentUtils.PARA_KEY_PUBLIC,orgId);
+        intent.putExtra(IntentUtils.PARA_KEY_TYPE,ApplyMyExperienceDegreeAddActivity.TYPE_EDIT);
+        intent.putExtra(IntentUtils.PARA_KEY_DATA,pEntity);
+        mContext.startActivityForResult(intent,reqCode);
+    }
+
 }

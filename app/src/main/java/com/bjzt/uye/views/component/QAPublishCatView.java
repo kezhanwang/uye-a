@@ -83,12 +83,11 @@ public class QAPublishCatView extends LinearLayout implements NoConfusion {
             }
 
             if (tempList != null) {
-                int index = i / ROW_CNT;
+                int index = (i-1) / ROW_CNT;
                 QARowItem item = mQAList.get(index);
                 item.setIndex(index);
                 item.setInfoLoc(tempList);
             }
-
         }
     }
 

@@ -82,6 +82,23 @@ public class EmployArea extends RelativeLayout implements View.OnClickListener,N
         catView.setLocInfo(mList,null);
     }
 
+    public void setList(List<String> sList){
+        if(sList != null){
+            catView.setVisibility(View.VISIBLE);
+            mTxtContent.setVisibility(View.GONE);
+            for(int i = 0;i < sList.size();i++){
+                String strInfo = sList.get(i);
+                BLocEntity bEntity = new BLocEntity();
+                bEntity.mLocPro = new PLocItemEntity();
+                bEntity.mLocCity = new PLocItemEntity();
+                bEntity.mLocArea = new PLocItemEntity();
+                bEntity.mLocArea.name = strInfo;
+                mList.add(bEntity);
+            }
+            catView.setLocInfo(mList,null);
+        }
+    }
+
     public List<BLocEntity> getLocList() {
         return this.mList;
     }

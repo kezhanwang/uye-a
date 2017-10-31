@@ -26,6 +26,15 @@ public class DialogStrNormalList extends DialogBankList{
 
     public void setStrInfo(List<BDialogStrEntity> mList,BDialogStrEntity mEntitySelect,String title){
         int cnt = mList.size();
+        //set select
+        if(mList != null && mEntitySelect != null){
+            for(BDialogStrEntity bEntity : mList){
+                if(bEntity != null && bEntity.str.equals(mEntitySelect.str)){
+                    bEntity.isSelect = true;
+                    break;
+                }
+            }
+        }
         if(mAdapter == null){
             mAdapter = new DStrNorAdapter(mList);
             mAdapter.setIItemListener(mItemListener);

@@ -202,6 +202,10 @@ public class ApplyMyExperienceBaseActivity extends BaseActivity implements  View
         String strHouse = pEntity.housing_situation;
         setItemViewTxt(mItemViewHouse,strHouse);
         //init city area
+        List<String> mLocList = pEntity.will_work_city;
+        if(mLocList != null && mLocList.size() > 0){
+            mEmployArea.setList(mLocList);
+        }
     }
 
     private void setItemViewTxt(ItemView mItemView,String strInfo){
@@ -229,22 +233,27 @@ public class ApplyMyExperienceBaseActivity extends BaseActivity implements  View
         @Override
         public void onClick(View v) {
             int src = -1;
+            String strSelect = null;
             if(pEntity != null){
                 List<String> mList = null;
                 if(v == mItemViewHighEdu.getEditTxt()){
                     src = SRC_DEGREE;
                     mList = pEntity.highest_education;
+                    strSelect = mItemViewHighEdu.getInputTxt();
                 }else if(v == mItemViewHouse.getEditTxt()){
                     src = SRC_HOUSE;
                     mList = pEntity.housing_situation;
+                    strSelect = mItemViewHouse.getInputTxt();
                 }else if(v == mItemViewIncome.getEditTxt()){
                     src = SRC_INCOME;
                     mList = pEntity.monthly_income;
+                    strSelect = mItemViewIncome.getInputTxt();
                 }else{
                     src = SRC_OCC;
                     mList = pEntity.profession;
+                    strSelect = mItemViewOcc.getInputTxt();
                 }
-                showDialogNormal(mList,src);
+                showDialogNormal(mList,strSelect,src);
             }else{
                 String tips = getResources().getString(R.string.common_cfg_empty);
                 showToast(tips);
@@ -252,7 +261,7 @@ public class ApplyMyExperienceBaseActivity extends BaseActivity implements  View
         }
     };
 
-    private void showDialogNormal(final List<String> mList, final int src){
+    private void showDialogNormal(final List<String> mList,String strSelect,final int src){
         hideDialogNormal();
         this.mDialogStrNor = new DialogStrNormalList(this,R.style.MyDialogBg);
         this.mDialogStrNor.setIItemListener(new IItemListener() {
@@ -295,7 +304,13 @@ public class ApplyMyExperienceBaseActivity extends BaseActivity implements  View
                 title = "选择职业";
                 break;
         }
-        this.mDialogStrNor.setStrInfo(DialogStrNormalList.buildNormalList(mList),null,title);
+        BDialogStrEntity bEntity = null;
+        if(!TextUtils.isEmpty(strSelect)){
+            bEntity = new BDialogStrEntity();
+            bEntity.str = strSelect;
+            bEntity.isSelect = true;
+        }
+        this.mDialogStrNor.setStrInfo(DialogStrNormalList.buildNormalList(mList),bEntity,title);
     }
 
     private void hideDialogNormal(){

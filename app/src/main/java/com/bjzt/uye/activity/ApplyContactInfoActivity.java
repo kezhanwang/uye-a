@@ -183,7 +183,8 @@ public class ApplyContactInfoActivity extends BaseActivity implements  View.OnCl
             if(v == mItemMarriage.getEditTxt()){
                 if(pCfgEntity != null && pCfgEntity.marriage != null && pCfgEntity.marriage.size() > 0){
                     List<String> mList = pCfgEntity.marriage;
-                    showDialogNor(mList,SRC_MARRIAGE);
+                    String strSelect = mItemMarriage.getInputTxt();
+                    showDialogNor(mList,strSelect,SRC_MARRIAGE);
                 }else{
                     String tips = getResources().getString(R.string.common_cfg_empty);
                     showToast(tips);
@@ -191,7 +192,8 @@ public class ApplyContactInfoActivity extends BaseActivity implements  View.OnCl
             }else if(v == mItemSecRela.getEditTxt()){
                 if(pCfgEntity != null && pCfgEntity.relation != null && pCfgEntity.relation.size() > 0){
                     List<String> mList = pCfgEntity.relation;
-                    showDialogNor(mList,SRC_RELA);
+                    String strSelect = mItemSecRela.getInputTxt();
+                    showDialogNor(mList,strSelect,SRC_RELA);
                 }else{
                     String tips = getResources().getString(R.string.common_cfg_empty);
                     showToast(tips);
@@ -278,7 +280,7 @@ public class ApplyContactInfoActivity extends BaseActivity implements  View.OnCl
         }
     }
 
-    private void showDialogNor(List<String> mList,final int src){
+    private void showDialogNor(List<String> mList,String strSelect,final int src){
         hideDialogNor();
         this.mDialogNor = new DialogStrNormalList(this,R.style.MyDialogBg);
         this.mDialogNor.setIItemListener(new IItemListener() {
@@ -305,8 +307,13 @@ public class ApplyContactInfoActivity extends BaseActivity implements  View.OnCl
                 title = "选择与本人关系";
                 break;
         }
-        this.mDialogNor.setStrInfo(DialogStrNormalList.buildNormalList(mList),null,title);
-
+        BDialogStrEntity bEntitySelect = null;
+        if(!TextUtils.isEmpty(strSelect)){
+            bEntitySelect = new BDialogStrEntity();
+            bEntitySelect.str = strSelect;
+            bEntitySelect.isSelect = true;
+        }
+        this.mDialogNor.setStrInfo(DialogStrNormalList.buildNormalList(mList),bEntitySelect,title);
     }
 
     private void hideDialogNor(){

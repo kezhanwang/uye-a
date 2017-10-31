@@ -21,9 +21,11 @@ import com.bjzt.uye.http.rsp.RspExperiAddEntity;
 import com.bjzt.uye.listener.IHeaderListener;
 import com.bjzt.uye.listener.IItemListener;
 import com.bjzt.uye.util.IntentUtils;
+import com.bjzt.uye.util.LoanDateUtil;
 import com.bjzt.uye.util.StrUtil;
 import com.bjzt.uye.views.component.ItemView;
 import com.bjzt.uye.views.component.YHeaderView;
+import com.common.common.MyLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -152,7 +154,7 @@ public class ApplyMyExperienceOccAddActivity extends BaseActivity implements  Vi
         }
     }
 
-    private void showDialogDate(final int src){
+    private void showDialogDate(final int src,String strTimeSelect){
         hideDialogDate();
         this.mDialogDate = new DialogDateSelector(this,R.style.MyDialogBg);
         this.mDialogDate.setIDatePickerListener(new DialogDateSelector.IDatePickerListener() {
@@ -169,6 +171,16 @@ public class ApplyMyExperienceOccAddActivity extends BaseActivity implements  Vi
         this.mDialogDate.show();
         this.mDialogDate.updateType(DialogDateSelector.TYPE_EDU_DATE);
         this.mDialogDate.setCurDaySelected();
+        //reset date
+        if(!TextUtils.isEmpty(strTimeSelect)){
+            VDateEntity vEntity = LoanDateUtil.parseVDateEntitiy(strTimeSelect);
+            if(vEntity != null){
+                if(MyLog.isDebugable()){
+                    MyLog.debug(TAG,"[setPos]" + " year:" + vEntity.year + " month:" + vEntity.month + " day:" + vEntity.date);
+                }
+                mDialogDate.setPos(vEntity.year,vEntity.month,vEntity.date);
+            }
+        }
     }
 
     private void hideDialogDate(){
@@ -185,7 +197,7 @@ public class ApplyMyExperienceOccAddActivity extends BaseActivity implements  Vi
         }
     }
 
-    private void showDialogNor(List<String> mList,final int src){
+    private void showDialogNor(List<String> mList,final int src,String strSelect){
         hideDialogNor();
         this.mDialogNor = new DialogStrNormalList(this,R.style.MyDialogBg);
         this.mDialogNor.show();
@@ -210,7 +222,13 @@ public class ApplyMyExperienceOccAddActivity extends BaseActivity implements  Vi
                 title = "请选择月薪范围";
                 break;
         }
-        this.mDialogNor.setStrInfo(DialogStrNormalList.buildNormalList(mList),null,title);
+        BDialogStrEntity bEntity = null;
+        if(!TextUtils.isEmpty(strSelect)){
+            bEntity = new BDialogStrEntity();
+            bEntity.str = strSelect;
+            bEntity.isSelect = true;
+        }
+        this.mDialogNor.setStrInfo(DialogStrNormalList.buildNormalList(mList),bEntity,title);
     }
 
     @Override
@@ -224,13 +242,16 @@ public class ApplyMyExperienceOccAddActivity extends BaseActivity implements  Vi
         @Override
         public void onClick(View v) {
             if(v == mItemViewEntryTime.getEditTxt()){
-                showDialogDate(SRC_DATE_START);
+                String strDate = mItemViewEntryTime.getInputTxt();
+                showDialogDate(SRC_DATE_START,strDate);
             }else if(v == mItemViewTurnOverTime.getEditTxt()){
-                showDialogDate(SRC_DATE_END);
+                String strDate = mItemViewTurnOverTime.getInputTxt();
+                showDialogDate(SRC_DATE_END,strDate);
             }else if(v == mItemViewPos.getEditTxt()){
                 List<String> mList = ExperiController.getInstance().getPostList();
                 if(mList != null && mList.size() > 0){
-                    showDialogNor(mList,SRC_NOR_POS);
+                    String strSelect = mItemViewPos.getInputTxt();
+                    showDialogNor(mList,SRC_NOR_POS,strSelect);
                 }else{
                     String tips = getString(R.string.common_cfg_empty);
                     showToast(tips);
@@ -238,7 +259,8 @@ public class ApplyMyExperienceOccAddActivity extends BaseActivity implements  Vi
             }else if(v == mItemViewIncome.getEditTxt()){
                 List<String> mList = ExperiController.getInstance().getIncomeList();
                 if(mList != null && mList.size() > 0){
-                    showDialogNor(mList,SRC_NOR_INCOME);
+                    String strSelect = mItemViewIncome.getInputTxt();
+                    showDialogNor(mList,SRC_NOR_INCOME,strSelect);
                 }else{
                     String tips = getString(R.string.common_cfg_empty);
                     showToast(tips);

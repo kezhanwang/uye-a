@@ -21,10 +21,12 @@ import com.bjzt.uye.http.rsp.RspExperiAddEntity;
 import com.bjzt.uye.listener.IHeaderListener;
 import com.bjzt.uye.listener.IItemListener;
 import com.bjzt.uye.util.IntentUtils;
+import com.bjzt.uye.util.LoanDateUtil;
 import com.bjzt.uye.util.StrUtil;
 import com.bjzt.uye.views.component.BlankEmptyView;
 import com.bjzt.uye.views.component.ItemView;
 import com.bjzt.uye.views.component.YHeaderView;
+import com.common.common.MyLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -185,13 +187,13 @@ public class ApplyMyExperienceDegreeAddActivity extends BaseActivity implements 
         @Override
         public void onClick(View v) {
             if(v == mItemViewEntryTime.getEditTxt()){
-                showDialogDate(SRC_DATE_START);
+                showDialogDate(SRC_DATE_START,mItemViewEntryTime.getInputTxt());
             }else if(v == mItemViewGraduTime.getEditTxt()){
-                showDialogDate(SRC_DATE_END);
+                showDialogDate(SRC_DATE_END,mItemViewGraduTime.getInputTxt());
             }else if(v == mItemViewDegree.getEditTxt()){
                 List<String> mList = ExperiController.getInstance().getDegreeList();
                 if(mList != null && mList.size() > 0){
-                    showDialogStrNor(mList,SRC_DEGREE);
+                    showDialogStrNor(mList,SRC_DEGREE,mItemViewDegree.getInputTxt());
                 }else{
                     String tips = getResources().getString(R.string.common_cfg_empty);
                     showToast(tips);
@@ -200,7 +202,7 @@ public class ApplyMyExperienceDegreeAddActivity extends BaseActivity implements 
         }
     };
 
-    private void showDialogDate(final int src){
+    private void showDialogDate(final int src,String strDate){
         hideDialogDate();
         this.mDialogDate = new DialogDateSelector(this,R.style.MyDialogBg);
         this.mDialogDate.setIDatePickerListener(new DialogDateSelector.IDatePickerListener() {
@@ -217,6 +219,16 @@ public class ApplyMyExperienceDegreeAddActivity extends BaseActivity implements 
         this.mDialogDate.show();
         this.mDialogDate.updateType(DialogDateSelector.TYPE_EDU_DATE);
         this.mDialogDate.setCurDaySelected();
+
+        if(!TextUtils.isEmpty(strDate)){
+            VDateEntity vEntity = LoanDateUtil.parseVDateEntitiy(strDate);
+            if(vEntity != null){
+                if(MyLog.isDebugable()){
+                    MyLog.debug(TAG,"[setPos]" + " year:" + vEntity.year + " month:" + vEntity.month + " day:" + vEntity.date);
+                }
+                mDialogDate.setPos(vEntity.year,vEntity.month,vEntity.date);
+            }
+        }
     }
 
     private void hideDialogDate(){
@@ -226,7 +238,7 @@ public class ApplyMyExperienceDegreeAddActivity extends BaseActivity implements 
         }
     }
 
-    private void showDialogStrNor(List<String> mList, int src){
+    private void showDialogStrNor(List<String> mList, int src,String strSelect){
         hideDialogStrNor();
         this.mDialogNor = new DialogStrNormalList(this,R.style.MyDialogBg);
         this.mDialogNor.setIItemListener(new IItemListener() {
@@ -239,7 +251,13 @@ public class ApplyMyExperienceDegreeAddActivity extends BaseActivity implements 
         });
         this.mDialogNor.show();
         String title = "选择最高学历";
-        this.mDialogNor.setStrInfo(DialogStrNormalList.buildNormalList(mList),null,title);
+        BDialogStrEntity bEntity = null;
+        if(!TextUtils.isEmpty(strSelect)){
+            bEntity = new BDialogStrEntity();
+            bEntity.isSelect = true;
+            bEntity.str = strSelect;
+        }
+        this.mDialogNor.setStrInfo(DialogStrNormalList.buildNormalList(mList),bEntity,title);
     }
 
     private void hideDialogStrNor() {

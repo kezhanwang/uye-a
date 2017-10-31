@@ -302,8 +302,9 @@ public class DataCheckActivity extends BaseActivity implements View.OnClickListe
         if(view == this.btnOk){
             if(mEntity != null){
                 boolean isIDIDentity = mEntity.identity;
-                boolean isContactListIDentity = mEntity.contact;
-                boolean isContactInfoIDentity = mEntity.experience;
+                boolean isContactListIDentity = itemPhoneContact.isIDentity();
+                boolean isContact = mEntity.contact;
+                boolean isExperience = mEntity.experience;
                 if(!isIDIDentity){
                     String tips = getResources().getString(R.string.data_check_tips_identity_id);
                     showToast(tips);
@@ -314,7 +315,7 @@ public class DataCheckActivity extends BaseActivity implements View.OnClickListe
                     showToast(tips);
                     return;
                 }
-                if(!isContactInfoIDentity){
+                if(!isContact){
                     String tips = getResources().getString(R.string.data_check_tips_identity_contacts_info);
                     showToast(tips);
                     return;

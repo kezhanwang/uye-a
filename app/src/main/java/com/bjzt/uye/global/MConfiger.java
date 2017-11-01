@@ -18,4 +18,5 @@ public class MConfiger {
     public static final int MAX_SIZE_PIC_ABLUEM_SIZE = 5;
     public static final int TIME_OUT = 1000 * 20;	//20秒超时
     public static final int SPLASH_INTERVAL = 1000 * 3; //闪屏3秒钟
+    public static final String STR_NO_EMPLOYMENT = "未就业";
 }

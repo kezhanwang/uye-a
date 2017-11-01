@@ -18,10 +18,13 @@ import com.bjzt.uye.entity.PExperiBaseCfgEntity;
 import com.bjzt.uye.entity.PExperiBaseInfoEntity;
 import com.bjzt.uye.entity.PLocItemEntity;
 import com.bjzt.uye.entity.VExperienceBaseEntity;
+import com.bjzt.uye.global.MConfiger;
 import com.bjzt.uye.http.ProtocalManager;
+import com.bjzt.uye.http.req.ReqExperiListEntity;
 import com.bjzt.uye.http.rsp.RspExperiBaseCfgEntity;
 import com.bjzt.uye.http.rsp.RspExperiBaseCommitEntity;
 import com.bjzt.uye.http.rsp.RspExperiBaseInfoEntity;
+import com.bjzt.uye.http.rsp.RspExperiListEntity;
 import com.bjzt.uye.listener.IHeaderListener;
 import com.bjzt.uye.listener.IItemListener;
 import com.bjzt.uye.util.IntentUtils;
@@ -72,10 +75,12 @@ public class ApplyMyExperienceBaseActivity extends BaseActivity implements  View
     private final int SRC_HOUSE = 4;
 
     private final int REQ_EXPERI_OCC = 100;
+    private final int REQ_EXPERI_DEGREE = 101;
 
     private List<Integer> mReqList = new ArrayList<>();
     private PExperiBaseCfgEntity pEntity;
     private String orgId;
+    private String strDegree;
 
     @Override
     protected int getLayoutID() {
@@ -179,10 +184,26 @@ public class ApplyMyExperienceBaseActivity extends BaseActivity implements  View
                 if(isSucc){
                     String tips = getResources().getString(R.string.common_request_succ);
                     showToast(tips);
-                    IntentUtils.startMyExperienceOccActivity(ApplyMyExperienceBaseActivity.this,orgId,REQ_EXPERI_OCC);
+                    if(isNotEmployed()){
+                        showLoading();
+                        int seq = ProtocalManager.getInstance().reqMyExperiListDegree(getCallBack());
+                        mReqList.add(seq);
+                    }else{
+                        showLoading();
+                        int seq = ProtocalManager.getInstance().reqMyExperiListOcc(getCallBack());
+                        mReqList.add(seq);
+                    }
                 }else{
                     String tips = StrUtil.getErrorTipsByCode(errorCode,rspEntity);
                     showToast(tips);
+                }
+            }else if(rsp instanceof RspExperiListEntity){
+                RspExperiListEntity rspEntity = (RspExperiListEntity) rsp;
+                int mType = rspEntity.mType;
+                if(mType == ReqExperiListEntity.TYPE_DEGREE){
+                    IntentUtils.startMyExperienceOccActivity(ApplyMyExperienceBaseActivity.this,orgId,REQ_EXPERI_DEGREE,false,rspEntity);
+                }else if(mType == ReqExperiListEntity.TYPE_OCC){
+                    IntentUtils.startMyExperienceOccActivity(ApplyMyExperienceBaseActivity.this,orgId,REQ_EXPERI_OCC,true,rspEntity);
                 }
             }
         }
@@ -195,6 +216,7 @@ public class ApplyMyExperienceBaseActivity extends BaseActivity implements  View
         //init occ
         String strOcc = pEntity.profession;
         setItemViewTxt(mItemViewOcc,strOcc);
+        this.strDegree = strOcc;
         //init income
         String strIncome = pEntity.monthly_income;
         setItemViewTxt(mItemViewIncome,strIncome);
@@ -261,6 +283,14 @@ public class ApplyMyExperienceBaseActivity extends BaseActivity implements  View
         }
     };
 
+    /***
+     * 未就业
+     * @return
+     */
+    private boolean isNotEmployed(){
+        return !TextUtils.isEmpty(strDegree) && MConfiger.STR_NO_EMPLOYMENT.equals(strDegree);
+    }
+
     private void showDialogNormal(final List<String> mList,String strSelect,final int src){
         hideDialogNormal();
         this.mDialogStrNor = new DialogStrNormalList(this,R.style.MyDialogBg);
@@ -273,6 +303,7 @@ public class ApplyMyExperienceBaseActivity extends BaseActivity implements  View
                 if(!TextUtils.isEmpty(strInfo)){
                     switch(src){
                         case SRC_DEGREE:
+                            ApplyMyExperienceBaseActivity.this.strDegree = strInfo;
                             mItemViewHighEdu.setEditTxt(strInfo);
                             break;
                         case SRC_HOUSE:
@@ -351,6 +382,7 @@ public class ApplyMyExperienceBaseActivity extends BaseActivity implements  View
         if(resultCode == Activity.RESULT_OK){
             switch(requestCode){
                 case REQ_EXPERI_OCC:
+                case REQ_EXPERI_DEGREE:
                     setResult(Activity.RESULT_OK);
                     finish();
                     break;

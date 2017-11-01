@@ -26,6 +26,7 @@ import com.bjzt.uye.activity.RegisterActivity;
 import com.bjzt.uye.activity.SearchActivity;
 import com.bjzt.uye.activity.WebViewActivity;
 import com.bjzt.uye.entity.PExperiEntity;
+import com.bjzt.uye.http.rsp.RspExperiListEntity;
 import com.bjzt.uye.http.rsp.RspQACfgEntity;
 import com.bjzt.uye.photo.activity.LoanPhotoAlblumActivity;
 import com.bjzt.uye.photo.activity.LoanPicScanActivity;
@@ -50,6 +51,7 @@ public class IntentUtils {
     public static final String PARA_KEY_POS = "key_pos";
     public static final String PARA_KEY_TYPE = "key_type";
     public static final String PARA_KEY_LIST = "key_list";
+    public static final String PARA_KEY_RSP = "key_rsp";
 
     /**
      * 打开首页
@@ -362,10 +364,17 @@ public class IntentUtils {
      * @param orgId
      * @param reqCode
      */
-    public static final void startMyExperienceOccActivity(Activity mContext,String orgId,int reqCode){
+    public static final void startMyExperienceOccActivity(Activity mContext, String orgId, int reqCode, boolean isOcc, RspExperiListEntity rspEntity){
         Intent intent = new Intent(mContext, ApplyMyExperienceOccDegreeActivity.class);
         intent.putExtra(IntentUtils.PARA_KEY_PUBLIC,orgId);
-        intent.putExtra(IntentUtils.PARA_KEY_TYPE,ApplyMyExperienceOccDegreeActivity.TYPE_OCC);
+        if(isOcc){
+            intent.putExtra(IntentUtils.PARA_KEY_TYPE,ApplyMyExperienceOccDegreeActivity.TYPE_OCC);
+        }else{
+            intent.putExtra(IntentUtils.PARA_KEY_TYPE,ApplyMyExperienceOccDegreeActivity.TYPE_DEGREE);
+        }
+        if(rspEntity != null){
+            intent.putExtra(IntentUtils.PARA_KEY_RSP,rspEntity);
+        }
         mContext.startActivityForResult(intent,reqCode);
     }
 

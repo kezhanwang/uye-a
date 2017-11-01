@@ -8,14 +8,16 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.List;
 
 /**
  * Created by billy on 2017/10/31
  */
-public class RspExperiListEntity extends RspBaseEntity{
+public class RspExperiListEntity extends RspBaseEntity implements Serializable{
     public List<PExperiEntity> mList;
+    public int mType;
 
     @Override
     public void parseData(JSONObject jsonObj, JSONArray jsonArray, boolean isArray, ReqBaseEntity reqEntity) {
@@ -25,6 +27,7 @@ public class RspExperiListEntity extends RspBaseEntity{
 
         ReqExperiListEntity reqExEntity = (ReqExperiListEntity) reqEntity;
         int typeInt = reqExEntity.type;
+        this.mType = typeInt;
         if(mList != null){
             for(int i = 0;i < mList.size();i++){
                 PExperiEntity pEntity = mList.get(i);

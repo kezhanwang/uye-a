@@ -268,7 +268,7 @@ public class TestActivity extends BaseActivity{
         btnExperiOcc.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                IntentUtils.startMyExperienceOccActivity(TestActivity.this,"",10);
+                IntentUtils.startMyExperienceOccActivity(TestActivity.this,"",10,true,null);
             }
         });
 

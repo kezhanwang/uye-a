@@ -55,9 +55,12 @@ public class ApplyMyExperienceOccDegreeActivity extends BaseActivity implements 
     private final int REQ_EXPERI_DEGREE_LIST = 3;
     private final int REQ_EDIT_OCC = 4;
     private final int REQ_EDIT_DEGREE = 5;
+    private final int REQ_ADD_OCC_CANCLE = 6;
+    private final int REQ_ADD_DEGREE_CANCLE = 7;
 
     private List<Integer> mReqList = new ArrayList<>();
     private ExperiListAdapter mAdapter;
+    private RspExperiListEntity mRspParamsEntity;
 
     @Override
     protected int getLayoutID() {
@@ -67,24 +70,7 @@ public class ApplyMyExperienceOccDegreeActivity extends BaseActivity implements 
     @Override
     protected void initLayout(Bundle bundle) {
         mHeader.updateType(YHeaderView.TYPE_RIGHT_TXT);
-        mHeader.setIListener(new IHeaderListener() {
-            @Override
-            public void onLeftClick() {
-                finish();
-            }
-
-            @Override
-            public void onRightClick() {
-                switch(mType) {
-                    case TYPE_DEGREE:
-                        IntentUtils.startMyExperienceDegreeAddActivity(ApplyMyExperienceOccDegreeActivity.this,orgId,REQ_ADD_DEGREE);
-                        break;
-                    case TYPE_OCC:
-                        IntentUtils.startMyExperienceOccAddActivity(ApplyMyExperienceOccDegreeActivity.this,orgId,REQ_ADD_OCC);
-                        break;
-                }
-            }
-        });
+        mHeader.setIListener(mHeaderListener);
         String strTxtRight = "";
         String title = "";
         String btnTxt = "";
@@ -110,8 +96,47 @@ public class ApplyMyExperienceOccDegreeActivity extends BaseActivity implements 
         btnOk.setOnClickListener(this);
         btnOk.setText(btnTxt);
 
-        refresh();
+        boolean needRefresh = false;
+        if(mRspParamsEntity != null){
+            if(mRspParamsEntity.mList == null || mRspParamsEntity.mList.size() <= 0){
+                switch(mType) {
+                    case TYPE_DEGREE:
+                        IntentUtils.startMyExperienceDegreeAddActivity(ApplyMyExperienceOccDegreeActivity.this,orgId,REQ_ADD_DEGREE_CANCLE);
+                        break;
+                    case TYPE_OCC:
+                        IntentUtils.startMyExperienceOccAddActivity(ApplyMyExperienceOccDegreeActivity.this,orgId,REQ_ADD_OCC_CANCLE);
+                        break;
+                }
+            }else{
+                needRefresh = true;
+            }
+        }else{
+            needRefresh = true;
+        }
+
+        if(needRefresh){
+            refresh();
+        }
     }
+
+    private IHeaderListener mHeaderListener = new IHeaderListener() {
+        @Override
+        public void onLeftClick() {
+            finish();
+        }
+
+        @Override
+        public void onRightClick() {
+            switch(mType) {
+                case TYPE_DEGREE:
+                    IntentUtils.startMyExperienceDegreeAddActivity(ApplyMyExperienceOccDegreeActivity.this,orgId,REQ_ADD_DEGREE);
+                    break;
+                case TYPE_OCC:
+                    IntentUtils.startMyExperienceOccAddActivity(ApplyMyExperienceOccDegreeActivity.this,orgId,REQ_ADD_OCC);
+                    break;
+            }
+        }
+    };
 
     private void refresh(){
         int seqNo = -1;
@@ -189,25 +214,35 @@ public class ApplyMyExperienceOccDegreeActivity extends BaseActivity implements 
         Intent intent = getIntent();
         this.orgId = intent.getStringExtra(IntentUtils.PARA_KEY_PUBLIC);
         this.mType = intent.getIntExtra(IntentUtils.PARA_KEY_TYPE,TYPE_OCC);
+        this.mRspParamsEntity = (RspExperiListEntity) intent.getSerializableExtra(IntentUtils.PARA_KEY_RSP);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == Activity.RESULT_OK){
-            switch(requestCode){
-                case REQ_ADD_OCC:
-                case REQ_EDIT_OCC:
-                    refresh();
-                    break;
-                case REQ_ADD_DEGREE:
-                case REQ_EDIT_DEGREE:
-                    refresh();
-                    break;
-                case REQ_EXPERI_DEGREE_LIST:
-                    setResult(Activity.RESULT_OK);
-                    finish();
-                    break;
+        if(requestCode == REQ_ADD_DEGREE_CANCLE || requestCode == REQ_ADD_OCC_CANCLE){
+            if(resultCode == Activity.RESULT_OK){
+                refresh();
+            }else{
+                setResult(Activity.RESULT_CANCELED);
+                finish();
+            }
+        }else{
+            if(resultCode == Activity.RESULT_OK){
+                switch(requestCode){
+                    case REQ_ADD_OCC:
+                    case REQ_EDIT_OCC:
+                        refresh();
+                        break;
+                    case REQ_ADD_DEGREE:
+                    case REQ_EDIT_DEGREE:
+                        refresh();
+                        break;
+                    case REQ_EXPERI_DEGREE_LIST:
+                        setResult(Activity.RESULT_OK);
+                        finish();
+                        break;
+                }
             }
         }
     }

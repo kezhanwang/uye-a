@@ -77,12 +77,23 @@ public class DialogLocation extends Dialog implements  View.OnClickListener{
 
         setCancelable(true);
         setCanceledOnTouchOutside(true);
-        mCityList.add("北京市");
-        mCityList.add("天津市");
-        mCityList.add("上海市");
-        mCityList.add("重庆市");
-        mCityList.add("澳门特别行政区");
-        mCityList.add("香港特别行政区");
+        mCityList.add("北京");
+        mCityList.add("天津");
+        mCityList.add("上海");
+        mCityList.add("重庆");
+        mCityList.add("澳门");
+        mCityList.add("香港");
+    }
+
+    private boolean isUnderGovCity(String strCity){
+        if(mCityList != null && !TextUtils.isEmpty(strCity)){
+            for(String str: mCityList){
+                if(strCity.contains(str)){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public void setType(int mType){
@@ -340,7 +351,7 @@ public class DialogLocation extends Dialog implements  View.OnClickListener{
                 mTxtView.setText(strName);
             }
             setIndex(INDEX_CITY,false);
-            if(mType == TYPE_CITY && mCityList.contains(mEntityPro.name)){
+            if(mType == TYPE_CITY && isUnderGovCity(mEntityPro.name)){
                 PLocItemEntity pLocPro = new PLocItemEntity();
                 pLocPro.id = mEntityPro.id;
                 pLocPro.name = mEntityPro.name;

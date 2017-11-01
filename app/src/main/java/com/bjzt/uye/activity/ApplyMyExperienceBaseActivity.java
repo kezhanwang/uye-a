@@ -3,6 +3,7 @@ package com.bjzt.uye.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -77,10 +78,13 @@ public class ApplyMyExperienceBaseActivity extends BaseActivity implements  View
     private final int REQ_EXPERI_OCC = 100;
     private final int REQ_EXPERI_DEGREE = 101;
 
+    private final int FLAG_FILLIN_VAL = 1000;
+
     private List<Integer> mReqList = new ArrayList<>();
     private PExperiBaseCfgEntity pEntity;
     private String orgId;
     private String strDegree;
+    private final String KEY_DATA = "key_data";
 
     @Override
     protected int getLayoutID() {
@@ -142,11 +146,56 @@ public class ApplyMyExperienceBaseActivity extends BaseActivity implements  View
             }
         });
 
-        mScrollView.setVisibility(View.GONE);
-        mEmptyView.setVisibility(View.VISIBLE);
-        mEmptyView.showLoadingState();
-        int seqNo = ProtocalManager.getInstance().reqMyExperiBaseCfg(getCallBack());
-        mReqList.add(seqNo);
+        boolean needReq = false;
+        if(bundle != null){
+            VExperienceBaseEntity vEntity = (VExperienceBaseEntity) bundle.getSerializable(KEY_DATA);
+            if(vEntity != null){
+                Message msg = Message.obtain();
+                msg.what = FLAG_FILLIN_VAL;
+                msg.obj = vEntity;
+                sendMsgDelay(msg,800);
+            }else{
+                needReq = true;
+            }
+        }else{
+            needReq = true;
+        }
+        if(needReq){
+            mScrollView.setVisibility(View.GONE);
+            mEmptyView.setVisibility(View.VISIBLE);
+            mEmptyView.showLoadingState();
+            int seqNo = ProtocalManager.getInstance().reqMyExperiBaseCfg(getCallBack());
+            mReqList.add(seqNo);
+        }
+    }
+
+    private void fillInVal(VExperienceBaseEntity vEntity){
+        String strDegree = vEntity.strDegree;
+        setItemViewTxt(mItemViewHighEdu,strDegree);
+        String strOcc = vEntity.strOcc;
+        setItemViewTxt(mItemViewOcc,strOcc);
+        String strIncome = vEntity.strIncome;
+        setItemViewTxt(mItemViewIncome,strIncome);
+        String strHouse = vEntity.strHouse;
+        setItemViewTxt(mItemViewHouse,strHouse);
+        List<EmployArea.BLocEntity> mList = vEntity.mLocList;
+        if(mList != null && mList.size() > 0){
+            mEmployArea.reSetLocList(mList);
+        }
+    }
+
+    @Override
+    protected void handleMsg(Message msg) {
+        super.handleMsg(msg);
+        int what = msg.what;
+        switch(what){
+            case FLAG_FILLIN_VAL:
+                VExperienceBaseEntity vEntity = (VExperienceBaseEntity) msg.obj;
+                if(vEntity != null){
+                    fillInVal(vEntity);
+                }
+                break;
+        }
     }
 
     @Override
@@ -162,6 +211,7 @@ public class ApplyMyExperienceBaseActivity extends BaseActivity implements  View
                         ExperiController.getInstance().setCfgEntity(this.pEntity);
                         mScrollView.setVisibility(View.VISIBLE);
                         mEmptyView.loadSucc();
+                        showLoading();
                         int seq = ProtocalManager.getInstance().reqMyExperiBaseInfo(getCallBack());
                         mReqList.add(seq);
                     }else{
@@ -464,5 +514,12 @@ public class ApplyMyExperienceBaseActivity extends BaseActivity implements  View
         }
         vEntity.isSucc = true;
         return vEntity;
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        VExperienceBaseEntity vEntity = buildResult(false);
+        outState.putSerializable(KEY_DATA,vEntity);
     }
 }

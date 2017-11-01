@@ -123,6 +123,15 @@ public class EmployArea extends RelativeLayout implements View.OnClickListener,N
         }
     }
 
+    public void reSetLocList(List<EmployArea.BLocEntity> mList){
+        if(mList != null && mList.size() > 0){
+            this.mList = mList;
+            catView.setVisibility(View.VISIBLE);
+            mTxtContent.setVisibility(View.GONE);
+            catView.setLocInfo(mList,null);
+        }
+    }
+
     public List<BLocEntity> getLocList() {
         return this.mList;
     }

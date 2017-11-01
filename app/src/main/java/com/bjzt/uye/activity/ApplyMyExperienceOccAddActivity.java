@@ -162,9 +162,33 @@ public class ApplyMyExperienceOccAddActivity extends BaseActivity implements  Vi
             public void onPickerClick(VDateEntity vEntity) {
                 String strInfo = vEntity.getDate();
                 if(src == SRC_DATE_START){
-                    mItemViewEntryTime.setEditTxt(strInfo);
+                    String strEnd = mItemViewTurnOverTime.getInputTxt();
+                    if(!TextUtils.isEmpty(strEnd)){
+                        long start = LoanDateUtil.strToLong(strInfo);
+                        long end = LoanDateUtil.strToLong(strEnd);
+                        if(end >= start){
+                            mItemViewEntryTime.setEditTxt(strInfo);
+                        }else{
+                            String tips = getResources().getString(R.string.myexperience_degree_tips_date_select_return);
+                            showToast(tips);
+                        }
+                    }else{
+                        mItemViewEntryTime.setEditTxt(strInfo);
+                    }
                 }else if(src == SRC_DATE_END){
-                    mItemViewTurnOverTime.setEditTxt(strInfo);
+                    String strStart = mItemViewEntryTime.getInputTxt();
+                    if(!TextUtils.isEmpty(strStart)){
+                        long start = LoanDateUtil.strToLong(strStart);
+                        long end = LoanDateUtil.strToLong(strInfo);
+                        if(end >= start){
+                            mItemViewTurnOverTime.setEditTxt(strInfo);
+                        }else{
+                            String tips = getResources().getString(R.string.myexperience_degree_tips_date_select);
+                            showToast(tips);
+                        }
+                    }else{
+                        mItemViewTurnOverTime.setEditTxt(strInfo);
+                    }
                 }
             }
         });

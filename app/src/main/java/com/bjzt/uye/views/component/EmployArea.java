@@ -12,6 +12,7 @@ import com.bjzt.uye.entity.PLocItemEntity;
 import com.bjzt.uye.listener.IItemListener;
 import com.common.listener.NoConfusion;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -136,7 +137,7 @@ public class EmployArea extends RelativeLayout implements View.OnClickListener,N
         return this.mList;
     }
 
-    public static class BLocEntity{
+    public static class BLocEntity implements Serializable{
         public PLocItemEntity mLocPro;
         public PLocItemEntity mLocCity;
         public PLocItemEntity mLocArea;

@@ -210,9 +210,33 @@ public class ApplyMyExperienceDegreeAddActivity extends BaseActivity implements 
             public void onPickerClick(VDateEntity vEntity) {
                 String strDate = vEntity.getDate();
                 if(src == SRC_DATE_START){
-                    mItemViewEntryTime.setEditTxt(strDate);
+                    String strEnd = mItemViewGraduTime.getInputTxt();
+                    if(!TextUtils.isEmpty(strEnd)){
+                        long start = LoanDateUtil.strToLong(strDate);
+                        long end = LoanDateUtil.strToLong(strEnd);
+                        if(end >= start){
+                            mItemViewEntryTime.setEditTxt(strDate);
+                        }else{
+                            String tips = "入学时间不能晚于毕业时间~";
+                            showToast(tips);
+                        }
+                    }else{
+                        mItemViewEntryTime.setEditTxt(strDate);
+                    }
                 }else{
-                    mItemViewGraduTime.setEditTxt(strDate);
+                    String strStart = mItemViewEntryTime.getInputTxt();
+                    if(!TextUtils.isEmpty(strStart)){
+                        long start = LoanDateUtil.strToLong(strStart);
+                        long end = LoanDateUtil.strToLong(strDate);
+                        if(end >= start){
+                            mItemViewGraduTime.setEditTxt(strDate);
+                        }else{
+                            String tips = "毕业时间不能早于开学时间~";
+                            showToast(tips);
+                        }
+                    }else{
+                        mItemViewGraduTime.setEditTxt(strDate);
+                    }
                 }
             }
         });

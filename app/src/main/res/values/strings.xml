@@ -261,5 +261,7 @@
     <string name="myexperience_degree_dateend_hint">请选择您的离职时间</string>
     <string name="myexperience_degree_pos_hint">请选择职位</string>
     <string name="myexperience_degree_income_hint">请选择您的薪资范围</string>
+    <string name="myexperience_degree_tips_date_select">离职时间不能早于入职时间</string>
+    <string name="myexperience_degree_tips_date_select_return">入职时间不能晚于离职时间</string>
 
 </resources>

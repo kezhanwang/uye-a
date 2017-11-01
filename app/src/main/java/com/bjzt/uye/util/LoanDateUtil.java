@@ -30,7 +30,12 @@ public class LoanDateUtil {
 	}
 
 	public static Date StrToDate(String str) {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat format = null;
+		if(!str.contains(":")){
+			format = new SimpleDateFormat("yyyy-MM-dd");
+		}else{
+			format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		}
 		Date date = null;
 		try {
 			date = format.parse(str);
@@ -38,6 +43,19 @@ public class LoanDateUtil {
 			e.printStackTrace();
 		}
 		return date;
+	}
+
+	/**
+	 * 日期转换为long类型
+	 * @param str
+	 * @return
+     */
+	public static final long strToLong(String str){
+		Date date = StrToDate(str);
+		if(date != null){
+			return date.getTime();
+		}
+		return -1;
 	}
 
 	// 判断是否为闰年

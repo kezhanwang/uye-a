@@ -9,6 +9,8 @@ import com.bjzt.uye.R;
 import com.bjzt.uye.entity.PExperiEntity;
 import com.bjzt.uye.http.req.ReqExperiListEntity;
 import com.bjzt.uye.listener.IItemListener;
+import com.bjzt.uye.util.LoanDateUtil;
+import com.bjzt.uye.util.StrUtil;
 import com.common.listener.NoConfusion;
 import com.common.msglist.base.BaseItemView;
 import butterknife.BindView;
@@ -38,12 +40,20 @@ public class ExperiItemView extends BaseItemView<PExperiEntity> implements View.
         this.mEntity = pExperiEntity;
         int type = this.mEntity.type;
         String strInfo = "";
+        String strTitle = getTitle();
+        mTxtTitle.setText(strTitle);
         if(type == ReqExperiListEntity.TYPE_DEGREE){
             strInfo = this.mEntity.school_name;
         }else if(type == ReqExperiListEntity.TYPE_OCC){
             strInfo = this.mEntity.work_name;
         }
         mTxtContent.setText(strInfo);
+    }
+
+    private String getTitle(){
+        String title = "";
+        title = StrUtil.getTimeShowStyle(this.mEntity.date_start) + " ~ " + StrUtil.getTimeShowStyle(this.mEntity.date_end);
+        return title;
     }
 
     @Override

@@ -197,4 +197,10 @@ public class StrUtil {
         }
         return str;
     }
+
+    public static final String getTimeShowStyle(String strTime){
+        String strResult;
+        strResult = strTime.replaceAll("-","/");
+        return strResult;
+    }
 }

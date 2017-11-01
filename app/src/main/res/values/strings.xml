@@ -245,7 +245,8 @@
     <string name="myexperience_base_house_title">住房情况</string>
     <string name="myexperience_base_house_hint">请选择您的住房情况</string>
     <string name="myexperience_base_locarea_hint">请选择期望工作地区</string>
-
+    <string name="myexperience_base_locdialog_title">就业地区</string>
+    <string name="myexperience_base_samecity_tips">已经添加过相同的期望工作城市~</string>
     <!--个人经历-添加学历-->
     <string name="myexperience_degree_hint">请选择您的学历</string>
     <string name="myexperience_degree_schname_hint">请输入您的学校名称</string>

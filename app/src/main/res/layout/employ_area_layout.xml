@@ -22,7 +22,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/common_white"
-
     >
 
 
@@ -78,6 +77,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/item_rela"
         android:visibility="gone"
+        android:paddingBottom="@dimen/common_margin"
         ></com.bjzt.uye.views.component.QAPublishCatView>
 
     <ImageView

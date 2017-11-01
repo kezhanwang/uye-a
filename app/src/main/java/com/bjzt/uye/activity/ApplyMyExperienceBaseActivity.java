@@ -202,7 +202,7 @@ public class ApplyMyExperienceBaseActivity extends BaseActivity implements  View
                 int mType = rspEntity.mType;
                 if(mType == ReqExperiListEntity.TYPE_DEGREE){
                     IntentUtils.startMyExperienceOccActivity(ApplyMyExperienceBaseActivity.this,orgId,REQ_EXPERI_DEGREE,false,rspEntity);
-                }else if(mType == ReqExperiListEntity.TYPE_OCC){ 
+                }else if(mType == ReqExperiListEntity.TYPE_OCC){
                     IntentUtils.startMyExperienceOccActivity(ApplyMyExperienceBaseActivity.this,orgId,REQ_EXPERI_OCC,true,rspEntity);
                 }
             }
@@ -358,9 +358,16 @@ public class ApplyMyExperienceBaseActivity extends BaseActivity implements  View
         this.mDialogLoc.setIListener(new DialogLocation.LoanIDialogLocListener() {
             @Override
             public void onLocSelect(PLocItemEntity mEntityPro, PLocItemEntity mEntityCity, PLocItemEntity mEntityArea) {
-                mEmployArea.appendLocEntity(mEntityPro,mEntityCity,mEntityArea);
+                boolean isSucc = mEmployArea.appendLocEntity(mEntityPro,mEntityCity,mEntityArea);
+                if(!isSucc){
+                    String tips = getResources().getString(R.string.myexperience_base_samecity_tips);
+                    showToast(tips);
+                }
             }
         });
+        this.mDialogLoc.setType(DialogLocation.TYPE_CITY);
+        String strTitle = getResources().getString(R.string.myexperience_base_locdialog_title);
+        this.mDialogLoc.setTitleInfo(strTitle);
     }
 
     private void hideDialogLoc(){

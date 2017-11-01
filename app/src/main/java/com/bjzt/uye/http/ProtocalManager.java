@@ -508,7 +508,9 @@ public class ProtocalManager {
         if(mList != null && mList.size() > 0){
             for(int i = 0;i < mList.size();i++){
                 EmployArea.BLocEntity bEntity = mList.get(i);
-                rList.add(bEntity.mLocArea.name);
+                if(!bEntity.isFake){
+                    rList.add(bEntity.mLocArea.name);
+                }
             }
         }
         reqEntity.will_work_city = rList;

@@ -35,7 +35,7 @@ import java.util.List;
  */
 public class DialogLocation extends Dialog implements  View.OnClickListener{
     private final String TAG = getClass().getSimpleName();
-
+    private TextView mTxtTitle;
     private LinearLayout[] mLinearArray;
     private TextView[] mTxtArray;
     private View[] mViewArray;
@@ -61,6 +61,10 @@ public class DialogLocation extends Dialog implements  View.OnClickListener{
     private PLocItemEntity mSelectCity;
     private PLocItemEntity mSelectArea;
 
+    public static final int TYPE_CITY = 1;
+    private int mType;
+    private List<String> mCityList = new ArrayList<String>();
+
     public DialogLocation(Context context, int theme) {
         super(context, theme);
         init();
@@ -73,8 +77,17 @@ public class DialogLocation extends Dialog implements  View.OnClickListener{
 
         setCancelable(true);
         setCanceledOnTouchOutside(true);
+        mCityList.add("北京市");
+        mCityList.add("天津市");
+        mCityList.add("上海市");
+        mCityList.add("重庆市");
+        mCityList.add("澳门特别行政区");
+        mCityList.add("香港特别行政区");
     }
 
+    public void setType(int mType){
+        this.mType = mType;
+    }
 
     public void setSelectInfo(PLocItemEntity mSelectPro, PLocItemEntity mSelectCity, PLocItemEntity mSelectArea){
         this.mSelectPro = mSelectPro;
@@ -108,6 +121,7 @@ public class DialogLocation extends Dialog implements  View.OnClickListener{
         super.onCreate(savedInstanceState);
         LayoutInflater li = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View mView = li.inflate(R.layout.loan_location_dialog_layout, null);
+        this.mTxtTitle = mView.findViewById(R.id.txt_title);
         this.imgClose = (ImageView) mView.findViewById(R.id.img_close);
         this.imgClose.setOnClickListener(this);
         LinearLayout mLinearFirst = (LinearLayout) mView.findViewById(R.id.linear_first);
@@ -145,6 +159,10 @@ public class DialogLocation extends Dialog implements  View.OnClickListener{
         showLoadingDialog();
 
         reSetStatus(INDEX_PROVINCE);
+    }
+
+    public void setTitleInfo(String title){
+        this.mTxtTitle.setText(title);
     }
 
     private void reSetStatus(int mIndex){
@@ -322,10 +340,22 @@ public class DialogLocation extends Dialog implements  View.OnClickListener{
                 mTxtView.setText(strName);
             }
             setIndex(INDEX_CITY,false);
-            showLoadingDialog();
-            String id = mEntityPro.id;
-            int reqNo= ProtocalManager.getInstance().reqLocCityList(id,callBack);
-            mReqList.add(reqNo);
+            if(mType == TYPE_CITY && mCityList.contains(mEntityPro.name)){
+                PLocItemEntity pLocPro = new PLocItemEntity();
+                pLocPro.id = mEntityPro.id;
+                pLocPro.name = mEntityPro.name;
+                PLocItemEntity pLocCity = pLocPro;
+                PLocItemEntity pLocArea = pLocPro;
+                if(mListener != null){
+                    mListener.onLocSelect(pLocPro,pLocCity,pLocArea);
+                    dismiss();
+                }
+            }else{
+                showLoadingDialog();
+                String id = mEntityPro.id;
+                int reqNo= ProtocalManager.getInstance().reqLocCityList(id,callBack);
+                mReqList.add(reqNo);
+            }
         }
     };
 
@@ -354,10 +384,24 @@ public class DialogLocation extends Dialog implements  View.OnClickListener{
                 mTxtView.setText(strName);
             }
             setIndex(INDEX_AREA,false);
-            showLoadingDialog();
-            String id = mEntityCity.id;
-            int reqNo= ProtocalManager.getInstance().reqLocAreaList(id,callBack);
-            mReqList.add(reqNo);
+            if(mType == TYPE_CITY){
+                PLocItemEntity pLocPro = new PLocItemEntity();
+                pLocPro.id = mEntityPro.id;
+                pLocPro.name = mEntityPro.name;
+                PLocItemEntity pLocCity = new PLocItemEntity();
+                pLocCity.id = mEntityCity.id;
+                pLocCity.name = mEntityCity.name;
+                PLocItemEntity pLocArea = pLocCity;
+                if(mListener != null){
+                    mListener.onLocSelect(pLocPro,pLocCity,pLocArea);
+                    dismiss();
+                }
+            }else{
+                showLoadingDialog();
+                String id = mEntityCity.id;
+                int reqNo= ProtocalManager.getInstance().reqLocAreaList(id,callBack);
+                mReqList.add(reqNo);
+            }
         }
     };
 

@@ -52,7 +52,8 @@ public class EmployArea extends RelativeLayout implements View.OnClickListener,N
         li.inflate(R.layout.employ_area_layout,this,true);
         ButterKnife.bind(this);
 
-        mTxtTitle.setText("就业地区");
+        String title = getResources().getString(R.string.myexperience_base_locdialog_title);
+        mTxtTitle.setText(title);
         imgAdd.setOnClickListener(this);
         catView.setRowCnt(3);
     }
@@ -70,16 +71,39 @@ public class EmployArea extends RelativeLayout implements View.OnClickListener,N
         }
     }
 
-    public void appendLocEntity(PLocItemEntity mLocPro,PLocItemEntity mLocCity,PLocItemEntity mLocArea){
-        catView.setVisibility(View.VISIBLE);
-        mTxtContent.setVisibility(View.GONE);
+    private boolean hasSameAreaName(PLocItemEntity mLocPro,PLocItemEntity mLocCity,PLocItemEntity mLocArea){
+        boolean hasSame = false;
+        if(mList != null){
+            for(BLocEntity bLocEntity : mList){
+                if(bLocEntity != null && !bLocEntity.isFake){
+                    if(bLocEntity.mLocArea.name.equals(mLocArea.name)){
+                        hasSame = true;
+                        break;
+                    }
+                }
+            }
+        }
+        return hasSame;
+    }
 
-        BLocEntity bEntity = new BLocEntity();
-        bEntity.mLocPro = mLocPro;
-        bEntity.mLocCity = mLocCity;
-        bEntity.mLocArea = mLocArea;
-        mList.add(bEntity);
-        catView.setLocInfo(mList,null);
+    public boolean appendLocEntity(PLocItemEntity mLocPro,PLocItemEntity mLocCity,PLocItemEntity mLocArea){
+        boolean succ = false;
+        if(hasSameAreaName(mLocPro,mLocCity,mLocArea)){
+            succ = false;
+        }else{
+            catView.setVisibility(View.VISIBLE);
+            mTxtContent.setVisibility(View.GONE);
+
+            BLocEntity bEntity = new BLocEntity();
+            bEntity.mLocPro = mLocPro;
+            bEntity.mLocCity = mLocCity;
+            bEntity.mLocArea = mLocArea;
+            mList.add(bEntity);
+            catView.setLocInfo(mList,null);
+
+            succ = true;
+        }
+        return succ;
     }
 
     public void setList(List<String> sList){
@@ -107,5 +131,6 @@ public class EmployArea extends RelativeLayout implements View.OnClickListener,N
         public PLocItemEntity mLocPro;
         public PLocItemEntity mLocCity;
         public PLocItemEntity mLocArea;
+        public boolean isFake;
     }
 }

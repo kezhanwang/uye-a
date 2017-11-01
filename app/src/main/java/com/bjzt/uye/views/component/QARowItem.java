@@ -76,8 +76,13 @@ public class QARowItem extends RelativeLayout implements NoConfusion,View.OnClic
             TextView txtView = txtArray[i];
             if(i < mList.size()){
                 EmployArea.BLocEntity entity = mList.get(i);
-                txtView.setVisibility(View.VISIBLE);
-                txtView.setText(entity.mLocArea.name);
+                if(entity.isFake){
+                    txtView.setVisibility(View.INVISIBLE);
+                    txtView.setText("...");
+                }else{
+                    txtView.setVisibility(View.VISIBLE);
+                    txtView.setText(entity.mLocArea.name);
+                }
             }else{
                 txtView.setVisibility(View.GONE);
             }

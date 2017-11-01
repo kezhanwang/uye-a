@@ -39,6 +39,17 @@ public class QAPublishCatView extends LinearLayout implements NoConfusion {
         this.ROW_CNT = cnt;
     }
 
+    private boolean hasFakeInfo(){
+        if(this.mLocList != null){
+            for(EmployArea.BLocEntity mEntity : mLocList){
+                if(mEntity != null && mEntity.isFake){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public void setLocInfo(List<EmployArea.BLocEntity> mList,IItemListener mListener){
         //clear row
         removeAllViews();
@@ -46,6 +57,12 @@ public class QAPublishCatView extends LinearLayout implements NoConfusion {
 
         if(this.mLocList != null) {
             int size = this.mLocList.size();
+            if(!hasFakeInfo() && size > 2){   //add fake
+                EmployArea.BLocEntity bEntity = new EmployArea.BLocEntity();
+                bEntity.isFake = true;
+                this.mLocList.add(2,bEntity);
+                size++;
+            }
             int row = 0;
             if (size > 0) {
                 if (size % ROW_CNT == 0) {

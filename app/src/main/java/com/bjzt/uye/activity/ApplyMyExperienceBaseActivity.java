@@ -202,7 +202,7 @@ public class ApplyMyExperienceBaseActivity extends BaseActivity implements  View
                 int mType = rspEntity.mType;
                 if(mType == ReqExperiListEntity.TYPE_DEGREE){
                     IntentUtils.startMyExperienceOccActivity(ApplyMyExperienceBaseActivity.this,orgId,REQ_EXPERI_DEGREE,false,rspEntity);
-                }else if(mType == ReqExperiListEntity.TYPE_OCC){
+                }else if(mType == ReqExperiListEntity.TYPE_OCC){ 
                     IntentUtils.startMyExperienceOccActivity(ApplyMyExperienceBaseActivity.this,orgId,REQ_EXPERI_OCC,true,rspEntity);
                 }
             }

@@ -29,11 +29,19 @@
         ></com.bjzt.uye.views.component.YHeaderView>
 
 
+    <com.bjzt.uye.views.component.OrgDetailBtnArea
+        android:id="@+id/org_btn_area"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        ></com.bjzt.uye.views.component.OrgDetailBtnArea>
+
     <ScrollView
         android:id="@+id/scrollview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@id/header"
+        android:layout_above="@id/org_btn_area"
         >
 
         <LinearLayout
@@ -48,8 +56,23 @@
                 android:layout_height="wrap_content"
                 ></com.bjzt.uye.views.component.OrgDetailHeaderView>
 
-        </LinearLayout>
+            <com.bjzt.uye.views.component.OrgDetailCourseView
+                android:id="@+id/course_itemview"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin"
+                ></com.bjzt.uye.views.component.OrgDetailCourseView>
+
+            <com.bjzt.uye.views.component.OrgDetailCourseInfoView
+                android:id="@+id/course_info_view"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin"
+                ></com.bjzt.uye.views.component.OrgDetailCourseInfoView>
+
+    </LinearLayout>
     </ScrollView>
+
 
 
     <com.bjzt.uye.views.component.BlankEmptyView

@@ -106,7 +106,7 @@ public class MapActivity extends BaseActivity {
 		sName = getIntent().getStringExtra(IntentUtils.SNAME);
 		address=getIntent().getStringExtra(IntentUtils.ADDRESS);
 		
-		//test code
+		//test code 108.953542,34.22527
 		lat = 34.2212080000;
 		lng = 108.9555180000;
 	}

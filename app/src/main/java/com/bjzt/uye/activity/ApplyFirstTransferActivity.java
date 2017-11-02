@@ -87,4 +87,11 @@ public class ApplyFirstTransferActivity extends BaseActivity{
             finish();
         }
     }
+
+    @Override
+    public void finish() {
+        super.finish();
+        //关闭窗体动画显示
+        this.overridePendingTransition(R.anim.activity_left_in, R.anim.activity_right_out);
+    }
 }

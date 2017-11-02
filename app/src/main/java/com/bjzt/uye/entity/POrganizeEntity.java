@@ -12,7 +12,7 @@ public class POrganizeEntity implements Serializable{
     public String org_name;
     public String org_type;
     public String parent_id;
-    public String status;
+    public String status;   //employment_index=4.5
     public int is_shelf;
     public int is_delete;
     public int is_employment;

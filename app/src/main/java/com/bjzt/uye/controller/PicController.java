@@ -54,8 +54,12 @@ public class PicController {
 //                    .placeholder(R.drawable.round_rect_grey_shape)
 ////                    .error(R.drawable.round_rect_grey_shape)
 //                    .into(imgView);
-
-            Drawable d = mContext.getResources().getDrawable(R.drawable.round_rect_grey_shape);
+            Drawable d = null;
+            if(isRound){
+                d = mContext.getResources().getDrawable(R.drawable.round_rect_grey_shape);
+            }else{
+                d = mContext.getResources().getDrawable(R.drawable.rect_grey_shape);
+            }
             DrawableRequestBuilder builder = Glide.with(mContext).load(url);
             builder.centerCrop();
             if(d != null){
@@ -72,6 +76,10 @@ public class PicController {
 
     public void showPic(ImageView imgView,String url){
         showPic(imgView,url,true);
+    }
+
+    public void showPicRect(ImageView imgView,String url){
+        showPic(imgView,url,false);
     }
 
     public interface IPicDownLoadListener{

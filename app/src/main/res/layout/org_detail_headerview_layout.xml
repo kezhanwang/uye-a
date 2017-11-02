@@ -27,7 +27,7 @@
         android:id="@+id/rela_header"
         android:layout_width="fill_parent"
         android:layout_height="130dp"
-        android:background="@drawable/more_setting_bg_selector"
+        android:background="@color/common_white"
         >
 
         <ImageView
@@ -82,6 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/txt_tips"
             android:layout_alignTop="@id/txt_tips"
+            android:layout_marginTop="@dimen/common_margin_4"
             android:layout_marginLeft="@dimen/common_margin"
             ></com.bjzt.uye.views.component.ScoreView>
 

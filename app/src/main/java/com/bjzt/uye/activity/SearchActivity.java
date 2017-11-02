@@ -68,6 +68,7 @@ public class SearchActivity extends BaseActivity{
 
     private final int REQ_DATA_CHECK = 10;
     private final int REQ_LOGIN = 11;
+    private final int REQ_DETAIL = 12;
 
     @Override
     protected int getLayoutID() {
@@ -179,14 +180,16 @@ public class SearchActivity extends BaseActivity{
         @Override
         public void onItemClick(Object obj, int tag) {
             PAgencyEntity pEntity = (PAgencyEntity) obj;
+            String orgId = MConfiger.TEST_ORG_ID;
             switch(tag){
                 case SearchItemView.SRC_ITEM:
-                    String tips = "开发中...";
-                    showToast(tips);
+//                    String tips = "开发中...";
+//                    showToast(tips);
+                    IntentUtils.startOrgDetailActivity(SearchActivity.this,orgId,REQ_DETAIL);
                     break;
                 case SearchItemView.SRC_BTN_OK:
                     //        this.orgId = "10049"; test code
-                    String orgId = MConfiger.TEST_ORG_ID;
+                    orgId = MConfiger.TEST_ORG_ID;
 //                    orgId = pEntity.org_id;
                     if(LoginController.getInstance().isLogin()){
 //                        IntentUtils.startQAActivity(SearchActivity.this,orgId,REQ_DATA_CHECK);

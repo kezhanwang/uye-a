@@ -85,7 +85,6 @@ public class OrgDetailHeaderView extends RelativeLayout implements NoConfusion, 
 
     public void setInfo(POrganizeEntity pEntity){
         this.mEntity = pEntity;
-
         //init img icon
         String logo = pEntity.logo;
         if(!TextUtils.isEmpty(logo)){
@@ -101,6 +100,9 @@ public class OrgDetailHeaderView extends RelativeLayout implements NoConfusion, 
         if(!TextUtils.isEmpty(strCat)){
             mTxtCat.setText(strCat);
         }
+        //init score
+        double score = pEntity.employment_index;
+        mScoreView.setData((float)score);
         //set rela loc
         String strAddr = pEntity.address;
         if(!TextUtils.isEmpty(strAddr)){

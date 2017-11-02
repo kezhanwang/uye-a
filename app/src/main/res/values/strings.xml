@@ -264,4 +264,14 @@
     <string name="myexperience_degree_tips_date_select">离职时间不能早于入职时间</string>
     <string name="myexperience_degree_tips_date_select_return">入职时间不能晚于离职时间</string>
 
+    <!--机构详情-->
+    <string name="org_detail_title">机构详情</string>
+
+    <!-- map -->
+    <string name="map_from">从这里开始</string>
+    <string name="map_to">到这里结束</string>
+    <string name="map_noMap">未安装地图app客户端，将跳转到网页导航！</string>
+    <string name="map_err">未安装地图app客户端，建议先安装！</string>
+    <string name="map_nav">导航</string>
+
 </resources>

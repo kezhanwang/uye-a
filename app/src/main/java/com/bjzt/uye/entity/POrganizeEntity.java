@@ -31,6 +31,8 @@ public class POrganizeEntity implements Serializable{
     public String avg_course_price;
     public String category;
     public String distance;
+    public double map_lat;
+    public double map_lng;
 
     /**
      * 获取投保类型

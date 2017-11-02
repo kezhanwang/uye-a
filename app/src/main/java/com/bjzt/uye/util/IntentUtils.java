@@ -19,6 +19,7 @@ import com.bjzt.uye.activity.ApplyMyExperienceOccAddActivity;
 import com.bjzt.uye.activity.DataCheckActivity;
 import com.bjzt.uye.activity.LoginActivity;
 import com.bjzt.uye.activity.MainActivity;
+import com.bjzt.uye.activity.MapActivity;
 import com.bjzt.uye.activity.OrderInfoActivity;
 import com.bjzt.uye.activity.OrgDetailActivity;
 import com.bjzt.uye.activity.QAActivity;
@@ -52,6 +53,10 @@ public class IntentUtils {
     public static final String PARA_KEY_TYPE = "key_type";
     public static final String PARA_KEY_LIST = "key_list";
     public static final String PARA_KEY_RSP = "key_rsp";
+    public static final String LNG = "lng";
+    public static final String LAT = "lat";
+    public static final String SNAME = "sname";
+    public static final String ADDRESS = "addrss";
 
     /**
      * 打开首页
@@ -437,4 +442,20 @@ public class IntentUtils {
         mContext.startActivityForResult(intent,reqCode);
     }
 
+    /***
+     * 打开百度定位
+     * @param mContext
+     * @param lng
+     * @param lat
+     * @param orgName
+     * @param address
+     */
+    public static final void startBaiduMapActivity(Context mContext,double lng,double lat,String orgName,String address){
+        Intent intent=new Intent(mContext,MapActivity.class);
+        intent.putExtra(LNG, lng);
+        intent.putExtra(LAT, lat);
+        intent.putExtra(SNAME, orgName);
+        intent.putExtra(ADDRESS, address);
+        mContext.startActivity(intent);
+    }
 }

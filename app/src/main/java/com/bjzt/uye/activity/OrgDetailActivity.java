@@ -7,9 +7,11 @@ import android.widget.ScrollView;
 
 import com.bjzt.uye.R;
 import com.bjzt.uye.activity.base.BaseActivity;
+import com.bjzt.uye.entity.POrganizeEntity;
 import com.bjzt.uye.http.ProtocalManager;
 import com.bjzt.uye.http.rsp.RspOrgDetailEntity;
 import com.bjzt.uye.listener.IHeaderListener;
+import com.bjzt.uye.listener.IItemListener;
 import com.bjzt.uye.util.IntentUtils;
 import com.bjzt.uye.util.StrUtil;
 import com.bjzt.uye.views.component.BlankEmptyView;
@@ -55,15 +57,28 @@ public class OrgDetailActivity extends BaseActivity{
                 finish();
             }
         });
-        String title = "机构详情";
+        String title = getString(R.string.org_detail_title);
         mHeader.setTitle(title);
 
         mScrollView.setVisibility(View.GONE);
         mEmptyView.setVisibility(View.VISIBLE);
         mEmptyView.showLoadingState();
+
+        mHeaderView.setIItemListener(mHeaderViewListener);
+
         int seqNo = ProtocalManager.getInstance().reqOrgDetail(orgId,getCallBack());
         mReqList.add(seqNo);
     }
+
+    private IItemListener mHeaderViewListener = new IItemListener() {
+        @Override
+        public void onItemClick(Object obj, int tag) {
+            POrganizeEntity pEntity = (POrganizeEntity) obj;
+            if(tag == OrgDetailHeaderView.SRC_LOC){
+                IntentUtils.startBaiduMapActivity(OrgDetailActivity.this,pEntity.map_lat,pEntity.map_lng,pEntity.org_name,pEntity.address);
+            }
+        }
+    };
 
     @Override
     protected void onRsp(Object rsp, boolean isSucc, int errorCode, int seqNo, int src) {
@@ -77,7 +92,9 @@ public class OrgDetailActivity extends BaseActivity{
                         mScrollView.setVisibility(View.VISIBLE);
                         //init header info
                         mHeaderView.setInfo(rspEntity.mEntity.organize);
-
+                        //set title
+                        String orgName = rspEntity.mEntity.organize.org_name;
+                        mHeader.setTitle(orgName);
                     }else{
                         String tips = getResources().getString(R.string.common_cfg_empty);
                         initErrorStatus(tips);

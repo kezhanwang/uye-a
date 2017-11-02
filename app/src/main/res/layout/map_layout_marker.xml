@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/map_qipao"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" 
+        android:gravity="center_vertical"
+        android:layout_marginRight="@dimen/common_margin"
+        >
+
+        <TextView
+            android:id="@+id/text_map_marker_sname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:textSize="@dimen/map_textSize_tilte"
+            android:textColor="@color/map_textColor"
+            android:layout_marginTop="@dimen/map_marginTop"
+            
+            android:layout_marginLeft="@dimen/map_marginLeft"
+            android:singleLine="true"
+            android:ellipsize="end"
+       	    android:maxEms="11"/>
+
+        <TextView
+            android:id="@+id/text_map_marker_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:textSize="@dimen/map_textSize"
+            android:textColor="@color/map_adree_textColor"
+            android:layout_marginLeft="@dimen/map_marginLeft"
+            android:layout_marginBottom="@dimen/map_marginTop"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:maxEms="13"
+       	    />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_map_marker"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_height="@dimen/map_btn_height"
+        android:background="@drawable/btn_login_selector"
+        android:layout_marginBottom="@dimen/map_marginBottom2"
+        android:layout_marginTop="@dimen/map_marginTop2"
+        android:layout_marginRight="@dimen/map_marginLeft"
+        android:paddingLeft="@dimen/map_paddingLeft"
+        android:paddingRight="@dimen/map_paddingLeft"
+        android:textSize="@dimen/map_textSize_tilte"
+        android:textColor="@color/common_white"
+        android:text="@string/map_nav" />
+
+</LinearLayout>

@@ -138,5 +138,18 @@
     <dimen name="pro_font_small">12sp</dimen>
     <dimen name="pro_font_large">13.5sp</dimen>
 
+    <!-- mapActivity -->
+    <dimen name="map_textSize_tilte">18sp</dimen>
+    <dimen name="map_textSize">15sp</dimen>
+    <dimen name="map_marginTop">12dp</dimen>
+    <dimen name="map_marginLeft">12dp</dimen>
+    <dimen name="map_marginRight">12.5dp</dimen>
+    <dimen name="map_marginBottom">6dp</dimen>
+    <dimen name="map_marginBottom2">16dp</dimen>
+    <dimen name="map_marginTop2">16dp</dimen>
+    <dimen name="map_paddingLeft">21dp</dimen>
+    <dimen name="map_btn_height">40dp</dimen>
+    <dimen name="map_textWidth">170dp</dimen>
+
 
 </resources>

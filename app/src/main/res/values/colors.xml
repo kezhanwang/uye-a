@@ -69,4 +69,8 @@
     <color name="dialog_upgrade_timeColor">#999999</color>
     <color name="dialog_upgrade_lineColor">#b3b3b3</color>
 
+    <!-- map -->
+    <color name="map_textColor">#505050</color>
+    <color name="map_adree_textColor">#909090</color>
+
 </resources>

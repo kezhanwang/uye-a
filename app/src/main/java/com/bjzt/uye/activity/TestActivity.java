@@ -1,6 +1,7 @@
 package com.bjzt.uye.activity;
 
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
@@ -96,6 +97,9 @@ public class TestActivity extends BaseActivity{
 
     @BindView(R.id.btn_degree_add)
     Button btnDegreeAdd;
+
+    @BindView(R.id.btn_touch)
+    Button btnTouch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -292,8 +296,36 @@ public class TestActivity extends BaseActivity{
                 IntentUtils.startMyExperienceDegreeAddActivity(TestActivity.this,"",11);
             }
         });
+
+
+        btnTouch.setOnTouchListener(new View.OnTouchListener(){
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                MyLog.d(MyLog.BILLY,"[onTouch]" + " button touch listener");
+                return false;
+            }
+        });
+
+        btnTouch.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                MyLog.d(MyLog.BILLY,"[onClick]" + " button click...");
+            }
+        });
     }
 
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        MyLog.d(MyLog.BILLY,"[dispatchTouchEvent]" + " TestActivity");
+        super.dispatchTouchEvent(ev);
+        return true;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        MyLog.d(MyLog.BILLY,"[onTouchEvent]" + " TestActivity");
+        return super.onTouchEvent(event);
+    }
 
     @Override
     protected void initExtras(Bundle bundle) {

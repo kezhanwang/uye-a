@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <!-- 添加百度地图 -->
+
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/baidu_map"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:clickable="true"
+        >
+    </com.baidu.mapapi.map.MapView>
+
+    <com.bjzt.uye.views.component.YHeaderView
+        android:id="@+id/header_map"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
+
+</RelativeLayout>

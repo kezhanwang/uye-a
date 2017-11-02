@@ -35,13 +35,20 @@ public class OrgDetailHeaderView extends RelativeLayout implements NoConfusion, 
     TextView mTxtCat;
     @BindView(R.id.score_view)
     ScoreView mScoreView;
+    @BindView(R.id.rela_loc)
+    RelativeLayout mRelaLoc;
+    @BindView(R.id.txt_loc)
+    TextView mTxtLoc;
+
 
     private IItemListener mListener;
 
     public static final int SRC_RELA = 1;
     public static final int SRC_BTN = 2;
+    public static final int SRC_LOC = 3;
 
     private POrganizeEntity mEntity;
+
     public OrgDetailHeaderView(Context context) {
         super(context);
         init();
@@ -58,13 +65,16 @@ public class OrgDetailHeaderView extends RelativeLayout implements NoConfusion, 
         ButterKnife.bind(this);
 
         mRelaMain.setOnClickListener(this);
+        mRelaLoc.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         if(this.mListener != null){
             if(v == this.mRelaMain){
-                this.mListener.onItemClick(null,SRC_RELA);
+                this.mListener.onItemClick(this.mEntity,SRC_RELA);
+            }else if(v == this.mRelaLoc){
+                this.mListener.onItemClick(this.mEntity,SRC_LOC);
             }
         }
     }
@@ -74,6 +84,8 @@ public class OrgDetailHeaderView extends RelativeLayout implements NoConfusion, 
     }
 
     public void setInfo(POrganizeEntity pEntity){
+        this.mEntity = pEntity;
+
         //init img icon
         String logo = pEntity.logo;
         if(!TextUtils.isEmpty(logo)){
@@ -88,6 +100,13 @@ public class OrgDetailHeaderView extends RelativeLayout implements NoConfusion, 
         String strCat = pEntity.category;
         if(!TextUtils.isEmpty(strCat)){
             mTxtCat.setText(strCat);
+        }
+        //set rela loc
+        String strAddr = pEntity.address;
+        if(!TextUtils.isEmpty(strAddr)){
+            mTxtLoc.setText(strAddr);
+        }else{
+            mTxtLoc.setText("");
         }
     }
 }

@@ -10,6 +10,8 @@ import com.bjzt.uye.global.MConfiger;
 
 public class MyLog {
 
+    public static final String BILLY = "billy";
+
     public static final boolean isJsonDebugable(){
         return MConfiger.isJsonDebug;
     }

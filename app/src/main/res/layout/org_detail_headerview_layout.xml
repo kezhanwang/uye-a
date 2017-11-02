@@ -36,7 +36,7 @@
             android:layout_height="86dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/common_margin"
-            android:background="@drawable/loan_bg_img_rect_border"
+            android:src="@drawable/loan_bg_img_rect_border"
             />
 
 
@@ -96,5 +96,44 @@
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/rela_loc"
+        android:layout_width="fill_parent"
+        android:layout_height="52dp"
+        android:layout_below="@id/rela_header"
+        android:background="@drawable/more_setting_bg_selector"
+        >
+
+        <ImageView
+            android:id="@+id/img_loc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/common_margin"
+            android:background="@drawable/img_loc"
+            />
+
+        <TextView
+            android:id="@+id/txt_loc"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/img_loc"
+            android:layout_marginLeft="@dimen/common_margin_18"
+            android:textSize="15sp"
+            android:textColor="@color/common_font_3"
+            android:text="@string/common_default"
+            android:layout_centerVertical="true"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/img_right"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/common_margin"
+            />
+
+    </RelativeLayout>
 
 </RelativeLayout>

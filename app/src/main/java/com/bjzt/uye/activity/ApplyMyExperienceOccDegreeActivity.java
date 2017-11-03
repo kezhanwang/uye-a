@@ -326,4 +326,5 @@ public class ApplyMyExperienceOccDegreeActivity extends BaseActivity implements 
             }
         }
     }
+
 }

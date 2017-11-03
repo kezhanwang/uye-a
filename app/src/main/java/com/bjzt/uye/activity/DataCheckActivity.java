@@ -73,6 +73,7 @@ public class DataCheckActivity extends BaseActivity implements View.OnClickListe
 
     private String orgId;
     private PUInfoEntity mEntity;
+    private final String KEY_UPLOAD_CONTACT = "key_contact";
 
     @Override
     protected int getLayoutID() {
@@ -143,6 +144,13 @@ public class DataCheckActivity extends BaseActivity implements View.OnClickListe
         mScrollView.setVisibility(View.GONE);
         int seqNo = ProtocalManager.getInstance().reqUInfoDataCheck(getCallBack());
         mReqList.add(seqNo);
+
+        if(bundle != null){
+            if(bundle.containsKey(KEY_UPLOAD_CONTACT)){
+                boolean isPhoneContactIDentity = bundle.getBoolean(KEY_UPLOAD_CONTACT);
+                itemPhoneContact.updateTailContent(isPhoneContactIDentity);
+            }
+        }
     }
 
     private Runnable rUploadPhone = new Runnable() {
@@ -354,5 +362,11 @@ public class DataCheckActivity extends BaseActivity implements View.OnClickListe
         showLoading();
         int seqNo = ProtocalManager.getInstance().reqUInfoDataCheck(getCallBack());
         mReqList.add(seqNo);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable(KEY_UPLOAD_CONTACT,itemPhoneContact.isIDentity());
     }
 }

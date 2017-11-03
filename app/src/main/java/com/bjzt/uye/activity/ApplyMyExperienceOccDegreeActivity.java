@@ -3,18 +3,14 @@ package com.bjzt.uye.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.ScrollView;
 import com.bjzt.uye.R;
 import com.bjzt.uye.activity.base.BaseActivity;
 import com.bjzt.uye.adapter.ExperiListAdapter;
 import com.bjzt.uye.entity.PExperiEntity;
 import com.bjzt.uye.http.ProtocalManager;
-import com.bjzt.uye.http.req.ReqExperiListEntity;
 import com.bjzt.uye.http.rsp.RspExperiDelEntity;
 import com.bjzt.uye.http.rsp.RspExperiListEntity;
 import com.bjzt.uye.listener.IHeaderListener;
@@ -29,7 +25,6 @@ import com.common.msglist.base.BaseListAdapter;
 import com.common.msglist.listener.IRefreshListener;
 import com.common.msglist.swipe.SwipeMenu;
 import com.common.msglist.swipe.SwipeMenuListView;
-
 import java.util.ArrayList;
 import java.util.List;
 

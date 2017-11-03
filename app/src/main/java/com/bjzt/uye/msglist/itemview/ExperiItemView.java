@@ -22,8 +22,6 @@ import butterknife.ButterKnife;
 public class ExperiItemView extends BaseItemView<PExperiEntity> implements View.OnClickListener, NoConfusion{
     private PExperiEntity mEntity;
 
-    @BindView(R.id.rela_main)
-    RelativeLayout mRelaMain;
     @BindView(R.id.txt_time)
     TextView mTxtTitle;
     @BindView(R.id.txt_contents)
@@ -66,8 +64,6 @@ public class ExperiItemView extends BaseItemView<PExperiEntity> implements View.
         LayoutInflater li = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         li.inflate(R.layout.expri_itemview_layout,this,true);
         ButterKnife.bind(this);
-
-        mRelaMain.setOnClickListener(this);
     }
 
     public void setIItemListener(IItemListener mListener){
@@ -77,9 +73,7 @@ public class ExperiItemView extends BaseItemView<PExperiEntity> implements View.
     @Override
     public void onClick(View v) {
         if(mListener != null){
-            if(v == this.mRelaMain){
-                mListener.onItemClick(this.mEntity,-1);
-            }
+            mListener.onItemClick(this.mEntity,-1);
         }
     }
 }

@@ -24,6 +24,7 @@ import com.bjzt.uye.http.req.ReqExperiAddEntity;
 import com.bjzt.uye.http.req.ReqExperiBaseCfgEntity;
 import com.bjzt.uye.http.req.ReqExperiBaseCommitEntity;
 import com.bjzt.uye.http.req.ReqExperiBaseInfoEntity;
+import com.bjzt.uye.http.req.ReqExperiDelEntity;
 import com.bjzt.uye.http.req.ReqExperiListEntity;
 import com.bjzt.uye.http.req.ReqFaceVerifyCfgEntity;
 import com.bjzt.uye.http.req.ReqIDentityCfgEntity;
@@ -579,6 +580,18 @@ public class ProtocalManager {
         if(pEntity != null){
             reqEntity.id = pEntity.id;
         }
+        return addTask(reqEntity,callBack);
+    }
+
+    /***
+     * 删除个人经历
+     * @param id
+     * @param callBack
+     * @return
+     */
+    public int reqMyExperiDel(int id,ICallBack<Object> callBack){
+        ReqExperiDelEntity reqEntity = new ReqExperiDelEntity();
+        reqEntity.id = id;
         return addTask(reqEntity,callBack);
     }
 }

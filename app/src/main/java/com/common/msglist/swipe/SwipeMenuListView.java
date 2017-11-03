@@ -7,6 +7,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Interpolator;
 import android.widget.ListAdapter;
+
+import com.common.common.MyLog;
 import com.common.msglist.ListViewV6;
 
 /**
@@ -109,6 +111,7 @@ public class SwipeMenuListView extends ListViewV6 {
         if (ev.getAction() != MotionEvent.ACTION_DOWN && mTouchView == null)
             return super.onTouchEvent(ev);
         int action = ev.getAction();
+        MyLog.d(MyLog.BILLY,"[onTouchEvent]" + " action:" + action);
         switch (action) {
             case MotionEvent.ACTION_DOWN:
                 int oldPos = mTouchPosition;

@@ -8,6 +8,7 @@ import com.bjzt.uye.http.rsp.RspExperiAddEntity;
 import com.bjzt.uye.http.rsp.RspExperiBaseCfgEntity;
 import com.bjzt.uye.http.rsp.RspExperiBaseCommitEntity;
 import com.bjzt.uye.http.rsp.RspExperiBaseInfoEntity;
+import com.bjzt.uye.http.rsp.RspExperiDelEntity;
 import com.bjzt.uye.http.rsp.RspExperiListEntity;
 import com.bjzt.uye.http.rsp.RspFaceVerifyCfgEntity;
 import com.bjzt.uye.http.rsp.RspIDentityCfgEntity;
@@ -82,6 +83,7 @@ public class HttpCommon {
     public static final String URL_EXPERIENCE_BASE_COMMIT = "/app/exper/submit";//个人经历基本信息提交
     public static final String URL_EXPERIENCE_LIST = "/app/elist/list";         //个人经历列表
     public static final String URL_EXPERIENCE_ADD = "/app/elist/submit";        //个人经历提交信息
+    public static final String URL_EXPERIENCE_DEL = "/app/elist/del";           //个人经历删除
 
     static{
         //请求定位城市
@@ -152,6 +154,8 @@ public class HttpCommon {
         mMap.put(URL_EXPERIENCE_LIST,RspExperiListEntity.class);
         //个人经历信息提交
         mMap.put(URL_EXPERIENCE_ADD,RspExperiAddEntity.class);
+        //删除个人经历
+        mMap.put(URL_EXPERIENCE_DEL, RspExperiDelEntity.class);
     }
 
     /***

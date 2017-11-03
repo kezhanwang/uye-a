@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ScrollView;
@@ -14,6 +15,7 @@ import com.bjzt.uye.adapter.ExperiListAdapter;
 import com.bjzt.uye.entity.PExperiEntity;
 import com.bjzt.uye.http.ProtocalManager;
 import com.bjzt.uye.http.req.ReqExperiListEntity;
+import com.bjzt.uye.http.rsp.RspExperiDelEntity;
 import com.bjzt.uye.http.rsp.RspExperiListEntity;
 import com.bjzt.uye.listener.IHeaderListener;
 import com.bjzt.uye.listener.IItemListener;
@@ -21,7 +23,12 @@ import com.bjzt.uye.util.IntentUtils;
 import com.bjzt.uye.util.StrUtil;
 import com.bjzt.uye.views.component.BlankEmptyView;
 import com.bjzt.uye.views.component.YHeaderView;
+import com.common.msglist.MsgPage;
+import com.common.msglist.NLPullRefreshView;
 import com.common.msglist.base.BaseListAdapter;
+import com.common.msglist.listener.IRefreshListener;
+import com.common.msglist.swipe.SwipeMenu;
+import com.common.msglist.swipe.SwipeMenuListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,10 +43,8 @@ public class ApplyMyExperienceOccDegreeActivity extends BaseActivity implements 
 
     @BindView(R.id.header)
     YHeaderView mHeader;
-    @BindView(R.id.scrollview)
-    ScrollView mScrollView;
-    @BindView(R.id.listview)
-    ListView mListView;
+    @BindView(R.id.msgpage)
+    MsgPage mMsgPage;
     @BindView(R.id.btn_ok)
     Button btnOk;
     @BindView(R.id.emptyview)
@@ -89,13 +94,19 @@ public class ApplyMyExperienceOccDegreeActivity extends BaseActivity implements 
         mHeader.setTitle(title);
         mHeader.setRightTxt(strTxtRight);
 
-        mScrollView.setVisibility(View.GONE);
+        mMsgPage.setVisibility(View.GONE);
         mEmptyView.setVisibility(View.VISIBLE);
         mEmptyView.showLoadingState();
 
         btnOk.setOnClickListener(this);
         btnOk.setText(btnTxt);
 
+        mMsgPage.setRefreshListener(mRefreshListener);
+        mMsgPage.setEnablePullDown(true);
+        mMsgPage.setListViewScrollBar(true);
+        mMsgPage.initCreator();
+        mMsgPage.setOnMenuItemClickListener(menuItemListener);
+        mMsgPage.getListView().setOnItemClickListener(mItemClickListener);
         boolean needRefresh = false;
         if(mRspParamsEntity != null){
             if(mRspParamsEntity.mList == null || mRspParamsEntity.mList.size() <= 0){
@@ -118,6 +129,53 @@ public class ApplyMyExperienceOccDegreeActivity extends BaseActivity implements 
             refresh();
         }
     }
+
+    private AdapterView.OnItemClickListener mItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            if(mAdapter != null){
+                PExperiEntity pEntity = (PExperiEntity) mAdapter.getItem(position);
+                if(pEntity != null){
+                    switch(mType){
+                        case TYPE_OCC:  //打开添加职位界面
+                            IntentUtils.startMyExperienceOccAddActivity(ApplyMyExperienceOccDegreeActivity.this,orgId,REQ_EDIT_OCC,pEntity);
+                            break;
+                        case TYPE_DEGREE:
+                            IntentUtils.startMyExperienceDegreeAddActivity(ApplyMyExperienceOccDegreeActivity.this,orgId,REQ_EDIT_DEGREE,pEntity);
+                            break;
+                    }
+                }
+            }
+        }
+    };
+
+    private IRefreshListener mRefreshListener = new IRefreshListener() {
+        @Override
+        public void onRefresh(NLPullRefreshView view) {
+            refresh();
+        }
+    };
+
+    private SwipeMenuListView.OnMenuItemClickListener menuItemListener = new SwipeMenuListView.OnMenuItemClickListener() {
+        @Override
+        public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+            // TODO Auto-generated method stub
+            if(mAdapter != null){
+                if(mAdapter.getCount() >= 2){
+                    PExperiEntity entity =  (PExperiEntity) mAdapter.getItem(position);
+                    if(entity != null){
+                        mAdapter.removeItem(entity);
+                        int seqNo = ProtocalManager.getInstance().reqMyExperiDel(entity.id,getCallBack());
+                        mReqList.add(seqNo);
+                    }
+                }else{
+                    String tips = "删除失败~";
+                    showToast(tips);
+                }
+            }
+            return false;
+        }
+    };
 
     private IHeaderListener mHeaderListener = new IHeaderListener() {
         @Override
@@ -176,12 +234,11 @@ public class ApplyMyExperienceOccDegreeActivity extends BaseActivity implements 
                 if(isSucc){
                     if(rspEntity != null && rspEntity.mList != null && rspEntity.mList.size() > 0){
                         mEmptyView.loadSucc();
-                        mScrollView.setVisibility(View.VISIBLE);
+                        mMsgPage.setVisibility(View.VISIBLE);
                         if(this.mAdapter == null){
                             mAdapter = new ExperiListAdapter(rspEntity.mList);
-                            mAdapter.setIItemListener(mItemListener);
                             mAdapter.setType(BaseListAdapter.ADAPTER_TYPE_NO_BOTTOM);
-                            mListView.setAdapter(mAdapter);
+                            mMsgPage.setListAdapter(mAdapter);
                         }else{
                             mAdapter.reSetList(rspEntity.mList);
                         }
@@ -189,9 +246,20 @@ public class ApplyMyExperienceOccDegreeActivity extends BaseActivity implements 
                         String tips = "暂无信息";
                         initErrorStatus(tips);
                     }
+                    mMsgPage.completeRefresh(true);
                 }else{
                     String tips = StrUtil.getErrorTipsByCode(errorCode,rspEntity);
                     initErrorStatus(tips);
+                    mMsgPage.completeRefresh(false);
+                }
+            }else if(rsp instanceof RspExperiDelEntity){
+                RspExperiDelEntity rspEntity = (RspExperiDelEntity) rsp;
+                if(isSucc){
+                    String tips = "删除成功~";
+                    showToast(tips);
+                }else{
+                    String tips = StrUtil.getErrorTipsByCode(errorCode,rspEntity);
+                    showToast(tips);
                 }
             }
         }

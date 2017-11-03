@@ -197,10 +197,10 @@ public class MsgPage extends RelativeLayout implements NoConfusion {
 	private void initListView(){
 		mRefreshView = (NLPullRefreshView) this.findViewById(R.id.refresh_root);
 		
-		mListView = (ListView) this.findViewById(R.id.listview);
+		mListView = this.findViewById(R.id.listview);
 //		View emptyView = this.findViewById(R.id.listview_emptyview);
 //		mListView.setEmptyView(emptyView);
-		listView_Empty=(ListViewEmptyView) this.findViewById(R.id.listView_Empty);
+		listView_Empty= (ListViewEmptyView) this.findViewById(R.id.listView_Empty);
 		mListView.setDividerHeight(0);
 		if(mType == TYPE_NORMAL){
 			mListView.setAdapter(null);

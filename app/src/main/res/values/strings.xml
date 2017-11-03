@@ -102,6 +102,7 @@
     <string name="data_check_tips_identity_id">请完成身份认证~</string>
     <string name="data_check_tips_identity_contacts_upload">请完成上传通讯录~</string>
     <string name="data_check_tips_identity_contacts_info">请完成联系信息~</string>
+    <string name="data_check_tips_identity_experience_info">请完成个人经历~</string>
 
     <!--手机通讯录-->
     <string name="contactlist_requesting">手机通讯信息获取中...</string>

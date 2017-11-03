@@ -211,7 +211,8 @@ public class ApplyMyExperienceBaseActivity extends BaseActivity implements  View
                         ExperiController.getInstance().setCfgEntity(this.pEntity);
                         mScrollView.setVisibility(View.VISIBLE);
                         mEmptyView.loadSucc();
-                        showLoading();
+                        String tips = getResources().getString(R.string.common_request);
+                        showLoading(tips,false);
                         int seq = ProtocalManager.getInstance().reqMyExperiBaseInfo(getCallBack());
                         mReqList.add(seq);
                     }else{

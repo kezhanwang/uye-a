@@ -320,6 +320,11 @@ public class DataCheckActivity extends BaseActivity implements View.OnClickListe
                     showToast(tips);
                     return;
                 }
+                if(!isExperience){
+                    String tips = getResources().getString(R.string.data_check_tips_identity_experience_info);
+                    showToast(tips);
+                    return;
+                }
                 IntentUtils.startOrderInfoActivity(DataCheckActivity.this,orgId,REQ_ORDERINFO);
             }else{
                 String tips = getResources().getString(R.string.common_cfg_empty);

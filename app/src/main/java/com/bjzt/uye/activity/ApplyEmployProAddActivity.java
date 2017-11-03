@@ -120,7 +120,8 @@ public class ApplyEmployProAddActivity extends BaseActivity{
         itemViewAddr.setEditTxtBtnListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                showDiaogLoc(ApplyEmployProAddActivity.this.mLocEntityPro,ApplyEmployProAddActivity.this.mLocEntityCity,ApplyEmployProAddActivity.this.mLocEntityArea);
+                String strTitleInfo = getResources().getString(R.string.employ_progress_add_work_addr);
+                showDiaogLoc(ApplyEmployProAddActivity.this.mLocEntityPro,ApplyEmployProAddActivity.this.mLocEntityCity,ApplyEmployProAddActivity.this.mLocEntityArea,strTitleInfo);
             }
         });
 
@@ -289,7 +290,7 @@ public class ApplyEmployProAddActivity extends BaseActivity{
         }
     }
 
-    private void showDiaogLoc(PLocItemEntity mLocProEntity, PLocItemEntity mLocCityEntity, PLocItemEntity mLocAreaEntity){
+    private void showDiaogLoc(PLocItemEntity mLocProEntity, PLocItemEntity mLocCityEntity, PLocItemEntity mLocAreaEntity,String title){
         hideDialogLoc();
         this.mDialogLoc = new DialogLocation(this,R.style.MyDialogBg);
         this.mDialogLoc.show();
@@ -306,6 +307,7 @@ public class ApplyEmployProAddActivity extends BaseActivity{
         if(mLocProEntity != null && mLocCityEntity != null && mLocAreaEntity != null){
             this.mDialogLoc.setSelectInfo(mLocProEntity,mLocCityEntity,mLocAreaEntity);
         }
+        this.mDialogLoc.setTitleInfo(title);
     }
 
     private void hideDialogLoc(){

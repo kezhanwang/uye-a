@@ -91,14 +91,7 @@ public class OrgDetailActivity extends BaseActivity{
         @Override
         public void onItemClick(Object obj, int tag) {
             if(tag == OrgDetailBtnArea.SRC_SIGN){
-                String orgId = MConfiger.TEST_ORG_ID;
-//                    orgId = pEntity.org_id;
-                if(LoginController.getInstance().isLogin()){
-//                        IntentUtils.startQAActivity(SearchActivity.this,orgId,REQ_DATA_CHECK);
-                    IntentUtils.startApplyFirstTransActivity(OrgDetailActivity.this,orgId,REQ_DATA_CHECK);
-                }else{
-                    IntentUtils.startLoginActivity(OrgDetailActivity.this,LoginActivity.TYPE_PHONE_VERIFY_CODE,REQ_LOGIN);
-                }
+                btnSign();
             }else{
                 String tips = "开发中...";
                 showToast(tips);
@@ -106,12 +99,25 @@ public class OrgDetailActivity extends BaseActivity{
         }
     };
 
+    private void btnSign(){
+        String orgId = MConfiger.TEST_ORG_ID;
+//                    orgId = pEntity.org_id;
+        if(LoginController.getInstance().isLogin()){
+//                        IntentUtils.startQAActivity(SearchActivity.this,orgId,REQ_DATA_CHECK);
+            IntentUtils.startApplyFirstTransActivity(OrgDetailActivity.this,orgId,REQ_DATA_CHECK);
+        }else{
+            IntentUtils.startLoginActivity(OrgDetailActivity.this,LoginActivity.TYPE_PHONE_VERIFY_CODE,REQ_LOGIN);
+        }
+    }
+
     private IItemListener mHeaderViewListener = new IItemListener() {
         @Override
         public void onItemClick(Object obj, int tag) {
             POrganizeEntity pEntity = (POrganizeEntity) obj;
             if(tag == OrgDetailHeaderView.SRC_LOC){
                 IntentUtils.startBaiduMapActivity(OrgDetailActivity.this,pEntity.map_lat,pEntity.map_lng,pEntity.org_name,pEntity.address);
+            }else if(tag == OrgDetailHeaderView.SRC_BTN){
+                btnSign();
             }
         }
     };

@@ -19,8 +19,8 @@
     <!--header相关-->
     <dimen name="header_bar_height">52dp</dimen>
     <dimen name="headerview_height">120dp</dimen>
-    <dimen name="header_bar_right_width">81dp</dimen>
-
+    <dimen name="header_bar_right_width">62dp</dimen>
+    <dimen name="header_bar_right_width_l">82dp</dimen>
     <!--ItemView-->
     <dimen name="item_view_height">52dp</dimen>
     <dimen name="item_view_textWidth_ss">72dp</dimen>

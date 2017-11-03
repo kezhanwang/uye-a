@@ -89,7 +89,7 @@ public class StrUtil {
         List<BStrFontEntity> mList = new ArrayList<BStrFontEntity>();
         Context mContext = Global.getContext();
         int start = 0;
-        int fontC = mContext.getResources().getColor(R.color.common_green);
+        int fontC = mContext.getResources().getColor(R.color.common_orange);
         int index = -1;
         int fontSize = mContext.getResources().getDimensionPixelSize(R.dimen.common_font_size_16);
         String strReg = "\\d+\\.?\\d*";

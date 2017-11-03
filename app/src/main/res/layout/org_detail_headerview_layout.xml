@@ -95,6 +95,21 @@
             android:background="@color/common_line_divider"
             ></View>
 
+
+        <Button
+            android:id="@+id/btn_apply"
+            android:layout_width="98dp"
+            android:layout_height="32dp"
+            android:background="@drawable/btn_login_selector"
+            android:textSize="11sp"
+            android:gravity="center"
+            android:textColor="@color/common_white"
+            android:text="@string/just_sign"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/common_margin"
+            />
+
     </RelativeLayout>
 
     <RelativeLayout

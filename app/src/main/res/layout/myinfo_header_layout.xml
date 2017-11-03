@@ -41,7 +41,7 @@
     <!-- header的右侧部分 -->
     <RelativeLayout
         android:id="@+id/rela_right"
-        android:layout_width="81dp"
+        android:layout_width="@dimen/header_bar_right_width"
         android:layout_height="fill_parent"
         android:layout_alignParentRight="true"
         android:background="@drawable/header_rela_bg"

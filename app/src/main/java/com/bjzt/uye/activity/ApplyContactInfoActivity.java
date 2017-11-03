@@ -114,7 +114,8 @@ public class ApplyContactInfoActivity extends BaseActivity implements  View.OnCl
         mItemAddr.setEditTxtBtnListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialogLoc(mLocPro,mLocCity,mLocArea);
+                String strTitle = getResources().getString(R.string.contact_info_info);
+                showDialogLoc(mLocPro,mLocCity,mLocArea,strTitle);
             }
         });
 
@@ -344,7 +345,7 @@ public class ApplyContactInfoActivity extends BaseActivity implements  View.OnCl
         }
     }
 
-    private void showDialogLoc(PLocItemEntity mLocPro, PLocItemEntity mLocCity, PLocItemEntity mLocArea){
+    private void showDialogLoc(PLocItemEntity mLocPro, PLocItemEntity mLocCity, PLocItemEntity mLocArea,String title){
         this.mDialogLoc = new DialogLocation(this,R.style.MyDialogBg);
         this.mDialogLoc.show();
         this.mDialogLoc.setIListener(new DialogLocation.LoanIDialogLocListener() {
@@ -360,6 +361,7 @@ public class ApplyContactInfoActivity extends BaseActivity implements  View.OnCl
         if(mLocPro != null && mLocCity != null && mLocArea != null){
             mDialogLoc.setSelectInfo(mLocPro,mLocCity,mLocArea);
         }
+        this.mDialogLoc.setTitleInfo(title);
     }
 
     private void hideDialogLoc(){

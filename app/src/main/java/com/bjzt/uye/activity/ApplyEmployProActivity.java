@@ -29,6 +29,8 @@ public class ApplyEmployProActivity extends BaseActivity{
     private String orgId;
     private AdapterEmployPro mAdapter;
 
+    private final int REQ_EMPLOY_ADD = 0x10;
+
     @Override
     protected int getLayoutID() {
         return R.layout.activity_employ_progress_layout;
@@ -45,7 +47,7 @@ public class ApplyEmployProActivity extends BaseActivity{
 
             @Override
             public void onRightClick() {
-                super.onRightClick();
+                IntentUtils.startEmployProAddActivity(ApplyEmployProActivity.this,"",REQ_EMPLOY_ADD);
             }
         });
         String title = getResources().getString(R.string.employ_progress_title);
@@ -53,6 +55,8 @@ public class ApplyEmployProActivity extends BaseActivity{
         String txtRight = getResources().getString(R.string.employ_progress_add);
         mHeader.setRightTxt(txtRight);
 
+        String tips = "就业进展列表开发中~";
+        showToast(tips);
     }
 
     @Override

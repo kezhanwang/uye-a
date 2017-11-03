@@ -109,6 +109,9 @@ public class MapActivity extends BaseActivity {
 		//test code 108.953542,34.22527
 		lat = 34.2212080000;
 		lng = 108.9555180000;
+		//34.1295220000,108.8400530000
+		lat = 34.1295220000;
+		lng = 108.8400530000;
 	}
 
 	private void setUpMap() {

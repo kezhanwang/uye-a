@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -29,6 +30,8 @@ public class OrgDetailHeaderView extends RelativeLayout implements NoConfusion, 
     RelativeLayout mRelaMain;
     @BindView(R.id.img_icon)
     ImageView imgIcon;
+    @BindView(R.id.btn_apply)
+    Button btnApply;
     @BindView(R.id.txt_name)
     TextView mTxtName;
     @BindView(R.id.txt_cat)
@@ -66,6 +69,7 @@ public class OrgDetailHeaderView extends RelativeLayout implements NoConfusion, 
 
         mRelaMain.setOnClickListener(this);
         mRelaLoc.setOnClickListener(this);
+        btnApply.setOnClickListener(this);
     }
 
     @Override
@@ -75,6 +79,8 @@ public class OrgDetailHeaderView extends RelativeLayout implements NoConfusion, 
                 this.mListener.onItemClick(this.mEntity,SRC_RELA);
             }else if(v == this.mRelaLoc){
                 this.mListener.onItemClick(this.mEntity,SRC_LOC);
+            }else if(v == this.btnApply){
+                this.mListener.onItemClick(this.mEntity,SRC_BTN);
             }
         }
     }

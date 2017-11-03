@@ -50,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/img_phone"
-                android:textSize="16.5sp"
+                android:textSize="16sp"
                 android:textColor="@color/common_green"
                 android:text="机构电话"
                 android:layout_centerHorizontal="true"
@@ -85,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/img_fav"
-                android:textSize="16.5sp"
+                android:textSize="16sp"
                 android:textColor="@color/common_green"
                 android:text="收藏"
                 android:layout_centerHorizontal="true"
@@ -111,9 +111,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="17.5sp"
+                android:textSize="17sp"
                 android:textColor="@color/common_white"
-                android:text="立即签约"
+                android:text="@string/just_sign"
                 android:layout_centerInParent="true"
                 />
 

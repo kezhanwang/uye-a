@@ -7,6 +7,7 @@ import com.bjzt.uye.controller.WifiController;
 import com.bjzt.uye.global.Global;
 import com.common.controller.LoginController;
 import com.common.http.HttpEngine;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.smtt.sdk.QbSdk;
 
 /**
@@ -40,6 +41,8 @@ public class MApp extends Application{
 
                 //x5内核SDK初始化
                 QbSdk.preInit(MApp.this);
+                //bugly初始化
+                CrashReport.initCrashReport(getApplicationContext(), "0e4e5fe1e1", false);
             }
         });
 

@@ -9,6 +9,8 @@
     <string name="time">时间</string>
     <string name="save">保存</string>
     <string name="ok">好的</string>
+    <string name="just_sign">立即签约</string>
+
 
     <string name="common_default">---</string>
     <string name="common_request">数据请求中...</string>

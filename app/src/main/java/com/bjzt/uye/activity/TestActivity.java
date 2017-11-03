@@ -313,6 +313,7 @@ public class TestActivity extends BaseActivity{
             @Override
             public void onClick(View v) {
                 MyLog.d(MyLog.BILLY,"[onClick]" + " button click...");
+                showLoading();
             }
         });
 

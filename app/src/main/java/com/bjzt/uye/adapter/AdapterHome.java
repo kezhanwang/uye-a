@@ -1,7 +1,6 @@
 package com.bjzt.uye.adapter;
 
 import android.content.Context;
-
 import com.bjzt.uye.entity.PHomeEntity;
 import com.bjzt.uye.entity.PHomeOrderEntity;
 import com.bjzt.uye.entity.VHomeHeaderViewEntity;
@@ -15,7 +14,6 @@ import com.bjzt.uye.views.component.HomeOrderInfoView;
 import com.common.msglist.base.BaseItemListener;
 import com.common.msglist.base.BaseItemView;
 import com.common.msglist.base.MutiBaseListAdapter;
-
 import java.util.ArrayList;
 import java.util.List;
 

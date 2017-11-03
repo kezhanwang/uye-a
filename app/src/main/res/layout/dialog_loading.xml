@@ -6,23 +6,42 @@
     android:layout_gravity="center"
     >
 
-    <ImageView
-        android:id="@+id/loading_img"
-        android:layout_height="wrap_content"
+    <RelativeLayout
+        android:id="@+id/rela_img"
         android:layout_width="wrap_content"
-        android:background="@drawable/icon_load"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        />
-    
-    <TextView 
+        >
+
+        <ImageView
+            android:id="@+id/loading_img"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:src="@drawable/icon_load"
+            android:scaleType="fitXY"
+            android:layout_centerInParent="true"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/icon_load_ye"
+            android:layout_centerInParent="true"
+            />
+
+    </RelativeLayout>
+
+
+
+    <TextView
         android:id="@+id/load_tips"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_centerHorizontal="true"
         android:visibility="visible"
-        android:layout_below="@id/loading_img"
+        android:layout_below="@id/rela_img"
         android:singleLine="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="38dp"
         />
-    
+
 </RelativeLayout>

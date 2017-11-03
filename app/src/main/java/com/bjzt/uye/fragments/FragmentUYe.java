@@ -12,6 +12,7 @@ import com.bjzt.uye.activity.MainActivity;
 import com.bjzt.uye.adapter.UYeAdapter;
 import com.bjzt.uye.controller.OtherController;
 import com.bjzt.uye.entity.PInsureOrderEntity;
+import com.bjzt.uye.entity.PInsureOrderItemEntity;
 import com.bjzt.uye.fragments.base.BaseFragment;
 import com.bjzt.uye.global.Global;
 import com.bjzt.uye.http.ProtocalManager;
@@ -139,8 +140,10 @@ public class FragmentUYe extends BaseFragment{
         public void onItemClick(Object obj, int tag) {
             switch(tag){
                 case InsureOrderItemView.SRC_EMPLOYED:
-                case InsureOrderItemView.SRC_EMPOY_PROGRESS:
                     showToast("开发中~");
+                    break;
+                case InsureOrderItemView.SRC_EMPOY_PROGRESS:
+                    IntentUtils.startEmployProActivity(getActivity(),"",MainActivity.REQ_EMPLOY_PRO);
                     break;
             }
         }

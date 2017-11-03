@@ -105,6 +105,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         hint = getResources().getString(R.string.reg_hint_pwd);
         editPwd.setHint(hint);
         editPwd.setTxtChangeListener(mTxtChangeListener);
+        editPwd.updateType(ExtendEditText.TYPE_PWD);
 
         btnReg.setOnClickListener(this);
         btnReg.setEnabled(false);

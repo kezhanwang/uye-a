@@ -21,27 +21,21 @@
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_youe_bg_shape"
+    android:background="@color/page_bg"
     >
 
     <com.bjzt.uye.views.component.YHeaderView
-        android:id="@+id/u_header"
+        android:id="@id/header"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         ></com.bjzt.uye.views.component.YHeaderView>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/u_viewpager"
+    <com.bjzt.uye.views.component.ExtendEditText
+        android:id="@+id/edit_nick"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@id/u_header"
-        ></android.support.v4.view.ViewPager>
-
-    <com.bjzt.uye.views.component.BlankEmptyView
-        android:id="@+id/u_emptyview"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@id/u_header"
-        ></com.bjzt.uye.views.component.BlankEmptyView>
+        android:layout_height="@dimen/item_modify_pwd_item_height"
+        android:layout_below="@id/header"
+        android:background="@color/common_white"
+        ></com.bjzt.uye.views.component.ExtendEditText>
 
 </RelativeLayout>

@@ -274,4 +274,25 @@
     <string name="map_err">未安装地图app客户端，建议先安装！</string>
     <string name="map_nav">导航</string>
 
+    <!--修改个人信息Profile-->
+    <string name="profile_title">个人信息</string>
+    <string name="profile_avator_modify">修改头像</string>
+    <string name="profile_nickname_modify">修改昵称</string>
+    <string name="profile_phone_modify">我的手机号</string>
+    <string name="profile_pwd_modify">修改密码</string>
+    <string name="profile_modify_pwd_not_support">手机号不支持修改哦~</string>
+
+    <!--修改密码-->
+    <string name="modify_pwd_title">修改密码</string>
+    <string name="modify_pwd_tips_input_pwd">请输入新密码~</string>
+    <string name="modify_pwd_tips_input_pwd_again">请再次输入确认密码~</string>
+    <string name="modify_pwd_tips_input_pwd_no_same">两次输入的密码不一致，请重新输入~</string>
+    <string name="modify_pwd_hint_input_pwd">新密码(8~20位字符组成，区分大小写)</string>
+    <string name="modify_pwd_hint_confirm">确认密码</string>
+
+    <!--修改昵称-->
+    <string name="modify_nick_title">修改昵称</string>
+    <string name="modify_nick_hint">请输入新昵称</string>
+
+
 </resources>

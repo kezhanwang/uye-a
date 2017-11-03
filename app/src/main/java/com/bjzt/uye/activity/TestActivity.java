@@ -101,6 +101,9 @@ public class TestActivity extends BaseActivity{
     @BindView(R.id.btn_touch)
     Button btnTouch;
 
+    @BindView(R.id.btn_profile)
+    Button btnProfile;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -310,6 +313,13 @@ public class TestActivity extends BaseActivity{
             @Override
             public void onClick(View v) {
                 MyLog.d(MyLog.BILLY,"[onClick]" + " button click...");
+            }
+        });
+
+        btnProfile.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                IntentUtils.startProfileActivity(TestActivity.this,16);
             }
         });
     }

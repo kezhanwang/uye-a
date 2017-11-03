@@ -108,6 +108,14 @@ public class YHeaderView extends RelativeLayout implements NoConfusion,View.OnCl
         }
     }
 
+    public void setRightClickAble(boolean isClickAble){
+        Drawable d = null;
+        if(isClickAble){
+            d = getResources().getDrawable(R.drawable.more_setting_bg_selector);
+        }
+        this.relaRight.setBackgroundDrawable(d);
+    }
+
     //设置右侧
     public void setRightImage(int resId){
         this.mImgRight.setImageResource(resId);

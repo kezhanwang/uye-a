@@ -151,5 +151,9 @@
     <dimen name="map_btn_height">40dp</dimen>
     <dimen name="map_textWidth">170dp</dimen>
 
+    <!--Profile信息页卡-->
+    <dimen name="item_icon_view_height">78dp</dimen>
+    <dimen name="item_modify_pwd_item_height">55dp</dimen>
+
 
 </resources>

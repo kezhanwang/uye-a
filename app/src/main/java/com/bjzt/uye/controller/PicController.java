@@ -27,6 +27,10 @@ public class PicController {
 
     private static PicController instance;
 
+    public static final int TYPE_RECT = 1;
+    public static final int TYPE_ROUND_RECT = 2;
+    public static final int TYPE_CIRCLE_USER_ICON = 3;
+
     private PicController(){
 
     }
@@ -43,7 +47,7 @@ public class PicController {
      * @param imgView
      * @param url
      */
-    public void showPic(ImageView imgView,String url,boolean isRound){
+    public void showPic(ImageView imgView,String url,int mType){
         Context mContext = Global.getContext();
         if(!TextUtils.isEmpty(url)){
             if(!url.startsWith("http") && !url.startsWith("https")){
@@ -55,10 +59,16 @@ public class PicController {
 ////                    .error(R.drawable.round_rect_grey_shape)
 //                    .into(imgView);
             Drawable d = null;
-            if(isRound){
-                d = mContext.getResources().getDrawable(R.drawable.round_rect_grey_shape);
-            }else{
-                d = mContext.getResources().getDrawable(R.drawable.rect_grey_shape);
+            switch(mType){
+                case TYPE_ROUND_RECT:
+                    d = mContext.getResources().getDrawable(R.drawable.round_rect_grey_shape);
+                    break;
+                case TYPE_RECT:
+                    d = mContext.getResources().getDrawable(R.drawable.rect_grey_shape);
+                    break;
+                case TYPE_CIRCLE_USER_ICON:
+                    d = mContext.getResources().getDrawable(R.drawable.user_icon);
+                    break;
             }
             DrawableRequestBuilder builder = Glide.with(mContext).load(url);
             builder.centerCrop();
@@ -75,12 +85,13 @@ public class PicController {
     }
 
     public void showPic(ImageView imgView,String url){
-        showPic(imgView,url,true);
+        showPic(imgView,url,TYPE_ROUND_RECT);
     }
 
     public void showPicRect(ImageView imgView,String url){
-        showPic(imgView,url,false);
+        showPic(imgView,url,TYPE_RECT);
     }
+
 
     public interface IPicDownLoadListener{
         public void downloadSucc(Bitmap bitmap);

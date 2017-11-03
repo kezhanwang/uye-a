@@ -140,6 +140,13 @@ public class LoginController {
         return null;
     }
 
+    public String getPhoneNum(){
+        if(this.pEntity != null){
+            return this.pEntity.phone;
+        }
+        return null;
+    }
+
     public String getFaceUrl(){
         if(this.pEntity != null){
             return this.pEntity.head_portrait;

@@ -80,6 +80,11 @@
             android:launchMode="standard"
             >
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
         </activity>
 
         <activity android:name=".activity.SplashActivity"
@@ -88,10 +93,7 @@
             android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"
             >
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
 
         </activity>
 
@@ -235,6 +237,33 @@
         <!--个人经历-添加学历-->
         <activity
             android:name=".activity.ApplyMyExperienceDegreeAddActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.Youye"
+            android:windowSoftInputMode="stateAlwaysHidden|stateHidden"
+            ></activity>
+
+        <!--个人信息页卡-->
+        <activity
+            android:name=".activity.ProfileActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.Youye"
+            android:windowSoftInputMode="stateAlwaysHidden|stateHidden"
+            ></activity>
+
+        <!--修改密码页-->
+        <activity
+            android:name=".activity.ModifyPwdActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.Youye"
+            android:windowSoftInputMode="stateAlwaysHidden|stateHidden"
+            ></activity>
+
+        <!--修改昵称页-->
+        <activity
+            android:name=".activity.ModifyNickActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTop"
             android:theme="@style/Theme.Youye"

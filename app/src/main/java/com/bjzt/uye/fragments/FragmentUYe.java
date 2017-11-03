@@ -58,6 +58,7 @@ public class FragmentUYe extends BaseFragment{
         ButterKnife.bind(this, view);
 
         mHeader.updateType(YHeaderView.TYPE_RIGHT_TXT_ONLY);
+        mHeader.setRightClickAble(false);
         String title = getResources().getString(R.string.tab_uye);
         mHeader.setTitle(title);
         String txtRight = "0/0";

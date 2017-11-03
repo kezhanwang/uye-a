@@ -79,8 +79,11 @@ public class FragmentMyInfo extends BaseFragment implements  View.OnClickListene
         mHeaderView.setIListener(new IItemListener() {
             @Override
             public void onItemClick(Object obj, int tag) {
-                String tips = "开发中~";
-                showToast(tips);
+                if(LoginController.getInstance().isLogin()){
+                    IntentUtils.startProfileActivity(getActivity(),MainActivity.REQ_PROFILE);
+                }else{
+                    IntentUtils.startLoginActivity(getActivity(),MainActivity.REQ_CODE_LOGIN);
+                }
             }
         });
 

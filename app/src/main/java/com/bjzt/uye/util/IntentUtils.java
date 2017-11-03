@@ -20,8 +20,11 @@ import com.bjzt.uye.activity.DataCheckActivity;
 import com.bjzt.uye.activity.LoginActivity;
 import com.bjzt.uye.activity.MainActivity;
 import com.bjzt.uye.activity.MapActivity;
+import com.bjzt.uye.activity.ModifyNickActivity;
+import com.bjzt.uye.activity.ModifyPwdActivity;
 import com.bjzt.uye.activity.OrderInfoActivity;
 import com.bjzt.uye.activity.OrgDetailActivity;
+import com.bjzt.uye.activity.ProfileActivity;
 import com.bjzt.uye.activity.QAActivity;
 import com.bjzt.uye.activity.RegisterActivity;
 import com.bjzt.uye.activity.SearchActivity;
@@ -92,6 +95,15 @@ public class IntentUtils {
         Intent intent = new Intent(mContext, LoginActivity.class);
         intent.putExtra(IntentUtils.PARA_KEY_PUBLIC,type);
         mContext.startActivityForResult(intent,requestCode);
+    }
+
+    /**
+     * 打开登录页卡
+     * @param mContext
+     * @param reqCode
+     */
+    public static final void startLoginActivity(Activity mContext,int reqCode){
+        startLoginActivity(mContext,LoginActivity.TYPE_PHONE_VERIFY_CODE,reqCode);
     }
 
     /***
@@ -457,5 +469,35 @@ public class IntentUtils {
         intent.putExtra(SNAME, orgName);
         intent.putExtra(ADDRESS, address);
         mContext.startActivity(intent);
+    }
+
+    /**
+     * 打开个人信息页
+     * @param mContext
+     * @param reqCode
+     */
+    public static final void startProfileActivity(Activity mContext,int reqCode){
+        Intent intent = new Intent(mContext, ProfileActivity.class);
+        mContext.startActivityForResult(intent,reqCode);
+    }
+
+    /***
+     * 打开修改密码页
+     * @param mContext
+     * @param reqCode
+     */
+    public static final void startModifyPwdActivity(Activity mContext,int reqCode){
+        Intent intent = new Intent(mContext, ModifyPwdActivity.class);
+        mContext.startActivityForResult(intent,reqCode);
+    }
+
+    /**
+     * 打开修改昵称页
+     * @param mContext
+     * @param reqCode
+     */
+    public static final void startMofifyNickActivity(Activity mContext,int reqCode){
+        Intent intent = new Intent(mContext, ModifyNickActivity.class);
+        mContext.startActivityForResult(intent,reqCode);
     }
 }

@@ -45,6 +45,7 @@ public class MainActivity extends BaseActivity {
     public static final int REQ_CODE_LOGIN = 0x10;
     public static final int REQ_SEARCH = 0x11;
     public static final int REQ_START_APPLY = 0x12;
+    public static final int REQ_PROFILE = 0x13;
 
     private DialogUpgrade mDialogUpgrade;
     private List<Integer> mReqList = new ArrayList<Integer>();

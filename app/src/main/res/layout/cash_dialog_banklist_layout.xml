@@ -25,7 +25,7 @@
         android:background="@drawable/more_setting_bg_selector"
         android:layout_alignParentRight="true"
         android:textSize="16sp"
-        android:textColor="@color/common_green"
+        android:textColor="@color/common_font_3"
         android:gravity="center"
         android:text="@string/cancle"
         />

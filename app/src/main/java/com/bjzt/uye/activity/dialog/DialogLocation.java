@@ -284,7 +284,7 @@ public class DialogLocation extends Dialog implements  View.OnClickListener{
             }
         }
         int cBlack = getContext().getResources().getColor(R.color.common_font_3);
-        int cRed = getContext().getResources().getColor(R.color.common_red);
+        int cRed = getContext().getResources().getColor(R.color.common_green);
         for(int i = 0;i < mTxtArray.length;i++){
             TextView txtView = mTxtArray[i];
             View mViewLine = mViewArray[i];

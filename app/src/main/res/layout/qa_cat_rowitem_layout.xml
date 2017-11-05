@@ -17,7 +17,7 @@
         android:layout_centerVertical="true"
         android:textSize="16.5sp"
         android:textColor="@drawable/textcolor_qa_cat"
-        android:background="@drawable/btn_qa_cat_selector"
+        android:background="@drawable/btn_qa_cat_circle_selector"
         android:singleLine="true"
         android:maxWidth="82dp"
         />
@@ -32,7 +32,7 @@
         android:textSize="16.5sp"
         android:textColor="@drawable/textcolor_qa_cat"
         android:layout_marginLeft="@dimen/common_margin"
-        android:background="@drawable/btn_qa_cat_selector"
+        android:background="@drawable/btn_qa_cat_circle_selector"
         android:singleLine="true"
         android:maxWidth="82dp"
         />
@@ -47,7 +47,7 @@
         android:textSize="16.5sp"
         android:textColor="@drawable/textcolor_qa_cat"
         android:layout_marginLeft="@dimen/common_margin"
-        android:background="@drawable/btn_qa_cat_selector"
+        android:background="@drawable/btn_qa_cat_circle_selector"
         android:singleLine="true"
         android:maxWidth="82dp"
         />
@@ -62,7 +62,7 @@
         android:textSize="16.5sp"
         android:textColor="@drawable/textcolor_qa_cat"
         android:layout_marginLeft="@dimen/common_margin"
-        android:background="@drawable/btn_qa_cat_selector"
+        android:background="@drawable/btn_qa_cat_circle_selector"
          android:singleLine="true"
          android:maxWidth="82dp"
         />

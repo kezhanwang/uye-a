@@ -36,6 +36,8 @@ public class EmployArea extends RelativeLayout implements View.OnClickListener,N
     private IItemListener mListener;
 
     public static final int SRC_ADD = 1;
+    public static final int SRC_DEL = 2;
+
     private List<BLocEntity> mList = new ArrayList<BLocEntity>();
 
     public EmployArea(Context context) {
@@ -87,6 +89,28 @@ public class EmployArea extends RelativeLayout implements View.OnClickListener,N
         return hasSame;
     }
 
+    private boolean isJustFake(){
+        if(mList != null && mList.size() == 1){
+            BLocEntity bEntity = mList.get(0);
+            if(bEntity.isFake){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean removeEntity(BLocEntity mEntity){
+        boolean isSucc = false;
+        mList.remove(mEntity);
+        catView.setLocInfo(mList,mCatViewListener);
+        if(isJustFake()){
+            mList.clear();
+            catView.setVisibility(View.GONE);
+            mTxtContent.setVisibility(View.VISIBLE);
+        }
+        return isSucc;
+    }
+
     public boolean appendLocEntity(PLocItemEntity mLocPro,PLocItemEntity mLocCity,PLocItemEntity mLocArea){
         boolean succ = false;
         if(hasSameAreaName(mLocPro,mLocCity,mLocArea)){
@@ -100,12 +124,21 @@ public class EmployArea extends RelativeLayout implements View.OnClickListener,N
             bEntity.mLocCity = mLocCity;
             bEntity.mLocArea = mLocArea;
             mList.add(bEntity);
-            catView.setLocInfo(mList,null);
+            catView.setLocInfo(mList,mCatViewListener);
 
             succ = true;
         }
         return succ;
     }
+
+    private IItemListener mCatViewListener = new IItemListener() {
+        @Override
+        public void onItemClick(Object obj, int tag) {
+            if(mListener != null){
+                mListener.onItemClick(obj,SRC_DEL);
+            }
+        }
+    };
 
     public void setList(List<String> sList){
         if(sList != null){
@@ -120,7 +153,7 @@ public class EmployArea extends RelativeLayout implements View.OnClickListener,N
                 bEntity.mLocArea.name = strInfo;
                 mList.add(bEntity);
             }
-            catView.setLocInfo(mList,null);
+            catView.setLocInfo(mList,mCatViewListener);
         }
     }
 
@@ -129,7 +162,7 @@ public class EmployArea extends RelativeLayout implements View.OnClickListener,N
             this.mList = mList;
             catView.setVisibility(View.VISIBLE);
             mTxtContent.setVisibility(View.GONE);
-            catView.setLocInfo(mList,null);
+            catView.setLocInfo(mList,mCatViewListener);
         }
     }
 

@@ -17,6 +17,7 @@ public class QAPublishCatView extends LinearLayout implements NoConfusion {
     private List<String> mList;
     private int ROW_CNT = 4;
     private List<QARowItem> mQAList;
+    private List<LocRowItem> mLocViewList;
     private List<EmployArea.BLocEntity> mLocList;
 
     public QAPublishCatView(Context context) {
@@ -71,11 +72,11 @@ public class QAPublishCatView extends LinearLayout implements NoConfusion {
                     row = size / ROW_CNT + 1;
                 }
             }
-            mQAList = new ArrayList<>();
+            mLocViewList = new ArrayList<>();
             for (int i = 0; i < row; i++) {
-                QARowItem item = new QARowItem(getContext());
+                LocRowItem item = new LocRowItem(getContext());
                 item.setIItemListner(mListener);
-                mQAList.add(item);
+                mLocViewList.add(item);
                 LayoutParams llp = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
                 addView(item, llp);
             }
@@ -88,7 +89,7 @@ public class QAPublishCatView extends LinearLayout implements NoConfusion {
                 if (i % ROW_CNT == 0) {
                     if (tempList != null) {
                         int index = i / ROW_CNT - 1;
-                        QARowItem item = mQAList.get(index);
+                        LocRowItem item = mLocViewList.get(index);
                         item.setIndex(index);
                         item.setInfoLoc(tempList);
                     }
@@ -101,7 +102,7 @@ public class QAPublishCatView extends LinearLayout implements NoConfusion {
 
             if (tempList != null) {
                 int index = (i-1) / ROW_CNT;
-                QARowItem item = mQAList.get(index);
+                LocRowItem item = mLocViewList.get(index);
                 item.setIndex(index);
                 item.setInfoLoc(tempList);
             }

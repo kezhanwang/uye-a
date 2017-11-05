@@ -25,3 +25,7 @@
 -keep class vi.com.** {*;}
 -dontwarn com.baidu.**
 
+#bugly相关配置
+-dontwarn com.tencent.bugly.**
+-keep public class com.tencent.bugly.**{*;}
+

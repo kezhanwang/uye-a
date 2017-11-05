@@ -34,6 +34,7 @@ import com.bjzt.uye.views.component.BlankEmptyView;
 import com.bjzt.uye.views.component.EmployArea;
 import com.bjzt.uye.views.component.ItemView;
 import com.bjzt.uye.views.component.YHeaderView;
+import com.common.common.MyLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -142,6 +143,10 @@ public class ApplyMyExperienceBaseActivity extends BaseActivity implements  View
             public void onItemClick(Object obj, int tag) {
                 if(tag == EmployArea.SRC_ADD){
                     showDialogLoc();
+                }else if(tag == EmployArea.SRC_DEL){
+                    EmployArea.BLocEntity locEntity = (EmployArea.BLocEntity) obj;
+                    MyLog.d(TAG,"[onItemClick]" + " strInfo:" + locEntity.mLocArea.name);
+                    mEmployArea.removeEntity(locEntity);
                 }
             }
         });

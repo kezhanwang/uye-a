@@ -26,6 +26,7 @@ import com.bjzt.uye.util.StrUtil;
 import com.bjzt.uye.views.component.BlankEmptyView;
 import com.bjzt.uye.views.component.HomeHeader;
 import com.bjzt.uye.views.component.HomeLocView;
+import com.bjzt.uye.views.component.HomeOrderInfoView;
 import com.common.controller.LoginController;
 import com.common.listener.ILoginListener;
 import com.common.msglist.MsgPage;
@@ -159,6 +160,16 @@ public class FragmentHome extends BaseFragment{
                     case HomeLocView.TAG_TXT_BTN_LOC:
                         if(ac != null){
                             IntentUtils.startSearchActivity(getActivity(),MainActivity.REQ_SEARCH);
+                        }
+                        break;
+                }
+            }else if(obj instanceof HomeOrderInfoView){
+                switch(tag){
+                    case HomeOrderInfoView.SRC_RELA_LEFT:
+                        Activity ac = getActivity();
+                        if(ac instanceof  MainActivity){
+                            MainActivity mAc = (MainActivity) ac;
+                            mAc.setIndex(1);
                         }
                         break;
                 }

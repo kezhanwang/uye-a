@@ -85,8 +85,6 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
     Button btnOk;
     @BindView(R.id.proto_item_service)
     ProtocalItemView proItemService;
-    @BindView(R.id.proto_item_auth)
-    ProtocalItemView proItemAuth;
 
     @BindView(R.id.emptyview)
     BlankEmptyView mEmptyView;
@@ -212,8 +210,6 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
 
         proItemService.updateType(ProtocalItemView.TYPE_SERVICE);
         proItemService.setIItemListener(mProItemListener);
-        proItemAuth.updateType(ProtocalItemView.TYPE_AUTH);
-        proItemAuth.setIItemListener(mProItemListener);
 
         btnOk.setOnClickListener(this);
 
@@ -309,11 +305,9 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
         if(strProtocalPics.size() > 0){
             picSelectView.insertList(strProtocalPics);
         }
-        //boolean isSerivice select
-        boolean isSelectService = vEntity.isSelectService;
-        proItemService.setIsSelect(isSelectService);
-        boolean isSelectAuth = vEntity.isSelectAuth;
-        proItemAuth.setIsSelect(isSelectAuth);
+//        //boolean isSerivice select
+//        boolean isSelectService = vEntity.isSelectService;
+//        proItemService.setIsSelect(isSelectService);
     }
 
     private void setItemView(ItemView mItemView,String val){
@@ -330,13 +324,6 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
             if(tag == ProtocalItemView.SRC_TXT_CLICK){
                 if(obj == proItemService){
                     IntentUtils.startWebViewActivity(OrderInfoActivity.this, HttpCommon.getServiceProtocal());
-                }else if(obj == proItemAuth){
-                    if(mRspEntity != null && mRspEntity.mEntity != null){
-                        String url = mRspEntity.mEntity.authcontract;
-                        if(!TextUtils.isEmpty(url)){
-                            IntentUtils.startWebViewActivity(OrderInfoActivity.this,url);
-                        }
-                    }
                 }
             }
         }
@@ -600,13 +587,6 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
         vEntity.isSelectService = isSelectService;
         if(isInterrupt && !isSelectService){
             String tips = getResources().getString(R.string.order_info_protocal_service_tips);
-            vEntity.msg = tips;
-            return vEntity;
-        }
-        boolean isSelectAuth = proItemAuth.getIsSelect();
-        vEntity.isSelectAuth = isSelectAuth;
-        if(isInterrupt && !isSelectAuth){
-            String tips = getResources().getString(R.string.order_info_protocal_auth_tips);
             vEntity.msg = tips;
             return vEntity;
         }

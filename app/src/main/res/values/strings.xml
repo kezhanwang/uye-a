@@ -234,6 +234,7 @@
     <string name="contact_info_sec_name_hint">请填写紧急联系人姓名</string>
     <string name="contact_info_sec_phone">手机号码</string>
     <string name="contact_info_sec_phone_hint">请填写紧急联系人手机号码</string>
+    <string name="contact_info_sec_phone_legal_tips">紧急联系人手机号码请填写正确~</string>
     <string name="contact_info_sec">紧急联系人</string>
     <string name="contact_info_info">个人信息</string>
 

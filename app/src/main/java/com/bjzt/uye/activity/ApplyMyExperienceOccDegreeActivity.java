@@ -104,7 +104,7 @@ public class ApplyMyExperienceOccDegreeActivity extends BaseActivity implements 
         mMsgPage.getListView().setOnItemClickListener(mItemClickListener);
         boolean needRefresh = false;
         if(mRspParamsEntity != null){
-            if(mRspParamsEntity.mList == null || mRspParamsEntity.mList.size() <= 0){
+            if(mRspParamsEntity.mEntity.list == null || mRspParamsEntity.mEntity.list.size() <= 0){
                 switch(mType) {
                     case TYPE_DEGREE:
                         IntentUtils.startMyExperienceDegreeAddActivity(ApplyMyExperienceOccDegreeActivity.this,orgId,REQ_ADD_DEGREE_CANCLE);
@@ -114,14 +114,26 @@ public class ApplyMyExperienceOccDegreeActivity extends BaseActivity implements 
                         break;
                 }
             }else{
-                needRefresh = true;
+                needRefresh = false;
             }
         }else{
             needRefresh = true;
         }
 
-        if(needRefresh){
+        if(needRefresh) {
             refresh();
+        }
+
+        if(mRspParamsEntity != null && mRspParamsEntity.mEntity.list != null && mRspParamsEntity.mEntity.list.size() > 0){
+            mEmptyView.loadSucc();
+            mMsgPage.setVisibility(View.VISIBLE);
+            if(this.mAdapter == null){
+                mAdapter = new ExperiListAdapter(mRspParamsEntity.mEntity.list);
+                mAdapter.setType(BaseListAdapter.ADAPTER_TYPE_NO_BOTTOM);
+                mMsgPage.setListAdapter(mAdapter);
+            }else{
+                mAdapter.reSetList(mRspParamsEntity.mEntity.list);
+            }
         }
     }
 
@@ -227,15 +239,15 @@ public class ApplyMyExperienceOccDegreeActivity extends BaseActivity implements 
             if(rsp instanceof RspExperiListEntity){
                 RspExperiListEntity rspEntity = (RspExperiListEntity) rsp;
                 if(isSucc){
-                    if(rspEntity != null && rspEntity.mList != null && rspEntity.mList.size() > 0){
+                    if(rspEntity != null && rspEntity.mEntity.list != null && rspEntity.mEntity.list.size() > 0){
                         mEmptyView.loadSucc();
                         mMsgPage.setVisibility(View.VISIBLE);
                         if(this.mAdapter == null){
-                            mAdapter = new ExperiListAdapter(rspEntity.mList);
+                            mAdapter = new ExperiListAdapter(rspEntity.mEntity.list);
                             mAdapter.setType(BaseListAdapter.ADAPTER_TYPE_NO_BOTTOM);
                             mMsgPage.setListAdapter(mAdapter);
                         }else{
-                            mAdapter.reSetList(rspEntity.mList);
+                            mAdapter.reSetList(rspEntity.mEntity.list);
                         }
                     }else{
                         String tips = "暂无信息";

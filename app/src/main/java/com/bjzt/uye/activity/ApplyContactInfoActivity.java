@@ -474,6 +474,11 @@ public class ApplyContactInfoActivity extends BaseActivity implements  View.OnCl
             vEntity.msg = tips;
             return vEntity;
         }
+        if(isInterrupt && !StrUtil.isPhotoLegal(strSecPhone)){
+            String tips = getResources().getString(R.string.contact_info_sec_phone_legal_tips);
+            vEntity.msg = tips;
+            return vEntity;
+        }
         vEntity.isSucc = true;
         return vEntity;
     }

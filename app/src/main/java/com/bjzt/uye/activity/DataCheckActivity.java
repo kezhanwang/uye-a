@@ -347,6 +347,7 @@ public class DataCheckActivity extends BaseActivity implements View.OnClickListe
         if(resultCode == Activity.RESULT_OK){
             switch(requestCode){
                 case REQ_IDENTITY:
+                case REQ_CONTACT_INFO:
                 case REQ_MYEXPERIENCE:
                     refresh();
                     break;

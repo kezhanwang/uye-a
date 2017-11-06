@@ -526,7 +526,7 @@ public class ProtocalManager {
     public int reqMyExperiListOcc(ICallBack<Object> callBack){
         ReqExperiListEntity reqEntity = new ReqExperiListEntity();
         reqEntity.type = ReqExperiListEntity.TYPE_OCC;
-        reqEntity.isJsonArray = true;
+//        reqEntity.isJsonArray = true;
         return addTask(reqEntity,callBack);
     }
 
@@ -538,7 +538,7 @@ public class ProtocalManager {
     public int reqMyExperiListDegree(ICallBack<Object> callBack){
         ReqExperiListEntity reqEntity = new ReqExperiListEntity();
         reqEntity.type = ReqExperiListEntity.TYPE_DEGREE;
-        reqEntity.isJsonArray = true;
+//        reqEntity.isJsonArray = true;
         return addTask(reqEntity,callBack);
     }
 

@@ -11,23 +11,12 @@
         android:id="@+id/banklist_txtview_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="招商银行"
         android:textSize="17sp"
         android:layout_marginLeft="@dimen/common_margin"
         android:textColor="@color/common_font_3"
         android:layout_marginRight="@dimen/common_margin_18"
-        />
-
-    <ImageView
-        android:id="@+id/banklist_imgview_select"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/common_margin"
-        android:background="@drawable/banklist_img_select"
-        android:layout_centerVertical="true"
         />
 
     <View

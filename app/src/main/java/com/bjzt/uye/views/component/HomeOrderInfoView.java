@@ -37,6 +37,9 @@ public class HomeOrderInfoView extends BaseItemView<PHomeOrderEntity> implements
     private PHomeOrderEntity mEntity;
     private IItemListener mListener;
 
+    public static final int SRC_RELA_LEFT = 1;
+    public static final int SRC_RELA_RIGHT = 2;
+
     public HomeOrderInfoView(Context context) {
         super(context);
     }
@@ -86,6 +89,10 @@ public class HomeOrderInfoView extends BaseItemView<PHomeOrderEntity> implements
 
     @Override
     public void onClick(View v) {
-
+        if(mListener != null){
+            if(v == relaLeft){
+                mListener.onItemClick(this,SRC_RELA_LEFT);
+            }
+        }
     }
 }

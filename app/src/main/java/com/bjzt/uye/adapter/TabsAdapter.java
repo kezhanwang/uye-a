@@ -1,5 +1,6 @@
 package com.bjzt.uye.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,8 +12,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TabHost;
 import android.widget.TabWidget;
+
+import com.bjzt.uye.R;
+import com.bjzt.uye.activity.MainActivity;
 import com.bjzt.uye.fragments.base.BaseFragment;
+import com.bjzt.uye.global.Global;
+import com.bjzt.uye.util.IntentUtils;
 import com.common.common.MyLog;
+import com.common.controller.LoginController;
+
 import java.util.ArrayList;
 
 /**
@@ -26,6 +34,9 @@ public class TabsAdapter extends FragmentPagerAdapter implements TabHost.OnTabCh
     private ViewPager mViewPager;
     private ArrayList<TabInfo> mTabs = new ArrayList<>();
     private FragmentManager fm;
+    private String tabIdOld;
+    private int posOld;
+    private String strUYe;
 
     static final class TabInfo {
         private final String tag;
@@ -41,6 +52,7 @@ public class TabsAdapter extends FragmentPagerAdapter implements TabHost.OnTabCh
 
     static class DummyTabFactory implements TabHost.TabContentFactory {
         private final Context mContext;
+
 
         public DummyTabFactory(Context context) {
             mContext = context;
@@ -64,6 +76,7 @@ public class TabsAdapter extends FragmentPagerAdapter implements TabHost.OnTabCh
         mTabHost.setOnTabChangedListener(this);
         mViewPager.setAdapter(this);
         mViewPager.addOnPageChangeListener(this);
+        strUYe = Global.getContext().getString(R.string.tab_uye);
     }
 
     public void addTab(TabHost.TabSpec tabSpec, Class<?> clazz, Bundle args) {
@@ -95,8 +108,23 @@ public class TabsAdapter extends FragmentPagerAdapter implements TabHost.OnTabCh
 
     @Override
     public void onTabChanged(String tabId) {
-        int position = mTabHost.getCurrentTab();
-        mViewPager.setCurrentItem(position,false);
+        if(tabId.equals(strUYe)){
+            Activity ac = (Activity) mContext;
+            if(!LoginController.getInstance().isLogin()){
+                MainActivity mAc = (MainActivity) ac;
+                mAc.setIndex(posOld);
+                mTabHost.setCurrentTab(posOld);
+                IntentUtils.startLoginActivity(ac, MainActivity.REQ_CODE_LOGIN);
+            }else{
+                int position = mTabHost.getCurrentTab();
+                mViewPager.setCurrentItem(position,false);
+            }
+        }else{
+            int position = mTabHost.getCurrentTab();
+            mViewPager.setCurrentItem(position,false);
+        }
+        this.tabIdOld = tabId;
+        this.posOld = mViewPager.getCurrentItem();
     }
 
     @Override

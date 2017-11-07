@@ -20,7 +20,7 @@ public class POrganizeEntity implements Serializable{
     public long created_time;
     public long updated_time;
     public String logo;
-//    public String description;
+    public String description;
     public String province;
     public String city;
     public String area;

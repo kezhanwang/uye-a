@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">就业帮</string>
+    <string name="app_name">U业帮</string>
 
     <string name="cancle">取消</string>
     <string name="complete">完成</string>
@@ -10,7 +10,7 @@
     <string name="save">保存</string>
     <string name="ok">好的</string>
     <string name="just_sign">立即签约</string>
-
+    <string name="dev_ing">稍后献上，敬请期待</string>
 
     <string name="common_default">---</string>
     <string name="common_request">数据请求中...</string>
@@ -29,7 +29,7 @@
 
     <!--tab目录-->
     <string name="tab_main">首页</string>
-    <string name="tab_uye">U业</string>
+    <string name="tab_uye">@string/app_name</string>
     <string name="tab_mine">我的</string>
 
 
@@ -166,7 +166,7 @@
     <string name="order_info_advise_tips">请输入您课程顾问的姓名</string>
     <string name="order_info_upload_pic_hold_tips">请上传手持身份证照片</string>
     <string name="order_info_upload_pic_protocal_tips">请上传协议照片</string>
-    <string name="order_info_protocal_service">U业帮服务协议</string>
+    <string name="order_info_protocal_service">U业帮用户服务条款</string>
     <string name="order_info_protocal_auth">U业帮用户授权协议</string>
     <string name="order_info_protocal_formate">&#060;%s&#062;</string>
     <string name="order_info_protocal_service_tips">请阅读并同意勾选&#060;U业帮服务协议&#062;</string>

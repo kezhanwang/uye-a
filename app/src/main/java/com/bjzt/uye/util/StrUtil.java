@@ -203,4 +203,11 @@ public class StrUtil {
         strResult = strTime.replaceAll("-","/");
         return strResult;
     }
+
+    public static final boolean isWebUrlLegal(String url){
+        if(!TextUtils.isEmpty(url) && url.startsWith("http")){
+            return true;
+        }
+        return false;
+    }
 }

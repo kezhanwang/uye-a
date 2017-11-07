@@ -163,10 +163,9 @@ public class SearchActivity extends BaseActivity{
                             }
                         }
                         this.mAdapter.updatePageFlag(rspEntitiy.mEntity.page);
-                        udpatePageStatus(false);
+                        udpatePageStatus(false,false);
                     }else{
-                        String tips = getResources().getString(R.string.search_result_empty);
-                        showToast(tips);
+                        udpatePageStatus(false,true);
                     }
                 }else{
                     String tips = StrUtil.getErrorTipsByCode(errorCode,rspEntitiy);
@@ -180,35 +179,42 @@ public class SearchActivity extends BaseActivity{
         @Override
         public void onItemClick(Object obj, int tag) {
             PAgencyEntity pEntity = (PAgencyEntity) obj;
-            String orgId = MConfiger.TEST_ORG_ID;
-            switch(tag){
-                case SearchItemView.SRC_ITEM:
-//                    String tips = "开发中...";
-//                    showToast(tips);
-                    IntentUtils.startOrgDetailActivity(SearchActivity.this,orgId,REQ_DETAIL);
-                    break;
-                case SearchItemView.SRC_BTN_OK:
-                    //        this.orgId = "10049"; test code
-                    orgId = MConfiger.TEST_ORG_ID;
-//                    orgId = pEntity.org_id;
-                    if(LoginController.getInstance().isLogin()){
-//                        IntentUtils.startQAActivity(SearchActivity.this,orgId,REQ_DATA_CHECK);
-                        IntentUtils.startApplyFirstTransActivity(SearchActivity.this,orgId,REQ_DATA_CHECK);
-                    }else{
-                        IntentUtils.startLoginActivity(SearchActivity.this,LoginActivity.TYPE_PHONE_VERIFY_CODE,REQ_LOGIN);
-                    }
-                    break;
+            String orgId = pEntity.org_id;
+            if(!TextUtils.isEmpty(orgId)){
+                switch(tag){
+                    case SearchItemView.SRC_ITEM:
+                        IntentUtils.startOrgDetailActivity(SearchActivity.this,orgId,REQ_DETAIL);
+                        break;
+                    case SearchItemView.SRC_BTN_OK:
+                        if(LoginController.getInstance().isLogin()){
+                            IntentUtils.startApplyFirstTransActivity(SearchActivity.this,orgId,REQ_DATA_CHECK);
+                        }else{
+                            IntentUtils.startLoginActivity(SearchActivity.this,LoginActivity.TYPE_PHONE_VERIFY_CODE,REQ_LOGIN);
+                        }
+                        break;
+                }
+            }else{
+                String tips = getResources().getString(R.string.common_cfg_error);
+                showToast(tips);
             }
         }
     };
 
-    private void udpatePageStatus(boolean isHot){
+    private void udpatePageStatus(boolean isHot,boolean isSearchEmpty){
+        mEmptyView.setVisibility(View.GONE);
         if(isHot){
             mScrollView.setVisibility(View.VISIBLE);
             mMsgPage.setVisibility(View.GONE);
         }else{
             mScrollView.setVisibility(View.GONE);
             mMsgPage.setVisibility(View.VISIBLE);
+        }
+        if(isSearchEmpty){
+            mEmptyView.reSetState();
+            mEmptyView.setVisibility(View.VISIBLE);
+            mEmptyView.showErrorState();
+            String tips = getResources().getString(R.string.search_result_empty);
+            mEmptyView.setErrorTips(tips);
         }
     }
 
@@ -246,11 +252,11 @@ public class SearchActivity extends BaseActivity{
             if(mAdapter != null){
                 mAdapter.clear();
             }
-            udpatePageStatus(false);
+            udpatePageStatus(false,false);
             int seqNo = ProtocalManager.getInstance().reqSearchAgencyList(strInfo,1,getCallBack());
             mReqList.put(seqNo,PageAction.TYPE_REFRESH);
         }else{
-            udpatePageStatus(true);
+            udpatePageStatus(true,false);
         }
     }
 

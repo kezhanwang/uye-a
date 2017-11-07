@@ -3,6 +3,7 @@ package com.bjzt.uye.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +57,7 @@ public class FragmentHome extends BaseFragment{
     BlankEmptyView mEmptyView;
 
     private AdapterHome mAdapter;
-    private List<Integer> mReqList = new ArrayList<Integer>();
+    private List<Integer> mReqList = new ArrayList<>();
     private PHomeEntity pEntity;
 
     @Nullable
@@ -134,10 +135,9 @@ public class FragmentHome extends BaseFragment{
                         IntentUtils.startSearchActivity(getActivity(),MainActivity.REQ_SEARCH);
                         break;
                     case HomeHeader.TAG_LOC:
-                        showToast("开发中~");
                         break;
                     case HomeHeader.TAG_SYSMSG:
-                        showToast("开发中~");
+                        showToast(getResources().getString(R.string.dev_ing));
                         break;
                 }
             }else if(obj instanceof HomeLocView){
@@ -193,8 +193,13 @@ public class FragmentHome extends BaseFragment{
                 if(isSucc){
                     if(rspEntity.mEntity != null){
                         this.pEntity = rspEntity.mEntity;
-                        //set loc
-                        LBSController.getInstance().setLocStr(rspEntity.mEntity.loaction);
+                        String locTxt = rspEntity.mEntity.loaction;
+                        if(!TextUtils.isEmpty(locTxt)){
+                            //set loc
+                            LBSController.getInstance().setLocStr(rspEntity.mEntity.loaction);
+                            //headerview set loc
+                            mHeader.setLocTxt(rspEntity.mEntity.loaction);
+                        }
                         mEmptyView.loadSucc();
                         mMsgPage.setVisibility(View.VISIBLE);
                         List<BaseItemListener> mList = AdapterHome.buildList(rspEntity.mEntity);
@@ -233,5 +238,4 @@ public class FragmentHome extends BaseFragment{
             }
         });
     }
-
 }

@@ -71,7 +71,7 @@ public class FragmentMyInfo extends BaseFragment implements  View.OnClickListene
         mHeader.setIListener(new IHeaderListener() {
             @Override
             public void onRightClick() {
-                String tips = "开发中~";
+                String tips = getResources().getString(R.string.dev_ing);
                 showToast(tips);
             }
         });

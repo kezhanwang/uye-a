@@ -109,6 +109,7 @@ public class TestActivity extends BaseActivity{
         super.onCreate(savedInstanceState);
         String strMac = DeviceUtil.getMacAdd();
         MyLog.d(TAG,"[onCreate]" + " strMac:" + strMac);
+        //稍后献上，敬请期待  开发中~
     }
 
     @Override

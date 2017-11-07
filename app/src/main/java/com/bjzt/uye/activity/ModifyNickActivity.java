@@ -44,7 +44,7 @@ public class ModifyNickActivity extends BaseActivity{
                     showToast(tips);
                     return;
                 }
-                String tips = "开发中~";
+                String tips = getResources().getString(R.string.dev_ing);
                 showToast(tips);
             }
         });

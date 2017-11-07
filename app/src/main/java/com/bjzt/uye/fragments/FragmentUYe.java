@@ -1,5 +1,6 @@
 package com.bjzt.uye.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -140,7 +141,7 @@ public class FragmentUYe extends BaseFragment{
         public void onItemClick(Object obj, int tag) {
             switch(tag){
                 case InsureOrderItemView.SRC_EMPLOYED:
-                    showToast("开发中~");
+                    showToast(getResources().getString(R.string.dev_ing));
                     break;
                 case InsureOrderItemView.SRC_EMPOY_PROGRESS:
                     IntentUtils.startEmployProActivity(getActivity(),"",MainActivity.REQ_EMPLOY_PRO);

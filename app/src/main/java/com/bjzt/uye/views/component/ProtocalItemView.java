@@ -65,7 +65,7 @@ public class ProtocalItemView extends RelativeLayout implements NoConfusion, Vie
     public void updateType(int mType){
         this.mType = mType;
         List<String> mList = new ArrayList<>();
-        String str = "我已阅读并同意";
+        String str = "我同意";
         switch(this.mType){
             case TYPE_AUTH:
                 String s = getResources().getString(R.string.order_info_protocal_auth);

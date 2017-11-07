@@ -55,7 +55,7 @@ public class ApplyEmployProActivity extends BaseActivity{
         String txtRight = getResources().getString(R.string.employ_progress_add);
         mHeader.setRightTxt(txtRight);
 
-        String tips = "就业进展列表开发中~";
+        String tips = "就业进展列" + getResources().getString(R.string.dev_ing);
         showToast(tips);
     }
 

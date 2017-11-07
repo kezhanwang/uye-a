@@ -8,6 +8,9 @@ import android.widget.ScrollView;
 
 import com.bjzt.uye.R;
 import com.bjzt.uye.activity.base.BaseActivity;
+import com.bjzt.uye.activity.dialog.DialogKF;
+import com.bjzt.uye.activity.dialog.DialogPicSelect;
+import com.bjzt.uye.entity.POrgDetailEntity;
 import com.bjzt.uye.entity.POrganizeEntity;
 import com.bjzt.uye.global.MConfiger;
 import com.bjzt.uye.http.ProtocalManager;
@@ -57,6 +60,8 @@ public class OrgDetailActivity extends BaseActivity{
 
     private final int REQ_DATA_CHECK = 10;
     private final int REQ_LOGIN = 11;
+    private DialogKF mDialogKf;
+    private POrgDetailEntity mEntity;
 
     @Override
     protected int getLayoutID() {
@@ -92,18 +97,19 @@ public class OrgDetailActivity extends BaseActivity{
         public void onItemClick(Object obj, int tag) {
             if(tag == OrgDetailBtnArea.SRC_SIGN){
                 btnSign();
+            }else if(tag == OrgDetailBtnArea.SRC_PHONE){
+                if(mEntity != null && mEntity.organize != null && !TextUtils.isEmpty(mEntity.organize.phone)){
+                    showDialogKF(mEntity.organize.phone);
+                }
             }else{
-                String tips = "开发中...";
+                String tips = getResources().getString(R.string.dev_ing);
                 showToast(tips);
             }
         }
     };
 
     private void btnSign(){
-        String orgId = MConfiger.TEST_ORG_ID;
-//                    orgId = pEntity.org_id;
         if(LoginController.getInstance().isLogin()){
-//                        IntentUtils.startQAActivity(SearchActivity.this,orgId,REQ_DATA_CHECK);
             IntentUtils.startApplyFirstTransActivity(OrgDetailActivity.this,orgId,REQ_DATA_CHECK);
         }else{
             IntentUtils.startLoginActivity(OrgDetailActivity.this,LoginActivity.TYPE_PHONE_VERIFY_CODE,REQ_LOGIN);
@@ -130,6 +136,7 @@ public class OrgDetailActivity extends BaseActivity{
                 RspOrgDetailEntity rspEntity = (RspOrgDetailEntity) rsp;
                 if(isSucc){
                     if(rspEntity.mEntity != null){
+                        this.mEntity = rspEntity.mEntity;
                         mEmptyView.loadSucc();
                         mScrollView.setVisibility(View.VISIBLE);
                         mBtnArea.setVisibility(View.VISIBLE);
@@ -143,8 +150,16 @@ public class OrgDetailActivity extends BaseActivity{
                             mCourseView.setCourseList(rspEntity.mEntity.courses);
                         }
                         //set course info
-                        String url = "http://api2.kezhanwang.cn/app/apiv20/getdesp?cid=1000274";
-                        mCourseInfo.setOrgInfo(url);
+                        String url = null;
+                        if(rspEntity.mEntity.organize != null){
+                            url = rspEntity.mEntity.organize.description;
+                        }
+                        if(StrUtil.isWebUrlLegal(url)){
+                            mCourseInfo.setVisibility(View.VISIBLE);
+                            mCourseInfo.setOrgInfo(url);
+                        }else{
+                            mCourseInfo.setVisibility(View.GONE);
+                        }
                     }else{
                         String tips = getResources().getString(R.string.common_cfg_empty);
                         initErrorStatus(tips);
@@ -154,6 +169,27 @@ public class OrgDetailActivity extends BaseActivity{
                     initErrorStatus(tips);
                 }
             }
+        }
+    }
+
+    private void showDialogKF(final String tel){
+        hideDialogKF();
+        this.mDialogKf = new DialogKF(this,R.style.MyDialogBg);
+        this.mDialogKf.updateType(DialogKF.TYPE_KF);
+        this.mDialogKf.setTel(tel,null);
+        this.mDialogKf.show();
+        this.mDialogKf.setDialogClickListener(new DialogPicSelect.DialogClickListener() {
+            @Override
+            public void ItemMiddleClick() {
+                IntentUtils.startSysCallActivity(OrgDetailActivity.this,tel);
+            }
+        });
+    }
+
+    private void hideDialogKF(){
+        if(this.mDialogKf != null){
+            this.mDialogKf.dismiss();
+            this.mDialogKf = null;
         }
     }
 
@@ -181,5 +217,11 @@ public class OrgDetailActivity extends BaseActivity{
         super.finish();
         //关闭窗体动画显示
         this.overridePendingTransition(R.anim.activity_left_in, R.anim.activity_right_out);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        hideDialogKF();
     }
 }

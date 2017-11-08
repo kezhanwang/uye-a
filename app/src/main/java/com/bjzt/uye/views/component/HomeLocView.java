@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -24,12 +25,16 @@ import butterknife.ButterKnife;
  */
 public class HomeLocView extends BaseItemView<VHomeLocEntity> implements NoConfusion, View.OnClickListener{
 
+    @BindView(R.id.home_loc_rela_main)
+    RelativeLayout mRelaMain;
     @BindView(R.id.home_btn_ok)
     Button btnOk;
     @BindView(R.id.home_loc_txt_clickme)
     TextView txtBtnClick;
     @BindView(R.id.txt_loc)
     TextView mTxtOrgName;
+    @BindView(R.id.linear_loc)
+    LinearLayout mLinearLoc;
 
     private IItemListener mListener;
 
@@ -45,11 +50,15 @@ public class HomeLocView extends BaseItemView<VHomeLocEntity> implements NoConfu
     @Override
     public void setMsg(VHomeLocEntity vHomeLocEntity) {
         this.mEntity = vHomeLocEntity;
+        int topMargin = 0;
+        int h = 0;
         if(this.mEntity.organize == null || this.mEntity.organize.size() <= 0){
-            txtBtnClick.setEnabled(false);
+            mLinearLoc.setVisibility(View.GONE);
             mTxtOrgName.setText("未知机构");
+            topMargin = (int) getResources().getDimension(R.dimen.common_margin_22);
+            h = (int) getResources().getDimension(R.dimen.home_loc_item_height_s);
         }else{
-            txtBtnClick.setEnabled(true);
+            mLinearLoc.setVisibility(View.VISIBLE);
             POrganizeEntity orgEntity = this.mEntity.organize.get(0);
             String name = null;
             if(orgEntity != null){
@@ -60,7 +69,15 @@ public class HomeLocView extends BaseItemView<VHomeLocEntity> implements NoConfu
             }else{
                 mTxtOrgName.setText("");
             }
+            topMargin = (int) getResources().getDimension(R.dimen.common_margin);
+            h = (int) getResources().getDimension(R.dimen.home_loc_item_height_l);
         }
+        RelativeLayout.LayoutParams llp = (LayoutParams) btnOk.getLayoutParams();
+        llp.topMargin = topMargin;
+        btnOk.setLayoutParams(llp);
+        llp = (LayoutParams) mRelaMain.getLayoutParams();
+        llp.height = h;
+        mRelaMain.setLayoutParams(llp);
     }
 
     @Override

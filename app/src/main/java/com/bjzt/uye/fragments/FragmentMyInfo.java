@@ -57,6 +57,7 @@ public class FragmentMyInfo extends BaseFragment implements  View.OnClickListene
     private final int FLAG_TOAST_SHOW = 12;
 
     private DialogKF mDialogKF;
+    private boolean isLoaded;
 
     @Nullable
     @Override
@@ -268,4 +269,9 @@ public class FragmentMyInfo extends BaseFragment implements  View.OnClickListene
         }
     }
 
+    @Override
+    public void fragmentSelected() {
+        super.fragmentSelected();
+        refresh();
+    }
 }

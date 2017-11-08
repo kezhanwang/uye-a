@@ -1,6 +1,5 @@
 package com.bjzt.uye.fragments.base;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
@@ -11,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.bjzt.uye.R;
 import com.bjzt.uye.global.Global;
 import com.bjzt.uye.http.listener.ICallBack;

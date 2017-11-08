@@ -46,6 +46,7 @@ public class FragmentUYe extends BaseFragment{
 
     private List<Integer> mReqList = new ArrayList<>();
     private UYeAdapter mAdapter;
+    private boolean isLoaded;
 
     @Nullable
     @Override
@@ -61,7 +62,7 @@ public class FragmentUYe extends BaseFragment{
         mHeader.setRightClickAble(false);
         String title = getResources().getString(R.string.tab_uye);
         mHeader.setTitle(title);
-        String txtRight = "0/0";
+        String txtRight = getResources().getString(R.string.order_info_empty_zero);
         mHeader.setRightTxt(txtRight);
 
         mEmptyView.updateType(BlankEmptyView.TYPE_EMPTY_ORDER);
@@ -71,11 +72,6 @@ public class FragmentUYe extends BaseFragment{
 
         OtherController.getInstance().registerRefreshListener(mDataRefreshListener);
         LoginController.getInstance().registerListener(mLoginListener);
-
-        if(LoginController.getInstance().isLogin()){
-            int seqNo = ProtocalManager.getInstance().reqOrderList(PageType.FIRST_PAGE,getCallBack());
-            mReqList.add(seqNo);
-        }
     }
 
     private ILoginListener mLoginListener = new ILoginListener() {
@@ -129,7 +125,7 @@ public class FragmentUYe extends BaseFragment{
     };
 
     private void reSetRightTxtTips(int curCnt){
-        String tips = "0/0";
+        String tips = getResources().getString(R.string.order_info_empty_zero);
         if(mAdapter != null){
             int totalCnt = mAdapter.getCount();
             tips = curCnt + "/" + totalCnt;
@@ -177,7 +173,7 @@ public class FragmentUYe extends BaseFragment{
                             initErrorStatus(tips);
                         }
                     }else{
-                        String tips = getResources().getString(R.string.common_cfg_empty);
+                        String tips = getResources().getString(R.string.common_cfg_empty_orderlist);
                         initErrorStatus(tips);
                     }
                 }else{
@@ -222,5 +218,14 @@ public class FragmentUYe extends BaseFragment{
         super.refreshPage();
         int seqNo = ProtocalManager.getInstance().reqOrderList(PageType.FIRST_PAGE,getCallBack());
         mReqList.add(seqNo);
+    }
+
+    @Override
+    public void fragmentSelected() {
+        super.fragmentSelected();
+        if(!this.isLoaded){
+            refreshPage();
+            this.isLoaded = true;
+        }
     }
 }

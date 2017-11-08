@@ -16,6 +16,7 @@ import com.bjzt.uye.adapter.AdapterHome;
 import com.bjzt.uye.controller.LBSController;
 import com.bjzt.uye.controller.OtherController;
 import com.bjzt.uye.entity.PHomeEntity;
+import com.bjzt.uye.entity.POrganizeEntity;
 import com.bjzt.uye.fragments.base.BaseFragment;
 import com.bjzt.uye.global.MConfiger;
 import com.bjzt.uye.http.ProtocalManager;
@@ -146,7 +147,14 @@ public class FragmentHome extends BaseFragment{
                         if(pEntity != null){
                             if(ac != null){
                                 if(LoginController.getInstance().isLogin()){
-                                    IntentUtils.startApplyFirstTransActivity(ac,MConfiger.TEST_ORG_ID,MainActivity.REQ_START_APPLY);
+                                    if(pEntity == null || pEntity.organize == null || pEntity.organize.size() <= 0){
+                                        IntentUtils.startSearchActivity(getActivity(),MainActivity.REQ_SEARCH);
+                                    }else{
+                                        POrganizeEntity orgEntity = pEntity.organize.get(0);
+                                        if(orgEntity != null && !TextUtils.isEmpty(orgEntity.org_id)){
+                                            IntentUtils.startApplyFirstTransActivity(ac,orgEntity.org_id,MainActivity.REQ_START_APPLY);
+                                        }
+                                    }
                                 }else{
                                     IntentUtils.startLoginActivity(ac, LoginActivity.TYPE_PHONE_VERIFY_CODE,MainActivity.REQ_CODE_LOGIN);
                                 }

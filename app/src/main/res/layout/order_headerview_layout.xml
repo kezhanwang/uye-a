@@ -33,7 +33,6 @@
         android:layout_marginLeft="@dimen/common_margin"
         />
 
-
     <TextView
         android:id="@+id/txt_course_name"
         android:layout_width="wrap_content"
@@ -45,6 +44,8 @@
         android:text="北京完美动力培训学校"
         android:layout_marginLeft="@dimen/common_margin_8"
         android:maxLines="2"
+        android:singleLine="true"
+        android:ellipsize="end"
         />
 
     <TextView

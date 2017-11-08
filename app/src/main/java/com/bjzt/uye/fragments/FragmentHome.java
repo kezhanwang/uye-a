@@ -69,7 +69,6 @@ public class FragmentHome extends BaseFragment{
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         ButterKnife.bind(this, view);
-
         mHeader.setIItemListener(mItemListener);
 
 
@@ -167,9 +166,15 @@ public class FragmentHome extends BaseFragment{
                 switch(tag){
                     case HomeOrderInfoView.SRC_RELA_LEFT:
                         Activity ac = getActivity();
-                        if(ac instanceof  MainActivity){
-                            MainActivity mAc = (MainActivity) ac;
-                            mAc.setIndex(1);
+                        if(ac != null){
+                            if(LoginController.getInstance().isLogin()){
+                                if(ac instanceof  MainActivity){
+                                    MainActivity mAc = (MainActivity) ac;
+                                    mAc.setIndex(1);
+                                }
+                            }else{
+                                IntentUtils.startLoginActivity(ac,MainActivity.REQ_CODE_LOGIN);
+                            }
                         }
                         break;
                 }
@@ -237,5 +242,12 @@ public class FragmentHome extends BaseFragment{
                 mReqList.add(seqNo);
             }
         });
+    }
+
+    @Override
+    public void refreshPage() {
+        super.refreshPage();
+        int seqNo = ProtocalManager.getInstance().reqHomeInfo(getCallBack());
+        mReqList.add(seqNo);
     }
 }

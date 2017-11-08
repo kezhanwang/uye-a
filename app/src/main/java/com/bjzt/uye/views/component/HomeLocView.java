@@ -1,6 +1,7 @@
 package com.bjzt.uye.views.component;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bjzt.uye.R;
+import com.bjzt.uye.entity.POrganizeEntity;
 import com.bjzt.uye.entity.VHomeLocEntity;
 import com.bjzt.uye.listener.IItemListener;
 import com.common.listener.NoConfusion;
@@ -26,6 +28,8 @@ public class HomeLocView extends BaseItemView<VHomeLocEntity> implements NoConfu
     Button btnOk;
     @BindView(R.id.home_loc_txt_clickme)
     TextView txtBtnClick;
+    @BindView(R.id.txt_loc)
+    TextView mTxtOrgName;
 
     private IItemListener mListener;
 
@@ -41,6 +45,22 @@ public class HomeLocView extends BaseItemView<VHomeLocEntity> implements NoConfu
     @Override
     public void setMsg(VHomeLocEntity vHomeLocEntity) {
         this.mEntity = vHomeLocEntity;
+        if(this.mEntity.organize == null || this.mEntity.organize.size() <= 0){
+            txtBtnClick.setEnabled(false);
+            mTxtOrgName.setText("未知机构");
+        }else{
+            txtBtnClick.setEnabled(true);
+            POrganizeEntity orgEntity = this.mEntity.organize.get(0);
+            String name = null;
+            if(orgEntity != null){
+                name = orgEntity.org_name;
+            }
+            if(!TextUtils.isEmpty(name)){
+                mTxtOrgName.setText(name);
+            }else{
+                mTxtOrgName.setText("");
+            }
+        }
     }
 
     @Override

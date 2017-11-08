@@ -4,9 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.TabHost;
 import com.bjzt.uye.R;
 import com.bjzt.uye.activity.base.BaseActivity;
@@ -18,6 +21,7 @@ import com.bjzt.uye.fragments.FragmentHome;
 import com.bjzt.uye.fragments.FragmentMain;
 import com.bjzt.uye.fragments.FragmentMyInfo;
 import com.bjzt.uye.fragments.FragmentUYe;
+import com.bjzt.uye.fragments.base.BaseFragment;
 import com.bjzt.uye.global.Global;
 import com.bjzt.uye.http.ProtocalManager;
 import com.bjzt.uye.http.rsp.RspUpgradeEntity;
@@ -73,7 +77,7 @@ public class MainActivity extends BaseActivity {
             }
         }
         //缓存几个页面
-        mViewPager.setOffscreenPageLimit(4);
+        mViewPager.setOffscreenPageLimit(3);
 
         Global.postDelay(rDelay);
     }
@@ -213,7 +217,24 @@ public class MainActivity extends BaseActivity {
                 case REQ_START_APPLY:
                     String tips = "申请成功~";
                     showToast(tips);
+                    refreshPage();
                     break;
+            }
+        }
+    }
+
+    private void refreshPage(){
+        FragmentManager fm = this.getSupportFragmentManager();
+        if(fm != null){
+            List<Fragment> mList = fm.getFragments();
+            if(mList != null && mList.size() > 0){
+                for(int i = 0;i < mList.size();i++){
+                    Fragment f = mList.get(i);
+                    if(f != null && f instanceof  BaseFragment){
+                        BaseFragment bf = (BaseFragment) f;
+                        bf.refreshPage();
+                    }
+                }
             }
         }
     }

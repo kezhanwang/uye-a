@@ -1,6 +1,5 @@
 package com.bjzt.uye.fragments;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -13,7 +12,6 @@ import com.bjzt.uye.activity.MainActivity;
 import com.bjzt.uye.adapter.UYeAdapter;
 import com.bjzt.uye.controller.OtherController;
 import com.bjzt.uye.entity.PInsureOrderEntity;
-import com.bjzt.uye.entity.PInsureOrderItemEntity;
 import com.bjzt.uye.fragments.base.BaseFragment;
 import com.bjzt.uye.global.Global;
 import com.bjzt.uye.http.ProtocalManager;
@@ -73,8 +71,11 @@ public class FragmentUYe extends BaseFragment{
 
         OtherController.getInstance().registerRefreshListener(mDataRefreshListener);
         LoginController.getInstance().registerListener(mLoginListener);
-        int seqNo = ProtocalManager.getInstance().reqOrderList(PageType.FIRST_PAGE,getCallBack());
-        mReqList.add(seqNo);
+
+        if(LoginController.getInstance().isLogin()){
+            int seqNo = ProtocalManager.getInstance().reqOrderList(PageType.FIRST_PAGE,getCallBack());
+            mReqList.add(seqNo);
+        }
     }
 
     private ILoginListener mLoginListener = new ILoginListener() {
@@ -200,7 +201,7 @@ public class FragmentUYe extends BaseFragment{
             public void btnRefresh() {
                 if(LoginController.getInstance().isLogin()){
                     mEmptyView.showLoadingState();
-                    int seqNo = ProtocalManager.getInstance().reqOrderList(1,getCallBack());
+                    int seqNo = ProtocalManager.getInstance().reqOrderList(PageType.FIRST_PAGE,getCallBack());
                     mReqList.add(seqNo);
                 }else{
                     IntentUtils.startLoginActivity(getActivity(), LoginActivity.TYPE_PHONE_VERIFY_CODE,MainActivity.REQ_CODE_LOGIN);
@@ -214,5 +215,12 @@ public class FragmentUYe extends BaseFragment{
         super.onDestroy();
         OtherController.getInstance().unRegisterRefreshListener(mDataRefreshListener);
         LoginController.getInstance().unRegisterListener(mLoginListener);
+    }
+
+    @Override
+    public void refreshPage() {
+        super.refreshPage();
+        int seqNo = ProtocalManager.getInstance().reqOrderList(PageType.FIRST_PAGE,getCallBack());
+        mReqList.add(seqNo);
     }
 }

@@ -103,4 +103,9 @@ public class BaseFragment extends Fragment {
     protected void sendMsg(Message msg){
         uiHandler.sendMessage(msg);
     }
+
+    /***
+     * 刷新UI
+     */
+    public void refreshPage(){}
 }

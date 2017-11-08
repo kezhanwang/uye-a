@@ -19,7 +19,6 @@ import com.common.msglist.base.BaseItemView;
 public class DCourseListItemView extends BaseItemView<PCourseEntity> implements View.OnClickListener{
     private PCourseEntity mEntity;
     private TextView mTxtName;
-    private ImageView imgSelect;
     private RelativeLayout mRela;
     private IItemListener mListener;
 
@@ -37,13 +36,13 @@ public class DCourseListItemView extends BaseItemView<PCourseEntity> implements 
         }else{
             this.mTxtName.setText("");
         }
-        //set select img flag
-        boolean isSelect = this.mEntity.vIsSelected;
-        if(isSelect){
-            this.imgSelect.setVisibility(View.VISIBLE);
-        }else{
-            this.imgSelect.setVisibility(View.GONE);
-        }
+//        //set select img flag
+//        boolean isSelect = this.mEntity.vIsSelected;
+//        if(isSelect && imgSelect != null){
+//            this.imgSelect.setVisibility(View.VISIBLE);
+//        }else{
+//            this.imgSelect.setVisibility(View.GONE);
+//        }
     }
 
     @Override
@@ -58,7 +57,6 @@ public class DCourseListItemView extends BaseItemView<PCourseEntity> implements 
         this.mRela = (RelativeLayout) this.findViewById(R.id.dialog_rela_main);
         this.mRela.setOnClickListener(this);
         this.mTxtName = (TextView) this.findViewById(R.id.banklist_txtview_name);
-        this.imgSelect = (ImageView) this.findViewById(R.id.banklist_imgview_select);
     }
 
     @Override

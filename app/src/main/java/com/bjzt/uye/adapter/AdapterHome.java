@@ -72,6 +72,7 @@ public class AdapterHome extends MutiBaseListAdapter{
         //build loc entity
         VHomeLocEntity locEntity = new VHomeLocEntity();
         locEntity.strLoc = pEntity.loaction;
+        locEntity.organize = pEntity.organize;
         rList.add(locEntity);
         return rList;
     }

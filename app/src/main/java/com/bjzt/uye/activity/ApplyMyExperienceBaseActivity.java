@@ -98,6 +98,7 @@ public class ApplyMyExperienceBaseActivity extends BaseActivity implements  View
         mHeader.setIListener(new IHeaderListener() {
             @Override
             public void onLeftClick() {
+                setResult(Activity.RESULT_OK);
                 finish();
             }
         });
@@ -326,7 +327,7 @@ public class ApplyMyExperienceBaseActivity extends BaseActivity implements  View
                     src = SRC_INCOME;
                     mList = pEntity.monthly_income;
                     strSelect = mItemViewIncome.getInputTxt();
-                }else{
+                }else if(v == mItemViewOcc.getEditTxt()){
                     src = SRC_OCC;
                     mList = pEntity.profession;
                     strSelect = mItemViewOcc.getInputTxt();
@@ -370,6 +371,7 @@ public class ApplyMyExperienceBaseActivity extends BaseActivity implements  View
                             break;
                         case SRC_OCC:
                             mItemViewOcc.setEditTxt(strInfo);
+                            strDegree = strInfo;
                             break;
                     }
                 }

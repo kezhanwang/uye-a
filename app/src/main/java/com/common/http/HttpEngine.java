@@ -31,7 +31,7 @@ public class HttpEngine extends Thread {
 		// TODO Auto-generated constructor stub
 		super("HttpEnginePool");
 		//0->正式域名
-		mMapUrl.put(NetCommon.NET_TYPE_INDEX_OFFICAL,"http://dev.bjzhongteng.com");
+		mMapUrl.put(NetCommon.NET_TYPE_INDEX_OFFICAL,"http://www.bjzhongteng.com");
 		//1->开发域名
 		mMapUrl.put(NetCommon.NET_TYPE_INDEX_DEV,"http://dev.bjzhongteng.com");
 		//2->测试域名 .app "http://test1.app.kezhanwang.cn/saas";

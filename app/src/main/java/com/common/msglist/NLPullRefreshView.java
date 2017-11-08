@@ -369,7 +369,7 @@ public class NLPullRefreshView extends LinearLayout implements NoConfusion {
 		downTextView.setVisibility(View.VISIBLE);
 		refreshIndicatorView.setVisibility(View.VISIBLE);
 		bar.setVisibility(View.GONE);
-		imgLogo.setVisibility(View.VISIBLE);
+		imgLogo.setVisibility(View.INVISIBLE);
 		if (lp.topMargin > 0) {
 			downTextView.setText(releaseCanRefreshText);
 			refreshIndicatorView.setImageResource(R.drawable.refresh_arrow_up);

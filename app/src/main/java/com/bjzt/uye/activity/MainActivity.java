@@ -212,7 +212,7 @@ public class MainActivity extends BaseActivity {
         if(resultCode == Activity.RESULT_OK){
             switch(requestCode){
                 case REQ_SEARCH:
-                    OtherController.getInstance().notifyRefresh();
+                    refreshPage();
                     break;
                 case REQ_START_APPLY:
                     String tips = "申请成功~";

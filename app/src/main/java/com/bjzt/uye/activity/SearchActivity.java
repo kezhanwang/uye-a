@@ -277,6 +277,7 @@ public class SearchActivity extends BaseActivity{
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == Activity.RESULT_OK){
             switch(requestCode){
+                case REQ_DETAIL:
                 case REQ_DATA_CHECK:
                     String tips = "申请成功~";
                     showToast(tips);

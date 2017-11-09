@@ -38,11 +38,12 @@ public class POrganizeEntity implements Serializable{
      * 获取投保类型
      * @return
      * 1：就业帮 2：高薪帮
+     * 目前只是支持就业帮
      */
     public int getInsureType(){
-        if(is_high_salary > 0){
-            return 2;
-        }
+//        if(is_high_salary > 0){
+//            return 2;
+//        }
         return 1;
     }
 }

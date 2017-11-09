@@ -121,16 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/common_margin"
                 android:layout_marginTop="@dimen/common_margin_10"
-                android:layout_marginBottom="42dp"
-                ></com.bjzt.uye.views.component.ProtocalItemView>
-
-            <com.bjzt.uye.views.component.ProtocalItemView
-                android:id="@+id/proto_item_auth"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/common_margin"
-                android:layout_marginTop="@dimen/common_margin_10"
-                android:visibility="gone"
+                android:layout_marginBottom="28dp"
                 ></com.bjzt.uye.views.component.ProtocalItemView>
 
         </LinearLayout>

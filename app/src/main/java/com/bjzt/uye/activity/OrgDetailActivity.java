@@ -1,5 +1,6 @@
 package com.bjzt.uye.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -12,7 +13,6 @@ import com.bjzt.uye.activity.dialog.DialogKF;
 import com.bjzt.uye.activity.dialog.DialogPicSelect;
 import com.bjzt.uye.entity.POrgDetailEntity;
 import com.bjzt.uye.entity.POrganizeEntity;
-import com.bjzt.uye.global.MConfiger;
 import com.bjzt.uye.http.ProtocalManager;
 import com.bjzt.uye.http.rsp.RspOrgDetailEntity;
 import com.bjzt.uye.listener.IHeaderListener;
@@ -24,7 +24,6 @@ import com.bjzt.uye.views.component.OrgDetailBtnArea;
 import com.bjzt.uye.views.component.OrgDetailCourseInfoView;
 import com.bjzt.uye.views.component.OrgDetailCourseView;
 import com.bjzt.uye.views.component.OrgDetailHeaderView;
-import com.bjzt.uye.views.component.ScoreView;
 import com.bjzt.uye.views.component.YHeaderView;
 import com.common.controller.LoginController;
 
@@ -58,8 +57,9 @@ public class OrgDetailActivity extends BaseActivity{
     private String orgId;
     private List<Integer> mReqList = new ArrayList<Integer>();
 
-    private final int REQ_DATA_CHECK = 10;
+    private final int REQ_DATA_CHECK_APPLY = 10;
     private final int REQ_LOGIN = 11;
+
     private DialogKF mDialogKf;
     private POrgDetailEntity mEntity;
 
@@ -110,7 +110,7 @@ public class OrgDetailActivity extends BaseActivity{
 
     private void btnSign(){
         if(LoginController.getInstance().isLogin()){
-            IntentUtils.startApplyFirstTransActivity(OrgDetailActivity.this,orgId,REQ_DATA_CHECK);
+            IntentUtils.startApplyFirstTransActivity(OrgDetailActivity.this,orgId, REQ_DATA_CHECK_APPLY);
         }else{
             IntentUtils.startLoginActivity(OrgDetailActivity.this,LoginActivity.TYPE_PHONE_VERIFY_CODE,REQ_LOGIN);
         }
@@ -217,6 +217,19 @@ public class OrgDetailActivity extends BaseActivity{
         super.finish();
         //关闭窗体动画显示
         this.overridePendingTransition(R.anim.activity_left_in, R.anim.activity_right_out);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == Activity.RESULT_OK){
+            switch(requestCode){
+                case REQ_DATA_CHECK_APPLY:
+                    setResult(Activity.RESULT_OK);
+                    finish();
+                    break;
+            }
+        }
     }
 
     @Override

@@ -3,20 +3,16 @@ package com.bjzt.uye.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ScrollView;
-
 import com.bjzt.uye.R;
 import com.bjzt.uye.activity.base.BaseActivity;
 import com.bjzt.uye.adapter.QAAdapter;
 import com.bjzt.uye.entity.PQACfgItemEntity;
 import com.bjzt.uye.entity.VQAItemEntity;
 import com.bjzt.uye.entity.VQAResultEntity;
-import com.bjzt.uye.entity.VQATitleEntity;
-import com.bjzt.uye.global.MConfiger;
 import com.bjzt.uye.http.ProtocalManager;
 import com.bjzt.uye.http.rsp.RspQACfgEntity;
 import com.bjzt.uye.http.rsp.RspQASubmitEntity;
@@ -30,7 +26,6 @@ import com.bjzt.uye.views.component.TipsSubHeaderView;
 import com.bjzt.uye.views.component.YHeaderView;
 import com.common.common.MyLog;
 import com.common.msglist.base.BaseListAdapter;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

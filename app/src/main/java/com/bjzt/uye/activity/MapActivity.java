@@ -38,6 +38,9 @@ import com.bjzt.uye.util.MapUtil;
 import com.bjzt.uye.views.component.YHeaderView;
 import com.common.common.MyLog;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+
 import butterknife.BindView;
 
 public class MapActivity extends BaseActivity {
@@ -107,11 +110,22 @@ public class MapActivity extends BaseActivity {
 		address=getIntent().getStringExtra(IntentUtils.ADDRESS);
 		
 		//test code 108.953542,34.22527
-		lat = 34.2212080000;
-		lng = 108.9555180000;
+//		lat = 34.2212080000;
+//		lng = 108.9555180000;
 		//34.1295220000,108.8400530000
-		lat = 34.1295220000;
-		lng = 108.8400530000;
+//		lat = 34.129522;
+//		lng = 108.840053;
+//		DecimalFormat df = new DecimalFormat(".##########");
+//		String strLa = df.format(lat);
+//		lat = Double.parseDouble(strLa);
+//		String strLo = df.format(lng);
+//		lng = Double.parseDouble(strLo);
+
+//		BigDecimal b = new BigDecimal(lat);
+//		lat = b.setScale(10,BigDecimal.ROUND_HALF_UP).doubleValue();
+//		b = new BigDecimal(lng);
+//		lng = b.setScale(10,BigDecimal.ROUND_HALF_UP).doubleValue();
+		MyLog.d(TAG,"[initExtras]" + " la:" + lat + " lng:" + lng);
 	}
 
 	private void setUpMap() {
@@ -145,10 +159,11 @@ public class MapActivity extends BaseActivity {
 		mInfoWindow = new InfoWindow(view, point, -90);
 		// 显示InfoWindow
 		map.showInfoWindow(mInfoWindow);
-//		MapStatusUpdate statusUpdate = MapStatusUpdateFactory.newLatLng(point);
-//		map.setMapStatus(statusUpdate);
-//		MapStatusUpdate zoomTo = MapStatusUpdateFactory.zoomTo(16);
-//		map.setMapStatus(zoomTo);
+
+		MapStatusUpdate statusUpdate = MapStatusUpdateFactory.newLatLng(point);
+		map.setMapStatus(statusUpdate);
+		MapStatusUpdate zoomTo = MapStatusUpdateFactory.zoomTo(16);
+		map.setMapStatus(zoomTo);
 
 //		设置所有Overlay全部显示
 //		new OverlayManager(map) {

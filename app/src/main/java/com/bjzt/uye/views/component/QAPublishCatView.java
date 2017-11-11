@@ -100,7 +100,7 @@ public class QAPublishCatView extends LinearLayout implements NoConfusion {
                 }
             }
 
-            if (tempList != null) {
+            if (tempList != null && (i-1) >= 0) {
                 int index = (i-1) / ROW_CNT;
                 LocRowItem item = mLocViewList.get(index);
                 item.setIndex(index);
@@ -152,8 +152,8 @@ public class QAPublishCatView extends LinearLayout implements NoConfusion {
                 }
             }
 
-            if(tempList != null){
-                int index = i / ROW_CNT;
+            if(tempList != null && (i-1) >= 0){
+                int index = (i-1) / ROW_CNT;
                 QARowItem item = mQAList.get(index);
                 item.setIndex(index);
                 item.setInfo(tempList);

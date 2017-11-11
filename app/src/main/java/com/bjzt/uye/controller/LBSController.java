@@ -51,11 +51,16 @@ public class LBSController {
     }
 
     private void notifyLBS(){
-        for(ILBSListener mListener : mSet){
-            if(mListener != null){
-                mListener.onLBSNotify();
+        Global.post2UI(new Runnable() {
+            @Override
+            public void run() {
+                for(ILBSListener mListener : mSet){
+                    if(mListener != null){
+                        mListener.onLBSNotify();
+                    }
+                }
             }
-        }
+        });
     }
 
     public synchronized  static final LBSController getInstance(){

@@ -43,13 +43,14 @@ public class SplashActivity extends BaseActivity{
     }
 
     private void delayTask(){
+        //开始定位
+        LBSController.getInstance().startLoc();
+
         Global.postDelay(new Runnable() {
             @Override
             public void run() {
                 //快捷方式创建
                 ShortCutUtils.createShortCut(SplashActivity.this);
-                //开始定位
-                LBSController.getInstance().startLoc();
                 Message msg = Message.obtain();
                 msg.what = FLAG_MSG_DELAY;
                 sendMsgDelay(msg, MConfiger.SPLASH_INTERVAL);

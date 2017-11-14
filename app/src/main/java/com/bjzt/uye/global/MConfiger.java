@@ -11,7 +11,7 @@ public class MConfiger {
     public static final String JPUSH_ID = "0000";
     public static String CHANNEL_ID = "6000";
 
-    public static final boolean isDebug = true; //是否开启debug开关
+    public static final boolean isDebug = false; //是否开启debug开关
     public static final boolean isJsonDebug = false; //json解析debug开关是否打开
 
     public static final int AUTO_LOAD_ITEM_CNT = 16;

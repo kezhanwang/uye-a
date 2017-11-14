@@ -238,6 +238,9 @@ public class ApplyContactInfoActivity extends BaseActivity implements  View.OnCl
                     showToast(tips);
                     setResult(Activity.RESULT_OK);
                     finish();
+                }else{
+                    String tips = StrUtil.getErrorTipsByCode(errorCode,rspEntity);
+                    showToast(tips);
                 }
             }
         }

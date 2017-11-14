@@ -143,6 +143,7 @@ public class BindCardPhotoView extends RelativeLayout implements NoConfusion,Vie
                     d = getResources().getDrawable(R.drawable.bind_card_front);
                 }
                 mViewLineBottom.setVisibility(View.GONE);
+
                 break;
         }
 
@@ -241,12 +242,14 @@ public class BindCardPhotoView extends RelativeLayout implements NoConfusion,Vie
         if(!isEdiable){
             this.imgView.setOnClickListener(null);
             this.imgClose.setVisibility(View.GONE);
-            this.mIsClickable = false;
         }else{
             this.imgView.setOnClickListener(this);
             this.imgClose.setVisibility(View.VISIBLE);
-            this.mIsClickable = true;
         }
+    }
+
+    public void setIClickAble(boolean isClickAble){
+        this.mIsClickable = isClickAble;
     }
 
     public String getUrl(){

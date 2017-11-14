@@ -327,12 +327,12 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
         //id card pic front
         String picFront = pEntity.id_card_info_pic;
         if(!TextUtils.isEmpty(picFront)){
-            photoViewFront.updatePicInfo(this,picFront,true);
+            photoViewFront.updatePicInfo(this,picFront,false);
         }
         //id card pic bank
         String picBack = pEntity.id_card_nation_pic;
         if(!TextUtils.isEmpty(picBack)){
-            photoViewBack.updatePicInfo(this,picBack,true);
+            photoViewBack.updatePicInfo(this,picBack,false);
         }
         //bank card no
         String bankCardNum = pEntity.bank_card_number;
@@ -408,7 +408,7 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
     private IItemListener mPhotoViewListener = new IItemListener() {
         @Override
         public void onItemClick(Object obj, int tag) {
-            if(tag == BindCardPhotoView.TAG_TYPE_IMG_ADD){
+            if(tag == BindCardPhotoView.TAG_TYPE_IMG_ADD || tag == BindCardPhotoView.TAG_TYPE_CONTENT){
                 if(obj == photoViewFront){
                     showDialogPicSelect(REQ_CODE_ID);
                 }else if(obj == photoViewBack){
@@ -581,6 +581,11 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
         //init addr
         String strAddr = entity.addr_card;
         itemAddr.setEditTxt(strAddr);
+
+        if(MyLog.isDebugable()){
+            MyLog.d(TAG,"[initParmas]" + " order:" + pFaceVerifyEntity.order);
+        }
+
         //id card front 身份证件正面照 照片请求
         if(pFaceVerifyEntity != null && !TextUtils.isEmpty(pFaceVerifyEntity.order)){
             String tips = getResources().getString(R.string.common_pic_requesting);
@@ -596,11 +601,14 @@ public class ApplyIDActivity extends BaseActivity implements  View.OnClickListen
     private void initPicInfo(PIDentityPicEntity mEntity){
         String picFont = mEntity.id_card_info_pic;
         if(!TextUtils.isEmpty(picFont)){
-            photoViewFront.updatePicInfo(this,picFont,true);
+            photoViewFront.updatePicInfo(this,picFont,false);
         }
         String picBack = mEntity.id_card_nation_pic;
         if(!TextUtils.isEmpty(picBack)){
-            photoViewBack.updatePicInfo(this,picBack,true);
+            photoViewBack.updatePicInfo(this,picBack,false);
+        }
+        if(MyLog.isDebugable()){
+            MyLog.d(TAG,"[initPicInfo]" + " picFront:" + picFont + " picBack:" + picBack);
         }
     }
 

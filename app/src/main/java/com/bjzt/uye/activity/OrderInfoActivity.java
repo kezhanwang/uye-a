@@ -305,9 +305,6 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
         if(strProtocalPics.size() > 0){
             picSelectView.insertList(strProtocalPics);
         }
-//        //boolean isSerivice select
-//        boolean isSelectService = vEntity.isSelectService;
-//        proItemService.setIsSelect(isSelectService);
     }
 
     private void setItemView(ItemView mItemView,String val){

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bjzt.uye.R;
 import com.bjzt.uye.controller.PicController;
 import com.bjzt.uye.entity.POrganizeEntity;
+import com.bjzt.uye.util.StrUtil;
 import com.common.listener.NoConfusion;
 
 import butterknife.BindView;
@@ -74,10 +75,10 @@ public class OrderHeaderView extends RelativeLayout implements NoConfusion{
             mTxtCat.setVisibility(View.INVISIBLE);
             mTxtCat.setText("");
         }
-        String strTution = this.mEntity.avg_course_price;
+        long avgPrice = this.mEntity.avg_course_price;
+        String strTution = StrUtil.getMoneyInfoByFen(avgPrice);
         if(!TextUtils.isEmpty(strTution)){
-            String strInfo = getResources().getString(R.string.common_money_info_str,strTution);
-            mTxtAvPrice.setText(strInfo);
+            mTxtAvPrice.setText(strTution);
         }else{
             mTxtAvPrice.setText("");
         }

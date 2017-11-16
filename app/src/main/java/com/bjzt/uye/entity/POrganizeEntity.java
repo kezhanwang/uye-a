@@ -28,7 +28,7 @@ public class POrganizeEntity implements Serializable{
     public String category_1;
     public String phone;
     public double employment_index;
-    public String avg_course_price;
+    public long avg_course_price;
     public String category;
     public String distance;
     public double map_lat;

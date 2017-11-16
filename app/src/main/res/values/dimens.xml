@@ -29,7 +29,7 @@
 
 
     <!--Home首页-->
-    <dimen name="home_loc_item_height_l">172dp</dimen>
+    <dimen name="home_loc_item_height_l">182dp</dimen>
     <dimen name="home_loc_item_height_s">142dp</dimen>
 
     <!--个人中心-->

@@ -64,6 +64,7 @@ public class FragmentUYe extends BaseFragment{
         mHeader.setTitle(title);
         String txtRight = getResources().getString(R.string.order_info_empty_zero);
         mHeader.setRightTxt(txtRight);
+        mHeader.setRightTxtAlignRight();
 
         mEmptyView.updateType(BlankEmptyView.TYPE_EMPTY_ORDER);
         mEmptyView.showLoadingState();

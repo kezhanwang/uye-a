@@ -9,7 +9,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.KeyEvent;
-import android.view.View;
 import android.widget.TabHost;
 import com.bjzt.uye.R;
 import com.bjzt.uye.activity.base.BaseActivity;
@@ -18,7 +17,6 @@ import com.bjzt.uye.adapter.TabsAdapter;
 import com.bjzt.uye.controller.OtherController;
 import com.bjzt.uye.entity.PUpgradeEntity;
 import com.bjzt.uye.fragments.FragmentHome;
-import com.bjzt.uye.fragments.FragmentMain;
 import com.bjzt.uye.fragments.FragmentMyInfo;
 import com.bjzt.uye.fragments.FragmentUYe;
 import com.bjzt.uye.fragments.base.BaseFragment;
@@ -30,9 +28,7 @@ import com.bjzt.uye.util.IntentUtils;
 import com.bjzt.uye.views.component.MainTabView;
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity {
 

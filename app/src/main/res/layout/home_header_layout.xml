@@ -29,7 +29,6 @@
         android:id="@+id/rela_loc"
         android:layout_width="72dp"
         android:layout_height="fill_parent"
-        android:gravity="center"
         android:background="@color/common_white"
         >
 
@@ -40,8 +39,9 @@
             android:textSize="15.5sp"
             android:textColor="@color/common_font_3"
             android:text="全国"
-            android:gravity="center"
             android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/common_margin"
             />
 
         <ImageView

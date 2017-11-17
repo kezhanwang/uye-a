@@ -108,6 +108,16 @@ public class YHeaderView extends RelativeLayout implements NoConfusion,View.OnCl
         }
     }
 
+    public void setRightTxtAlignRight(){
+        int margin = (int) getContext().getResources().getDimension(R.dimen.common_margin_18);
+        RelativeLayout.LayoutParams llp = (LayoutParams) mTxtRight.getLayoutParams();
+        llp.addRule(RelativeLayout.CENTER_IN_PARENT,-1);
+        llp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        llp.addRule(RelativeLayout.CENTER_VERTICAL);
+        llp.rightMargin = margin;
+        mTxtRight.setLayoutParams(llp);
+    }
+
     public void setRightClickAble(boolean isClickAble){
         Drawable d = null;
         if(isClickAble){

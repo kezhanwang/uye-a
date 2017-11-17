@@ -7,18 +7,15 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.bjzt.uye.R;
 import com.bjzt.uye.activity.LoginActivity;
 import com.bjzt.uye.activity.MainActivity;
-import com.bjzt.uye.activity.SearchActivity;
 import com.bjzt.uye.adapter.AdapterHome;
 import com.bjzt.uye.controller.LBSController;
 import com.bjzt.uye.controller.OtherController;
 import com.bjzt.uye.entity.PHomeEntity;
 import com.bjzt.uye.entity.POrganizeEntity;
 import com.bjzt.uye.fragments.base.BaseFragment;
-import com.bjzt.uye.global.MConfiger;
 import com.bjzt.uye.http.ProtocalManager;
 import com.bjzt.uye.http.rsp.RspHomeEntity;
 import com.bjzt.uye.listener.IItemListener;
@@ -37,10 +34,8 @@ import com.common.msglist.base.BaseItemListener;
 import com.common.msglist.base.BaseListAdapter;
 import com.common.msglist.base.MutiBaseListAdapter;
 import com.common.msglist.listener.IRefreshListener;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

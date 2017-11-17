@@ -8,6 +8,7 @@ import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -61,6 +62,14 @@ public class ExtendEditText extends LinearLayout implements NoConfusion, View.On
         this.text.addTextChangedListener(this);
         this.img.setOnClickListener(this);
         this.imgEyes.setOnClickListener(this);
+    }
+
+    /***
+     * 设置文本大小
+     * @param txtSize
+     */
+    public void setTextSize(float txtSize){
+        text.setTextSize(TypedValue.COMPLEX_UNIT_PX,txtSize);
     }
 
     public void setBGDrawable(Drawable d){

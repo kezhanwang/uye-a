@@ -52,11 +52,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/img_logo"
+        android:layout_below="@id/txt_name"
         android:layout_marginLeft="@dimen/myinfo_headerview_nickname_left_margin"
+        android:layout_marginTop="@dimen/common_margin"
         android:textColor="@color/myinfo_nick_txt_color"
         android:textSize="13sp"
-        android:layout_alignBottom="@id/img_logo"
         android:text="位置"
+        android:background="@drawable/round_grey_fill_gery_border_shape"
         />
 
     <ImageView

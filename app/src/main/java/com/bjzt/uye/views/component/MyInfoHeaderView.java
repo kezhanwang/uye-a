@@ -75,8 +75,10 @@ public class MyInfoHeaderView extends RelativeLayout implements NoConfusion, Vie
         }
         //init strLoc
         if(!TextUtils.isEmpty(strLoc)){
+            mTxtLoc.setVisibility(View.VISIBLE);
             mTxtLoc.setText(strLoc);
         }else{
+            mTxtLoc.setVisibility(View.GONE);
             mTxtLoc.setText("");
         }
     }

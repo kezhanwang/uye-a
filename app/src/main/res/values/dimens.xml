@@ -15,6 +15,7 @@
     <dimen name="common_margin_left_small">2dp</dimen>
     <dimen name="common_margin_10">10dp</dimen>
 
+    <dimen name="common_font_size_14">14sp</dimen>
     <dimen name="common_font_size_16">16sp</dimen>
     <dimen name="common_font_size_17">17sp</dimen>
     <!--header相关-->

@@ -79,6 +79,18 @@ public class SearchHeader extends RelativeLayout implements NoConfusion, View.On
                 return false;
             }
         });
+
+        editTxt.setOnFocusChangeListener(new OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(mListener != null){
+                    mListener.onTxtFocus(hasFocus);
+                }
+            }
+        });
+        //设置文本大小
+        float txtSize = getResources().getDimension(R.dimen.common_font_size_14);
+        editTxt.setTextSize(txtSize);
         //设置键盘为搜索样式
         editTxt.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
         //隐藏键盘
@@ -126,9 +138,10 @@ public class SearchHeader extends RelativeLayout implements NoConfusion, View.On
         this.mListener = mListener;
     }
 
-    public static interface ISearchListener{
+    public interface ISearchListener{
         public void onSearch(String msg);
         public void onTxtCancle();
         public void onTxtChanged(String info);
+        public void onTxtFocus(boolean focus);
     }
 }

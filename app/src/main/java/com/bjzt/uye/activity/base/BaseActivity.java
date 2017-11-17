@@ -142,6 +142,10 @@ public abstract class BaseActivity extends FragmentActivity {
         uiHandler.sendMessage(msg);
     }
 
+    protected void removeMsg(int what){
+        uiHandler.removeMessages(what);
+    }
+
     protected void sendMsgDelay(Message msg,long milli){
         uiHandler.sendMessageDelayed(msg,milli);
     }

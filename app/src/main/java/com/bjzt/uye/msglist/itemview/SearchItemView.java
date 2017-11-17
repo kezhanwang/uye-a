@@ -4,11 +4,9 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.bjzt.uye.R;
 import com.bjzt.uye.controller.PicController;
 import com.bjzt.uye.entity.PAgencyEntity;
@@ -37,8 +35,6 @@ public class SearchItemView extends BaseItemView<PAgencyEntity> implements View.
     TextView mTxtContent;
     @BindView(R.id.txt_dis)
     TextView mTxtDis;
-    @BindView(R.id.btn_ok)
-    Button btnOk;
 
     private IItemListener mListener;
 
@@ -99,7 +95,6 @@ public class SearchItemView extends BaseItemView<PAgencyEntity> implements View.
         ButterKnife.bind(this);
 
         mRelaMain.setOnClickListener(this);
-        btnOk.setOnClickListener(this);
     }
 
     @Override
@@ -107,8 +102,6 @@ public class SearchItemView extends BaseItemView<PAgencyEntity> implements View.
         if(this.mListener != null){
             if(v == this.mRelaMain){
                 this.mListener.onItemClick(this.mEntity,SRC_ITEM);
-            }else if(v == this.btnOk){
-                this.mListener.onItemClick(this.mEntity,SRC_BTN_OK);
             }
         }
     }

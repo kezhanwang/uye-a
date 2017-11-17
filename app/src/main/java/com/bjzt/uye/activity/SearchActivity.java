@@ -3,6 +3,7 @@ package com.bjzt.uye.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ScrollView;
@@ -23,6 +24,7 @@ import com.bjzt.uye.util.StrUtil;
 import com.bjzt.uye.views.component.BlankEmptyView;
 import com.bjzt.uye.views.component.QAPublishCatView;
 import com.bjzt.uye.views.component.SearchHeader;
+import com.common.common.MyLog;
 import com.common.controller.LoginController;
 import com.common.msglist.MsgPage;
 import com.common.msglist.MsgPageBottomView;
@@ -70,6 +72,9 @@ public class SearchActivity extends BaseActivity{
     private final int REQ_LOGIN = 11;
     private final int REQ_DETAIL = 12;
 
+    private final int FLAG_SHOW_KEYBOARD = 0x10;
+    private final int FLAG_HIDE_KEYBOARD = 0x11;
+
     @Override
     protected int getLayoutID() {
         return R.layout.activity_search_layout;
@@ -93,9 +98,14 @@ public class SearchActivity extends BaseActivity{
             public void onTxtChanged(String info) {
                 onActionSearch(info);
             }
+
+            @Override
+            public void onTxtFocus(boolean focus) {
+
+            }
         });
         //
-        String str = "请输入您要搜索的机构名称";
+        String str = getResources().getString(R.string.search_header_hint);
         mHeader.setHint(str);
 
         this.mScrollView.setVisibility(BlankEmptyView.GONE);
@@ -103,10 +113,16 @@ public class SearchActivity extends BaseActivity{
         this.mEmptyView.showLoadingState();
         this.mMsgPage.setVisibility(View.GONE);
         this.mMsgPage.setEnablePullDown(false);
-
+        this.mMsgPage.setNeedPageScrollListener(true);
         this.mMsgPage.setRefreshListener(refreshListener);
+
         int seqNo = ProtocalManager.getInstance().reqSearchHotW(getCallBack());
         mReqList.put(seqNo,PageAction.TYPE_REFRESH);
+
+        //show key board
+        Message msg = Message.obtain();
+        msg.what = FLAG_SHOW_KEYBOARD;
+        sendMsgDelay(msg,800);
     }
 
     private IRefreshListener refreshListener = new IRefreshListener() {
@@ -124,6 +140,17 @@ public class SearchActivity extends BaseActivity{
                 int seqNo = ProtocalManager.getInstance().reqSearchAgencyList(words, PageType.getNextPage(pageEntity),getCallBack());
                 mReqList.put(seqNo,PageAction.TYPE_LOAD_MORE);
             }
+        }
+
+        @Override
+        public void onPageScroll() {
+            if(MyLog.isDebugable()){
+                MyLog.d(TAG,"[onPageScroll]" + "...");
+            }
+            removeMsg(FLAG_HIDE_KEYBOARD);
+            Message msg = Message.obtain();
+            msg.what = FLAG_HIDE_KEYBOARD;
+            sendMsg(msg);
         }
     };
 
@@ -166,10 +193,16 @@ public class SearchActivity extends BaseActivity{
                         udpatePageStatus(false,false);
                     }else{
                         udpatePageStatus(false,true);
+                        if(mAdapter != null){
+                            this.mAdapter.updateState(MsgPageBottomView.STATE_LISTVIEW_NOMORE);
+                        }
                     }
                 }else{
                     String tips = StrUtil.getErrorTipsByCode(errorCode,rspEntitiy);
                     showToast(tips);
+                    if(mAdapter != null){
+                        this.mAdapter.updateState(MsgPageBottomView.STATE_LISTVIEW_ERROR);
+                    }
                 }
             }
         }
@@ -279,12 +312,26 @@ public class SearchActivity extends BaseActivity{
             switch(requestCode){
                 case REQ_DETAIL:
                 case REQ_DATA_CHECK:
-                    String tips = "申请成功~";
+                    String tips = getResources().getString(R.string.apply_succ);
                     showToast(tips);
                     setResult(Activity.RESULT_OK);
                     finish();
                     break;
             }
+        }
+    }
+
+    @Override
+    protected void handleMsg(Message msg) {
+        super.handleMsg(msg);
+        int what = msg.what;
+        switch(what){
+            case FLAG_SHOW_KEYBOARD:
+                mHeader.showKeyBoard();
+                break;
+            case FLAG_HIDE_KEYBOARD:
+                mHeader.hideKeyBoard();
+                break;
         }
     }
 }

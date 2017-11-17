@@ -11,6 +11,7 @@
     <string name="ok">好的</string>
     <string name="just_sign">立即签约</string>
     <string name="dev_ing">稍后献上，敬请期待</string>
+    <string name="apply_succ">申请成功~</string>
 
     <string name="common_default">---</string>
     <string name="common_request">数据请求中...</string>
@@ -184,6 +185,7 @@
 
     <!--搜索页卡-->
     <string name="search_result_empty">没有发现任何搜索结果~</string>
+    <string name="search_header_hint">请输入您要搜索的机构名称</string>
 
     <!-- PicScaneActivity 大图加载相关 -->
     <string name="loan_pic_scanne_tips_error">下载失败</string>

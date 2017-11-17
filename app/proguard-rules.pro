@@ -75,15 +75,6 @@
     	-keep public class * implements com.common.listener.NoConfusion {*;}
 
 
-    #gson相关
-	-keep class com.google.**{*;}
-	-keep class sun.misc.Unsafe { *; }
-	-keepattributes *Annotation*
-	##-keep class com.kezhanw.entity.** { *; }
-    -keepattributes Signature
-    -keep class com.google.gson.stream.** { *; }
-
-
     #x5
     	-dontwarn com.tencent.smtt.**
     	-keep public class com.tencent.smtt.**{*;}
@@ -239,26 +230,26 @@
         }
 
 
-        #glide相关 不混淆
-        -keep class com.bumptech.glide.**{*;}
+#glide相关 不混淆
+-keep class com.bumptech.glide.**{*;}
 
 
-          #人脸识别混淆相关
-        -keep class com.face.** {*;}
-        -keep class cn.com.bsfit.** {*;}
-        -keep class com.android.snetjob.** {*;}
-        -keep class java.awt.** { *; }
-        -dontwarn com.sun.jna.**
-        -keep class com.sun.jna.** { *; }
-        -keep class com.udcredit.** { *; }
-        -keep class com.authreal.** { *; }
-        -keep class com.facevisa.** { *; }
-        -keep class com.hotvision.** { *; }
+#人脸识别混淆相关
+-keep class com.face.** {*;}
+-keep class cn.com.bsfit.** {*;}
+-keep class com.android.snetjob.** {*;}
+-keep class java.awt.** { *; }
+-dontwarn com.sun.jna.**
+-keep class com.sun.jna.** { *; }
+-keep class com.udcredit.** { *; }
+-keep class com.authreal.** { *; }
+-keep class com.facevisa.** { *; }
+-keep class com.hotvision.** { *; }
 
 
 
 
-#百度地图
+#百度地图定位
 -keep class com.baidu.** {*;}
 -keep class vi.com.** {*;}
 -dontwarn com.baidu.**
@@ -267,3 +258,20 @@
 -dontwarn com.tencent.bugly.**
 -keep public class com.tencent.bugly.**{*;}
 
+#极光推送
+-dontoptimize
+-dontpreverify
+-dontwarn cn.jpush.**
+-keep class cn.jpush.** { *; }
+
+#http lib相关
+-dontwarn org.apache.http.**
+-keep class org.apache.http.** { *; }
+
+
+ #gson相关
+-keep class com.google.**{*;}
+-keep class sun.misc.Unsafe { *; }
+-keepattributes *Annotation*
+-keepattributes Signature
+-keep class com.google.gson.stream.** { *; }

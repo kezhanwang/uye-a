@@ -121,7 +121,7 @@ public class OrgDetailActivity extends BaseActivity{
         public void onItemClick(Object obj, int tag) {
             POrganizeEntity pEntity = (POrganizeEntity) obj;
             if(tag == OrgDetailHeaderView.SRC_LOC){
-                IntentUtils.startBaiduMapActivity(OrgDetailActivity.this,pEntity.map_lat,pEntity.map_lng,pEntity.org_name,pEntity.address);
+                IntentUtils.startBaiduMapActivity(OrgDetailActivity.this,pEntity.map_lng,pEntity.map_lat,pEntity.org_name,pEntity.address);
             }else if(tag == OrgDetailHeaderView.SRC_BTN){
                 btnSign();
             }

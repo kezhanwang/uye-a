@@ -146,17 +146,17 @@ public class FragmentHome extends BaseFragment{
                     case HomeLocView.TAG_BTN_SIGN:
                         if(pEntity != null){
                             if(ac != null){
-                                if(LoginController.getInstance().isLogin()){
-                                    if(pEntity == null || pEntity.organize == null || pEntity.organize.size() <= 0){
-                                        IntentUtils.startSearchActivity(getActivity(),MainActivity.REQ_SEARCH);
-                                    }else{
-                                        POrganizeEntity orgEntity = pEntity.organize.get(0);
-                                        if(orgEntity != null && !TextUtils.isEmpty(orgEntity.org_id)){
+                                if(pEntity == null || pEntity.organize == null || pEntity.organize.size() <= 0){
+                                    IntentUtils.startSearchActivity(getActivity(),MainActivity.REQ_SEARCH);
+                                }else{
+                                    POrganizeEntity orgEntity = pEntity.organize.get(0);
+                                    if(orgEntity != null && !TextUtils.isEmpty(orgEntity.org_id)){
+                                        if(LoginController.getInstance().isLogin()){
                                             IntentUtils.startApplyFirstTransActivity(ac,orgEntity.org_id,MainActivity.REQ_START_APPLY);
+                                        }else{
+                                            IntentUtils.startLoginActivity(ac, LoginActivity.TYPE_PHONE_VERIFY_CODE,MainActivity.REQ_CODE_LOGIN);
                                         }
                                     }
-                                }else{
-                                    IntentUtils.startLoginActivity(ac, LoginActivity.TYPE_PHONE_VERIFY_CODE,MainActivity.REQ_CODE_LOGIN);
                                 }
                             }
                         }else{

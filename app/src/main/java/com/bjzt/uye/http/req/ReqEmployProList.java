@@ -10,6 +10,7 @@ import java.util.Map;
  */
 public class ReqEmployProList extends ReqBaseEntity{
     public String insured_id;
+    public int page;
 
     @Override
     public String getReqUrl() {
@@ -20,6 +21,7 @@ public class ReqEmployProList extends ReqBaseEntity{
     public Map<String, Object> getReqData() {
         Map<String,Object> mReqMap = new HashMap<>();
         mReqMap.put("insured_id",insured_id);
+        mReqMap.put("page",page);
         return mReqMap;
     }
 }

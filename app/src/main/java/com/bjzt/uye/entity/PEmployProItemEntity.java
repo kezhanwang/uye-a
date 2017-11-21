@@ -1,5 +1,7 @@
 package com.bjzt.uye.entity;
 
+import com.common.msglist.entity.PPageEntity;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -8,5 +10,6 @@ import java.util.ArrayList;
  */
 
 public class PEmployProItemEntity implements Serializable{
-    public ArrayList<PEmployProListItemEntity> work;
+    public ArrayList<PEmployProListItemEntity> lists;
+    public PPageEntity pages;
 }

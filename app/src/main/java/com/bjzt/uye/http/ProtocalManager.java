@@ -617,9 +617,10 @@ public class ProtocalManager {
      * @param callBack
      * @return
      */
-    public int reqEmployProList(String insureId,ICallBack<Object> callBack){
+    public int reqEmployProList(String insureId,int page,ICallBack<Object> callBack){
         ReqEmployProList reqEntity = new ReqEmployProList();
         reqEntity.insured_id = insureId;
+        reqEntity.page = page;
         return addTask(reqEntity,callBack);
     }
 

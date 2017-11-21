@@ -25,7 +25,7 @@ public class HttpEngine extends Thread {
 	private Map<Integer,String> mSaasMapUrl = new HashMap<Integer,String>();
 	private Map<Integer,String> mMapLoanUrl = new HashMap<Integer,String>();
 
-	private int mDevType = 0;
+	private int mDevType = NetCommon.NET_TYPE_INDEX_DEV;
 	
 	private HttpEngine() {
 		// TODO Auto-generated constructor stub

@@ -40,6 +40,14 @@ public class StrUtil {
         return strResult;
     }
 
+    public static final String trimQuotes(String strInfo){
+        String strResult = "";
+        if(!TextUtils.isEmpty(strInfo)){
+            strResult = strInfo.replace("\"","");
+        }
+        return strResult;
+    }
+
     /***
      * 判断手机号码是否合法
      * @param phone

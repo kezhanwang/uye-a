@@ -145,7 +145,7 @@ public class FragmentUYe extends BaseFragment{
                         break;
                     case InsureOrderItemView.SRC_EMPOY_PROGRESS:
                         if(mEntity.insured_order != null){
-                            IntentUtils.startEmployProActivity(getActivity(),mEntity.insured_order.insured_order,MainActivity.REQ_EMPLOY_PRO);
+                            IntentUtils.startEmployProActivity(getActivity(),mEntity.insured_order.insured_id,MainActivity.REQ_EMPLOY_PRO);
                         }
                         break;
                 }

@@ -8,6 +8,7 @@ import android.net.wifi.WifiManager;
 import android.text.TextUtils;
 
 import com.bjzt.uye.global.Global;
+import com.bjzt.uye.util.StrUtil;
 import com.common.entity.BWifiEntity;
 import com.common.file.SharePreWifi;
 import com.common.receiver.NetReceiver;
@@ -55,6 +56,7 @@ public class WifiController {
                     //refresh
                     String ssid = getWifiSSID();
                     String mac = DeviceUtil.getMacAdd();
+                    ssid = StrUtil.trimQuotes(ssid);
                     bEntity.ssid = ssid;
                     bEntity.mac = mac;
                     SharePreWifi mSharePre = new SharePreWifi();
@@ -88,6 +90,7 @@ public class WifiController {
         }
         if(APNUtils.isWifi()){
             String ssid = getWifiSSID();
+            ssid = StrUtil.trimQuotes(ssid);
             String mac = DeviceUtil.getMacAdd();
             if(!TextUtils.isEmpty(ssid)){
                 bEntity.ssid = ssid;

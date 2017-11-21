@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 
 public class PInsureOrderItemEntity implements Serializable{
+    public String insured_id;
     public String org_logo;
     public String career_time;
     public String insured_order;

@@ -81,7 +81,7 @@ public class ApplyEmployProActivity extends BaseActivity{
             if(rsp instanceof RspEmployProList){
                 RspEmployProList rspEntity = (RspEmployProList) rsp;
                 if(isSucc){
-                    if(rspEntity.mEntity != null && rspEntity.mEntity.work != null && rspEntity.mEntity.work.size() > 0){
+                    if(rspEntity.mEntity == null || rspEntity.mEntity.work == null || rspEntity.mEntity.work.size() <= 0){
                         String tips = getResources().getString(R.string.common_cfg_empty);
                         initErrorStatus(tips);
                     }else{

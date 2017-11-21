@@ -8,27 +8,37 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ScrollView;
 
 import com.bjzt.uye.R;
 import com.bjzt.uye.activity.base.BaseActivity;
+import com.bjzt.uye.activity.dialog.DialogConfirmSingle;
 import com.bjzt.uye.activity.dialog.DialogDateSelector;
 import com.bjzt.uye.activity.dialog.DialogLocation;
 import com.bjzt.uye.activity.dialog.DialogPicSelect;
+import com.bjzt.uye.activity.dialog.DialogStrSelect;
 import com.bjzt.uye.controller.UploadPicController;
 import com.bjzt.uye.entity.PLocItemEntity;
 import com.bjzt.uye.entity.PicEntity;
 import com.bjzt.uye.entity.PicResultEntity;
 import com.bjzt.uye.entity.VActivityResultEntity;
+import com.bjzt.uye.entity.VApplyEmplyAddEntity;
 import com.bjzt.uye.entity.VDateEntity;
 import com.bjzt.uye.entity.VPicFileEntity;
+import com.bjzt.uye.global.MConfiger;
+import com.bjzt.uye.http.ProtocalManager;
 import com.bjzt.uye.http.listener.IUploadListener;
+import com.bjzt.uye.http.rsp.RspEmployProCfgEntity;
+import com.bjzt.uye.http.rsp.RspEmployProSubmitEntity;
 import com.bjzt.uye.listener.IHeaderListener;
+import com.bjzt.uye.listener.IItemListener;
 import com.bjzt.uye.photo.activity.LoanPicScanActivity;
 import com.bjzt.uye.util.ActivityResultUtil;
 import com.bjzt.uye.util.FileUtil;
 import com.bjzt.uye.util.IntentUtils;
 import com.bjzt.uye.util.PicUtils;
 import com.bjzt.uye.util.StrUtil;
+import com.bjzt.uye.views.component.BlankEmptyView;
 import com.bjzt.uye.views.component.ItemView;
 import com.bjzt.uye.views.component.PicSelectView;
 import com.bjzt.uye.views.component.YHeaderView;
@@ -43,14 +53,22 @@ import butterknife.BindView;
  * 新增就业进展
  * Created by billy on 2017/10/25.
  */
-public class ApplyEmployProAddActivity extends BaseActivity{
+public class ApplyEmployProAddActivity extends BaseActivity implements  View.OnClickListener{
 
     @BindView(R.id.header)
     YHeaderView mHeader;
+    @BindView(R.id.scrollview)
+    ScrollView mScrollView;
+    @BindView(R.id.emptyview)
+    BlankEmptyView mEmptyView;
+
     @BindView(R.id.item_time)
     ItemView itemViewTime;
     @BindView(R.id.item_addr)
     ItemView itemViewAddr;
+    @BindView(R.id.item_addr_detail)
+    ItemView itemViewAddDetail;
+
     @BindView(R.id.item_cp)
     ItemView itemViewCp;
     @BindView(R.id.item_position)
@@ -74,12 +92,18 @@ public class ApplyEmployProAddActivity extends BaseActivity{
 
     private DialogDateSelector mDialogDate;
     private DialogPicSelect mDialogPic;
+    private DialogConfirmSingle mDialogCfg;
 
     private DialogLocation mDialogLoc;
     private PLocItemEntity mLocEntityPro;
     private PLocItemEntity mLocEntityCity;
     private PLocItemEntity mLocEntityArea;
     private String mCammerImgPath;
+
+    private List<Integer> mReqList = new ArrayList<>();
+    private String mInsureId;
+    private RspEmployProCfgEntity mRspEntityCfg;
+    private DialogStrSelect mDialogStr;
 
     @Override
     protected int getLayoutID() {
@@ -125,6 +149,11 @@ public class ApplyEmployProAddActivity extends BaseActivity{
             }
         });
 
+        title = getResources().getString(R.string.employ_progress_add_work_addr_detail);
+        itemViewAddDetail.setTitle(title);
+        hint = getResources().getString(R.string.employ_progress_add_work_addr_detail_hint);
+        itemViewAddDetail.setHint(hint);
+
         title = getResources().getString(R.string.employ_progress_add_cp);
         hint = getResources().getString(R.string.employ_progress_add_cp_hint);
         itemViewCp.setTitle(title);
@@ -144,7 +173,10 @@ public class ApplyEmployProAddActivity extends BaseActivity{
         itemViewSalary.setEditTxtBtnListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
+                if(mRspEntityCfg != null && mRspEntityCfg.mEntity != null && mRspEntityCfg.mEntity.monthly_income != null){
+                    String strInfo = itemViewSalary.getInputTxt();
+                    showDialogStrList(mRspEntityCfg.mEntity.monthly_income,strInfo,DialogStrSelect.TYPE_SALARY);
+                }
             }
         });
 
@@ -157,14 +189,23 @@ public class ApplyEmployProAddActivity extends BaseActivity{
         itemViewWorkStatus.setEditTxtBtnListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
+                ArrayList<String> mList = MConfiger.buildEmployStatusList();
+                String strInfo = itemViewWorkStatus.getInputTxt();
+                showDialogStrList(mList,strInfo,DialogStrSelect.TYPE_EMPLOY_PRO_ADD);
             }
         });
 
         picSelectView.initData(PicSelectView.TYPE_EMPLOY_TRACK);
         picSelectView.setOnItemClickListener(mSelectListener);
 
+        btnOk.setOnClickListener(this);
         UploadPicController.getInstance().setUploadListener(mUploadListener);
+
+        mScrollView.setVisibility(View.GONE);
+        mEmptyView.setVisibility(View.VISIBLE);
+        mEmptyView.showLoadingState();
+        int seqNo = ProtocalManager.getInstance().reqEmployProCfg(this.mInsureId,getCallBack());
+        mReqList.add(seqNo);
     }
 
     @Override
@@ -350,6 +391,7 @@ public class ApplyEmployProAddActivity extends BaseActivity{
         hideDialogDateSelector();
         hideDialogLoc();
         hideDialogPicSelect();
+        hideDialogCfg();
         UploadPicController.getInstance().setUploadListener(null);
     }
 
@@ -382,7 +424,168 @@ public class ApplyEmployProAddActivity extends BaseActivity{
     }
 
     @Override
-    protected void initExtras(Bundle bundle) {
+    protected void onRsp(Object rsp, boolean isSucc, int errorCode, int seqNo, int src) {
+        super.onRsp(rsp, isSucc, errorCode, seqNo, src);
+        if(mReqList.contains(Integer.valueOf(seqNo))){
+            hideLoadingDialog();
+            if(rsp instanceof RspEmployProCfgEntity){
+                RspEmployProCfgEntity mRspEntity = (RspEmployProCfgEntity) rsp;
+                if(isSucc && mRspEntity != null && mRspEntity.mEntity != null && mRspEntity.mEntity.monthly_income != null){
+                    this.mRspEntityCfg = mRspEntity;
+                    mEmptyView.loadSucc();
+                    mScrollView.setVisibility(View.VISIBLE);
+                }else{
+                    String tips = StrUtil.getErrorTipsByCode(errorCode,mRspEntity);
+                    showDialogCfg(tips);
+                }
+            }else if(rsp instanceof RspEmployProSubmitEntity){
+                RspEmployProSubmitEntity rspEntity = (RspEmployProSubmitEntity) rsp;
+                if(isSucc){
+                    setResult(Activity.RESULT_OK);
+                    finish();
+                }else{
+                    String tips = StrUtil.getErrorTipsByCode(errorCode,rspEntity);
+                    showToast(tips);
+                }
+            }
+        }
+    }
 
+    private void showDialogCfg(String tips){
+        this.mDialogCfg = new DialogConfirmSingle(this,R.style.MyDialogBg);
+        this.mDialogCfg.setMCancleable(false);
+        this.mDialogCfg.setIBtnListener(new IItemListener() {
+            @Override
+            public void onItemClick(Object obj, int tag) {
+                hideDialogCfg();
+                finish();
+            }
+        });
+        this.mDialogCfg.setContents(tips,null);
+        this.mDialogCfg.show();
+    }
+
+    private void hideDialogCfg(){
+        if(this.mDialogCfg != null){
+            this.mDialogCfg.dismiss();
+            this.mDialogCfg = null;
+        }
+    }
+
+    private void showDialogStrList(ArrayList<String> mList,String strSelect,final int src){
+        hideDialogStrList();
+        this.mDialogStr = new DialogStrSelect(this,R.style.MyDialogBg);
+        this.mDialogStr.setIItemListener(new IItemListener() {
+            @Override
+            public void onItemClick(Object obj, int tag) {
+                hideDialogStrList();
+                if(tag == IItemListener.SRC_BTN_OK){
+                    if(src == DialogStrSelect.TYPE_EMPLOY_PRO_ADD){
+                        itemViewWorkStatus.setEditTxt(obj+"");
+                    }else if(src == DialogStrSelect.TYPE_SALARY){
+                        itemViewSalary.setEditTxt(obj+"");
+                    }
+                }
+            }
+        });
+        this.mDialogStr.show();
+        this.mDialogStr.updateType(src);
+        this.mDialogStr.setListInfo(mList);
+        this.mDialogStr.setSelectInfo(strSelect);
+    }
+
+    private void hideDialogStrList(){
+        if(this.mDialogStr != null){
+            this.mDialogStr.dismiss();
+            this.mDialogStr = null;
+        }
+    }
+
+    @Override
+    protected void initExtras(Bundle bundle) {
+        Intent intent = getIntent();
+        this.mInsureId = intent.getStringExtra(IntentUtils.PARA_KEY_PUBLIC);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v == this.btnOk){
+            VApplyEmplyAddEntity vEntity = buildApplyEmployResult();
+            if(vEntity.isSucc){
+                showLoading();
+                int seqNo = ProtocalManager.getInstance().reqEmployProSubmit(mInsureId,vEntity,getCallBack());
+                mReqList.add(seqNo);
+            }else{
+                String tips = vEntity.tips;
+                showToast(tips);
+            }
+        }
+    }
+
+    private VApplyEmplyAddEntity buildApplyEmployResult(){
+        VApplyEmplyAddEntity vEntity = new VApplyEmplyAddEntity();
+        String strTime = itemViewTime.getInputTxt();
+        vEntity.strTime = strTime;
+        if(TextUtils.isEmpty(strTime)){
+            vEntity.tips  = getResources().getString(R.string.employ_progress_add_select_time);
+            return vEntity;
+        }
+        vEntity.mLocEntityPro = this.mLocEntityPro;
+        vEntity.mLocEntityCity = this.mLocEntityCity;
+        vEntity.mLocEntityArea = this.mLocEntityArea;
+        if(mLocEntityPro == null || mLocEntityCity == null || mLocEntityArea == null){
+            String tips = getResources().getString(R.string.employ_progress_add_select_addr);
+            vEntity.tips = tips;
+            return vEntity;
+        }
+        //addr detai
+        String strAddrDetail = itemViewAddDetail.getInputTxt();
+        vEntity.strAddr = strAddrDetail;
+        if(TextUtils.isEmpty(strAddrDetail)){
+            String tips = getResources().getString(R.string.employ_progress_add_work_addr_detail_hint);
+            vEntity.tips = tips;
+            return vEntity;
+        }
+        String strCpName = itemViewCp.getInputTxt();
+        vEntity.cpName = strCpName;
+        if(TextUtils.isEmpty(strCpName)){
+            String tips = getResources().getString(R.string.employ_progress_add_cp_hint);
+            vEntity.tips = tips;
+            return vEntity;
+        }
+        //
+        String strPos = itemViewPos.getInputTxt();
+        vEntity.cpPos = strPos;
+        if(TextUtils.isEmpty(strPos)){
+            String tips = getResources().getString(R.string.employ_progress_add_pos_hint);
+            vEntity.tips = tips;
+            return vEntity;
+        }
+        //salary
+        String strSalary = itemViewSalary.getInputTxt();
+        vEntity.salary = strSalary;
+        if(TextUtils.isEmpty(strSalary)){
+            String tips = getResources().getString(R.string.employ_progress_add_salary_hint);
+            vEntity.tips = tips;
+            return vEntity;
+        }
+        //是否录用
+        String strEmployStatus = itemViewWorkStatus.getInputTxt();
+        vEntity.employStatus = strEmployStatus;
+        if(TextUtils.isEmpty(strEmployStatus)){
+            String tips = getResources().getString(R.string.employ_progress_add_workstatus_hint);
+            vEntity.tips = tips;
+            return vEntity;
+        }
+        //就业足迹
+        List<String> mListPic = picSelectView.getNetUrlList();
+        vEntity.mPicList = mListPic;
+        if(mListPic == null || mListPic.size() <= 0){
+            String tips = getResources().getString(R.string.pic_select_tips_employ_track);
+            vEntity.tips = tips;
+            return vEntity;
+        }
+        vEntity.isSucc = true;
+        return vEntity;
     }
 }

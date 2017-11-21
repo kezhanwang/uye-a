@@ -211,6 +211,8 @@
     <string name="employ_progress_add_title">新增就业进展</string>
     <string name="employ_progress_add_select_time">请选择就业时间</string>
     <string name="employ_progress_add_work_addr">工作地点</string>
+    <string name="employ_progress_add_work_addr_detail">详细地址</string>
+    <string name="employ_progress_add_work_addr_detail_hint">请输入详细地址，精确到门牌号</string>
     <string name="employ_progress_add_select_addr">请选择省市区</string>
     <string name="employ_progress_add_cp">工作单位</string>
     <string name="employ_progress_add_cp_hint">请输入工作单位</string>

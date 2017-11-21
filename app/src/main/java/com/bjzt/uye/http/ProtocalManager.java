@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import com.bjzt.uye.entity.PBankEntity;
 import com.bjzt.uye.entity.PExperiEntity;
 import com.bjzt.uye.entity.PIDentityInfoEntity;
+import com.bjzt.uye.entity.VApplyEmplyAddEntity;
 import com.bjzt.uye.entity.VContactInfoEntity;
 import com.bjzt.uye.entity.VExperiDegreeAddEntity;
 import com.bjzt.uye.entity.VExperiOccEntity;
@@ -20,6 +21,9 @@ import com.bjzt.uye.http.req.Req400ContactEntity;
 import com.bjzt.uye.http.req.ReqContactCfgEntity;
 import com.bjzt.uye.http.req.ReqContactInfoEntity;
 import com.bjzt.uye.http.req.ReqContactSubmitEntity;
+import com.bjzt.uye.http.req.ReqEmployProCfgEntity;
+import com.bjzt.uye.http.req.ReqEmployProList;
+import com.bjzt.uye.http.req.ReqEmployProSubmit;
 import com.bjzt.uye.http.req.ReqExperiAddEntity;
 import com.bjzt.uye.http.req.ReqExperiBaseCfgEntity;
 import com.bjzt.uye.http.req.ReqExperiBaseCommitEntity;
@@ -592,6 +596,51 @@ public class ProtocalManager {
     public int reqMyExperiDel(int id,ICallBack<Object> callBack){
         ReqExperiDelEntity reqEntity = new ReqExperiDelEntity();
         reqEntity.id = id;
+        return addTask(reqEntity,callBack);
+    }
+
+    /***
+     * 获取就业进展配置信息
+     * @param insureId
+     * @param callBack
+     * @return
+     */
+    public int reqEmployProCfg(String insureId,ICallBack<Object> callBack){
+        ReqEmployProCfgEntity reqEntity = new ReqEmployProCfgEntity();
+        reqEntity.insured_id = insureId;
+        return addTask(reqEntity,callBack);
+    }
+
+    /***
+     * 获取就业进展列表
+     * @param insureId
+     * @param callBack
+     * @return
+     */
+    public int reqEmployProList(String insureId,ICallBack<Object> callBack){
+        ReqEmployProList reqEntity = new ReqEmployProList();
+        reqEntity.insured_id = insureId;
+        return addTask(reqEntity,callBack);
+    }
+
+    /***
+     * 提交就业进展信息
+     * @param callBack
+     * @return
+     */
+    public int reqEmployProSubmit(String inSureId,VApplyEmplyAddEntity vEntity, ICallBack<Object> callBack){
+        ReqEmployProSubmit reqEntity = new ReqEmployProSubmit();
+        reqEntity.insured_id = inSureId;
+        reqEntity.date = vEntity.strTime;
+        reqEntity.work_province = vEntity.mLocEntityPro.id;
+        reqEntity.work_city = vEntity.mLocEntityCity.id;
+        reqEntity.work_area = vEntity.mLocEntityArea.id;
+        reqEntity.work_address = vEntity.strAddr;
+        reqEntity.work_name = vEntity.cpName;
+        reqEntity.position = vEntity.cpPos;
+        reqEntity.monthly_income = vEntity.salary;
+        reqEntity.is_hiring = MConfiger.isHireSucc(vEntity.employStatus);
+        reqEntity.pic_json = (ArrayList<String>) vEntity.mPicList;
         return addTask(reqEntity,callBack);
     }
 }

@@ -1,9 +1,14 @@
 package com.bjzt.uye.http;
 
+import android.support.v4.util.ArrayMap;
+
 import com.bjzt.uye.http.rsp.Rsp400ContactEntity;
 import com.bjzt.uye.http.rsp.RspContactCfgEntity;
 import com.bjzt.uye.http.rsp.RspContactInfoEntity;
 import com.bjzt.uye.http.rsp.RspContactSubmitEntity;
+import com.bjzt.uye.http.rsp.RspEmployProCfgEntity;
+import com.bjzt.uye.http.rsp.RspEmployProList;
+import com.bjzt.uye.http.rsp.RspEmployProSubmitEntity;
 import com.bjzt.uye.http.rsp.RspExperiAddEntity;
 import com.bjzt.uye.http.rsp.RspExperiBaseCfgEntity;
 import com.bjzt.uye.http.rsp.RspExperiBaseCommitEntity;
@@ -38,7 +43,6 @@ import com.bjzt.uye.http.rsp.RspUploadPhoneListEntity;
 import com.common.common.NetCommon;
 import com.common.http.HttpEngine;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -47,7 +51,7 @@ import java.util.Map;
 
 public class HttpCommon {
 
-    public static Map<String,Class> mMap = new HashMap<>();
+    public static Map<String,Class> mMap = new ArrayMap<>();
 
     public static final String URL_HOME = "/app/index/index";               //首页
     public static final String URL_PHONE_VERIFY_CODE = "/safe/Getmsgcode";      //手机验证码
@@ -84,6 +88,9 @@ public class HttpCommon {
     public static final String URL_EXPERIENCE_LIST = "/app/elist/list";         //个人经历列表
     public static final String URL_EXPERIENCE_ADD = "/app/elist/submit";        //个人经历提交信息
     public static final String URL_EXPERIENCE_DEL = "/app/elist/del";           //个人经历删除
+    public static final String URL_EMPLOY_PRO_CFG = "/app/work/config";         //就业进展配置信息
+    public static final String URL_EMPLOY_PRO_LIST = "/app/work/list";          //就业进展列表
+    public static final String URL_EMPLOY_PRO_SUBMIT = "/app/work/submit";      //提交就业进展
 
     static{
         //请求定位城市
@@ -156,6 +163,12 @@ public class HttpCommon {
         mMap.put(URL_EXPERIENCE_ADD,RspExperiAddEntity.class);
         //删除个人经历
         mMap.put(URL_EXPERIENCE_DEL, RspExperiDelEntity.class);
+        //就业进展配置信息
+        mMap.put(URL_EMPLOY_PRO_CFG,RspEmployProCfgEntity.class);
+        //就业进展列表信息
+        mMap.put(URL_EMPLOY_PRO_LIST, RspEmployProList.class);
+        //就业进展信息提交
+        mMap.put(URL_EMPLOY_PRO_SUBMIT, RspEmployProSubmitEntity.class);
     }
 
     /***

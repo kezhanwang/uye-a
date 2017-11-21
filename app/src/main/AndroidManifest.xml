@@ -70,7 +70,7 @@
         android:theme="@style/AppTheme"
         android:name="com.MApp"
         android:largeHeap="true"
-        android:debuggable="false"
+        android:debuggable="true"
         tools:ignore="HardcodedDebugMode"
         android:persistent="true"
         android:hardwareAccelerated="true"

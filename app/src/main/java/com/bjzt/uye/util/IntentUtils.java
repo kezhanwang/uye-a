@@ -330,12 +330,12 @@ public class IntentUtils {
     /****
      * 新增就业进展
      * @param mContext
-     * @param orgId
+     * @param inSureId
      * @param reqCode
      */
-    public static final void startEmployProAddActivity(Activity mContext,String orgId,int reqCode){
+    public static final void startEmployProAddActivity(Activity mContext,String inSureId,int reqCode){
         Intent intent = new Intent(mContext, ApplyEmployProAddActivity.class);
-        intent.putExtra(IntentUtils.PARA_KEY_PUBLIC,orgId);
+        intent.putExtra(IntentUtils.PARA_KEY_PUBLIC,inSureId);
         mContext.startActivityForResult(intent,reqCode);
     }
 

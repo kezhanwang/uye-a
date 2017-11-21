@@ -31,6 +31,7 @@
         ></com.bjzt.uye.views.component.YHeaderView>
 
     <ScrollView
+        android:id="@+id/scrollview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@id/header"
@@ -50,6 +51,13 @@
             <!--工作地点-->
             <com.bjzt.uye.views.component.ItemView
                 android:id="@+id/item_addr"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                ></com.bjzt.uye.views.component.ItemView>
+
+            <!--工作地点-->
+            <com.bjzt.uye.views.component.ItemView
+                android:id="@+id/item_addr_detail"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 ></com.bjzt.uye.views.component.ItemView>
@@ -108,5 +116,13 @@
         </LinearLayout>
 
     </ScrollView>
+
+
+    <com.bjzt.uye.views.component.BlankEmptyView
+        android:id="@+id/emptyview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/header"
+        ></com.bjzt.uye.views.component.BlankEmptyView>
 
 </RelativeLayout>

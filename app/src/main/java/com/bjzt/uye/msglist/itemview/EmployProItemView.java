@@ -5,28 +5,29 @@ import android.view.LayoutInflater;
 
 import com.bjzt.uye.R;
 import com.bjzt.uye.entity.PEmployProEntity;
+import com.bjzt.uye.entity.PEmployProListItemEntity;
 import com.common.msglist.base.BaseItemView;
 
 import butterknife.ButterKnife;
 
 /**
- * Created by billy on 2017/10/25.
+ * 就业进展列表
+ * Created by billy on 2017/10/25
  */
-
-public class EmployProItemView extends BaseItemView<PEmployProEntity>{
-    private PEmployProEntity mEntity;
+public class EmployProItemView extends BaseItemView<PEmployProListItemEntity>{
+    private PEmployProListItemEntity mEntity;
 
     public EmployProItemView(Context context) {
         super(context);
     }
 
     @Override
-    public void setMsg(PEmployProEntity pEmployProEntity) {
+    public void setMsg(PEmployProListItemEntity pEmployProEntity) {
         this.mEntity = pEmployProEntity;
     }
 
     @Override
-    public PEmployProEntity getMsg() {
+    public PEmployProListItemEntity getMsg() {
         return this.mEntity;
     }
 

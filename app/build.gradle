@@ -12,6 +12,13 @@ android {
             storeFile file('uyekeystore.jks')
             storePassword 'kezhanwang'
         }
+
+        release{
+            keyAlias 'kezhanwang'
+            keyPassword 'kezhanwang'
+            storeFile file('uyekeystore.jks')
+            storePassword 'kezhanwang'
+        }
     }
 
     defaultConfig {
@@ -33,6 +40,8 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //Zipalign优化
+            zipAlignEnabled true
 //            //移除无用的resource文件
             shrinkResources true
             //签名
@@ -117,3 +126,7 @@ dependencies {
     compile files('libs/jcore-android-1.1.7.jar')
     compile files('libs/jpush-android-3.0.9.jar')
 }
+
+
+
+

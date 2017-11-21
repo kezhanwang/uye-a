@@ -234,9 +234,9 @@ public class InsureOrderItemView extends LinearLayout implements  View.OnClickLi
     public void onClick(View v) {
         if(this.mListener != null){
             if(v == this.btnEmployed){
-                this.mListener.onItemClick(null,SRC_EMPLOYED);
+                this.mListener.onItemClick(this.mEntity,SRC_EMPLOYED);
             }else{
-                this.mListener.onItemClick(null,SRC_EMPOY_PROGRESS);
+                this.mListener.onItemClick(this.mEntity,SRC_EMPOY_PROGRESS);
             }
         }
     }

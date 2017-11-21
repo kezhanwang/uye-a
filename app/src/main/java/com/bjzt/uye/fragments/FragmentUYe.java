@@ -137,13 +137,18 @@ public class FragmentUYe extends BaseFragment{
     private IItemListener mItemListener = new IItemListener() {
         @Override
         public void onItemClick(Object obj, int tag) {
-            switch(tag){
-                case InsureOrderItemView.SRC_EMPLOYED:
-                    showToast(getResources().getString(R.string.dev_ing));
-                    break;
-                case InsureOrderItemView.SRC_EMPOY_PROGRESS:
-                    IntentUtils.startEmployProActivity(getActivity(),"",MainActivity.REQ_EMPLOY_PRO);
-                    break;
+            if(obj != null && obj instanceof  PInsureOrderEntity){
+                PInsureOrderEntity mEntity = (PInsureOrderEntity) obj;
+                switch(tag){
+                    case InsureOrderItemView.SRC_EMPLOYED:
+                        showToast(getResources().getString(R.string.dev_ing));
+                        break;
+                    case InsureOrderItemView.SRC_EMPOY_PROGRESS:
+                        if(mEntity.insured_order != null){
+                            IntentUtils.startEmployProActivity(getActivity(),mEntity.insured_order.insured_order,MainActivity.REQ_EMPLOY_PRO);
+                        }
+                        break;
+                }
             }
         }
     };

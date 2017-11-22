@@ -54,7 +54,7 @@
                     android:layout_marginTop="@dimen/common_margin_18"
                     android:layout_marginLeft="@dimen/common_margin"
                     android:textSize="14sp"
-                    android:textColor="@color/common_font_9"
+                    android:textColor="@color/common_font_3"
                     android:gravity="center"
                     />
 
@@ -64,7 +64,7 @@
                     android:layout_height="32dp"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/common_margin"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     android:textColor="@color/common_font_3"
                     android:text="择业中"
                     android:gravity="center"
@@ -298,7 +298,6 @@
                     style="@style/txt_type_order_normal"
                     android:id="@+id/txt_tips_train_date"
                     android:layout_below="@id/view_line_second"
-                    android:layout_marginTop="@dimen/common_margin"
                     android:textSize="15sp"
                     android:text="培训日期"
                     />

@@ -104,6 +104,7 @@ public class ApplyEmployProAddActivity extends BaseActivity implements  View.OnC
     private String mInsureId;
     private RspEmployProCfgEntity mRspEntityCfg;
     private DialogStrSelect mDialogStr;
+    private boolean isHired;
 
     @Override
     protected int getLayoutID() {
@@ -194,7 +195,10 @@ public class ApplyEmployProAddActivity extends BaseActivity implements  View.OnC
                 showDialogStrList(mList,strInfo,DialogStrSelect.TYPE_EMPLOY_PRO_ADD);
             }
         });
-
+        if(isHired){
+            String strInfo = MConfiger.getIsHiredSuccStr();
+            itemViewWorkStatus.setEditTxt(strInfo);
+        }
         picSelectView.initData(PicSelectView.TYPE_EMPLOY_TRACK);
         picSelectView.setOnItemClickListener(mSelectListener);
 
@@ -505,6 +509,7 @@ public class ApplyEmployProAddActivity extends BaseActivity implements  View.OnC
     protected void initExtras(Bundle bundle) {
         Intent intent = getIntent();
         this.mInsureId = intent.getStringExtra(IntentUtils.PARA_KEY_PUBLIC);
+        this.isHired = intent.getBooleanExtra(IntentUtils.PARA_KEY_ISHIRED,false);
     }
 
     @Override

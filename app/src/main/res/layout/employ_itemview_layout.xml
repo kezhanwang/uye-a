@@ -17,11 +17,71 @@
 */
 -->
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/common_white"
     >
+
+    <ImageView
+        android:id="@+id/img_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/common_margin"
+        android:layout_marginTop="@dimen/common_margin"
+        android:background="@drawable/smile_icon"
+        />
+
+
+    <TextView
+        android:id="@+id/txt_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/img_icon"
+        android:layout_alignTop="@id/img_icon"
+        android:layout_marginLeft="@dimen/common_margin"
+        android:textSize="14sp"
+        android:textColor="@color/common_font_3"
+        android:text="2017/11/22"
+        />
+
+    <TextView
+        android:id="@+id/txt_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
+        android:layout_below="@id/txt_time"
+        android:layout_toRightOf="@id/txt_time"
+        android:layout_alignLeft="@id/txt_time"
+        android:layout_marginTop="@dimen/common_margin_8"
+        android:textColor="@color/common_orange"
+        android:text="恭喜您成功就业到百度钱包"
+        />
+
+    <com.bjzt.uye.views.MGridView
+        android:id="@+id/gridview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_content"
+        android:layout_alignLeft="@id/txt_time"
+        android:layout_marginTop="@dimen/common_margin"
+        android:layout_marginRight="@dimen/common_margin"
+        android:numColumns="4"
+        android:horizontalSpacing="@dimen/common_margin_8"
+        android:listSelector="@color/translucent"
+        ></com.bjzt.uye.views.MGridView>
+
+    <View
+        android:id="@+id/view_line"
+        android:layout_height="1px"
+        android:layout_width="fill_parent"
+        android:layout_below="@id/gridview"
+        android:background="@color/common_line_divider"
+        android:layout_marginLeft="@dimen/common_margin"
+        android:layout_marginRight="@dimen/common_margin"
+        android:layout_marginTop="@dimen/common_margin"
+        ></View>
 
 </RelativeLayout>

@@ -162,5 +162,7 @@
     <dimen name="item_icon_view_height">78dp</dimen>
     <dimen name="item_modify_pwd_item_height">55dp</dimen>
 
+    <!--就业进展-->
+    <dimen name="employ_pro_img_width">72dp</dimen>
 
 </resources>

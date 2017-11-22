@@ -141,7 +141,7 @@ public class FragmentUYe extends BaseFragment{
                 PInsureOrderEntity mEntity = (PInsureOrderEntity) obj;
                 switch(tag){
                     case InsureOrderItemView.SRC_EMPLOYED:
-                        showToast(getResources().getString(R.string.dev_ing));
+                        IntentUtils.startEmployProAddActivity(getActivity(),mEntity.insured_order.insured_id,true,MainActivity.REQ_EMPLOY_ADD);
                         break;
                     case InsureOrderItemView.SRC_EMPOY_PROGRESS:
                         if(mEntity.insured_order != null){

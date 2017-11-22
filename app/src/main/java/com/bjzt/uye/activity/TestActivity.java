@@ -248,7 +248,7 @@ public class TestActivity extends BaseActivity{
         btnEmployProAdd.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                IntentUtils.startEmployProAddActivity(TestActivity.this,"",15);
+                IntentUtils.startEmployProAddActivity(TestActivity.this,"",false,15);
             }
         });
 

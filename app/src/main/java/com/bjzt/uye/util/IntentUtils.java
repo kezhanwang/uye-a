@@ -56,6 +56,7 @@ public class IntentUtils {
     public static final String PARA_KEY_TYPE = "key_type";
     public static final String PARA_KEY_LIST = "key_list";
     public static final String PARA_KEY_RSP = "key_rsp";
+    public static final String PARA_KEY_ISHIRED = "key_is_hired";
     public static final String LNG = "lng";
     public static final String LAT = "lat";
     public static final String SNAME = "sname";
@@ -333,9 +334,10 @@ public class IntentUtils {
      * @param inSureId
      * @param reqCode
      */
-    public static final void startEmployProAddActivity(Activity mContext,String inSureId,int reqCode){
+    public static final void startEmployProAddActivity(Activity mContext,String inSureId,boolean isHired,int reqCode){
         Intent intent = new Intent(mContext, ApplyEmployProAddActivity.class);
         intent.putExtra(IntentUtils.PARA_KEY_PUBLIC,inSureId);
+        intent.putExtra(IntentUtils.PARA_KEY_ISHIRED,isHired);
         mContext.startActivityForResult(intent,reqCode);
     }
 

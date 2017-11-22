@@ -24,12 +24,15 @@ public class MConfiger {
     public static final int SPLASH_INTERVAL = 1000 * 3; //闪屏3秒钟
     public static final String STR_NO_EMPLOYMENT = "未就业";
 
-
     public static final ArrayList<String> buildEmployStatusList(){
         ArrayList<String> mList = new ArrayList<String>();
         mList.add("成功录用");
         mList.add("待定");
         return mList;
+    }
+
+    public static final String getIsHiredSuccStr(){
+        return buildEmployStatusList().get(0);
     }
 
     /***

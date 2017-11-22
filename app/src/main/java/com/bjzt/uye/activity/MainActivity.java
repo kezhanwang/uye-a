@@ -47,6 +47,7 @@ public class MainActivity extends BaseActivity {
     public static final int REQ_START_APPLY = 0x12;
     public static final int REQ_PROFILE = 0x13;
     public static final int REQ_EMPLOY_PRO = 0x15;
+    public static final int REQ_EMPLOY_ADD = 0x16;
 
     private DialogUpgrade mDialogUpgrade;
     private List<Integer> mReqList = new ArrayList<Integer>();
@@ -208,18 +209,21 @@ public class MainActivity extends BaseActivity {
         if(resultCode == Activity.RESULT_OK){
             switch(requestCode){
                 case REQ_SEARCH:
-                    refreshPage();
+                    refreshPage(-1);
                     break;
                 case REQ_START_APPLY:
                     String tips = "申请成功~";
                     showToast(tips);
-                    refreshPage();
+                    refreshPage(-1);
+                    break;
+                case REQ_EMPLOY_ADD:
+                    refreshPage(1);
                     break;
             }
         }
     }
 
-    private void refreshPage(){
+    private void refreshPage(int index){
         FragmentManager fm = this.getSupportFragmentManager();
         if(fm != null){
             List<Fragment> mList = fm.getFragments();
@@ -228,7 +232,13 @@ public class MainActivity extends BaseActivity {
                     Fragment f = mList.get(i);
                     if(f != null && f instanceof  BaseFragment){
                         BaseFragment bf = (BaseFragment) f;
-                        bf.refreshPage();
+                        if(index < 0){
+                            bf.refreshPage();
+                        }else if(index == 1){
+                            if(f instanceof  FragmentUYe){
+                                bf.refreshPage();
+                            }
+                        }
                     }
                 }
             }

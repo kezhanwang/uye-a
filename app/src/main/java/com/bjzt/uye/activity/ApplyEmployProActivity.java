@@ -1,12 +1,13 @@
 package com.bjzt.uye.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import com.bjzt.uye.R;
 import com.bjzt.uye.activity.base.BaseActivity;
-import com.bjzt.uye.adapter.AdapterEmployPro;
+import com.bjzt.uye.adapter.EmployProAdapter;
 import com.bjzt.uye.http.ProtocalManager;
 import com.bjzt.uye.http.rsp.RspEmployProList;
 import com.bjzt.uye.listener.IHeaderListener;
@@ -21,10 +22,8 @@ import com.common.msglist.PageAction;
 import com.common.msglist.PageType;
 import com.common.msglist.entity.PPageEntity;
 import com.common.msglist.listener.IRefreshListener;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import butterknife.BindView;
 
 /**
@@ -41,7 +40,7 @@ public class ApplyEmployProActivity extends BaseActivity{
     BlankEmptyView mEmptyView;
 
     private String insureId;
-    private AdapterEmployPro mAdapter;
+    private EmployProAdapter mAdapter;
 
     private final int REQ_EMPLOY_ADD = 0x10;
     private Map<Integer,PageAction> mReqList = new HashMap<>();
@@ -62,7 +61,7 @@ public class ApplyEmployProActivity extends BaseActivity{
 
             @Override
             public void onRightClick() {
-                IntentUtils.startEmployProAddActivity(ApplyEmployProActivity.this,insureId,REQ_EMPLOY_ADD);
+                IntentUtils.startEmployProAddActivity(ApplyEmployProActivity.this,insureId,false,REQ_EMPLOY_ADD);
             }
         });
         String title = getResources().getString(R.string.employ_progress_title);
@@ -116,7 +115,7 @@ public class ApplyEmployProActivity extends BaseActivity{
                         mEmptyView.loadSucc();
                         mMsgPage.setVisibility(View.VISIBLE);
                         if(mAdapter == null){
-                            mAdapter = new AdapterEmployPro(rspEntity.mEntity.lists);
+                            mAdapter = new EmployProAdapter(rspEntity.mEntity.lists);
                             mMsgPage.setListAdapter(mAdapter);
                         }else{
                             if(pageAction == PageAction.TYPE_REFRESH){
@@ -153,5 +152,17 @@ public class ApplyEmployProActivity extends BaseActivity{
     protected void initExtras(Bundle bundle) {
         Intent intent = getIntent();
         this.insureId = intent.getStringExtra(IntentUtils.PARA_KEY_PUBLIC);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == Activity.RESULT_OK){
+            switch(requestCode){
+                case REQ_EMPLOY_ADD:
+                    mRefreshListener.onRefresh(null);
+                    break;
+            }
+        }
     }
 }

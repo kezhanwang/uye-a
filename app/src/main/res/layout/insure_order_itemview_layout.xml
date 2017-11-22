@@ -68,7 +68,7 @@
                     android:textColor="@color/common_font_3"
                     android:text="择业中"
                     android:gravity="center"
-                    android:layout_marginTop="@dimen/common_margin_4"
+                    android:layout_alignTop="@id/order_title"
                     />
 
                 <View
@@ -77,6 +77,7 @@
                     android:layout_width="fill_parent"
                     android:layout_below="@id/order_title"
                     android:layout_marginLeft="@dimen/common_margin"
+                    android:layout_marginRight="@dimen/common_margin"
                     android:background="@color/common_line_divider"
                     ></View>
 
@@ -180,14 +181,14 @@
                 android:layout_marginLeft="@dimen/common_margin_18"
                 android:layout_marginRight="@dimen/common_margin_18"
                 android:background="@drawable/order_item_bg_below"
-                android:paddingTop="@dimen/common_margin"
+                android:paddingTop="@dimen/common_margin_4"
                 android:layout_marginBottom="@dimen/common_margin"
                 >
 
                 <TextView
                     android:id="@+id/txt_tips_orderinfo"
                     android:layout_width="wrap_content"
-                    android:layout_height="18dp"
+                    android:layout_height="22dp"
                     android:textSize="16sp"
                     android:textColor="@color/common_font_6"
                     android:text="订单信息"
@@ -201,7 +202,9 @@
                     android:layout_width="fill_parent"
                     android:layout_below="@id/txt_tips_orderinfo"
                     android:background="@color/common_line_divider"
-                    android:layout_marginTop="@dimen/common_margin_6"
+                    android:layout_marginTop="@dimen/common_margin_8"
+                    android:layout_marginLeft="@dimen/common_margin"
+                    android:layout_marginRight="@dimen/common_margin"
                     ></View>
 
 
@@ -270,11 +273,11 @@
                 <TextView
                     android:id="@+id/txt_train_tips"
                     android:layout_width="wrap_content"
-                    android:layout_height="18dp"
+                    android:layout_height="22dp"
                     android:textSize="16sp"
                     android:textColor="@color/common_font_6"
                     android:text="培训信息"
-                    android:layout_marginTop="@dimen/common_margin_18"
+                    android:layout_marginTop="@dimen/common_margin_22"
                     android:layout_marginLeft="@dimen/common_margin"
                     android:layout_below="@id/txt_payout_date"
                     />
@@ -286,6 +289,8 @@
                     android:layout_below="@id/txt_train_tips"
                     android:background="@color/common_line_divider"
                     android:layout_marginTop="@dimen/common_margin_6"
+                    android:layout_marginLeft="@dimen/common_margin"
+                    android:layout_marginRight="@dimen/common_margin"
                     ></View>
 
 

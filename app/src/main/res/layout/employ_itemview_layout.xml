@@ -69,7 +69,8 @@
         android:layout_marginTop="@dimen/common_margin"
         android:layout_marginRight="@dimen/common_margin"
         android:numColumns="4"
-        android:horizontalSpacing="@dimen/common_margin_8"
+        android:horizontalSpacing="@dimen/common_margin_4"
+        android:verticalSpacing="@dimen/common_margin_4"
         android:listSelector="@color/translucent"
         ></com.bjzt.uye.views.MGridView>
 

@@ -9,12 +9,6 @@ import com.bjzt.uye.R;
 import com.bjzt.uye.global.Global;
 import com.bumptech.glide.DrawableRequestBuilder;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.Request;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SizeReadyCallback;
-import com.bumptech.glide.request.target.Target;
 import com.common.common.NetCommon;
 import com.common.http.HttpEngine;
 
@@ -73,7 +67,7 @@ public class PicController {
             DrawableRequestBuilder builder = Glide.with(mContext).load(url);
             builder.centerCrop();
             if(d != null){
-                builder.placeholder(d).crossFade();
+                builder.placeholder(d);
             }
             builder.into(imgView);
 

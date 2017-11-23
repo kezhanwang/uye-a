@@ -24,7 +24,7 @@
     android:background="@color/common_white"
     >
 
-    <ImageView
+    <com.bjzt.uye.views.component.RoundImageView
         android:id="@+id/img_icon"
         android:layout_width="110dp"
         android:layout_height="80dp"

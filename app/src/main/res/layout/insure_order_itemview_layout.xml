@@ -82,12 +82,11 @@
                     ></View>
 
 
-                <ImageView
+                <com.bjzt.uye.views.component.RoundImageView
                     android:id="@+id/img_logo"
                     android:layout_width="98dp"
                     android:layout_height="72dp"
                     android:layout_marginLeft="@dimen/common_margin"
-                    android:background="#f1f1f1"
                     android:layout_below="@id/order_divider_line"
                     android:layout_marginTop="@dimen/common_margin"
                     />

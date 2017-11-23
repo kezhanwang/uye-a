@@ -29,6 +29,7 @@
     <color name="common_green">#00c29a</color>
     <color name="common_green_press">#00c2ba</color>
     <color name="common_dc">#dcdcdc</color>
+    <color name="common_border_color">#B3c8c8c8</color>
 
     <color name="white_bg">#ffffff</color>
     <color name="common_font_black">#333333</color>
@@ -73,5 +74,6 @@
     <!-- map -->
     <color name="map_textColor">#505050</color>
     <color name="map_adree_textColor">#909090</color>
+
 
 </resources>

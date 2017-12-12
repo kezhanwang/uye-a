@@ -16,7 +16,9 @@ import com.bjzt.uye.http.base.RspBaseEntity;
 import com.common.common.NetCommon;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -217,5 +219,60 @@ public class StrUtil {
             return true;
         }
         return false;
+    }
+
+
+    /**
+     * 获取网页中img url图片地址
+     * @param htmlStr
+     * @return
+     */
+    public static Set<String> getImgStr(String htmlStr) {
+        Set<String> pics = new HashSet<>();
+        String img = "";
+        Pattern p_image;
+        Matcher m_image;
+        //     String regEx_img = "<img.*src=(.*?)[^>]*?>"; //图片链接地址
+        String regEx_img = "<img.*src\\s*=\\s*(.*?)[^>]*?>";
+        p_image = Pattern.compile(regEx_img, Pattern.CASE_INSENSITIVE);
+        m_image = p_image.matcher(htmlStr);
+        while (m_image.find()) {
+            // 得到<img />数据
+            img = m_image.group();
+            // 匹配<img>中的src数据
+            Matcher m = Pattern.compile("src\\s*=\\s*\"?(.*?)(\"|>|\\s+)").matcher(img);
+            while (m.find()) {
+                pics.add(m.group(1));
+            }
+        }
+        return pics;
+    }
+
+    /***
+     * 获取网页中url地址
+     * @param s
+     */
+    public static List<String> findHtmlUrl(String s){
+        String mode = "(http[s]?:\\/\\/([\\w-]+\\.)+[\\w-]+([\\w-./?%&*=]*))";
+        Pattern p = Pattern.compile(mode);
+        Matcher m = p.matcher(s);
+        String s1 = "";
+        int i = 0;
+        List<String> mList = new ArrayList<>();
+        while (m.find()) {
+            String url = m.group();
+            //<a href="https://www.baidu.com"  target="_blank">百度</a>
+//            if(i>0) {
+//                s1 = s1.replaceAll(url,"<a href=\'" + url +"\'" + " target=\'_blank\'>" + url + "</a>");
+//                System.out.println(i);
+//            }else {
+//                s1 = s.replaceAll(url,"<a href=\'" + url +"\'" + " target=\'_blank\'>" + url + "</a>");
+//            }
+            i++;
+            System.out.println("src:" + url);
+            System.out.println(s1);
+            mList.add(url);
+        }
+        return mList;
     }
 }

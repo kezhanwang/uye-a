@@ -232,7 +232,6 @@
                     android:layout_below="@id/txt_payout_tips"
                     android:layout_marginLeft="0dp"
                     android:layout_alignLeft="@id/txt_payout_tips"
-                    android:textColor="@color/common_green"
                     android:text="择业日期"
                     />
 
@@ -243,7 +242,6 @@
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@id/txt_tips_employ_date"
                     android:layout_alignLeft="@id/txt_payout"
-                    android:textColor="@color/common_green"
                     android:text="2017.08.01~2017.10.1"
                     android:layout_margin="0dp"
                     />
@@ -269,6 +267,33 @@
                     android:layout_margin="0dp"
                     />
 
+
+                <TextView
+                    style="@style/txt_type_order_normal"
+                    android:id="@+id/txt_tips_train_protocal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txt_tips_payout_date"
+                    android:layout_alignLeft="@id/txt_tips_employ_date"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="@dimen/common_margin"
+                    android:text="培训协议"
+                    />
+
+
+                <TextView
+                    style="@style/txt_type_order_normal"
+                    android:id="@+id/txt_train_protocal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txt_tips_employ_date"
+                    android:layout_alignTop="@id/txt_tips_train_protocal"
+                    android:layout_alignLeft="@id/txt_employ_date"
+                    android:textColor="@color/common_green"
+                    android:text="课程质量担保协议"
+                    android:layout_margin="0dp"
+                    />
+
                 <TextView
                     android:id="@+id/txt_train_tips"
                     android:layout_width="wrap_content"
@@ -278,7 +303,7 @@
                     android:text="培训信息"
                     android:layout_marginTop="@dimen/common_margin_22"
                     android:layout_marginLeft="@dimen/common_margin"
-                    android:layout_below="@id/txt_payout_date"
+                    android:layout_below="@id/txt_tips_train_protocal"
                     />
 
                 <View

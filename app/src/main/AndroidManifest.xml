@@ -284,6 +284,14 @@
             android:windowSoftInputMode="stateAlwaysHidden|stateHidden"
             ></activity>
 
+        <!--PDFActivity-->
+        <activity
+            android:name=".activity.PDFActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.Youye"
+            ></activity>
+
         <!--========================================本地相册==============================-->
         <!-- 本地相册 -->
         <activity

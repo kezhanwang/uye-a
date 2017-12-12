@@ -98,10 +98,10 @@
 
         <Button
             android:id="@+id/btn_apply"
-            android:layout_width="98dp"
+            android:layout_width="108dp"
             android:layout_height="32dp"
             android:background="@drawable/btn_login_selector"
-            android:textSize="11sp"
+            android:textSize="12.5sp"
             android:gravity="center"
             android:textColor="@color/common_white"
             android:text="@string/just_sign"

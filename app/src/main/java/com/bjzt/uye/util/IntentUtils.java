@@ -24,6 +24,7 @@ import com.bjzt.uye.activity.ModifyNickActivity;
 import com.bjzt.uye.activity.ModifyPwdActivity;
 import com.bjzt.uye.activity.OrderInfoActivity;
 import com.bjzt.uye.activity.OrgDetailActivity;
+import com.bjzt.uye.activity.PDFActivity;
 import com.bjzt.uye.activity.ProfileActivity;
 import com.bjzt.uye.activity.QAActivity;
 import com.bjzt.uye.activity.RegisterActivity;
@@ -57,6 +58,9 @@ public class IntentUtils {
     public static final String PARA_KEY_LIST = "key_list";
     public static final String PARA_KEY_RSP = "key_rsp";
     public static final String PARA_KEY_ISHIRED = "key_is_hired";
+    public static final String PARA_KEY_TITLE = "key_title";
+    public static final String PARA_KEY_URL = "key_url";
+
     public static final String LNG = "lng";
     public static final String LAT = "lat";
     public static final String SNAME = "sname";
@@ -500,6 +504,18 @@ public class IntentUtils {
      */
     public static final void startMofifyNickActivity(Activity mContext,int reqCode){
         Intent intent = new Intent(mContext, ModifyNickActivity.class);
+        mContext.startActivityForResult(intent,reqCode);
+    }
+
+    /***
+     * 打开PDF浏览页
+     * @param mContext
+     * @param reqCode
+     */
+    public static final void startPDFActivity(Activity mContext,String url,String title,int reqCode){
+        Intent intent = new Intent(mContext, PDFActivity.class);
+        intent.putExtra(IntentUtils.PARA_KEY_URL,url);
+        intent.putExtra(IntentUtils.PARA_KEY_TITLE,title);
         mContext.startActivityForResult(intent,reqCode);
     }
 }

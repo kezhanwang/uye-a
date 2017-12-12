@@ -1,6 +1,7 @@
 package com.bjzt.uye.msglist.itemview;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -69,6 +70,8 @@ public class InsureOrderItemView extends LinearLayout implements  View.OnClickLi
     TextView mTxtEndTrainDateTitle;
     @BindView(R.id.txt_gradu_date)
     TextView mTxtEndTrainDate;
+    @BindView(R.id.txt_train_protocal)
+    TextView mTxtTrainProtocal;
 
     @BindView(R.id.emptyview)
     BlankEmptyView mEmptyView;
@@ -80,6 +83,7 @@ public class InsureOrderItemView extends LinearLayout implements  View.OnClickLi
 
     public static final int SRC_EMPLOYED = 1;
     public static final int SRC_EMPOY_PROGRESS = 2;
+    public static final int SRC_EMPLOY_PROTOCAL = 3;
 
     public InsureOrderItemView(Context context) {
         super(context);
@@ -98,6 +102,9 @@ public class InsureOrderItemView extends LinearLayout implements  View.OnClickLi
 
         btnEmployPross.setOnClickListener(this);
         btnEmployed.setOnClickListener(this);
+
+        mTxtTrainProtocal.setOnClickListener(this);
+        mTxtTrainProtocal.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG|Paint.ANTI_ALIAS_FLAG);
     }
 
     public void reqInfo(PInsureOrderEntity mEntity){
@@ -235,8 +242,10 @@ public class InsureOrderItemView extends LinearLayout implements  View.OnClickLi
         if(this.mListener != null){
             if(v == this.btnEmployed){
                 this.mListener.onItemClick(this.mEntity,SRC_EMPLOYED);
-            }else{
+            }else if(v == this.btnEmployPross){
                 this.mListener.onItemClick(this.mEntity,SRC_EMPOY_PROGRESS);
+            }else if(v == this.mTxtTrainProtocal){
+                this.mListener.onItemClick(this.mEntity,SRC_EMPLOY_PROTOCAL);
             }
         }
     }

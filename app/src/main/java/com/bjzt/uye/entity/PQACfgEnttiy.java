@@ -1,8 +1,12 @@
 package com.bjzt.uye.entity;
 
+import com.common.msglist.base.BaseItemListener;
+import com.common.msglist.base.MutiBaseListAdapter;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -22,5 +26,24 @@ public class PQACfgEnttiy implements Serializable{
             }
         }
         return mMap;
+    }
+
+    public List<BaseItemListener> buildList(){
+        List<BaseItemListener> mList = new ArrayList<>();
+        if(questions != null){
+            BaseItemListener itemEntity = new BaseItemListener() {
+                @Override
+                public int getType() {
+                    return MutiBaseListAdapter.TYPE_QA_HEADER;
+                }
+            };
+            mList.add(itemEntity);
+
+            for(int i = 0;i < questions.size();i++){
+                PQACfgItemEntity entity = questions.get(i);
+                mList.add(entity);
+            }
+        }
+        return mList;
     }
 }

@@ -21,9 +21,15 @@ public abstract class MutiBaseListAdapter extends BaseListAdapter<BaseItemListen
 
 	public static final int[] TYPE_HOME = {TYPE_FOOTER,TYPE_HOME_HEADERVIEW,TYPE_HOME_ORDERIINFO,TYPE_HOME_LOC};
 
+	public static final int TYPE_QA_HEADER = TYPE_FOOTER + 1;
+	public static final int TYPE_QA_ITEM = TYPE_QA_HEADER + 1;
+	public static final int TYPE_QA_BTN = TYPE_QA_ITEM + 1;
+	public static final int[] TYPE_QA = {TYPE_FOOTER,TYPE_QA_HEADER,TYPE_QA_ITEM,TYPE_QA_BTN};
+
 	private int[] mTypeArray = null;
 
 	public static final int ADAPTER_TYPE_HOME = 1;
+	public static final int ADAPTER_TYPE_QA = 2;
 
 	public MutiBaseListAdapter(List<BaseItemListener> mList, int mTypeAdapter) {
 		super(mList);
@@ -35,6 +41,9 @@ public abstract class MutiBaseListAdapter extends BaseListAdapter<BaseItemListen
 		switch(mType){
 			case ADAPTER_TYPE_HOME:
 				mTypeArray = TYPE_HOME;
+				break;
+			case ADAPTER_TYPE_QA:
+				mTypeArray = TYPE_QA;
 				break;
 		}
 	}

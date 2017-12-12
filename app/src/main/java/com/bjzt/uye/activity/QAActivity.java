@@ -25,6 +25,7 @@ import com.bjzt.uye.views.component.BlankEmptyView;
 import com.bjzt.uye.views.component.TipsSubHeaderView;
 import com.bjzt.uye.views.component.YHeaderView;
 import com.common.common.MyLog;
+import com.common.msglist.base.BaseItemListener;
 import com.common.msglist.base.BaseListAdapter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,14 +42,8 @@ public class QAActivity extends BaseActivity implements  View.OnClickListener{
 
     @BindView(R.id.header)
     YHeaderView mHeader;
-    @BindView(R.id.scrollview)
-    ScrollView mScrollView;
-    @BindView(R.id.tips_subheader)
-    TipsSubHeaderView tipsSub;
     @BindView(R.id.listview)
     ListView mListView;
-    @BindView(R.id.btn_ok)
-    Button btnOk;
 
     @BindView(R.id.emptyview)
     BlankEmptyView mEmptyView;
@@ -79,17 +74,17 @@ public class QAActivity extends BaseActivity implements  View.OnClickListener{
         String title = getResources().getString(R.string.qa_title);
         mHeader.setTitle(title);
 
-        tipsSub.updateType(TipsSubHeaderView.TYPE_QA);
-
-        btnOk.setOnClickListener(this);
+//        tipsSub.updateType(TipsSubHeaderView.TYPE_QA);
+//
+//        btnOk.setOnClickListener(this);
 
         if(this.mRspEntity != null && this.mRspEntity.mEntity != null){
-            mScrollView.setVisibility(View.VISIBLE);
+            mListView.setVisibility(View.VISIBLE);
             mEmptyView.loadSucc();
             mMap = mRspEntity.mEntity.buildHashMap();
-            initParams(this.mRspEntity.mEntity.questions);
+            initParams(this.mRspEntity.mEntity.buildList());
         }else{
-            mScrollView.setVisibility(View.GONE);
+            mListView.setVisibility(View.GONE);
             mEmptyView.setVisibility(View.VISIBLE);
             mEmptyView.showLoadingState();
             int seqNo = ProtocalManager.getInstance().reqQACfg(this.orgId,getCallBack());
@@ -110,9 +105,9 @@ public class QAActivity extends BaseActivity implements  View.OnClickListener{
                         if(rspEntity.mEntity.need_question){
                             if(rspEntity != null && rspEntity.mEntity != null && rspEntity.mEntity.questions != null && rspEntity.mEntity.questions.size() > 0){
                                 mEmptyView.loadSucc();
-                                mScrollView.setVisibility(View.VISIBLE);
+                                mListView.setVisibility(View.VISIBLE);
                                 mMap = rspEntity.mEntity.buildHashMap();
-                                initParams(rspEntity.mEntity.questions);
+                                initParams(rspEntity.mEntity.buildList());
                             }else{
                                 String tips = getResources().getString(R.string.common_cfg_empty);
                                 initErrorStatus(tips);
@@ -141,7 +136,7 @@ public class QAActivity extends BaseActivity implements  View.OnClickListener{
         }
     }
 
-    private void initParams(List<PQACfgItemEntity> mList){
+    private void initParams(List<BaseItemListener> mList){
         if(mAdapter == null){
             mAdapter = new QAAdapter(mList);
             mAdapter.setType(BaseListAdapter.ADAPTER_TYPE_NO_BOTTOM);
@@ -155,8 +150,7 @@ public class QAActivity extends BaseActivity implements  View.OnClickListener{
     private IItemListener mItemListener = new IItemListener() {
         @Override
         public void onItemClick(Object obj, int tag) {
-            QAListItemView itemView = (QAListItemView) obj;
-            VQAItemEntity vEntity = itemView.getMsg();
+            VQAItemEntity vEntity = (VQAItemEntity) obj;
             int qaId = vEntity.vQAId;
             int type = vEntity.vType;
             //获取当前的答案
@@ -165,26 +159,19 @@ public class QAActivity extends BaseActivity implements  View.OnClickListener{
             if(type == PQACfgItemEntity.TYPE_SINGLE){
                 if(mAsList.size() <= 0){
                     vEntity.isSelect = true;
-                    vEntity.itemView = itemView;
-                    itemView.setMsg(vEntity);
                     mAsList.add(vEntity);
+                    mAdapter.notifyDataSetChanged();
                 }else{
                     //clear all
                     for(int i = 0;i < mAsList.size();i++){
                         VQAItemEntity tempEntity = mAsList.get(i);
-                        if(tempEntity.itemView != null){
-                            VQAItemEntity tEntity = tempEntity.itemView.getMsg();
-                            tEntity.isSelect = false;
-                            tempEntity.itemView.setMsg(tEntity);
-                            tempEntity.itemView = null;
-                        }
+                        tempEntity.isSelect = false;
                     }
                     mAsList.clear();
                     //选择当前选项
                     vEntity.isSelect = true;
-                    vEntity.itemView = itemView;
-                    itemView.setMsg(vEntity);
                     mAsList.add(vEntity);
+                    mAdapter.notifyDataSetChanged();
                 }
             }else{
                 if(vEntity.isSelect){
@@ -193,7 +180,7 @@ public class QAActivity extends BaseActivity implements  View.OnClickListener{
                     mAsList.add(vEntity);
                 }
                 vEntity.isSelect = !vEntity.isSelect;
-                itemView.setMsg(vEntity);
+                mAdapter.notifyDataSetChanged();
             }
         }
     };
@@ -220,23 +207,23 @@ public class QAActivity extends BaseActivity implements  View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        if(v == this.btnOk){
-            if(mRspEntity != null && mRspEntity.mEntity != null && mRspEntity.mEntity.questions != null && mRspEntity.mEntity.questions.size() > 0){
-                VQAResultEntity rEntity = buildResultEntity(mRspEntity.mEntity.questions);
-                if(rEntity.isSucc){
-                    showLoading();
-                    int seqNo = ProtocalManager.getInstance().reqQASubmit(this.orgId,rEntity.mList,getCallBack());
-                    mReqList.add(seqNo);
-                }else{
-                    String msg = rEntity.msg;
-                    String tips = getResources().getString(R.string.qa_select_tips,msg);
-                    showToast(tips);
-                }
-            }else{
-                String tips = getResources().getString(R.string.common_cfg_empty);
-                showToast(tips);
-            }
-        }
+//        if(v == this.btnOk){
+//            if(mRspEntity != null && mRspEntity.mEntity != null && mRspEntity.mEntity.questions != null && mRspEntity.mEntity.questions.size() > 0){
+//                VQAResultEntity rEntity = buildResultEntity(mRspEntity.mEntity.questions);
+//                if(rEntity.isSucc){
+//                    showLoading();
+//                    int seqNo = ProtocalManager.getInstance().reqQASubmit(this.orgId,rEntity.mList,getCallBack());
+//                    mReqList.add(seqNo);
+//                }else{
+//                    String msg = rEntity.msg;
+//                    String tips = getResources().getString(R.string.qa_select_tips,msg);
+//                    showToast(tips);
+//                }
+//            }else{
+//                String tips = getResources().getString(R.string.common_cfg_empty);
+//                showToast(tips);
+//            }
+//        }
     }
 
     private VQAResultEntity buildResultEntity(List<PQACfgItemEntity> mList){

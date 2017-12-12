@@ -4,11 +4,11 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.bjzt.uye.R;
 import com.common.listener.NoConfusion;
+import com.common.msglist.base.BaseItemListener;
+import com.common.msglist.base.BaseItemView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
  * Created by billy on 2017/10/21.
  */
 
-public class TipsSubHeaderView extends RelativeLayout implements NoConfusion{
+public class TipsSubHeaderView extends BaseItemView<BaseItemListener> implements NoConfusion{
 
     @BindView(R.id.txt_tips)
     TextView mTxtTips;
@@ -25,8 +25,25 @@ public class TipsSubHeaderView extends RelativeLayout implements NoConfusion{
     public static final int TYPE_QA = 1;
     private int mType;
 
+    private BaseItemListener mEntity;
+
     public TipsSubHeaderView(Context context) {
         super(context);
+        init();
+    }
+
+    @Override
+    public void setMsg(BaseItemListener baseItemListener) {
+        this.mEntity = baseItemListener;
+    }
+
+    @Override
+    public BaseItemListener getMsg() {
+        return this.mEntity;
+    }
+
+    @Override
+    public void onInflate() {
         init();
     }
 

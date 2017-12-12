@@ -122,4 +122,10 @@ public class PDFActivity extends BaseActivity{
         this.mTitle = bundle.getString(IntentUtils.PARA_KEY_TITLE);
         this.mUrl = bundle.getString(IntentUtils.PARA_KEY_URL);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        DownloadController.getInstance().setListener(null);
+    }
 }

@@ -1,11 +1,9 @@
 package com.bjzt.uye.msglist.itemview;
 
 import android.content.Context;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-
 import com.bjzt.uye.R;
 import com.bjzt.uye.listener.IItemListener;
 import com.common.msglist.base.BaseItemListener;

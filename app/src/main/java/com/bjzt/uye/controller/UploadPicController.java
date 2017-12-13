@@ -30,7 +30,7 @@ public class UploadPicController extends Thread {
     private IUploadListener mListener;
     private final int FLAG_TIME_OUT = 0x10;
 
-    private final int SIZE = 6; //文件大小为6MB
+    private final int SIZE = 2; //文件大小为6MB
     private final int TIME_OUT = 1000*120;   //图片超时时间
 
     private UploadPicController(){
@@ -119,7 +119,17 @@ public class UploadPicController extends Thread {
                                 if(MyLog.isDebugable()){
                                     MyLog.debug(TAG,"[run]" + " compress:" + cEntity.path + " size:" + len);
                                 }
+                            }else if(len >= FileUtil.KB * 800){
+                                if(MyLog.isDebugable()){
+                                    MyLog.debug(TAG,"[run]" + " src:" + filePath + " size:" + FileUtil.getFileSizeStr(len));
+                                }
+                                cEntity = comBitmapByQuality(filePath,mType);
+                                if(MyLog.isDebugable()){
+                                    File file = new File(cEntity.path);
+                                    MyLog.debug(TAG,"[run]" + " dest:" + cEntity.path + " size:" + FileUtil.getFileSizeStr(file.length()));
+                                }
                             }
+
                             UploadFileUtil util = new UploadFileUtil();
                             String fileName = PicEntity.getFileName(filePath);
                             PUploadEntity rEntity = null;
@@ -187,7 +197,7 @@ public class UploadPicController extends Thread {
         }
     };
 
-    private BComResultEntity comBitmap(String path, int codeSrc){
+    private BComResultEntity comBitmap(String path,int codeSrc){
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.RGB_565;
         options.inPurgeable = true;
@@ -205,13 +215,16 @@ public class UploadPicController extends Thread {
             }
             if(bitmap != null){
                 int width = 720;
+                if(bitmap.getWidth() >= 1080){
+                    width = 1080;
+                }
                 int height = (bitmap.getHeight() * width) / bitmap.getWidth();
                 Bitmap destBitmap = null;
                 destBitmap = BitmapUtil.compressImageByQuailty(bitmap, width, height, path, false);
                 if(destBitmap == null){
                     bEntity.code = codeSrc + 4;
                 }
-                filePath = FileUtil.saveBitmapToCammera(destBitmap, null);
+                filePath = FileUtil.saveBitmapToCammera(destBitmap, null,80);
                 if(TextUtils.isEmpty(filePath)){
                     bEntity.code = codeSrc + 5;
                 }
@@ -350,4 +363,32 @@ public class UploadPicController extends Thread {
         }
         return find;
     }
+
+
+    private BComResultEntity comBitmapByQuality(String path,int codeSrc){
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPreferredConfig = Bitmap.Config.RGB_565;
+        BComResultEntity bEntity = new BComResultEntity();
+        String filePath = null;
+        Bitmap bitmap = null;
+        try{
+            bitmap = BitmapFactory.decodeFile(path, options);
+        }catch(OutOfMemoryError ee){
+            MyLog.error(TAG,ee);
+            bEntity.code = codeSrc + 1;
+        }
+        if(bitmap != null){
+            filePath =  FileUtil.saveBitmapToCammera(bitmap, null,80);
+            if(!TextUtils.isEmpty(filePath)){
+                bEntity.path = filePath;
+            }else{
+                bEntity.path = path;
+            }
+        }else{
+            bEntity.path = path;
+        }
+        return bEntity;
+    }
+
+
 }

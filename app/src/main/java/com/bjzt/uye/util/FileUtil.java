@@ -172,7 +172,7 @@ public class FileUtil {
 		return filePath;
 	}
 	
-	public static final String saveBitmapToCammera(Bitmap bitmap, String fileName){
+	public static final String saveBitmapToCammera(Bitmap bitmap, String fileName,int quality){
 		String filePath = "";
 		if(!TextUtils.isEmpty(fileName)){
 			filePath = getCammerFolderPath() + "/" + fileName;
@@ -187,7 +187,7 @@ public class FileUtil {
 		boolean flag = false;
 		try{
 			out = new FileOutputStream(file);
-			bitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
+			bitmap.compress(Bitmap.CompressFormat.JPEG, quality, out);
 			flag = true;
 		}catch(Exception ee){
 			MyLog.error(TAG,"",ee);
@@ -313,4 +313,14 @@ public class FileUtil {
 	        return flag;
 	    }
 
+
+	public static final String getFileSizeStr(long size){
+		String str = "";
+		if(size >= FileUtil.MB){
+			str = (size / (float)FileUtil.MB) + "MB";
+		}else{
+			str = (size/(float)KB) + "KB";
+		}
+		return str;
+	}
 }

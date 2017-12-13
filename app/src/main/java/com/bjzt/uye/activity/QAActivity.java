@@ -4,9 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import com.bjzt.uye.R;
 import com.bjzt.uye.activity.base.BaseActivity;
 import com.bjzt.uye.adapter.QAAdapter;
@@ -19,11 +17,9 @@ import com.bjzt.uye.http.rsp.RspQASubmitEntity;
 import com.bjzt.uye.listener.IHeaderListener;
 import com.bjzt.uye.listener.IItemListener;
 import com.bjzt.uye.msglist.itemview.QAItemFooterView;
-import com.bjzt.uye.msglist.itemview.QAListItemView;
 import com.bjzt.uye.util.IntentUtils;
 import com.bjzt.uye.util.StrUtil;
 import com.bjzt.uye.views.component.BlankEmptyView;
-import com.bjzt.uye.views.component.TipsSubHeaderView;
 import com.bjzt.uye.views.component.YHeaderView;
 import com.common.common.MyLog;
 import com.common.msglist.base.BaseItemListener;
@@ -32,7 +28,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import butterknife.BindView;
 
 /**

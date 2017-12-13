@@ -70,6 +70,7 @@
         android:listSelector="@color/translucent"
         android:cacheColorHint="@color/translucent"
         android:background="@null"
+        android:layout_marginLeft="@dimen/common_margin_8"
         ></com.bjzt.uye.views.MGridView>
 
     <TextView

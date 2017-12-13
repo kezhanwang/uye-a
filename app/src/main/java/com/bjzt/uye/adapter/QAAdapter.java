@@ -2,6 +2,7 @@ package com.bjzt.uye.adapter;
 
 import com.bjzt.uye.global.Global;
 import com.bjzt.uye.listener.IItemListener;
+import com.bjzt.uye.msglist.itemview.QAItemFooterView;
 import com.bjzt.uye.msglist.itemview.QAItemView;
 import com.bjzt.uye.views.component.TipsSubHeaderView;
 import com.common.msglist.base.BaseItemListener;
@@ -36,7 +37,9 @@ public class QAAdapter extends MutiBaseListAdapter{
             itemView.updateType(TipsSubHeaderView.TYPE_QA);
             baseItemView = itemView;
         }else if(mType == MutiBaseListAdapter.TYPE_QA_BTN){
-
+            QAItemFooterView footerView = new QAItemFooterView(Global.getContext());
+            footerView.setListener(mListener);
+            baseItemView = footerView;
         }
         return baseItemView;
     }

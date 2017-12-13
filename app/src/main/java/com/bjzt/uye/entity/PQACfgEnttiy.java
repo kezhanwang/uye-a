@@ -31,6 +31,7 @@ public class PQACfgEnttiy implements Serializable{
     public List<BaseItemListener> buildList(){
         List<BaseItemListener> mList = new ArrayList<>();
         if(questions != null){
+            //add header
             BaseItemListener itemEntity = new BaseItemListener() {
                 @Override
                 public int getType() {
@@ -43,6 +44,15 @@ public class PQACfgEnttiy implements Serializable{
                 PQACfgItemEntity entity = questions.get(i);
                 mList.add(entity);
             }
+
+            //add footer btn area
+            BaseItemListener itemEntityFooter = new BaseItemListener() {
+                @Override
+                public int getType() {
+                    return MutiBaseListAdapter.TYPE_QA_BTN;
+                }
+            };
+            mList.add(itemEntityFooter);
         }
         return mList;
     }

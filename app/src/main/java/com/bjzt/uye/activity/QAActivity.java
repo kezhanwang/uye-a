@@ -18,6 +18,7 @@ import com.bjzt.uye.http.rsp.RspQACfgEntity;
 import com.bjzt.uye.http.rsp.RspQASubmitEntity;
 import com.bjzt.uye.listener.IHeaderListener;
 import com.bjzt.uye.listener.IItemListener;
+import com.bjzt.uye.msglist.itemview.QAItemFooterView;
 import com.bjzt.uye.msglist.itemview.QAListItemView;
 import com.bjzt.uye.util.IntentUtils;
 import com.bjzt.uye.util.StrUtil;
@@ -150,37 +151,55 @@ public class QAActivity extends BaseActivity implements  View.OnClickListener{
     private IItemListener mItemListener = new IItemListener() {
         @Override
         public void onItemClick(Object obj, int tag) {
-            VQAItemEntity vEntity = (VQAItemEntity) obj;
-            int qaId = vEntity.vQAId;
-            int type = vEntity.vType;
-            //获取当前的答案
-            ArrayList<VQAItemEntity> mAsList = mMap.get(Integer.valueOf(qaId));
-            MyLog.d(TAG,"[onItemClick]" + "" + mAsList);
-            if(type == PQACfgItemEntity.TYPE_SINGLE){
-                if(mAsList.size() <= 0){
-                    vEntity.isSelect = true;
-                    mAsList.add(vEntity);
-                    mAdapter.notifyDataSetChanged();
-                }else{
-                    //clear all
-                    for(int i = 0;i < mAsList.size();i++){
-                        VQAItemEntity tempEntity = mAsList.get(i);
-                        tempEntity.isSelect = false;
+            if(obj instanceof  VQAItemEntity){
+                VQAItemEntity vEntity = (VQAItemEntity) obj;
+                int qaId = vEntity.vQAId;
+                int type = vEntity.vType;
+                //获取当前的答案
+                ArrayList<VQAItemEntity> mAsList = mMap.get(Integer.valueOf(qaId));
+                MyLog.d(TAG,"[onItemClick]" + "" + mAsList);
+                if(type == PQACfgItemEntity.TYPE_SINGLE){
+                    if(mAsList.size() <= 0){
+                        vEntity.isSelect = true;
+                        mAsList.add(vEntity);
+                        mAdapter.notifyDataSetChanged();
+                    }else{
+                        //clear all
+                        for(int i = 0;i < mAsList.size();i++){
+                            VQAItemEntity tempEntity = mAsList.get(i);
+                            tempEntity.isSelect = false;
+                        }
+                        mAsList.clear();
+                        //选择当前选项
+                        vEntity.isSelect = true;
+                        mAsList.add(vEntity);
+                        mAdapter.notifyDataSetChanged();
                     }
-                    mAsList.clear();
-                    //选择当前选项
-                    vEntity.isSelect = true;
-                    mAsList.add(vEntity);
+                }else{
+                    if(vEntity.isSelect){
+                        mAsList.remove(vEntity);
+                    }else{
+                        mAsList.add(vEntity);
+                    }
+                    vEntity.isSelect = !vEntity.isSelect;
                     mAdapter.notifyDataSetChanged();
                 }
-            }else{
-                if(vEntity.isSelect){
-                    mAsList.remove(vEntity);
+            }else if(obj instanceof QAItemFooterView){
+                if(mRspEntity != null && mRspEntity.mEntity != null && mRspEntity.mEntity.questions != null && mRspEntity.mEntity.questions.size() > 0){
+                    VQAResultEntity rEntity = buildResultEntity(mRspEntity.mEntity.questions);
+                    if(rEntity.isSucc){
+                        showLoading();
+                        int seqNo = ProtocalManager.getInstance().reqQASubmit(orgId,rEntity.mList,getCallBack());
+                        mReqList.add(seqNo);
+                    }else{
+                        String msg = rEntity.msg;
+                        String tips = getResources().getString(R.string.qa_select_tips,msg);
+                        showToast(tips);
+                    }
                 }else{
-                    mAsList.add(vEntity);
+                    String tips = getResources().getString(R.string.common_cfg_empty);
+                    showToast(tips);
                 }
-                vEntity.isSelect = !vEntity.isSelect;
-                mAdapter.notifyDataSetChanged();
             }
         }
     };
@@ -206,25 +225,7 @@ public class QAActivity extends BaseActivity implements  View.OnClickListener{
     }
 
     @Override
-    public void onClick(View v) {
-//        if(v == this.btnOk){
-//            if(mRspEntity != null && mRspEntity.mEntity != null && mRspEntity.mEntity.questions != null && mRspEntity.mEntity.questions.size() > 0){
-//                VQAResultEntity rEntity = buildResultEntity(mRspEntity.mEntity.questions);
-//                if(rEntity.isSucc){
-//                    showLoading();
-//                    int seqNo = ProtocalManager.getInstance().reqQASubmit(this.orgId,rEntity.mList,getCallBack());
-//                    mReqList.add(seqNo);
-//                }else{
-//                    String msg = rEntity.msg;
-//                    String tips = getResources().getString(R.string.qa_select_tips,msg);
-//                    showToast(tips);
-//                }
-//            }else{
-//                String tips = getResources().getString(R.string.common_cfg_empty);
-//                showToast(tips);
-//            }
-//        }
-    }
+    public void onClick(View v) {}
 
     private VQAResultEntity buildResultEntity(List<PQACfgItemEntity> mList){
         VQAResultEntity vEntity = new VQAResultEntity();
